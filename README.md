@@ -1,8 +1,8 @@
 # MKPowerShell
 
-Objective of this module is conversion of end-of-line (EOL) characters in UTF-8 files: CRLF to LF or LF to CRLF
+This is module contains the following common tasks that I simplified:
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/marckassay/EndOfLine/blob/master/LICENSE) [![PS Gallery](https://img.shields.io/badge/install-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/EndOfLine/)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/marckassay/MKPowerShell/blob/master/LICENSE) [![PS Gallery](https://img.shields.io/badge/install-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/MKPowerShell/)
 
 ## Features
 
