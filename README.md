@@ -1,74 +1,234 @@
 # MKPowerShell
 
-This is module contains the following common tasks that I simplified:
+This module contains the following custom tasks that I use frequently:
+
+* Stores last value of Set-Location and restores that location when PowerShell restarts.
+* You can restart PowerShell from command-line via 'pwsh'.  'pwsha' will restart with administrator privledges
+* Publish modules by retrieving NugetAPIKey and deploying my development directory to a PowerShell module directory
+* When a session starts PowerShell profile will be backed-up to my Google Drive directory and will overwrite Visual Studio code profile.
+* A function to output a given module's synopsis for its exported functions.
+* Cumlitave PowerShell history of sessions.
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/marckassay/MKPowerShell/blob/master/LICENSE) [![PS Gallery](https://img.shields.io/badge/install-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/MKPowerShell/)
 
-## Features
-
-* Imports `.gitignore` file for exclusion of files and directories, if there is a file.  You can use `SkipIgnoreFile` switch to prevent importing that file.  And you can switch `Exclude` to add additional items to be excluded.
-* Simulate what will happen via `WhatIf` switch
-* Outputs a report on all files.  The `Verbose` switch can be used too.
-
 ## Caveat
 
-* Please use the `WhatIf` switch parameter to perform a 'dry-run' on what files will be modified.
-* Files are expected to be encoded in UTF-8.  If encoded in anything else it will not be modified.
+* This module hasn't been tested to my standard as it is simpily a utility module that I created.  So some constraints and limitations exist still, but welcome pull-requests.
 
 ## Instructions
 
 To install, run the following command in PowerShell.
 
 ```powershell
-$ Install-Module EndOfLine
+$ Install-Module MKPowerShell
 ```
-
-This module imports 'Encoding' by [Chris Kuech](https://github.com/chriskuech).
-
-[![PS Gallery](https://img.shields.io/badge/Encoding-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/Encoding)
 
 ## Usage
 
-### ConvertTo-LF
+### ```sl``` (```Set-LocationAndStore [-Path] <String> [[-LiteralPath] <String>] [-PassThru]```)
+
+.SYNOPSIS
+
+Stores last location and restores that location when PowerShell restarts
+
+.DESCRIPTION
+
+Stores last value of and restores that location when PowerShell restarts so that it continues in the directory you last were in previous session.
+
+.ALIAS sl
+
+.INPUTS None
+
+.OUTPUTS System.Management.Automation.PathInfo, System.Management.Automation.PathInfoStack
+
+.EXAMPLE
 
 ```powershell
-ConvertTo-LF [-Path] <String[]> [[-Exclude] <String[]>]
-[-SkipIgnoreFile] [-ExportReportData] [-WhatIf] [<CommonParameters>]
+E:\> sl projects
+
+E:\projects> sl..
 ```
 
-Converts CRLF to LF characters.
-This function will recursively read all files within the `Path` unless excluded by `.gitignore` file.  If a file is not excluded it is read to see if the current EOL character is the same as requested.  If so it will not modify the file.  And if the file is encoded other then UTF-8, it will not be modified.
+### ```Set-NuGetApiKey```
 
-Example using the `WhatIf`, and `Verbose` switch.
+.SYNOPSIS
+Stores NuGet API key to be used with MKPowerShell.Publish-Module
+
+.DESCRIPTION
+Stores NuGet API key in the registry so that when MKPowerShell.Publish-Module is called it will retrieve the key without promting you for it.
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
 
 ```powershell
-$ ConvertTo-LF -Path C:\repos\AiT -WhatIf -Verbose
+E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
+E:\projects\MKPowerShell> Publish-Module
 ```
 
-For this example, if you agree when prompted files will be modified without import of `.gitignore` file.
+.LINK
+Publish-Module
+
+### ```Publish-Module```
+
+.SYNOPSIS
+
+Streamline publishing module to using PowerShellGet.Publish-Module
+
+.DESCRIPTION
+
+Prior to calling you can store API key using Set-NuGetApiKey.  If not, you must assign it to the NuGetApiKey parameter.  When called this function will take the directory (or file's directory) and will copy it to the PowerShell module directory (eg: C:\Users\Marc\Documents\PowerShell\Modules) where PowerShell can then publish it to an online gallery.
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
 
 ```powershell
-$ ConvertTo-LF -Path C:\repos\AiT -SkipIgnoreFile
+E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
+E:\projects\MKPowerShell> Publish-Module
 ```
 
-If omitting `gitignore` file, it would be good to exclude modules too.
+.LINK
+Set-NuGetApiKey
+
+### ```pwsh``` (```Restart-PWSH```)
+
+.SYNOPSIS
+
+Restarts PowerShell
+
+.DESCRIPTION
+
+Restarts PowerShell
+
+.ALIAS
+pwsh
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
 
 ```powershell
-$ ConvertTo-LF -Path C:\repos\AiT -Exclude .\node_modules\, .\out\ -SkipIgnoreFile
+E:\projects> pwsh
 ```
 
-If you agree when prompted, files will be modified with import of `.gitignore` file if found.
+.LINK
+Restart-PWSH
+
+### ```pwsha``` (```Restart-PWSHAdmin```)
+
+.SYNOPSIS
+
+Restarts PowerShell with Administrator privileges
+
+.DESCRIPTION
+
+Restarts PowerShell with Administrator privileges
+
+.ALIAS
+pwsha
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
 
 ```powershell
-$ ConvertTo-LF -Path C:\repos\AiT
+E:\projects> pwsha
 ```
 
-### ConvertTo-CRLF
+.LINK
+Restart-PWSH
+
+### ```Set-BackupProfileLocation```
+
+.SYNOPSIS
+
+Will backup profile to desired location when PowerShell starts
+
+.DESCRIPTION
+
+Upon PowerShell startup, profile will be copied to the value given to this function
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
 
 ```powershell
-ConvertTo-CRLF [-Path] <String[]> [[-Exclude] <String[]>] 
-[-SkipIgnoreFile] [-ExportReportData] [-WhatIf] [<CommonParameters>]
+E:\projects> Set-BackupProfileLocation 'D:\Google Drive\Documents\PowerShell'
 ```
 
-Converts LF to CRLF characters.
-Besides the characters that will be replaced, all things that apply in `ConvertTo-LF` apply to this function too.
+### ```Get-ModuleSynopsis```
+
+.SYNOPSIS
+
+Lists all available functions for a module, with the synopsis of the functions.
+
+.DESCRIPTION
+
+Lists all available functions of a module using Get-Command and Get-Help.
+
+.INPUTS
+None
+
+.OUTPUTS
+PSCustomObject
+
+.EXAMPLE
+
+```none
+E:\> Get-ModuleSynopsis Microsoft.PowerShell.Utility
+
+Name                      Synopsis
+----                      --------
+ConvertFrom-SddlString
+Format-Hex                Displays a file or other input as hexadecimal.
+Get-FileHash              Computes the hash value for a file by using a specified hash algorithm.
+Import-PowerShellDataFile
+New-Guid                  Creates a GUID.
+New-TemporaryFile         Creates a temporary file.
+Add-Member                Adds custom properties and methods to an instance of a Windows PowerShell object.
+Add-Type                  Adds a.NET Framework type (a class) to a Windows PowerShell session.
+```
+
+### ```Get-History```
+
+.SYNOPSIS
+
+Concatnates PowerShell histories, so that you can reference previous commands from previous sessions.
+
+.DESCRIPTION
+
+When PowerShell starts, it will load the previous CSV file (via Import-Csv) and concatnate (via Add-History)it to current session.  Doing this allows you to reference previous command from any previous session.
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+
+```powershell
+E:\> Get-History
+E:\> Invoke-History
+```

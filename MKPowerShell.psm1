@@ -1,5 +1,130 @@
 $RegistryKey = 'HKCU:\SOFTWARE\PowerShell'
 
+
+<#
+.SYNOPSIS
+Concatnates PowerShell histories, so that you can reference previous commands from previous sessions.
+
+.DESCRIPTION
+When PowerShell starts, it will load the previous CSV file (via Import-Csv) and concatnate (via Add-History)it to current session.  Doing this allows you to reference previous command from any previous session.
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+E:\> Get-History
+E:\> Invoke-History
+#>
+function Get-History {
+    <#
+Get-History | Export-Csv c:\testing\history.csv
+Import-Csv history.csv | Add-History
+#>
+}
+
+<#
+.SYNOPSIS
+Lists all available functions for a module, with the synopsis of the functions.
+
+.DESCRIPTION
+Lists all available functions of a module using Get-Command and Get-Help.
+
+.INPUTS
+None
+
+.OUTPUTS
+PSCustomObject
+
+.EXAMPLE
+E:\> Get-ModuleSynopsis Microsoft.PowerShell.Utility
+
+Name                      Synopsis
+----                      --------
+ConvertFrom-SddlString
+Format-Hex                Displays a file or other input as hexadecimal.
+Get-FileHash              Computes the hash value for a file by using a specified hash algorithm.
+Import-PowerShellDataFile
+New-Guid                  Creates a GUID.
+New-TemporaryFile         Creates a temporary file.
+Add-Member                Adds custom properties and methods to an instance of a Windows PowerShell object.
+Add-Type                  Adds a.NET Framework type (a class) to a Windows PowerShell session.
+#>
+function Get-ModuleSynopsis {
+    [CmdletBinding(PositionalBinding = $False)]
+    Param(
+        # Any other parameters can go here
+    )
+ 
+    DynamicParam {
+        # Set the dynamic parameters' name
+        $ParameterName = 'Name'
+            
+        # Create the dictionary 
+        $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+        # Create the collection of attributes
+        $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+            
+        # Create and set the parameters' attributes
+        $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
+        $ParameterAttribute.Mandatory = $True
+        $ParameterAttribute.Position = 0
+
+        # Add the attributes to the attributes collection
+        $AttributeCollection.Add($ParameterAttribute)
+
+        # Generate and set the ValidateSets 
+        $NonInstalledSet = Get-Module | Select-Object -ExpandProperty Name
+        $InstalledSet = Get-InstalledModule | Select-Object -ExpandProperty Name
+            
+        $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($NonInstalledSet + $InstalledSet)
+
+        # Add the ValidateSet to the attributes collection
+        $AttributeCollection.Add($ValidateSetAttribute)
+
+        # Create and return the dynamic parameter
+        $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
+        $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
+        return $RuntimeParameterDictionary
+    }
+
+    begin {
+        # Bind the parameter to a friendly variable
+        $Name = $PsBoundParameters[$ParameterName]
+    }
+
+    process {
+        Get-Command -Module $Name | Foreach-Object {
+            $Syno = Get-Help -Name $_.Name | Select-Object -ExpandProperty Synopsis
+
+            [PSCustomObject]@{
+                Name     = $_.Name
+                Synopsis = $Syno 
+            }
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+Will backup profile to desired location when PowerShell starts
+
+.DESCRIPTION
+Upon PowerShell startup, profile will be copied to the value given to this function
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+E:\projects> Set-BackupProfileLocation 'D:\Google Drive\Documents\PowerShell'
+
+#>
 function Set-BackupProfileLocation {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -73,6 +198,28 @@ Set-Alias sl Set-LocationAndStore -Force
 
 }
 
+<#
+.SYNOPSIS
+Restarts PowerShell
+
+.DESCRIPTION
+Restarts PowerShell
+
+.ALIAS
+pwsh
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+E:\projects> pwsh
+
+.LINK
+Restart-PWSHAdmin
+#>
 function Restart-PWSH {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
@@ -85,6 +232,29 @@ function Restart-PWSH {
 Set-Alias pwsh Restart-PWSH -Scope Global
 Write-Host "'pwsh' alias is now mapped to 'Restart-PWSH'."
 
+
+<#
+.SYNOPSIS
+Restarts PowerShell with Administrator privileges
+
+.DESCRIPTION
+Restarts PowerShell with Administrator privileges
+
+.ALIAS
+pwsha
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+E:\projects> pwsha
+
+.LINK
+Restart-PWSH
+#>
 function Restart-PWSHAdmin {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
@@ -97,6 +267,26 @@ function Restart-PWSHAdmin {
 Set-Alias pwsha Restart-PWSHAdmin -Scope Global
 Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'."
 
+<#
+.SYNOPSIS
+Streamlines publishing module to using PowerShellGet.Publish-Module
+
+.DESCRIPTION
+Prior to calling you can store API key using Set-NuGetApiKey.  If not, you must assign it to the NuGetApiKey parameter.  When called this function will take the directory (or file's directory) and will copy it to the PowerShell module directory (eg: C:\Users\Marc\Documents\PowerShell\Modules) where PowerShell can then publish it to an online gallery.
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
+E:\projects\MKPowerShell> Publish-Module
+
+.LINK
+Set-NuGetApiKey
+#>
 function Publish-Module {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -109,19 +299,13 @@ function Publish-Module {
     )
 
     if (-not $Path -or -not $NuGetApiKey) {
-        Push-Location
-
-        Set-Location -Path $RegistryKey
-
         if (-not $Path) {
-            $Path = Get-ItemPropertyValue -Name LastLocation
+            $Path = Get-ItemPropertyValue -Path $RegistryKey -Name LastLocation
         }
 
         if (-not $NuGetApiKey) {
-            $NuGetApiKey = Get-ItemPropertyValue -Name NuGetApiKey
+            $NuGetApiKey = Get-ItemPropertyValue -Path $RegistryKey -Name NuGetApiKey
         }
-
-        Pop-Location
     }
     
     if ((Test-Path -Path $Path -PathType Container) -eq $False) {
@@ -132,6 +316,26 @@ function Publish-Module {
     Publish-Module -Name $Path -NuGetApiKey $NuGetApiKey -Verbose -Confirm
 }
 
+<#
+.SYNOPSIS
+Stores NuGet API key to be used with MKPowerShell.Publish-Module 
+
+.DESCRIPTION
+Stores NuGet API key in the registry so that when MKPowerShell.Publish-Module is called it will retrieve the key without promting you for it.
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
+E:\projects\MKPowerShell> Publish-Module
+
+.LINK
+Publish-Module
+#>
 function Set-NuGetApiKey {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -143,6 +347,26 @@ function Set-NuGetApiKey {
     Set-ItemProperty -Path $RegistryKey -Name NuGetApiKey -Value $Value
 }
 
+<#
+.SYNOPSIS
+Stores last location and restores that location when PowerShell restarts
+
+.DESCRIPTION
+Stores last value of and restores that location when PowerShell restarts so that it continues in the directory you last were in previous session. 
+
+.ALIAS
+sl
+
+.INPUTS
+None
+
+.OUTPUTS
+System.Management.Automation.PathInfo, System.Management.Automation.PathInfoStack
+
+.EXAMPLE
+E:\> sl projects
+E:\projects> sl..
+#>
 function Set-LocationAndStore {
     [CmdletBinding(PositionalBinding = $True)]
     Param
