@@ -3,17 +3,17 @@
 This module contains the following custom tasks that I use frequently:
 
 * Stores last value of Set-Location and restores that location when PowerShell restarts.
-* You can restart PowerShell from command-line via 'pwsh'.  'pwsha' will restart with administrator privledges
+* You can restart PowerShell from command-line via 'pwsh'.  'pwsha' will restart with administrator privileges
 * Publish modules by retrieving NugetAPIKey and deploying my development directory to a PowerShell module directory
 * When a session starts PowerShell profile will be backed-up to my Google Drive directory and will overwrite Visual Studio code profile.
 * A function to output a given module's synopsis for its exported functions.
-* Cumlitave PowerShell history of sessions.
+* Cumulative PowerShell history of sessions.
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/marckassay/MKPowerShell/blob/master/LICENSE) [![PS Gallery](https://img.shields.io/badge/install-PS%20Gallery-blue.svg)](https://www.powershellgallery.com/packages/MKPowerShell/)
 
 ## Caveat
 
-* This module hasn't been tested to my standard as it is simpily a utility module that I created.  So some constraints and limitations exist still, but welcome pull-requests.
+* This module hasn't been tested to my standard as it is simply a utility module that I created.  So some constraints and limitations exist still, but welcome pull-requests.
 
 ## Instructions
 
@@ -52,10 +52,10 @@ E:\projects> sl..
 ### ```Set-NuGetApiKey```
 
 .SYNOPSIS
-Stores NuGet API key to be used with MKPowerShell.Publish-Module
+Stores NuGet API key to be used with Publish-PowerShellGetModule
 
 .DESCRIPTION
-Stores NuGet API key in the registry so that when MKPowerShell.Publish-Module is called it will retrieve the key without promting you for it.
+Stores NuGet API key in the registry so that when Publish-PowerShellGetModule is called it will retrieve the key without you having to copy-and-paste it into the command line.
 
 .INPUTS
 None
@@ -67,21 +67,21 @@ None
 
 ```powershell
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-Module
+E:\projects\MKPowerShell> Publish-PowerShellGetModule
 ```
 
 .LINK
-Publish-Module
+Publish-PowerShellGetModule
 
-### ```Publish-Module```
+### ```Publish-PowerShellGetModule```
 
 .SYNOPSIS
 
-Streamline publishing module to using PowerShellGet.Publish-Module
+Streamline publishing module to PowerShellGet.
 
 .DESCRIPTION
 
-Prior to calling you can store API key using Set-NuGetApiKey.  If not, you must assign it to the NuGetApiKey parameter.  When called this function will take the directory (or file's directory) and will copy it to the PowerShell module directory (eg: C:\Users\Marc\Documents\PowerShell\Modules) where PowerShell can then publish it to an online gallery.
+Prior to calling you can store API key using Set-NuGetApiKey.  If not, you must assign it to the NuGetApiKey parameter.  When called this function will take the directory (or file's directory) and will copy it to the PowerShell module directory (eg: C:\Users\Marc\Documents\PowerShell\Modules) where PowerShell can publish it to an online gallery.
 
 .INPUTS
 None
@@ -93,7 +93,7 @@ None
 
 ```powershell
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-Module
+E:\projects\MKPowerShell> Publish-PowerShellGetModule
 ```
 
 .LINK
@@ -214,11 +214,11 @@ Add-Type                  Adds a.NET Framework type (a class) to a Windows Power
 
 .SYNOPSIS
 
-Concatnates PowerShell histories, so that you can reference previous commands from previous sessions.
+Concatenate PowerShell histories, so that you can reference previous commands from previous sessions.
 
 .DESCRIPTION
 
-When PowerShell starts, it will load the previous CSV file (via Import-Csv) and concatnate (via Add-History)it to current session.  Doing this allows you to reference previous command from any previous session.
+When PowerShell starts, it will load the previous CSV file (via Import-Csv) and concatenate (via Add-History)it to current session.  Doing this allows you to reference previous command from any previous session.
 
 .INPUTS
 None

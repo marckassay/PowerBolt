@@ -12,7 +12,7 @@
     RootModule        = 'MKPowerShell.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.1'
+    ModuleVersion     = '0.5.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -76,7 +76,7 @@
         'Set-BackupProfileLocation',
         'Restart-PWSH',
         'Restart-PWSHAdmin',
-        'Publish-Module',
+        'Publish-PowerShellGetModule',
         'Set-NuGetApiKey',
         'Set-LocationAndStore'
     )
@@ -101,7 +101,7 @@
     # ModuleList = @()
 
     # List of all files packaged with this module
-    # FileList = @()
+    FileList          = @('.\LICENSE', '.\README.md')
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
     PrivateData       = @{
@@ -109,13 +109,19 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags       = @('Set-Location', 
+                'location', 
+                'Show-History', 
+                'history', 
+                'restart', 
+                'NuGetApiKey', 
+                'automation')
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/marckassay/MKPowerShell/blob/master/LICENSE'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/marckassay/MKPowerShell'
 
             # A URL to an icon representing this module.
             # IconUri = ''
@@ -128,10 +134,9 @@
     } # End of PrivateData hashtable
 
     # HelpInfo URI of this module
-    # HelpInfoURI = ''
+    HelpInfoURI       = 'https://github.com/marckassay/MKPowerShell'
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''
 
 }
-

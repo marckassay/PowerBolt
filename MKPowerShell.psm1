@@ -334,26 +334,21 @@ Set-Alias pwsha Restart-PWSHAdmin -Scope Global
 Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'."
 
 <#
-.SYNOPSIS
-Streamlines publishing module to using PowerShellGet.Publish-Module
+.SYNOPSIS Streamline publishing module to PowerShellGet.
 
-.DESCRIPTION
-Prior to calling you can store API key using Set-NuGetApiKey.  If not, you must assign it to the NuGetApiKey parameter.  When called this function will take the directory (or file's directory) and will copy it to the PowerShell module directory (eg: C:\Users\Marc\Documents\PowerShell\Modules) where PowerShell can then publish it to an online gallery.
+.DESCRIPTION Prior to calling you can store API key using Set-NuGetApiKey.  If not, you must assign it to the NuGetApiKey parameter.  When called this function will take the directory (or file's directory) and will copy it to the PowerShell module directory (eg: C:\Users\Marc\Documents\PowerShell\Modules) where PowerShell can publish it to an online gallery.
 
-.INPUTS
-None
+.INPUTS None
 
-.OUTPUTS
-None
+.OUTPUTS None
 
 .EXAMPLE
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-Module
+E:\projects\MKPowerShell> Publish-PowerShellGetModule
 
-.LINK
-Set-NuGetApiKey
+.LINK Set-NuGetApiKey
 #>
-function Publish-Module {
+function Publish-PowerShellGetModule {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
@@ -366,7 +361,7 @@ function Publish-Module {
 
     if (-not $Path -or -not $NuGetApiKey) {
         if (-not $Path) {
-            $Path = Get-ItemPropertyValue -Path $RegistryKey -Name LastLocation
+            $Path = Get-Location | Select-Object -ExpandProperty Path
         }
 
         if (-not $NuGetApiKey) {
@@ -378,16 +373,16 @@ function Publish-Module {
         $Path = Split-Path -Path $Path -Parent
     }
 
-    Copy-Item -Path $Path -Destination "$PSScriptRoot\Modules" -Exclude '.git', '.vscode' -Recurse -Force -Verbose -Container
+    Copy-Item -Path $Path -Destination "$(Get-Variable PSScriptRoot -ValueOnly)\Modules" -Exclude '.git', '.vscode' -Recurse -Force -Verbose -Container
     Publish-Module -Name $Path -NuGetApiKey $NuGetApiKey -Verbose -Confirm
 }
 
 <#
 .SYNOPSIS
-Stores NuGet API key to be used with MKPowerShell.Publish-Module 
+Stores NuGet API key to be used with Publish-PowerShellGetModule 
 
 .DESCRIPTION
-Stores NuGet API key in the registry so that when MKPowerShell.Publish-Module is called it will retrieve the key without promting you for it.
+Stores NuGet API key in the registry so that when Publish-PowerShellGetModule is called it will retrieve the key without promting you for it.
 
 .INPUTS
 None
@@ -397,10 +392,10 @@ None
 
 .EXAMPLE
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-Module
+E:\projects\MKPowerShell> Publish-PowerShellGetModule
 
 .LINK
-Publish-Module
+Publish-PowerShellGetModule
 #>
 function Set-NuGetApiKey {
     [CmdletBinding(PositionalBinding = $True)]
