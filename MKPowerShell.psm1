@@ -1,12 +1,14 @@
-$RegistryKey = 'HKCU:\SOFTWARE\PowerShell'
-
+$RegistryKey = 'HKCU:\SOFTWARE\MKPowerShell'
+$MKPowerShellAppData = "$Env:LOCALAPPDATA\MKPowerShell"
+$SessionHistoriesCount
+$Script:Restart
 
 <#
 .SYNOPSIS
 Concatnates PowerShell histories, so that you can reference previous commands from previous sessions.
 
 .DESCRIPTION
-When PowerShell starts, it will load the previous CSV file (via Import-Csv) and concatnate (via Add-History)it to current session.  Doing this allows you to reference previous command from any previous session.
+When PowerShell starts, it will load the previous CSV file (via Import-Csv) and concatnate (via Add-History) it to current session.  Doing this allows you to reference previous command from any previous session.
 
 .INPUTS
 None
@@ -18,11 +20,73 @@ None
 E:\> Get-History
 E:\> Invoke-History
 #>
-function Get-History {
-    <#
-Get-History | Export-Csv c:\testing\history.csv
-Import-Csv history.csv | Add-History
+function Export-History {
+    [CmdletBinding(PositionalBinding = $True)]
+    Param()
+
+    if ((Test-Path $MKPowerShellAppData -ErrorAction SilentlyContinue) -eq $False ) {
+        New-Item -Path $MKPowerShellAppData -ItemType Directory
+        New-Item -Path "$MKPowerShellAppData\SessionHistories.csv" -ItemType File
+        
+        $Script:SessionHistoriesCount = 0
+    }
+    # TODO: check $MaximumHistoryCount
+    $SessionHistory = Get-History
+    $EntriesToExport = [math]::Abs($Script:SessionHistories.Count - $SessionHistory.Count)
+    
+    Get-History -Count $EntriesToExport | Export-Csv -Path "$MKPowerShellAppData\SessionHistories.csv" 
+}
+
+function Import-History {
+    [CmdletBinding(PositionalBinding = $True)]
+    Param()
+
+    if ((Test-Path $MKPowerShellAppData -ErrorAction SilentlyContinue) -eq $False ) {
+        New-Item -Path $MKPowerShellAppData -ItemType Directory
+        New-Item -Path "$MKPowerShellAppData\SessionHistories.csv" -ItemType File
+
+        $Script:SessionHistoriesCount = 0
+    }
+    else {
+        $SessionHistories = Import-Csv -Path "$MKPowerShellAppData\SessionHistories.csv"
+        $Script:SessionHistoriesCount = $SessionHistories.Count;
+
+        $SessionHistories | Add-History
+    }
+}
+
+<#
+.SYNOPSIS
+Concatnates PowerShell histories, so that you can reference previous commands from previous sessions.
+
+.DESCRIPTION
+Displays history in descending order
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+E:\> Show-History
+
+ExecutionTime                                                              CommandLine Id
+-------------                                                              ----------- --
+Saturday, April 7, 2018 3:52:21 PM                                                exit 62
+Saturday, April 7, 2018 3:52:05 PM                                        Show-History 61
+Saturday, April 7, 2018 3:42:59 PM                                                sl.. 60
+Saturday, April 7, 2018 3:42:29 PM                              Get-Content config.xml 59
+...
 #>
+function Show-History {
+    [CmdletBinding(PositionalBinding = $False)]
+    Param()
+
+    Get-History | Sort-Object -Descending Id | `
+        Format-Table @{Label = "ExecutionTime"; Expression = {($_.EndExecutionTime.DateTime)}; Alignment = 'Left'}, `
+    @{Label = "CommandLine"; Expression = {($_.CommandLine)}; Alignment = 'Right'}, `
+    @{Label = "Id"; Expression = {($_.Id)}; Alignment = 'Left'} -AutoSize
 }
 
 <#
@@ -205,7 +269,7 @@ Restarts PowerShell
 .DESCRIPTION
 Restarts PowerShell
 
-.ALIAS
+# .ALIAS
 pwsh
 
 .INPUTS
@@ -223,10 +287,11 @@ Restart-PWSHAdmin
 function Restart-PWSH {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
-
+    Unregister-Event -SourceIdentifier PowerShell.Exiting -ErrorAction SilentlyContinue
     Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
+        Export-History
         Start-Process -FilePath "pwsh.exe" -Verb open
-    }
+    } | Out-Null
     exit
 }
 Set-Alias pwsh Restart-PWSH -Scope Global
@@ -240,7 +305,7 @@ Restarts PowerShell with Administrator privileges
 .DESCRIPTION
 Restarts PowerShell with Administrator privileges
 
-.ALIAS
+# .ALIAS
 pwsha
 
 .INPUTS
@@ -258,10 +323,11 @@ Restart-PWSH
 function Restart-PWSHAdmin {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
-
+    Unregister-Event -SourceIdentifier PowerShell.Exiting -ErrorAction SilentlyContinue
     Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
+        Export-History
         Start-Process -FilePath "pwsh.exe" -Verb runAs
-    }
+    } | Out-Null
     exit
 }
 Set-Alias pwsha Restart-PWSHAdmin -Scope Global
@@ -354,7 +420,7 @@ Stores last location and restores that location when PowerShell restarts
 .DESCRIPTION
 Stores last value of and restores that location when PowerShell restarts so that it continues in the directory you last were in previous session. 
 
-.ALIAS
+# .ALIAS
 sl
 
 .INPUTS
@@ -392,7 +458,7 @@ function Set-LocationAndStore {
 Set-Alias sl Set-LocationAndStore -Scope Global -Force
 Write-Host "'sl' alias is now mapped to 'Set-LocationAndStore'."
 
-function Restore-Settings {
+function Restore-RegistrySettings {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
 
@@ -412,15 +478,15 @@ function Restore-Settings {
         Push-Location
 
         Set-Location -Path 'HKCU:\SOFTWARE\'
-
-        $RegKey = New-Item -Name 'PowerShell' 
+        
+        $RegKey = New-Item -Name 'MKPowerShell'
         $RegKey | New-ItemProperty -Name LastLocation -Value $InitalLocation -PropertyType String
         $RegKey | New-ItemProperty -Name NuGetApiKey -Value '' -PropertyType String
         $RegKey | New-ItemProperty -Name BackupProfileLocation -Value '' -PropertyType String
 
         Pop-Location
         
-        Write-Host "New registry key for PowerShell has been created."
+        Write-Host "New registry key for MKPowerShell has been created."
     }
 }
 
@@ -428,19 +494,38 @@ function Start-PowerShellSession {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
     
-    Restore-Settings
-
-    $job = Start-Job { Start-Sleep -Seconds 5 }
+    Register-Shutdown
     
-    Register-ObjectEvent $job -EventName StateChanged -SourceIdentifier JobEnd -Action {
+    Restore-RegistrySettings
+    Import-History
+    
+    Register-PostStartUp
+}
+
+function Register-PostStartUp {
+    [CmdletBinding(PositionalBinding = $False)]
+    Param()
+   
+    $job = Start-Job { Start-Sleep -Seconds 60 }
+    
+    Register-ObjectEvent $job -EventName StateChanged -SourceIdentifier StartUpJobEnd -Action {
         if ($sender.State -eq 'Completed') {
             Backup-PowerShellProfile
             Update-PowerShellProfile
 
-            Unregister-Event JobEnd
+            Unregister-Event StartUpJobEnd
             Remove-Job $job
         } 
     } | Out-Null
 }
+
+function Register-Shutdown {
+    [CmdletBinding(PositionalBinding = $False)]
+    Param()
+
+    Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
+        Export-History
+    } | Out-Null
+}  
 
 Start-PowerShellSession

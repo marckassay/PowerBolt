@@ -210,7 +210,7 @@ Add-Member                Adds custom properties and methods to an instance of a
 Add-Type                  Adds a.NET Framework type (a class) to a Windows PowerShell session.
 ```
 
-### ```Get-History```
+### ```Show-History```
 
 .SYNOPSIS
 
@@ -229,6 +229,13 @@ None
 .EXAMPLE
 
 ```powershell
-E:\> Get-History
-E:\> Invoke-History
+E:\> Show-History
+
+ExecutionTime                                                              CommandLine Id
+-------------                                                              ----------- --
+Saturday, April 7, 2018 3:52:21 PM                                                exit 62
+Saturday, April 7, 2018 3:52:05 PM                                        Show-History 61
+Saturday, April 7, 2018 3:42:59 PM                                                sl.. 60
+Saturday, April 7, 2018 3:42:29 PM                              Get-Content config.xml 59
+...
 ```
