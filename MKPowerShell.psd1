@@ -30,7 +30,7 @@
     # Copyright = '(c) Marc. All rights reserved.'
 
     # Description of the functionality provided by this module
-    # Description = ''
+    Description       = 'A PowerShell module to streamline frequent operations I execute.'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''

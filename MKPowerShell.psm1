@@ -353,28 +353,29 @@ function Publish-PowerShellGetModule {
     Param
     (
         [Parameter(Mandatory = $False, Position = 1)]
-        [string]$Path,
+        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
+
+        [Parameter(Mandatory = $False, Position = 2)]
+        [string]$NuGetApiKey = (Get-ItemPropertyValue -Path $RegistryKey -Name NuGetApiKey),
 
         [Parameter(Mandatory = $False)]
-        [string]$NuGetApiKey
+        [string[]]$Exclude = ('.git', '.vscode', '.gitignore'),
+
+        [switch]$WhatIf
     )
-
-    if (-not $Path -or -not $NuGetApiKey) {
-        if (-not $Path) {
-            $Path = Get-Location | Select-Object -ExpandProperty Path
-        }
-
-        if (-not $NuGetApiKey) {
-            $NuGetApiKey = Get-ItemPropertyValue -Path $RegistryKey -Name NuGetApiKey
-        }
-    }
     
     if ((Test-Path -Path $Path -PathType Container) -eq $False) {
-        $Path = Split-Path -Path $Path -Parent
+        $Path = Split-Path -Path $Path -Parent -Resolve
     }
 
-    Copy-Item -Path $Path -Destination "$(Get-Variable PSScriptRoot -ValueOnly)\Modules" -Exclude '.git', '.vscode' -Recurse -Force -Verbose -Container
-    Publish-Module -Name $Path -NuGetApiKey $NuGetApiKey -Verbose -Confirm
+    $DestinationDirectory = Join-Path -Path ($Env:PSModulePath.Split(';')[0]) -ChildPath (Split-Path -Path $Path -Leaf)
+    
+    Remove-Item $DestinationDirectory -Recurse -Force -ErrorAction SilentlyContinue
+    New-Item $DestinationDirectory -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
+
+    Get-ChildItem -Path $Path -Exclude $Exclude -Recurse | Copy-Item -Destination $DestinationDirectory -WhatIf:$WhatIf.IsPresent
+
+    Publish-Module -Name $Path -NuGetApiKey $NuGetApiKey -Verbose -Confirm -WhatIf:$WhatIf.IsPresent
 }
 
 <#

@@ -1,6 +1,6 @@
 # MKPowerShell
 
-This module contains the following custom tasks that I use frequently:
+The following operations are:
 
 * Stores last value of Set-Location and restores that location when PowerShell restarts.
 * You can restart PowerShell from command-line via 'pwsh'.  'pwsha' will restart with administrator privileges
