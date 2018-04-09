@@ -25,7 +25,19 @@ $ Install-Module MKPowerShell
 
 ## Usage
 
-### ```sl``` (```Set-LocationAndStore [-Path] <String> [[-LiteralPath] <String>] [-PassThru]```)
+## ```sl``` (```Set-LocationAndStore```)
+
+```powershell
+    Param (
+        [Parameter(Mandatory = $False, Position = 1)]
+        [string]$Path,
+
+        [Parameter(Mandatory = $False)]
+        [string]$LiteralPath,
+
+        [switch]$PassThru
+    )
+```
 
 .SYNOPSIS
 
@@ -49,7 +61,14 @@ E:\> sl projects
 E:\projects> sl..
 ```
 
-### ```Set-NuGetApiKey```
+## ```Set-NuGetApiKey```
+
+```powershell
+    Param (
+        [Parameter(Mandatory = $True, Position = 1)]
+        [string]$Value
+    )
+```
 
 .SYNOPSIS
 Stores NuGet API key to be used with Publish-Module
@@ -73,7 +92,22 @@ E:\projects\MKPowerShell> Publish-Module
 .LINK
 Publish-Module
 
-### ```Publish-Module```
+## ```Publish-Module```
+
+```powershell
+    Param (
+        [Parameter(Mandatory = $False)]
+        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
+
+        [Parameter(Mandatory = $False)]
+        [string]$NuGetApiKey = (Get-ItemPropertyValue -Path $RegistryKey -Name NuGetApiKey),
+
+        [Parameter(Mandatory = $False)]
+        [string[]]$Exclude = ('.git', '.vscode', '.gitignore'),
+
+        [switch]$WhatIf
+    )
+```
 
 .SYNOPSIS
 
@@ -99,7 +133,7 @@ E:\projects\MKPowerShell> Publish-Module
 .LINK
 Set-NuGetApiKey
 
-### ```pwsh``` (```Restart-PWSH```)
+## ```pwsh``` (```Restart-PWSH```)
 
 .SYNOPSIS
 
@@ -127,7 +161,7 @@ E:\projects> pwsh
 .LINK
 Restart-PWSH
 
-### ```pwsha``` (```Restart-PWSHAdmin```)
+## ```pwsha``` (```Restart-PWSHAdmin```)
 
 .SYNOPSIS
 
@@ -155,7 +189,14 @@ E:\projects> pwsha
 .LINK
 Restart-PWSH
 
-### ```Set-BackupProfileLocation```
+## ```Set-BackupProfileLocation```
+
+```powershell
+    Param (
+        [Parameter(Mandatory = $True, Position = 1)]
+        [string]$Value
+    )
+```
 
 .SYNOPSIS
 
@@ -177,7 +218,16 @@ None
 E:\projects> Set-BackupProfileLocation 'D:\Google Drive\Documents\PowerShell'
 ```
 
-### ```Get-ModuleSynopsis```
+## ```Get-ModuleSynopsis```
+
+```powershell
+    DynamicParam {
+        ...
+        $NonInstalledSet = Get-Module | Select-Object -ExpandProperty Name
+        $InstalledSet = Get-InstalledModule | Select-Object -ExpandProperty Name
+        ...
+    }
+```
 
 .SYNOPSIS
 
@@ -210,7 +260,7 @@ Add-Member                Adds custom properties and methods to an instance of a
 Add-Type                  Adds a.NET Framework type (a class) to a Windows PowerShell session.
 ```
 
-### ```Show-History```
+## ```Show-History```
 
 .SYNOPSIS
 
