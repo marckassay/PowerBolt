@@ -12,7 +12,7 @@
     RootModule        = 'MKPowerShell.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.5.0'
+    ModuleVersion     = '0.5.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -111,7 +111,8 @@
             # Tags applied to this module. These help with module discovery in online galleries.
             Tags       = @('Set-Location', 
                 'location', 
-                'Show-History', 
+                'Show-History',
+                'profile', 
                 'history', 
                 'restart', 
                 'NuGetApiKey', 

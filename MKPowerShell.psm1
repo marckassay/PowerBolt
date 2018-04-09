@@ -1,7 +1,5 @@
 $RegistryKey = 'HKCU:\SOFTWARE\MKPowerShell'
 $MKPowerShellAppData = "$Env:LOCALAPPDATA\MKPowerShell"
-$SessionHistoriesCount
-$Script:Restart
 
 <#
 .SYNOPSIS
@@ -230,6 +228,26 @@ function Backup-PowerShellProfile {
     }
 }
 
+
+<#
+.SYNOPSIS
+Updates other PowerShell profiles with Microsoft.PowerShell_profile.ps1
+
+.DESCRIPTION
+Currently this is hard-coded to only update VSCode profile.  Obviously this will need to be changed
+to live up to its name.
+
+.INPUTS
+None
+
+.OUTPUTS
+None
+
+.EXAMPLE
+
+.NOTES
+$args is being used here for for Register-ObjectEvent scope
+#>
 function Update-PowerShellProfile {
     [CmdletBinding(PositionalBinding = $False)]
     Param
@@ -385,10 +403,12 @@ function Publish-Module {
     # setup deploy directory
     Get-ChildItem -Path $Path -Exclude $Exclude -Recurse | `
         Copy-Item -Destination $DestinationDirectory -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
+    
+    # Mask all but the last 8 chracters for Write-Information
+    $RedactedNuGetApiKey = $NuGetApiKey.Remove(0, 23).Insert(0, 'XXXXXXXX-XXXX-XXXX-XXXX')
+    Write-Information "Will be using the following value for NuGet API Key: $RedactedNuGetApiKey" -InformationAction Continue
 
     PowerShellGet\Publish-Module -Name $DestinationDirectory -NuGetApiKey $NuGetApiKey -Verbose -Confirm:$(-not $WhatIf.IsPresent) -WhatIf:$WhatIf.IsPresent
-    
-    Write-Information "Will be using the following value for NuGet API Key: $NuGetApiKey" -InformationAction Continue
     
     # teardown
     Remove-Item $DestinationDirectory -Recurse -Force -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)

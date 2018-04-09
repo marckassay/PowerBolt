@@ -5,7 +5,7 @@ The following operations are:
 * Stores last value of Set-Location and restores that location when PowerShell restarts.
 * You can restart PowerShell from command-line via 'pwsh'.  'pwsha' will restart with administrator privileges
 * Publish modules by retrieving NugetAPIKey and deploying my development directory to a PowerShell module directory
-* When a session starts PowerShell profile will be backed-up to my Google Drive directory and will overwrite Visual Studio code profile.
+* When a session starts PowerShell profile will be backed-up to my Google Drive directory and will overwrite Visual Studio code profile (see Update-PowerShellProfile).
 * A function to output a given module's synopsis for its exported functions.
 * Cumulative PowerShell history of sessions.
 
@@ -25,7 +25,7 @@ $ Install-Module MKPowerShell
 
 ## Usage
 
-## ```sl``` (```Set-LocationAndStore```)
+### ```sl``` (```Set-LocationAndStore```)
 
 ```powershell
     Param (
@@ -61,7 +61,7 @@ E:\> sl projects
 E:\projects> sl..
 ```
 
-## ```Set-NuGetApiKey```
+### ```Set-NuGetApiKey```
 
 ```powershell
     Param (
@@ -92,7 +92,7 @@ E:\projects\MKPowerShell> Publish-Module
 .LINK
 Publish-Module
 
-## ```Publish-Module```
+### ```Publish-Module```
 
 ```powershell
     Param (
@@ -133,7 +133,7 @@ E:\projects\MKPowerShell> Publish-Module
 .LINK
 Set-NuGetApiKey
 
-## ```pwsh``` (```Restart-PWSH```)
+### ```pwsh``` (```Restart-PWSH```)
 
 .SYNOPSIS
 
@@ -161,7 +161,7 @@ E:\projects> pwsh
 .LINK
 Restart-PWSH
 
-## ```pwsha``` (```Restart-PWSHAdmin```)
+### ```pwsha``` (```Restart-PWSHAdmin```)
 
 .SYNOPSIS
 
@@ -189,7 +189,7 @@ E:\projects> pwsha
 .LINK
 Restart-PWSH
 
-## ```Set-BackupProfileLocation```
+### ```Set-BackupProfileLocation```
 
 ```powershell
     Param (
@@ -218,7 +218,7 @@ None
 E:\projects> Set-BackupProfileLocation 'D:\Google Drive\Documents\PowerShell'
 ```
 
-## ```Get-ModuleSynopsis```
+### ```Get-ModuleSynopsis```
 
 ```powershell
     DynamicParam {
@@ -260,7 +260,7 @@ Add-Member                Adds custom properties and methods to an instance of a
 Add-Type                  Adds a.NET Framework type (a class) to a Windows PowerShell session.
 ```
 
-## ```Show-History```
+### ```Show-History```
 
 .SYNOPSIS
 
@@ -289,3 +289,39 @@ Saturday, April 7, 2018 3:42:59 PM                                              
 Saturday, April 7, 2018 3:42:29 PM                              Get-Content config.xml 59
 ...
 ```
+
+### ```Update-PowerShellProfile```
+
+```powershell
+    Param
+    (
+        [Parameter(Mandatory = $False)]
+        [string]$Path = "$args\Microsoft.VSCode_profile.ps1",
+
+        [Parameter(Mandatory = $False)]
+        [string[]]$Include
+    )
+```
+
+.SYNOPSIS
+
+Updates other PowerShell profiles with Microsoft.PowerShell_profile.ps1
+
+.DESCRIPTION
+
+Currently this is hard-coded to only update VSCode profile.  Obviously this will need to be changed
+to live up to its name.
+
+.INPUT None
+
+.OUTPUTS None
+
+.EXAMPLE None
+
+.NOTES $args is being used here for for Register-ObjectEvent scope
+
+## Roadmap
+
+* breakup this module into seperate modules and/or scripts
+
+* use platyPS for documentation
