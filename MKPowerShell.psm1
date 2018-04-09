@@ -344,18 +344,18 @@ Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'."
 
 .EXAMPLE
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-PowerShellGetModule
+E:\projects\MKPowerShell> Publish-Module
 
 .LINK Set-NuGetApiKey
 #>
-function Publish-PowerShellGetModule {
+function Publish-Module {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $False, Position = 1)]
+        [Parameter(Mandatory = $False)]
         [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
 
-        [Parameter(Mandatory = $False, Position = 2)]
+        [Parameter(Mandatory = $False)]
         [string]$NuGetApiKey = (Get-ItemPropertyValue -Path $RegistryKey -Name NuGetApiKey),
 
         [Parameter(Mandatory = $False)]
@@ -364,26 +364,42 @@ function Publish-PowerShellGetModule {
         [switch]$WhatIf
     )
     
+    # ignore .psd1, just concerned about module's root directory
     if ((Test-Path -Path $Path -PathType Container) -eq $False) {
         $Path = Split-Path -Path $Path -Parent -Resolve
     }
 
-    $DestinationDirectory = Join-Path -Path ($Env:PSModulePath.Split(';')[0]) -ChildPath (Split-Path -Path $Path -Leaf)
+    # pick the first directory of $Env:PSModulePath and add the module's root directory name to it
+    $ModuleDirectoryName = (Split-Path -Path $Path -Leaf)
+    $DestinationDirectory = Join-Path -Path ($Env:PSModulePath.Split(';')[0]) -ChildPath $ModuleDirectoryName
+
+    # if it exists in $Env:PSModulePath[0], remove it
+    if ((Test-Path -Path $DestinationDirectory -PathType Container) -eq $True) {
+        Remove-Item $DestinationDirectory -Recurse -Force -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
+    }
     
-    Remove-Item $DestinationDirectory -Recurse -Force -ErrorAction SilentlyContinue
-    New-Item $DestinationDirectory -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
+    # setup deploy directory
+    New-Item $DestinationDirectory -ItemType Directory -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)| `
+        Out-Null
+    
+    # setup deploy directory
+    Get-ChildItem -Path $Path -Exclude $Exclude -Recurse | `
+        Copy-Item -Destination $DestinationDirectory -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
 
-    Get-ChildItem -Path $Path -Exclude $Exclude -Recurse | Copy-Item -Destination $DestinationDirectory -WhatIf:$WhatIf.IsPresent
-
-    Publish-Module -Name $Path -NuGetApiKey $NuGetApiKey -Verbose -Confirm -WhatIf:$WhatIf.IsPresent
+    PowerShellGet\Publish-Module -Name $DestinationDirectory -NuGetApiKey $NuGetApiKey -Verbose -Confirm:$(-not $WhatIf.IsPresent) -WhatIf:$WhatIf.IsPresent
+    
+    Write-Information "Will be using the following value for NuGet API Key: $NuGetApiKey" -InformationAction Continue
+    
+    # teardown
+    Remove-Item $DestinationDirectory -Recurse -Force -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
 }
 
 <#
 .SYNOPSIS
-Stores NuGet API key to be used with Publish-PowerShellGetModule 
+Stores NuGet API key to be used with Publish-Module 
 
 .DESCRIPTION
-Stores NuGet API key in the registry so that when Publish-PowerShellGetModule is called it will retrieve the key without promting you for it.
+Stores NuGet API key in the registry so that when Publish-Module is called it will retrieve the key without promting you for it.
 
 .INPUTS
 None
@@ -393,10 +409,10 @@ None
 
 .EXAMPLE
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-PowerShellGetModule
+E:\projects\MKPowerShell> Publish-Module
 
 .LINK
-Publish-PowerShellGetModule
+Publish-Module
 #>
 function Set-NuGetApiKey {
     [CmdletBinding(PositionalBinding = $True)]

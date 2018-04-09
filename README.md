@@ -52,10 +52,10 @@ E:\projects> sl..
 ### ```Set-NuGetApiKey```
 
 .SYNOPSIS
-Stores NuGet API key to be used with Publish-PowerShellGetModule
+Stores NuGet API key to be used with Publish-Module
 
 .DESCRIPTION
-Stores NuGet API key in the registry so that when Publish-PowerShellGetModule is called it will retrieve the key without you having to copy-and-paste it into the command line.
+Stores NuGet API key in the registry so that when Publish-Module is called it will retrieve the key without you having to copy-and-paste it into the command line.
 
 .INPUTS
 None
@@ -67,13 +67,13 @@ None
 
 ```powershell
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-PowerShellGetModule
+E:\projects\MKPowerShell> Publish-Module
 ```
 
 .LINK
-Publish-PowerShellGetModule
+Publish-Module
 
-### ```Publish-PowerShellGetModule```
+### ```Publish-Module```
 
 .SYNOPSIS
 
@@ -93,7 +93,7 @@ None
 
 ```powershell
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-PowerShellGetModule
+E:\projects\MKPowerShell> Publish-Module
 ```
 
 .LINK
