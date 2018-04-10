@@ -81,7 +81,7 @@ function Show-History {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
 
-    Get-History | Sort-Object -Descending Id | `
+    Get-History | Sort-Object | `
         Format-Table @{Label = "ExecutionTime"; Expression = {($_.EndExecutionTime.DateTime)}; Alignment = 'Left'}, `
     @{Label = "CommandLine"; Expression = {($_.CommandLine)}; Alignment = 'Right'}, `
     @{Label = "Id"; Expression = {($_.Id)}; Alignment = 'Left'} -AutoSize
@@ -205,20 +205,13 @@ function Backup-PowerShellProfile {
     Param
     (
         [Parameter(Mandatory = $False)]
-        [string]$Destination
+        [string]$Destination = (Get-ItemPropertyValue -Path $RegistryKey -Name BackupProfileLocation)
     )
 
-    if (-not $Destination) {
-        if ( $(Test-Path $RegistryKey -ErrorAction SilentlyContinue) -eq $True ) {
-
-            $Destination = Get-ItemPropertyValue -Path $RegistryKey -Name BackupProfileLocation
-
-            if ((Test-Path $Destination -PathType Container) -eq $False) {
-                New-Item $Destination -ItemType Directory
-            }
-            Copy-Item -Path $PROFILE -Destination $Destination -Force
-        }
+    if ((Test-Path $Destination -PathType Container) -eq $False) {
+        New-Item $Destination -ItemType Directory
     }
+    Copy-Item -Path $PROFILE -Destination $Destination -Force
 }
 
 
@@ -358,11 +351,11 @@ Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'." -ForegroundColo
 
 .EXAMPLE
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-Module
+E:\projects\MKPowerShell> Publish-ModuleToNuGetGallery
 
 .LINK Set-NuGetApiKey
 #>
-function Publish-Module {
+function Publish-ModuleToNuGetGallery {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
@@ -404,7 +397,7 @@ function Publish-Module {
     $RedactedNuGetApiKey = $NuGetApiKey.Remove(0, 23).Insert(0, 'XXXXXXXX-XXXX-XXXX-XXXX')
     Write-Information "Will be using the following value for NuGet API Key: $RedactedNuGetApiKey" -InformationAction Continue
 
-    PowerShellGet\Publish-Module -Name $DestinationDirectory -NuGetApiKey $NuGetApiKey -Verbose -Confirm:$(-not $WhatIf.IsPresent) -WhatIf:$WhatIf.IsPresent
+    PowerShellGet\Publish-ModuleToNuGetGallery -Name $DestinationDirectory -NuGetApiKey $NuGetApiKey -Verbose -Confirm:$(-not $WhatIf.IsPresent) -WhatIf:$WhatIf.IsPresent
     
     # teardown
     Remove-Item $DestinationDirectory -Recurse -Force -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
@@ -412,10 +405,10 @@ function Publish-Module {
 
 <#
 .SYNOPSIS
-Stores NuGet API key to be used with Publish-Module 
+Stores NuGet API key to be used with Publish-ModuleToNuGetGallery 
 
 .DESCRIPTION
-Stores NuGet API key in the registry so that when Publish-Module is called it will retrieve the key without promting you for it.
+Stores NuGet API key in the registry so that when Publish-ModuleToNuGetGallery is called it will retrieve the key without promting you for it.
 
 .INPUTS
 None
@@ -425,10 +418,10 @@ None
 
 .EXAMPLE
 E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-Module
+E:\projects\MKPowerShell> Publish-ModuleToNuGetGallery
 
 .LINK
-Publish-Module
+Publish-ModuleToNuGetGallery
 #>
 function Set-NuGetApiKey {
     [CmdletBinding(PositionalBinding = $True)]

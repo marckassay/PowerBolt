@@ -78,7 +78,7 @@
         'Restart-PWSHAdmin',
         'Backup-PowerShellProfile',
         'Update-PowerShellProfile',
-        'Publish-Module',
+        'Publish-ModuleToNuGetGallery',
         'Set-NuGetApiKey',
         'Set-LocationAndStore'
     )
