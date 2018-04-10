@@ -81,10 +81,16 @@ function Show-History {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
 
-    Get-History | Sort-Object | `
-        Format-Table @{Label = "ExecutionTime"; Expression = {($_.EndExecutionTime.DateTime)}; Alignment = 'Left'}, `
-    @{Label = "CommandLine"; Expression = {($_.CommandLine)}; Alignment = 'Right'}, `
-    @{Label = "Id"; Expression = {($_.Id)}; Alignment = 'Left'} -AutoSize
+    $GroupObject = @{
+        Name       = ':'
+        Expression = {$_.EndExecutionTime.DayOfWeek}
+    }
+
+    Get-History | Sort-Object -Property Id | `
+        Format-Table -AutoSize -Wrap -GroupBy $GroupObject -Property `
+    @{Label = "Id"; Expression = {($_.Id)}; Alignment = 'Left'}, `
+    @{Label = "ExecutionTime"; Expression = { ($_.EndExecutionTime.toString('t')) }; Alignment = 'Left'}, `
+    @{Label = "CommandLine"; Expression = {($_.CommandLine)}; Alignment = 'Left'}
 }
 
 <#
