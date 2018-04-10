@@ -76,6 +76,8 @@
         'Set-BackupProfileLocation',
         'Restart-PWSH',
         'Restart-PWSHAdmin',
+        'Backup-PowerShellProfile',
+        'Update-PowerShellProfile',
         'Publish-Module',
         'Set-NuGetApiKey',
         'Set-LocationAndStore'
