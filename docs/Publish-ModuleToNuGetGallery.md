@@ -107,4 +107,4 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 ## NOTES
 
 ## RELATED LINKS
-[Set-NuGetApiKey]
+[Set-NuGetApiKey](https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-NuGetApiKey.md)

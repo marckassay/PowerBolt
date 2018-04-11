@@ -53,5 +53,6 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## RELATED LINKS
 
-[Set-BackupProfileLocation]
-[Update-PowerShellProfile]
+[Set-BackupProfileLocation](https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-BackupProfileLocation.md)
+
+[Update-PowerShellProfile](https://github.com/marckassay/MKPowerShell/blob/master/docs/Update-PowerShellProfile.md)

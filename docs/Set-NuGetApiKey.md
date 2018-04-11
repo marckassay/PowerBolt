@@ -61,4 +61,4 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## RELATED LINKS
 
-[Publish-ModuleToNuGetGallery]
+[Publish-ModuleToNuGetGallery](https://github.com/marckassay/MKPowerShell/blob/master/docs/Publish-ModuleToNuGetGallery.md)

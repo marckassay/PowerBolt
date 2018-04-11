@@ -58,5 +58,6 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## RELATED LINKS
 
-[Backup-PowerShellProfile]
-[Update-PowerShellProfile]
+[Backup-PowerShellProfile](https://github.com/marckassay/MKPowerShell/blob/master/docs/Backup-PowerShellProfile.md)
+
+[Update-PowerShellProfile](https://github.com/marckassay/MKPowerShell/blob/master/docs/Update-PowerShellProfile.md)

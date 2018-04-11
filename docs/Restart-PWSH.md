@@ -49,4 +49,4 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## RELATED LINKS
 
-[Restart-PWSHAdmin]()
+[Restart-PWSHAdmin](https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSHAdmin.md)

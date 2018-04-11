@@ -77,5 +77,6 @@ $args is being used here for for Register-ObjectEvent scope
 
 ## RELATED LINKS
 
-[Backup-PowerShellProfile]
-[Set-BackupProfileLocation]
+[Backup-PowerShellProfile](https://github.com/marckassay/MKPowerShell/blob/master/docs/Backup-PowerShellProfile.md)
+
+[Set-BackupProfileLocation](https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-BackupProfileLocation.md)
