@@ -6,14 +6,13 @@ function Build-Docs {
         [string]$Name,
         
         [Parameter(Mandatory = $False)]
-        [string]$Path,
+        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownFolder = '.\docs',
 
         [Parameter(Mandatory = $False)]
-        [string]$Locale = 'en-US',
-
+        [string]$Locale = 'en-US'<#,
         [Parameter(Mandatory = $False)]
         [string]$ReadMeInsertPoint = "## Usage",
 
@@ -27,13 +26,19 @@ function Build-Docs {
         [string[]]$Include,
 
         [switch]
-        $NoOnlineVersionUrl
+        $NoOnlineVersionUrl 
+        #>
     )
 
     # Part 1 - obtain info about module and/or path
     $ModuleFolder
     $ModuleName = $Name 
-    
+
+    $RootModule = Get-ChildItem -Path $ModuleFolder  -Include '*.psm1' -Recurse | `
+        Select-Object -ExpandProperty Name | `
+        Resolve-Path | `
+        Select-Object -ExpandProperty Path
+
     if ($Name) {
         $ModuleFolder = Get-Module $Name | Select-Object -ExpandProperty Path | Split-Path -Parent
     } 
@@ -51,19 +56,26 @@ function Build-Docs {
     
     $ModuleMarkdownFolder = Join-Path -Path $ModuleFolder -ChildPath $MarkdownFolder
 
+    $PredicateA = ((Test-Path -Path $ModuleMarkdownFolder -PathType Container) -eq $False)
+    try {
+        $PredicateB = ((Get-Item $ModuleMarkdownFolder -ErrorAction SilentlyContinue ).GetFiles().Count -eq 0)
+    }
+    catch {
+        $PredicateB = $False
+    }
+
     # Part 2 - markdown files
-    if ((Test-Path -Path $ModuleMarkdownFolder -PathType Container) -eq $False) {
+    if ($PredicateA -or $PredicateB) {
         New-Item -Path $ModuleMarkdownFolder -ItemType Container
 
-        Import-Module $ModuleName -Force
+        Import-Module $RootModule -Force -ArgumentList $(Get-Variable PSScriptRoot -ValueOnly)
         New-MarkdownHelp -Module $ModuleName -OutputFolder $MarkdownFolder
     }
     else {
-        Import-Module $ModuleName -Force
+        Import-Module $RootModule -Force -ArgumentList $(Get-Variable PSScriptRoot -ValueOnly)
         Update-MarkdownHelp $MarkdownFolder
     }
  
-    $MarkdownSnippetCollection.Clear()
     $MarkdownSnippetCollection = Get-ChildItem -Path "$ModuleMarkdownFolder\*.md" | ForEach-Object {
         $FileContents = Get-Content -Path $_.FullName
         
@@ -81,10 +93,14 @@ function Build-Docs {
     New-ExternalHelp -Path $ModuleMarkdownFolder -OutputPath $HelpLocaleFolder -Force
 
     # Part 4 - update README with markdown snippets
+    <#
     [string]$ReadMeContents = Get-Content -Path "$ModuleFolder\README*"
-    $StartInsert = $ReadMeContents.IndexOf($ReadMeInsertPoint) + 1
+     $StartInsert = $ReadMeContents.IndexOf($ReadMeInsertPoint) + 1
     $EndInsert = $ReadMeContents.IndexOf('## Roadmap') - 1
 
     $ReadMeContents.Remove($StartInsert, ($EndInsert - $StartInsert))
-    $ReadMeContents.Insert($StartInsert, $MarkdownSnippetCollection)
+    $ReadMeContents.Insert($StartInsert, $MarkdownSnippetCollection) 
+    #>
+    Out-File -FilePath "$ModuleFolder\README*" -InputObject $MarkdownSnippetCollection -Append
 }
+Build-Docs
