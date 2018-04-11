@@ -19,9 +19,6 @@ Set-LocationAndStore [[-Path] <String>] [-LiteralPath <String>] [-PassThru] [<Co
 ## DESCRIPTION
 Stores last value of and restores that location when PowerShell restarts so that it continues in the directory you last were in previous session. This will override the alias 'sl' (Set-Location).
 
-# .ALIAS
-sl
-
 ## EXAMPLES
 
 ### EXAMPLE 1
@@ -78,8 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

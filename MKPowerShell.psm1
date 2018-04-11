@@ -1,23 +1,7 @@
 $RegistryKey = 'HKCU:\SOFTWARE\MKPowerShell'
 $MKPowerShellAppData = "$Env:LOCALAPPDATA\MKPowerShell"
 
-<#
-.SYNOPSIS
-Concatnates PowerShell histories, so that you can reference previous commands from previous sessions.
-
-.DESCRIPTION
-When PowerShell starts, it will load the previous CSV file (via Import-Csv) and concatnate (via Add-History) it to current session.  Doing this allows you to reference previous command from any previous session.
-
-.INPUTS
-None
-
-.OUTPUTS
-None
-
-.EXAMPLE
-E:\> Get-History
-E:\> Invoke-History
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Export-History {
     [CmdletBinding(PositionalBinding = $True)]
     Param()
@@ -53,30 +37,7 @@ function Import-History {
     }
 }
 
-<#
-.SYNOPSIS
-Concatnates PowerShell histories, so that you can reference previous commands from previous sessions.
-
-.DESCRIPTION
-Displays history in descending order
-
-.INPUTS
-None
-
-.OUTPUTS
-None
-
-.EXAMPLE
-E:\> Show-History
-
-ExecutionTime                                                              CommandLine Id
--------------                                                              ----------- --
-Saturday, April 7, 2018 3:52:21 PM                                                exit 62
-Saturday, April 7, 2018 3:52:05 PM                                        Show-History 61
-Saturday, April 7, 2018 3:42:59 PM                                                sl.. 60
-Saturday, April 7, 2018 3:42:29 PM                              Get-Content config.xml 59
-...
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Show-History {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
@@ -93,33 +54,7 @@ function Show-History {
     @{Label = "CommandLine"; Expression = {($_.CommandLine)}; Alignment = 'Left'}
 }
 
-<#
-.SYNOPSIS
-Lists all available functions for a module, with the synopsis of the functions.
-
-.DESCRIPTION
-Lists all available functions of a module using Get-Command and Get-Help.
-
-.INPUTS
-None
-
-.OUTPUTS
-PSCustomObject
-
-.EXAMPLE
-E:\> Get-ModuleSynopsis Microsoft.PowerShell.Utility
-
-Name                      Synopsis
-----                      --------
-ConvertFrom-SddlString
-Format-Hex                Displays a file or other input as hexadecimal.
-Get-FileHash              Computes the hash value for a file by using a specified hash algorithm.
-Import-PowerShellDataFile
-New-Guid                  Creates a GUID.
-New-TemporaryFile         Creates a temporary file.
-Add-Member                Adds custom properties and methods to an instance of a Windows PowerShell object.
-Add-Type                  Adds a.NET Framework type (a class) to a Windows PowerShell session.
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Get-ModuleSynopsis {
     [CmdletBinding(PositionalBinding = $False)]
     Param(
@@ -176,23 +111,7 @@ function Get-ModuleSynopsis {
     }
 }
 
-<#
-.SYNOPSIS
-Will backup profile to desired location when PowerShell starts
-
-.DESCRIPTION
-Upon PowerShell startup, profile will be copied to the value given to this function
-
-.INPUTS
-None
-
-.OUTPUTS
-None
-
-.EXAMPLE
-E:\projects> Set-BackupProfileLocation 'D:\Google Drive\Documents\PowerShell'
-
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Set-BackupProfileLocation {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -204,8 +123,7 @@ function Set-BackupProfileLocation {
     Set-ItemProperty -Path $RegistryKey -Name BackupProfileLocation -Value $Value -Verbose:$Verbose.IsPresent
 }
 
-# backup this profile to Google Drive in case if working on new computer or this 
-# computer gets reformatted which might be forgotten. 
+#.ExternalHelp MKPowerShell-help.xml
 function Backup-PowerShellProfile {
     [CmdletBinding(PositionalBinding = $False)]
     Param
@@ -220,26 +138,7 @@ function Backup-PowerShellProfile {
     Copy-Item -Path $PROFILE -Destination $Destination -Force
 }
 
-
-<#
-.SYNOPSIS
-Updates other PowerShell profiles with Microsoft.PowerShell_profile.ps1
-
-.DESCRIPTION
-Currently this is hard-coded to only update VSCode profile.  Obviously this will need to be changed
-to live up to its name.
-
-.INPUTS
-None
-
-.OUTPUTS
-None
-
-.EXAMPLE
-
-.NOTES
-$args is being used here for for Register-ObjectEvent scope
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Update-PowerShellProfile {
     [CmdletBinding(PositionalBinding = $False)]
     Param
@@ -275,28 +174,7 @@ Write-Host "'sl' alias is now mapped to 'Set-LocationAndStore'."
     Out-File -FilePath $Path -InputObject $ContentBuilder.ToString() -Encoding utf8
 }
 
-<#
-.SYNOPSIS
-Restarts PowerShell
-
-.DESCRIPTION
-Restarts PowerShell
-
-# .ALIAS
-pwsh
-
-.INPUTS
-None
-
-.OUTPUTS
-None
-
-.EXAMPLE
-E:\projects> pwsh
-
-.LINK
-Restart-PWSHAdmin
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Restart-PWSH {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
@@ -310,29 +188,7 @@ function Restart-PWSH {
 Set-Alias pwsh Restart-PWSH -Scope Global
 Write-Host "'pwsh' alias is now mapped to 'Restart-PWSH'." -ForegroundColor Green
 
-
-<#
-.SYNOPSIS
-Restarts PowerShell with Administrator privileges
-
-.DESCRIPTION
-Restarts PowerShell with Administrator privileges
-
-# .ALIAS
-pwsha
-
-.INPUTS
-None
-
-.OUTPUTS
-None
-
-.EXAMPLE
-E:\projects> pwsha
-
-.LINK
-Restart-PWSH
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Restart-PWSHAdmin {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
@@ -346,21 +202,7 @@ function Restart-PWSHAdmin {
 Set-Alias pwsha Restart-PWSHAdmin -Scope Global
 Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'." -ForegroundColor Green
 
-<#
-.SYNOPSIS Streamline publishing module to PowerShellGet.
-
-.DESCRIPTION Prior to calling you can store API key using Set-NuGetApiKey.  If not, you must assign it to the NuGetApiKey parameter.  When called this function will take the directory (or file's directory) and will copy it to the PowerShell module directory (eg: C:\Users\Marc\Documents\PowerShell\Modules) where PowerShell can publish it to an online gallery.
-
-.INPUTS None
-
-.OUTPUTS None
-
-.EXAMPLE
-E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-ModuleToNuGetGallery
-
-.LINK Set-NuGetApiKey
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Publish-ModuleToNuGetGallery {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -409,26 +251,7 @@ function Publish-ModuleToNuGetGallery {
     Remove-Item $DestinationDirectory -Recurse -Force -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
 }
 
-<#
-.SYNOPSIS
-Stores NuGet API key to be used with Publish-ModuleToNuGetGallery 
-
-.DESCRIPTION
-Stores NuGet API key in the registry so that when Publish-ModuleToNuGetGallery is called it will retrieve the key without promting you for it.
-
-.INPUTS
-None
-
-.OUTPUTS
-None
-
-.EXAMPLE
-E:\projects\MKPowerShell> Set-NuGetApiKey 'a1b2c3d4-e5f6-g7h8-i9j1-0k11l12m13n1'
-E:\projects\MKPowerShell> Publish-ModuleToNuGetGallery
-
-.LINK
-Publish-ModuleToNuGetGallery
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Set-NuGetApiKey {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -440,26 +263,7 @@ function Set-NuGetApiKey {
     Set-ItemProperty -Path $RegistryKey -Name NuGetApiKey -Value $Value -Verbose:$Verbose.IsPresent
 }
 
-<#
-.SYNOPSIS
-Stores last location and restores that location when PowerShell restarts
-
-.DESCRIPTION
-Stores last value of and restores that location when PowerShell restarts so that it continues in the directory you last were in previous session. 
-
-# .ALIAS
-sl
-
-.INPUTS
-None
-
-.OUTPUTS
-System.Management.Automation.PathInfo, System.Management.Automation.PathInfoStack
-
-.EXAMPLE
-E:\> sl projects
-E:\projects> sl..
-#>
+#.ExternalHelp MKPowerShell-help.xml
 function Set-LocationAndStore {
     [CmdletBinding(PositionalBinding = $True)]
     Param

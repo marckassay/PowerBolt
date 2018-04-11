@@ -17,10 +17,7 @@ Restart-PWSH [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Terminates current PowerShell session and will start a new session.
-
-# .ALIAS
-pwsh
+Terminates current PowerShell session and will start a new session.  The alias for this function is 'pwsh'.
 
 ## EXAMPLES
 
@@ -34,8 +31,7 @@ Terminates current PowerShell session and will start a new session.
 ## PARAMETERS
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

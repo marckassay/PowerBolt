@@ -19,6 +19,8 @@ Backup-PowerShellProfile [-Destination <String>] [<CommonParameters>]
 ## DESCRIPTION
 Interal function to retrieve value from previous call to Set-BackupProfileLocation which then is used by Back-PowerShellProfile to make a copy of profile page.
 
+## EXAMPLES
+
 ## PARAMETERS
 
 ### -Destination
@@ -37,13 +39,11 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
-
 
 ## OUTPUTS
 
