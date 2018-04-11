@@ -323,5 +323,3 @@ to live up to its name.
 ## Roadmap
 
 * breakup this module into seperate modules and/or scripts
-
-* use platyPS for documentation
