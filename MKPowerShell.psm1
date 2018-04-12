@@ -144,7 +144,7 @@ function Update-PowerShellProfile {
     Param
     (
         [Parameter(Mandatory = $False)]
-        [string]$Path = "$args\Microsoft.VSCode_profile.ps1",
+        [string]$Path = "$(Split-Path -Path $PROFILE -Parent)\Microsoft.VSCode_profile.ps1",
 
         [Parameter(Mandatory = $False)]
         [string[]]$Include

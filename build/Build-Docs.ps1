@@ -55,7 +55,7 @@ function Build-Docs {
     }
     
     $ModuleMarkdownFolder = Join-Path -Path $ModuleFolder -ChildPath $MarkdownFolder
-
+    
     $PredicateA = ((Test-Path -Path $ModuleMarkdownFolder -PathType Container) -eq $False)
     try {
         $PredicateB = ((Get-Item $ModuleMarkdownFolder -ErrorAction SilentlyContinue ).GetFiles().Count -eq 0)
@@ -66,7 +66,7 @@ function Build-Docs {
 
     # Part 2 - markdown files
     if ($PredicateA -or $PredicateB) {
-        New-Item -Path $ModuleMarkdownFolder -ItemType Container
+        New-Item -Path $ModuleMarkdownFolder -ItemType Container -Force
 
         Import-Module $RootModule -Force -ArgumentList $(Get-Variable PSScriptRoot -ValueOnly)
         New-MarkdownHelp -Module $ModuleName -OutputFolder $MarkdownFolder

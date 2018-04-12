@@ -72,7 +72,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None
 
 ## NOTES
-$args is being used here for for Register-ObjectEvent scope
 
 ## RELATED LINKS
 
