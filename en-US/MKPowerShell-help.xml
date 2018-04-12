@@ -993,7 +993,7 @@ PS C:\&gt; Invoke-History 112</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>$args is being used here for for Register-ObjectEvent scope</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
