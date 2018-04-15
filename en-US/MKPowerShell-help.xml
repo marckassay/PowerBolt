@@ -71,6 +71,10 @@
     <command:examples />
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Backup-PowerShellProfile.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Set-BackupProfileLocation</maml:linkText>
         <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-BackupProfileLocation.md</maml:uri>
       </maml:navigationLink>
@@ -125,6 +129,10 @@
     </maml:alertSet>
     <command:examples />
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Export-History.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Show-History</maml:linkText>
         <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Show-History.md</maml:uri>
@@ -221,6 +229,10 @@ Add-Type                  Adds a.NET Framework type (a class) to a Windows Power
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Get-ModuleSynopsis.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-Module</maml:linkText>
         <maml:uri>https://docs.microsoft.com/en-us/powershell/module/Microsoft.PowerShell.Core/Get-Module</maml:uri>
@@ -377,6 +389,10 @@ Add-Type                  Adds a.NET Framework type (a class) to a Windows Power
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Publish-ModuleToNuGetGallery.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Set-NuGetApiKey</maml:linkText>
         <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-NuGetApiKey.md</maml:uri>
       </maml:navigationLink>
@@ -436,6 +452,10 @@ Add-Type                  Adds a.NET Framework type (a class) to a Windows Power
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSH.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Restart-PWSHAdmin</maml:linkText>
         <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSHAdmin.md</maml:uri>
       </maml:navigationLink>
@@ -494,6 +514,10 @@ Add-Type                  Adds a.NET Framework type (a class) to a Windows Power
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSHAdmin.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Restart-PWSH</maml:linkText>
         <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSH.md</maml:uri>
@@ -578,6 +602,10 @@ Add-Type                  Adds a.NET Framework type (a class) to a Windows Power
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-BackupProfileLocation.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Backup-PowerShellProfile</maml:linkText>
         <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Backup-PowerShellProfile.md</maml:uri>
@@ -714,6 +742,10 @@ Add-Type                  Adds a.NET Framework type (a class) to a Windows Power
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-LocationAndStore.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Set-Location</maml:linkText>
         <maml:uri>https://docs.microsoft.com/en-us/powershell/module/Microsoft.PowerShell.Management/Set-Location</maml:uri>
       </maml:navigationLink>
@@ -799,6 +831,10 @@ PS C:\EndOfLine&gt; Publish-ModuleToNuGetGallery</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-NuGetApiKey.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Publish-ModuleToNuGetGallery</maml:linkText>
         <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Publish-ModuleToNuGetGallery.md</maml:uri>
@@ -898,6 +934,10 @@ PS C:\&gt; Invoke-History 112</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Show-History.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Invoke-History</maml:linkText>
         <maml:uri>https://docs.microsoft.com/en-us/powershell/module/Microsoft.PowerShell.Core/Invoke-History</maml:uri>
@@ -1006,6 +1046,10 @@ PS C:\&gt; Invoke-History 112</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Update-PowerShellProfile.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Backup-PowerShellProfile</maml:linkText>
         <maml:uri>https://github.com/marckassay/MKPowerShell/blob/master/docs/Backup-PowerShellProfile.md</maml:uri>

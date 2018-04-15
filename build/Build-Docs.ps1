@@ -200,7 +200,15 @@ function Build-Docs {
         }
         Update-MarkdownHelp $MarkdownFolder
     }
- 
+    
+    Get-ChildItem -Path "$ModuleMarkdownFolder\*.md" | ForEach-Object {
+        $FileContents = Get-Content -Path $_.FullName
+        $FunctionName = $_.BaseName
+        $MarkdownURL = $OnlineVersionUrlTemplate -f $FunctionName
+        
+        $FileContents.Replace('online version:', "online version: $MarkdownURL") | Set-Content -Path $_.FullName
+    }
+
     [string]$MarkdownSnippetCollection = Get-ChildItem -Path "$ModuleMarkdownFolder\*.md" | ForEach-Object {
         $FileContents = Get-Content -Path $_.FullName
         $FunctionName = $_.BaseName

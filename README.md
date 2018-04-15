@@ -68,5 +68,3 @@ $ Install-Module MKPowerShell
 ### [```Update-PowerShellProfile```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Update-PowerShellProfile.md)
 
     Internal function that updates other PowerShell profiles with the session's profile script ($PROFILE)
-
-## Roadmap

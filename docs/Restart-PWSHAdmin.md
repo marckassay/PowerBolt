@@ -1,7 +1,7 @@
 ---
 external help file: MKPowerShell-help.xml
 Module Name: MKPowerShell
-online version:
+online version: https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSHAdmin.md
 schema: 2.0.0
 ---
 
