@@ -101,7 +101,7 @@ function Write-File {
     $Data
 }
 
-function Build-Docs {
+function Build-PlatyPSDocs {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
@@ -124,95 +124,116 @@ function Build-Docs {
         [string]$OnlineVersionUrlPolicy = 'Auto',
         
         [Parameter(Mandatory = $False)]
-        [string]$ReadMeBeginBoundary = "## Functions",
+        [string]$ReadMeBeginBoundary = '## Functions',
         
         [Parameter(Mandatory = $False)]
-        [string]$ReadMeEndBoundary = "## Roadmap",
+        [string]$ReadMeEndBoundary = '## Roadmap',
         
         [switch]
         $NoReImportModule
-        <#,
-        [Parameter(Mandatory = $False)]
-        [string[]]$Exclude,
-
-        [Parameter(Mandatory = $False)]
-        [string[]]$Include,
-        #>
     )
 
-    # Part 1 - obtain info about module and/or path
-    $ModuleFolder
-    $ModuleName = $Name 
+    $Data = [PsCustomObject]@{
+        ModuleName                = $Name
+        Path                      = $Path
+        MarkdownFolder            = $MarkdownFolder
+        Locale                    = $Locale
+        OnlineVersionUrl          = ''
+        OnlineVersionUrlTemplate  = $OnlineVersionUrlTemplate
+        OnlineVersionUrlPolicy    = $OnlineVersionUrlPolicy
+        ReadMeBeginBoundary       = $ReadMeBeginBoundary
+        ReadMeEndBoundary         = $ReadMeBeginBoundary
+        NoReImportModule          = $NoReImportModule.IsPresent
+        RootModule                = $null
+        ModuleFolder              = ''
+        ModuleMarkdownFolder      = ''
+        MarkdownSnippetCollection = $null
+    }
 
-    $RootModule = Get-ChildItem -Path $ModuleFolder  -Include '*.psm1' -Recurse | `
+    if ($Name) {
+        $Data.ModuleFolder = Get-Module $Name | `
+            Select-Object -ExpandProperty Path | `
+            Split-Path -Parent
+    } 
+    elseif ($Path) {
+        # if Path was provided (hopefully .ps1, .psm1 or .psd1) ...
+        if ((Test-Path -Path $Path -PathType Leaf) -eq $True) {
+            $Data.ModuleFolder = Split-Path -Path $Path -Parent 
+            $Data.ModuleName = Split-Path -Path $Path -LeafBase 
+        }
+        else {
+            $Data.ModuleFolder = $Path
+            $Data.ModuleName = Split-Path -Path $Path -Leaf 
+        }
+    }
+
+    $Data.RootModule = Get-ChildItem -Path $Data.ModuleFolder -Include '*.psm1' -Recurse | `
         Select-Object -ExpandProperty Name | `
         Resolve-Path | `
         Select-Object -ExpandProperty Path
 
-    if ($Name) {
-        $ModuleFolder = Get-Module $Name | Select-Object -ExpandProperty Path | Split-Path -Parent
-    } 
-    elseif ($Path) {
-        # if file was provided (hopefully .ps1, .psm1 or .psd1) ...
-        if ((Test-Path -Path $Path -PathType Leaf) -eq $True) {
-            $ModuleFolder = Split-Path -Path $Path -Parent 
-            $ModuleName = Split-Path -Path $Path -LeafBase 
-        }
-        else {
-            $ModuleFolder = $Path
-            $ModuleName = Split-Path -Path $Path -Leaf 
-        }
-    }
+    $Data | `
+        Build-PlatyPSMarkdown | `
+        New-ExternalHelpFromPlatyPSMarkdown | `
+        Update-ReadmeFromPlatyPSMarkdown
+}
 
-    if ($OnlineVersionUrlPolicy -eq 'Auto') {
-        if ((Get-Content "$ModuleFolder\.git\config" -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
-            $OnlineVersionUrlTemplate = $Matches[1].Split('.git')[0] + "/blob/master/docs/{0}.md"
+function Build-PlatyPSMarkdown {
+    [CmdletBinding(PositionalBinding = $True)]
+    Param
+    (
+        [Parameter(Mandatory = $True, ValueFromPipeline = $True)]
+        [PSCustomObject]$Data
+    )
+
+    if ($Data.OnlineVersionUrlPolicy -eq 'Auto') {
+        if ((Get-Content ($Data.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
+            $Data.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/master/docs/{0}.md"
         }
         else {
             Write-Error "The parameter 'OnlineVersionUrlPolicy' was set to 'Auto' but unable to retrieve Git repo config file." -ErrorAction Inquire
         }
     }
 
-    # Part 2 - markdown files
-    $ModuleMarkdownFolder = Join-Path -Path $ModuleFolder -ChildPath $MarkdownFolder
+    $Data.ModuleMarkdownFolder = Join-Path -Path $Data.ModuleFolder -ChildPath $Data.MarkdownFolder
     
-    $PredicateA = ((Test-Path -Path $ModuleMarkdownFolder -PathType Container) -eq $False)
+    $PredicateA = ((Test-Path -Path $Data.ModuleMarkdownFolder -PathType Container) -eq $False)
     try {
-        $PredicateB = ((Get-Item $ModuleMarkdownFolder -ErrorAction SilentlyContinue ).GetFiles().Count -eq 0)
+        $PredicateB = ((Get-Item $Data.ModuleMarkdownFolder -ErrorAction SilentlyContinue ).GetFiles().Count -eq 0)
     }
     catch {
         $PredicateB = $False
     }
 
     if ($PredicateA -or $PredicateB) {
-        New-Item -Path $ModuleMarkdownFolder -ItemType Container -Force
+        New-Item -Path $Data.ModuleMarkdownFolder -ItemType Container -Force
 
-        if ($NoReImportModule.IsPresent -eq $False) {
-            Import-Module $RootModule -Force
+        if ($Data.NoReImportModule -eq $False) {
+            Import-Module $Data.RootModule -Force
             Start-Sleep -Seconds 3
         }
-        New-MarkdownHelp -Module $ModuleName -OutputFolder $MarkdownFolder
+        New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.MarkdownFolder
     }
     else {
-        if ($NoReImportModule.IsPresent -eq $False) {
-            Import-Module $RootModule -Force
+        if ($Data.NoReImportModule -eq $False) {
+            Import-Module $Data.RootModule -Force
             Start-Sleep -Seconds 3
         }
-        Update-MarkdownHelp $MarkdownFolder
+        Update-MarkdownHelp $Data.MarkdownFolder
     }
     
-    Get-ChildItem -Path "$ModuleMarkdownFolder\*.md" | ForEach-Object {
+    Get-ChildItem -Path ($Data.ModuleMarkdownFolder + "\*.md") | ForEach-Object {
         $FileContents = Get-Content -Path $_.FullName
         $FunctionName = $_.BaseName
-        $MarkdownURL = $OnlineVersionUrlTemplate -f $FunctionName
+        $MarkdownURL = $Data.OnlineVersionUrl -f $FunctionName
         
         $FileContents.Replace('online version:', "online version: $MarkdownURL") | Set-Content -Path $_.FullName
     }
 
-    [string]$MarkdownSnippetCollection = Get-ChildItem -Path "$ModuleMarkdownFolder\*.md" | ForEach-Object {
+    [string]$Data.MarkdownSnippetCollection = Get-ChildItem -Path ($Data.ModuleMarkdownFolder + "\*.md") | ForEach-Object {
         $FileContents = Get-Content -Path $_.FullName
         $FunctionName = $_.BaseName
-        $MarkdownURL = $OnlineVersionUrlTemplate -f $FunctionName
+        $MarkdownURL = $Data.OnlineVersionUrlTemplate -f $FunctionName
         
         $TitleLine = ("### [``````$FunctionName``````]($MarkdownURL)").Trim()
         $SynopsisLine = $FileContents[$FileContents.IndexOf('## SYNOPSIS') + 1]
@@ -226,19 +247,37 @@ $TitleLine
 
 "@
     }
-    
-    # Part 3 - help maml
-    $HelpLocaleFolder = Join-Path -Path $ModuleFolder -ChildPath $Locale
+
+    $Data
+}
+
+function New-ExternalHelpFromPlatyPSMarkdown {
+    [CmdletBinding(PositionalBinding = $True)]
+    Param
+    (
+        [Parameter(Mandatory = $True, ValueFromPipeline = $True)]
+        [PSCustomObject]$Data
+    )
+
+    $HelpLocaleFolder = Join-Path -Path $Data.ModuleFolder -ChildPath $Data.Locale
     if ((Test-Path -Path $HelpLocaleFolder -PathType Container) -eq $False) {
         New-Item -Path $HelpLocaleFolder -ItemType Container
     }
-    New-ExternalHelp -Path $ModuleMarkdownFolder -OutputPath $HelpLocaleFolder -Force
+    New-ExternalHelp -Path $Data.ModuleMarkdownFolder -OutputPath $HelpLocaleFolder -Force
+}
 
-    # Part 4 - update README with markdown snippets
+function Update-ReadmeFromPlatyPSMarkdown {
+    [CmdletBinding(PositionalBinding = $True)]
+    Param
+    (
+        [Parameter(Mandatory = $True, ValueFromPipeline = $True)]
+        [PSCustomObject]$Data
+    )
+    
     try {
-        $ReadMeContents = Get-FileObject -FilePath "$ModuleFolder\README*"
+        $ReadMeContents = Get-FileObject -FilePath ($Data.ModuleFolder + "\README*")
 
-        [regex]$InsertPointRegEx = "(?(?<=$ReadMeBeginBoundary)([\w\W]*?)|($))(?(?=$ReadMeEndBoundary)(?=$ReadMeEndBoundary)|($))"
+        [regex]$InsertPointRegEx = "(?(?<=$($Data.ReadMeBeginBoundary)[\w\W]*?)|($))(?(?=$($Data.ReadMeEndBoundary))(?=$($Data.ReadMeEndBoundary))|($))"
         $ReadMeContents.FileContent = $InsertPointRegEx.Replace($ReadMeContents.FileContent, @"
 
 $MarkdownSnippetCollection
@@ -250,4 +289,3 @@ $MarkdownSnippetCollection
         Write-Error "Unable to update README file."
     }
 }
-Build-Docs -NoReImportModule
