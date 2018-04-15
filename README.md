@@ -26,34 +26,47 @@ $ Install-Module MKPowerShell
 ## Functions
 
 ### [```Backup-PowerShellProfile```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Backup-PowerShellProfile.md)
+
     Internal function called by MKPowerShell that will copy the session's profile script ($PROFILE) to the value set with MKPowerShell\Set-BackupProfileLocation.
  
 ### [```Export-History```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Export-History.md)
+
     Internal async function for MKPowerShell, to update CSV file of histories
  
 ### [```Get-ModuleSynopsis```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Get-ModuleSynopsis.md)
+
     Lists all available functions for a module, with the synopsis of the functions.
  
 ### [```Publish-ModuleToNuGetGallery```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Publish-ModuleToNuGetGallery.md)
+
     Streamlines publishing a module to PowerShellGet.
  
 ### [```Restart-PWSH```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSH.md)
+
     Restarts PowerShell
  
 ### [```Restart-PWSHAdmin```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSHAdmin.md)
+
     Restarts PowerShell with Administrator privileges
  
 ### [```Set-BackupProfileLocation```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-BackupProfileLocation.md)
+
     To be used to set the value of a folder so MKPowerShell backs-up the sessions profile script ($PROFILE)
  
 ### [```Set-LocationAndStore```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-LocationAndStore.md)
+
     Stores last location and restores that location when PowerShell restarts
  
 ### [```Set-NuGetApiKey```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-NuGetApiKey.md)
+
     Stores NuGet API key to be used with Publish-ModuleToNuGetGallery
  
 ### [```Show-History```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Show-History.md)
+
     Concatnates PowerShell session histories so that you can reference previous commands from previous sessions.
  
 ### [```Update-PowerShellProfile```](https://github.com/marckassay/MKPowerShell/blob/master/docs/Update-PowerShellProfile.md)
+
     Internal function that updates other PowerShell profiles with the session's profile script ($PROFILE)
+
+## Roadmap

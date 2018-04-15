@@ -206,7 +206,7 @@ function Build-Docs {
         $FunctionName = $_.BaseName
         $MarkdownURL = $OnlineVersionUrlTemplate -f $FunctionName
         
-        $TitleLine = "### [``````$FunctionName``````]($MarkdownURL)"
+        $TitleLine = ("### [``````$FunctionName``````]($MarkdownURL)").Trim()
         $SynopsisLine = $FileContents[$FileContents.IndexOf('## SYNOPSIS') + 1]
 
         # this here-string indents $SynopsisLine by four spaces so that it resides in a rectanglar background
@@ -215,7 +215,8 @@ function Build-Docs {
 $TitleLine
 
     $SynopsisLine
-"@ | Out-String
+
+"@
     }
     
     # Part 3 - help maml
@@ -226,18 +227,19 @@ $TitleLine
     New-ExternalHelp -Path $ModuleMarkdownFolder -OutputPath $HelpLocaleFolder -Force
 
     # Part 4 - update README with markdown snippets
-    $ReadMeContents = Get-FileObject -FilePath "$ModuleFolder\README*"
-    $ReadMeRegEx = "(?(?<=$ReadMeBeginBoundary)([\w\W]*?)|($))(?(?=$ReadMeEndBoundary)()|($))"
-    if ($ReadMeContents.FileContent -match $ReadMeRegEx) {
-        $ReadMeContents.FileContent = ($ReadMeContents.FileContent -replace $ReadMeRegEx, @"
+    try {
+        $ReadMeContents = Get-FileObject -FilePath "$ModuleFolder\README*"
+
+        [regex]$InsertPointRegEx = "(?(?<=$ReadMeBeginBoundary)([\w\W]*?)|($))(?(?=$ReadMeEndBoundary)(?=$ReadMeEndBoundary)|($))"
+        $ReadMeContents.FileContent = $InsertPointRegEx.Replace($ReadMeContents.FileContent, @"
 
 $MarkdownSnippetCollection
 
-"@ | Out-String)
+"@, 1)
         $ReadMeContents | Write-File | Out-Null
     }
-    else {
+    catch {
         Write-Error "Unable to update README file."
     }
 }
-Build-Docs
+Build-Docs -NoReImportModule
