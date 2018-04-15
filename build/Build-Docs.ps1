@@ -85,11 +85,9 @@ function Write-File {
             New-Object -TypeName System.IO.StreamWriter -ArgumentList $Data.FileItem.FullName -OutVariable StreamWriter | Out-null
 
             try {
-                "***"
                 $StreamWriter.Write($Data.FileContent)
                 $StreamWriter.Flush()
                 $StreamWriter.Close()
-                "***"
             }
             catch {
                 Write-Error ("EndOfLine threw an exception when writing to: " + $Data.FileItem.FullName)
@@ -123,11 +121,17 @@ function Build-Docs {
         [string]$OnlineVersionUrlTemplate,
 
         [ValidateSet("Auto", "Omit")]
-        [string]$OnlineVersionUrlPolicy = 'Auto'
-        <#,
+        [string]$OnlineVersionUrlPolicy = 'Auto',
+        
         [Parameter(Mandatory = $False)]
-        [string]$ReadMeInsertPoint = "## Usage",
-
+        [string]$ReadMeBeginBoundary = "## Functions",
+        
+        [Parameter(Mandatory = $False)]
+        [string]$ReadMeEndBoundary = "## Roadmap",
+        
+        [switch]
+        $NoReImportModule
+        <#,
         [Parameter(Mandatory = $False)]
         [string[]]$Exclude,
 
@@ -183,13 +187,17 @@ function Build-Docs {
     if ($PredicateA -or $PredicateB) {
         New-Item -Path $ModuleMarkdownFolder -ItemType Container -Force
 
-        Import-Module $RootModule -Force
-        Start-Sleep -Seconds 3
+        if ($NoReImportModule.IsPresent -eq $False) {
+            Import-Module $RootModule -Force
+            Start-Sleep -Seconds 3
+        }
         New-MarkdownHelp -Module $ModuleName -OutputFolder $MarkdownFolder
     }
     else {
-        Import-Module $RootModule -Force
-        Start-Sleep -Seconds 3
+        if ($NoReImportModule.IsPresent -eq $False) {
+            Import-Module $RootModule -Force
+            Start-Sleep -Seconds 3
+        }
         Update-MarkdownHelp $MarkdownFolder
     }
  
@@ -201,12 +209,13 @@ function Build-Docs {
         $TitleLine = "### [``````$FunctionName``````]($MarkdownURL)"
         $SynopsisLine = $FileContents[$FileContents.IndexOf('## SYNOPSIS') + 1]
 
+        # this here-string indents $SynopsisLine by four spaces so that it resides in a rectanglar background
         @"
 
 $TitleLine
-    $SynopsisLine
 
-"@ | Out-String -NoNewline
+    $SynopsisLine
+"@ | Out-String
     }
     
     # Part 3 - help maml
@@ -218,15 +227,14 @@ $TitleLine
 
     # Part 4 - update README with markdown snippets
     $ReadMeContents = Get-FileObject -FilePath "$ModuleFolder\README*"
-    
-    if ($ReadMeContents.FileContent -match "(?<=## Functions)[\w\W]*(?=## Roadmap)") {
-        $ReadMeContents.FileContent =($ReadMeContents.FileContent -replace "(?<=## Functions)[\w\W]*(?=## Roadmap)", @"
+    $ReadMeRegEx = "(?(?<=$ReadMeBeginBoundary)([\w\W]*?)|($))(?(?=$ReadMeEndBoundary)()|($))"
+    if ($ReadMeContents.FileContent -match $ReadMeRegEx) {
+        $ReadMeContents.FileContent = ($ReadMeContents.FileContent -replace $ReadMeRegEx, @"
 
 $MarkdownSnippetCollection
 
-"@)
-        
-        $ReadMeContents | Write-File
+"@ | Out-String)
+        $ReadMeContents | Write-File | Out-Null
     }
     else {
         Write-Error "Unable to update README file."
