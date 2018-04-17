@@ -100,14 +100,16 @@ function Get-ModuleSynopsis {
     }
 
     process {
-        Get-Command -Module $Name | Foreach-Object {
-            $Syno = Get-Help -Name $_.Name | Select-Object -ExpandProperty Synopsis
-
-            [PSCustomObject]@{
+        Get-Command -Module $Name | Foreach-Object -Process {
+            $Syno = $(Get-Help -Name $_.Name | Select-Object -ExpandProperty Synopsis)
+        
+            [pscustomobject] @{
                 Name     = $_.Name
-                Synopsis = $Syno 
+                Synopsis = $Syno
             }
-        }
+        } | Format-Table -AutoSize -Wrap -Property `
+        @{Label = "Function"; Expression = {($_.Name)}; Alignment = 'Left'}, `
+        @{Label = "Synopsis"; Expression = {($_.Synopsis)}; Alignment = 'Left'}
     }
 }
 

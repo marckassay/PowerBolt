@@ -132,24 +132,24 @@ function Build-PlatyPSDocs {
         [switch]
         $NoReImportModule
     )
-
+    
     $Data = [PsCustomObject]@{
         ModuleName                = $Name
-        Path                      = $Path
+        Path                      = Resolve-Path $Path
         MarkdownFolder            = $MarkdownFolder
         Locale                    = $Locale
         OnlineVersionUrl          = ''
         OnlineVersionUrlTemplate  = $OnlineVersionUrlTemplate
         OnlineVersionUrlPolicy    = $OnlineVersionUrlPolicy
         ReadMeBeginBoundary       = $ReadMeBeginBoundary
-        ReadMeEndBoundary         = $ReadMeBeginBoundary
+        ReadMeEndBoundary         = $ReadMeEndBoundary
         NoReImportModule          = $NoReImportModule.IsPresent
         RootModule                = $null
         ModuleFolder              = ''
         ModuleMarkdownFolder      = ''
         MarkdownSnippetCollection = $null
     }
-
+    
     if ($Name) {
         $Data.ModuleFolder = Get-Module $Name | `
             Select-Object -ExpandProperty Path | `
@@ -167,10 +167,12 @@ function Build-PlatyPSDocs {
         }
     }
 
-    $Data.RootModule = Get-ChildItem -Path $Data.ModuleFolder -Include '*.psm1' -Recurse | `
-        Select-Object -ExpandProperty Name | `
-        Resolve-Path | `
-        Select-Object -ExpandProperty Path
+    $Data.RootModule = Get-ChildItem -Filter '*.psm1' | `
+        Select-Object -ExpandProperty FullName
+    if (-not $Data.RootModule) {
+        $Data.RootModule = Get-ChildItem -Filter '*.psm1' | `
+            Select-Object -ExpandProperty FullName
+    }
 
     $Data | `
         Build-PlatyPSMarkdown | `
@@ -199,7 +201,7 @@ function Build-PlatyPSMarkdown {
     
     $PredicateA = ((Test-Path -Path $Data.ModuleMarkdownFolder -PathType Container) -eq $False)
     try {
-        $PredicateB = ((Get-Item $Data.ModuleMarkdownFolder -ErrorAction SilentlyContinue ).GetFiles().Count -eq 0)
+        $PredicateB = ((Get-Item $Data.ModuleMarkdownFolder -ErrorAction SilentlyContinue).GetFiles().Count -eq 0)
     }
     catch {
         $PredicateB = $False
@@ -210,7 +212,10 @@ function Build-PlatyPSMarkdown {
 
         if ($Data.NoReImportModule -eq $False) {
             Import-Module $Data.RootModule -Force
+
+            "restarting"
             Start-Sleep -Seconds 3
+            "started"
         }
         New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.MarkdownFolder
     }
@@ -221,20 +226,16 @@ function Build-PlatyPSMarkdown {
         }
         Update-MarkdownHelp $Data.MarkdownFolder
     }
-    
-    Get-ChildItem -Path ($Data.ModuleMarkdownFolder + "\*.md") | ForEach-Object {
-        $FileContents = Get-Content -Path $_.FullName
-        $FunctionName = $_.BaseName
-        $MarkdownURL = $Data.OnlineVersionUrl -f $FunctionName
-        
-        $FileContents.Replace('online version:', "online version: $MarkdownURL") | Set-Content -Path $_.FullName
-    }
 
     [string]$Data.MarkdownSnippetCollection = Get-ChildItem -Path ($Data.ModuleMarkdownFolder + "\*.md") | ForEach-Object {
         $FileContents = Get-Content -Path $_.FullName
         $FunctionName = $_.BaseName
-        $MarkdownURL = $Data.OnlineVersionUrlTemplate -f $FunctionName
-        
+        $MarkdownURL = $Data.OnlineVersionUrl -f $FunctionName
+
+        # replace 'online version' value in markdown help file
+        $FileContents -replace '^(online version:)[\w\W]*$', "online version: $MarkdownURL" | Set-Content -Path $_.FullName
+
+        # building content for README...
         $TitleLine = ("### [``````$FunctionName``````]($MarkdownURL)").Trim()
         $SynopsisLine = $FileContents[$FileContents.IndexOf('## SYNOPSIS') + 1]
 
@@ -263,7 +264,10 @@ function New-ExternalHelpFromPlatyPSMarkdown {
     if ((Test-Path -Path $HelpLocaleFolder -PathType Container) -eq $False) {
         New-Item -Path $HelpLocaleFolder -ItemType Container
     }
-    New-ExternalHelp -Path $Data.ModuleMarkdownFolder -OutputPath $HelpLocaleFolder -Force
+    New-ExternalHelp -Path $Data.ModuleMarkdownFolder -OutputPath $HelpLocaleFolder -Force | `
+        Out-Null
+    
+    $Data
 }
 
 function Update-ReadmeFromPlatyPSMarkdown {
@@ -277,10 +281,19 @@ function Update-ReadmeFromPlatyPSMarkdown {
     try {
         $ReadMeContents = Get-FileObject -FilePath ($Data.ModuleFolder + "\README*")
 
-        [regex]$InsertPointRegEx = "(?(?<=$($Data.ReadMeBeginBoundary)[\w\W]*?)|($))(?(?=$($Data.ReadMeEndBoundary))(?=$($Data.ReadMeEndBoundary))|($))"
+        # check to see if ReadMeBeginBoundary exists, if not append it
+        if (-not $($ReadMeContents.FileContent -match $Data.ReadMeBeginBoundary)) {
+            $ReadMeContents.FileContent += @"
+
+
+$($Data.ReadMeBeginBoundary)
+
+"@
+        }
+        [regex]$InsertPointRegEx = "(?(?<=$($Data.ReadMeBeginBoundary))([\w\W]*?)|($))(?(?=$($Data.ReadMeEndBoundary))(?=$($Data.ReadMeEndBoundary))|($))"
         $ReadMeContents.FileContent = $InsertPointRegEx.Replace($ReadMeContents.FileContent, @"
 
-$MarkdownSnippetCollection
+$($Data.MarkdownSnippetCollection)
 
 "@, 1)
         $ReadMeContents | Write-File | Out-Null
