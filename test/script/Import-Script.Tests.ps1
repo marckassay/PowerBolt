@@ -16,7 +16,6 @@ Describe "Test Import-Script" {
     }
 
     It "Should be imported." -Test {
-        Get-Module -Name 'MK.PowerShell.4PS'
         (Get-Command Import-Script).Parameters['Path'].Attributes.Mandatory | Should Be $True
     }
 }

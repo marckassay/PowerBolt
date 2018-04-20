@@ -7,19 +7,15 @@ function Import-Script {
     Param
     (
         [Parameter(Mandatory = $True)]
-        [ValidatePattern('(.ps1)$')]
-        [ValidateScript( {Test-Path -Path $_ -PathType Leaf })]
-        [string]$Path,
+        [String]$Path,
 
-        [switch]$WhatIf
+        [Switch]$WhatIf
     )
 
     try {
-        [string]$Content = Get-Content -Path $Path -Raw -Verbose
-        Invoke-Expression -Command @"
-$Content
-"@ -Verbose
-
+        #Invoke-Expression ". '$Path'" 
+        # Export-ModuleMember -Function 'Update-FunctionsToExport'
+        Invoke-Command {. $Path} -NoNewScope
     }
     catch {
         Write-Error "Failed to import '$Path'"
