@@ -1,5 +1,6 @@
 function Update-FunctionsToExport {
     [CmdletBinding()]
+    [OutputType([PSModuleInfo])]
     Param
     (
         [Parameter(Mandatory = $True)]
@@ -12,10 +13,15 @@ function Update-FunctionsToExport {
         [string[]]$Include = '*.ps1',
  
         [Parameter(Mandatory = $false)]
-        [string[]]$Exclude
+        [string[]]$Exclude = '*.Tests.ps1',
+
+        [switch]
+        $PassThru
     )
+
     $TargetDirectory = (Join-Path -Path $Path -ChildPath $ChildDirectory)
     $FunctionsToExport = Get-ChildItem -Path $TargetDirectory -Include $Include -Exclude $Exclude -Recurse | `
+        Get-Item -Include $Include -PipelineVariable File | `
         Get-Content | `
         ForEach-Object {
         $FunctionMatches = [regex]::Matches($_, '(?<=function )[\w]*[-][\w]*')
@@ -24,5 +30,9 @@ function Update-FunctionsToExport {
         }
     }
     $ManifestFile = Get-Item -Path (Join-Path -Path $Path -ChildPath '*.psd1')
-    Update-ModuleManifest -Path $ManifestFile -FunctionsToExport $FunctionsToExport -PassThru
+    Update-ModuleManifest -Path $ManifestFile -FunctionsToExport @($FunctionsToExport)
+
+    if ($PassThru) {
+        Get-Module $ManifestFile.BaseName
+    }
 }
