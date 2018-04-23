@@ -19,16 +19,8 @@ function Update-FunctionsToExport {
         $PassThru
     )
 
-    $TargetDirectory = (Join-Path -Path $Path -ChildPath $ChildDirectory)
-    $FunctionsToExport = Get-ChildItem -Path $TargetDirectory -Include $Include -Exclude $Exclude -Recurse | `
-        Get-Item -Include $Include -PipelineVariable File | `
-        Get-Content | `
-        ForEach-Object {
-        $FunctionMatches = [regex]::Matches($_, '(?<=function )[\w]*[-][\w]*')
-        for ($i = 0; $i -lt $FunctionMatches.Count; $i++) {
-            $FunctionMatches[$i].Value
-        }
-    }
+    # TODO: now add functions that are in rootmodule to $FunctionsToExport
+
     $ManifestFile = Get-Item -Path (Join-Path -Path $Path -ChildPath '*.psd1')
     Update-ModuleManifest -Path $ManifestFile -FunctionsToExport @($FunctionsToExport)
 

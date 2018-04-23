@@ -115,7 +115,7 @@ function Get-AFunction {
 }
 "@
 
-            # exclude this file in this It block, it will be used for testing in the following It block
+            # exclude Get-AFunction.ps1 file in this It block, it will be used for testing in the following It block
             Update-FunctionsToExport -Path 'TestDrive:\TestModule' -Exclude 'Get-AFunction.ps1'
 
             $After = $(Test-ModuleManifest $ManifestFile | `
