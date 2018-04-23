@@ -1,3 +1,4 @@
+#Update-RootModuleDotSourceImports
 function Update-ModuleDotSourceFunctions {
     [CmdletBinding()]
     Param
@@ -87,6 +88,11 @@ $DotSourcedFiles
 $DotSourcedFiles
 $ModuleContentsCleaned
 "@
+    }
+
+    @{
+        ManifestPath            = $ManifestPath
+        TargetFunctionsToExport = $TargetFunctionsToExport
     }
 
     Set-Content -Path $ModulePath -Value $UpdatedModuleContent -PassThru:$PassThru.IsPresent -NoNewLine

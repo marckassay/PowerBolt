@@ -4,14 +4,36 @@ Describe "Test Update-FunctionsToExport" {
     BeforeEach {
         Push-Location
         Set-Location -Path $SUT_MODULE_HOME
-        Import-Module -Name .\MK.PowerShell.4PS.psd1 -Verbose -Force -Global
+
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force -Global
     }
     AfterEach {
-        Remove-Module -Name MK.PowerShell.4PS -Verbose -Force 
         Pop-Location
     }
 
-    Context "[non-imported module] Recurse src directory for correct function files" {
+    Context "Call Update-ModuleDotSourceFunctions and pipe result" {
+        BeforeEach {
+            Copy-Item -Path 'test\manifest\resource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
+        }
+        AfterEach {
+
+        }
+
+        It "Should overwrite the default value ('@()') for FunctionsToExport field with dot-source imports" {
+            Update-ModuleDotSourceFunctions -Path 'TestDrive:\TestModule' | Update-FunctionsToExport
+
+            $FunctionNames = Test-ModuleManifest 'TestDrive:\TestModule\TestModule.psd1' | `
+                Select-Object -ExpandProperty ExportedCommands | `
+                Select-Object -ExpandProperty Values | `
+                Select-Object -ExpandProperty Name
+
+            $FunctionNames -contains 'Get-AFunction' | Should -Be $true
+            $FunctionNames -contains 'Get-BFunction' | Should -Be $true
+            $FunctionNames -contains 'Get-CFunction' | Should -Be $true
+            $FunctionNames -contains 'Set-CFunction' | Should -Be $true
+        }
+
+        <#     Context "[non-imported module] Recurse src directory for correct function files" {
         BeforeEach {
             $ManifestFile = 'TestDrive:\TestModule\TestModule.psd1'
         }
@@ -134,5 +156,5 @@ function Get-AFunction {
             $FunctionNames -contains 'Get-CFunction' | Should -Be $true
             $FunctionNames -contains 'Set-CFunction' | Should -Be $true
         }
+    } #>
     }
-}
