@@ -73,7 +73,7 @@ function Update-ModuleDotSourceFunctions {
         ForEach-Object {
         if ($_ -ne $ModulePath) {
             @"
-. .$($_.Split($ModuleDirectory)[1])`n
+. .$($_.Split($ModuleDirectory)[1])`r`n
 "@
         }
     }
@@ -94,6 +94,6 @@ $ModuleContentsCleaned
         ManifestPath            = $ManifestPath
         TargetFunctionsToExport = $TargetFunctionsToExport
     }
-
-    Set-Content -Path $ModulePath -Value $UpdatedModuleContent -PassThru:$PassThru.IsPresent -NoNewLine
+    
+    Set-Content -Path $ModulePath -Value $UpdatedModuleContent -PassThru:$PassThru.IsPresent -Encoding UTF8 -NoNewline
 }
