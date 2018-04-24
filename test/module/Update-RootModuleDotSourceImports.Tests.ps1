@@ -1,4 +1,4 @@
-Describe "Test Update-ModuleDotSourceFunctions" {
+Describe "Test Update-RootModuleDotSourceImports" {
     $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
     BeforeEach {
@@ -17,7 +17,7 @@ Describe "Test Update-ModuleDotSourceFunctions" {
     Context "Recurse src directory for correct function files" {
 
         It "Should modify empty root module with dot-source files" {
-            Update-ModuleDotSourceFunctions -Path 'TestDrive:\TestModule'
+            Update-RootModuleDotSourceImports -Path 'TestDrive:\TestModule'
             $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
             $Results.Count | Should -Be 4
 
@@ -45,7 +45,7 @@ function Remove-CFunction {
 }
 "@
 
-            Update-ModuleDotSourceFunctions -Path 'TestDrive:\TestModule'
+            Update-RootModuleDotSourceImports -Path 'TestDrive:\TestModule'
             $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
             $Results.Count | Should -Be 6
 
@@ -77,7 +77,7 @@ function Remove-CFunction {
 }
 "@ 
 
-            Update-ModuleDotSourceFunctions -Path 'TestDrive:\TestModule'
+            Update-RootModuleDotSourceImports -Path 'TestDrive:\TestModule'
             $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
             $Results.Count | Should -Be 6
 

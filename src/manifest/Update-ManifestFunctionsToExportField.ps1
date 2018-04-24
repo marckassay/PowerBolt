@@ -1,5 +1,4 @@
-# Update-ManifestFunctionsToExportField
-function Update-FunctionsToExport {
+function Update-ManifestFunctionsToExportField {
     [CmdletBinding()]
     [OutputType([PSModuleInfo])]
     Param
@@ -29,7 +28,7 @@ function Update-FunctionsToExport {
         $ManifestContents = Get-Content -Path $ManifestUpdate.ManifestPath -Raw -ReadCount 0
         $ManifestContents = $InsertPointRegEx.Replace($ManifestContents, @"
  = @(
-`t$FunctionNames
+$FunctionNames
 )
 `r`n
 "@, 1)

@@ -1,5 +1,4 @@
-#Update-RootModuleDotSourceImports
-function Update-ModuleDotSourceFunctions {
+function Update-RootModuleDotSourceImports {
     [CmdletBinding()]
     Param
     (
@@ -65,7 +64,7 @@ function Update-ModuleDotSourceFunctions {
     }
 
     if ($DotSourceLinesCount -gt 0) {
-        Write-Verbose "Update-ModuleDotSourceFunctions: A total of $DotSourceLinesCount was removed in $($Manifest.RootModule)."
+        Write-Verbose "Update-RootModuleDotSourceImports: A total of $DotSourceLinesCount was removed in $($Manifest.RootModule)."
     }
     
     $DotSourcedFiles = $TargetFunctionsToExport.FilePath.FullName | `

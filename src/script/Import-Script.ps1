@@ -14,7 +14,7 @@ function Import-Script {
 
     try {
         #Invoke-Expression ". '$Path'" 
-        # Export-ModuleMember -Function 'Update-FunctionsToExport'
+        # Export-ModuleMember -Function 'Update-ManifestFunctionsToExportField'
         Invoke-Command {. $Path} -NoNewScope
     }
     catch {

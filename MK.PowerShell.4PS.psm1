@@ -1,3 +1,3 @@
 Get-Content -Path (Resolve-Path -Path .\src\script\Import-Script.ps1) -Raw | Invoke-Expression
-. .\src\manifest\Update-FunctionsToExport.ps1
-. .\src\module\Update-ModuleDotSourceFunctions.ps1
+. .\src\manifest\Update-ManifestFunctionsToExportField.ps1
+. .\src\module\Update-RootModuleDotSourceImports.ps1
