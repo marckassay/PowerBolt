@@ -6,11 +6,12 @@ Describe "Test Update-RootModuleUsingStatements" {
 
         Set-Location -Path $SUT_MODULE_HOME
 
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force -Global
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
 
         Copy-Item -Path 'test\manifest\resource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
     }
     AfterEach {
+        Remove-Module MK.PowerShell.4PS
         Pop-Location
     }
 

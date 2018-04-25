@@ -5,13 +5,14 @@ Describe "Test Update-ManifestFunctionsToExportField" {
         Push-Location
         Set-Location -Path $SUT_MODULE_HOME
 
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force -Global
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
     }
     AfterEach {
+        Remove-Module MK.PowerShell.4PS
         Pop-Location
     }
 
-    Context "Call Update-RootModuleDotSourceImports and pipe result" {
+    Context "Call Update-RootModuleUsingStatements and pipe result" {
         BeforeEach {
             Copy-Item -Path 'test\manifest\resource\TestModule' -Destination $TestDrive -Container -Recurse -Force -Verbose
             $ManifestFile = Join-Path -Path $TestDrive -ChildPath '\TestModule\TestModule.psd1'
@@ -21,8 +22,8 @@ Describe "Test Update-ManifestFunctionsToExportField" {
 
         }
 
-        It "Should overwrite the default value ('@()') for FunctionsToExport field with dot-source imports" {
-            Update-RootModuleDotSourceImports -Path $ModuleFile | Update-ManifestFunctionsToExportField
+        It "Should overwrite the default value ('@()') for FunctionsToExport field with 'using' statements" {
+            Update-RootModuleUsingStatements -Path $ModuleFile | Update-ManifestFunctionsToExportField
 
             $FunctionNames = Test-ModuleManifest $ManifestFile | `
                 Select-Object -ExpandProperty ExportedCommands | `
