@@ -1,4 +1,13 @@
-function GetModuleInfo($Path) {
+function Get-ModuleInfo {
+    [CmdletBinding()]
+    [OutputType([PSObject])]
+    Param
+    (
+        [Parameter(Mandatory = $True)]
+        [string]
+        $Path
+    )
+
     $Path = Get-Item $Path | Select-Object -ExpandProperty FullName
 
     if ($(Test-Path $Path -PathType Leaf)) {
@@ -14,11 +23,13 @@ function GetModuleInfo($Path) {
     $Manifest = Test-ModuleManifest $ManifestFilePath
     $ModuleFilePath = $(Join-Path $ModuleDirectory -ChildPath $ModuleName'.psm1')
 
-    return @{
+    [psobject]$ModuleInfo = @{
         Manifest         = $Manifest
         ManifestFilePath = $ManifestFilePath
         Name             = $ModuleName
         Directory        = $ModuleDirectory
         FilePath         = $ModuleFilePath
     }
+
+    $ModuleInfo
 }

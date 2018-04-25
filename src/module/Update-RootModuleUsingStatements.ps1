@@ -1,4 +1,4 @@
-function Update-RootModuleDotSourceImports {
+function Update-RootModuleUsingStatements {
     [CmdletBinding()]
     Param
     (
@@ -42,7 +42,7 @@ function Update-RootModuleDotSourceImports {
     # cleaned as in dot-source lines removed
     $ModuleContentsCleaned = Get-Content $ModulePath | `
         ForEach-Object -Begin {$DotSourceLinesCount = 0} -Process {
-        if ($_ -match '(?<=(\. \.\\)).*(?=(\.ps1))') {
+        if ($_ -match '(?<=(using module \.\\)).*(?=(\.ps1))') {
             $DotSourceLinesCount++
         }
         else {
@@ -72,7 +72,7 @@ function Update-RootModuleDotSourceImports {
         ForEach-Object {
         if ($_ -ne $ModulePath) {
             @"
-. .$($_.Split($ModuleDirectory)[1])`r`n
+using module .$($_.Split($ModuleDirectory)[1])`r`n
 "@
         }
     }

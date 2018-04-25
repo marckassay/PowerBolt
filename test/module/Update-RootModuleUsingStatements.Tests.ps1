@@ -1,4 +1,4 @@
-Describe "Test Update-RootModuleDotSourceImports" {
+Describe "Test Update-RootModuleUsingStatements" {
     $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
     BeforeEach {
@@ -16,25 +16,25 @@ Describe "Test Update-RootModuleDotSourceImports" {
 
     Context "Recurse src directory for correct function files" {
 
-        It "Should modify empty root module with dot-source files" {
-            Update-RootModuleDotSourceImports -Path 'TestDrive:\TestModule'
+        It "Should modify empty root module 'using' statments" {
+            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModule'
             $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
             $Results.Count | Should -Be 4
 
             $Assert = $Results[0] 
-            $Assert | Should -Be '. .\src\C\Get-CFunction.ps1'
+            $Assert | Should -Be 'using module .\src\C\Get-CFunction.ps1'
 
             $Assert = $Results[1] 
-            $Assert | Should -Be ' . .\src\C\Set-CFunction.ps1'
+            $Assert | Should -Be ' using module .\src\C\Set-CFunction.ps1'
 
             $Assert = $Results[2] 
-            $Assert | Should -Be ' . .\src\Get-AFunction.ps1'
+            $Assert | Should -Be ' using module .\src\Get-AFunction.ps1'
 
             $Assert = $Results[3] 
-            $Assert | Should -Be ' . .\src\Get-BFunction.ps1'
+            $Assert | Should -Be ' using module .\src\Get-BFunction.ps1'
         }
 
-        It "Should modify root module that contains a function with dot-source file imports" {
+        It "Should modify root module which declares a function with 'using' statements" {
             Set-Content -Path 'TestDrive:\TestModule\TestModule.psm1' -Value @"
 function Remove-CFunction {
     [CmdletBinding()]
@@ -45,29 +45,29 @@ function Remove-CFunction {
 }
 "@
 
-            Update-RootModuleDotSourceImports -Path 'TestDrive:\TestModule'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModule'
             $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
             $Results.Count | Should -Be 6
 
             $Assert = $Results[0] 
-            $Assert | Should -Be '. .\src\C\Get-CFunction.ps1'
+            $Assert | Should -Be 'using module .\src\C\Get-CFunction.ps1'
 
             $Assert = $Results[1] 
-            $Assert | Should -Be ' . .\src\C\Set-CFunction.ps1'
+            $Assert | Should -Be ' using module .\src\C\Set-CFunction.ps1'
 
             $Assert = $Results[2] 
-            $Assert | Should -Be ' . .\src\Get-AFunction.ps1'
+            $Assert | Should -Be ' using module .\src\Get-AFunction.ps1'
 
             $Assert = $Results[3] 
-            $Assert | Should -Be ' . .\src\Get-BFunction.ps1'
+            $Assert | Should -Be ' using module .\src\Get-BFunction.ps1'
 
             $Assert = $Results[4] 
             $Assert | Should -Be ''
         }
 
-        It "Should modify root module that contains a function and dot-source file import with more dot-source imports" {
+        It "Should modify root module which declares a function and contains a 'using' statement with more statements" {
             Set-Content -Path 'TestDrive:\TestModule\TestModule.psm1' -Value @"
-. .\src\C\New-CFunction.ps1'
+using module .\src\C\New-CFunction.ps1'
 function Remove-CFunction {
     [CmdletBinding()]
     param (
@@ -77,21 +77,21 @@ function Remove-CFunction {
 }
 "@ 
 
-            Update-RootModuleDotSourceImports -Path 'TestDrive:\TestModule'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModule'
             $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
             $Results.Count | Should -Be 6
 
             $Assert = $Results[0] 
-            $Assert | Should -Be '. .\src\C\Get-CFunction.ps1'
+            $Assert | Should -Be 'using module .\src\C\Get-CFunction.ps1'
 
             $Assert = $Results[1] 
-            $Assert | Should -Be ' . .\src\C\Set-CFunction.ps1'
+            $Assert | Should -Be ' using module .\src\C\Set-CFunction.ps1'
 
             $Assert = $Results[2] 
-            $Assert | Should -Be ' . .\src\Get-AFunction.ps1'
+            $Assert | Should -Be ' using module .\src\Get-AFunction.ps1'
 
             $Assert = $Results[3] 
-            $Assert | Should -Be ' . .\src\Get-BFunction.ps1'
+            $Assert | Should -Be ' using module .\src\Get-BFunction.ps1'
 
             $Assert = $Results[4] 
             $Assert | Should -Be ''

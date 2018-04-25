@@ -1,4 +1,3 @@
-. .\src\core\GetModuleInfo.ps1
 function Add-ModuleToProfile {
     [CmdletBinding()]
     [OutputType([String])]
@@ -8,7 +7,7 @@ function Add-ModuleToProfile {
         [string]
         $Path,
 
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $False)]
         [string]
         $ProfilePath = $(Get-Variable Profile -ValueOnly),
 
@@ -16,11 +15,7 @@ function Add-ModuleToProfile {
         $NoNewline
     )
 
-    $ModuleInfo = GetModuleInfo -Path $Path
-    $Builder = [System.Text.StringBuilder]::new()
-    [string]$ProfileContent = Get-Content -Path $ProfilePath -Raw
-    $Builder.AppendLine($ProfileContent)
-    $Builder.AppendLine("Import-Module " + $ModuleInfo.Directory)
-    
-    Set-Content -Path $ProfilePath -Value $Builder.ToString() -NoNewline:$NoNewline.IsPresent
+    $ModuleDirectory = (Get-ModuleInfo -Path $Path).Directory
+
+    Add-Content -Path $ProfilePath -Value "Import-Module $ModuleDirectory" -NoNewline:$NoNewline.IsPresent
 }
