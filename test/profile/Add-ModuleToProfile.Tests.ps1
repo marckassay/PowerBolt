@@ -12,7 +12,8 @@ Describe "Test Add-ModuleToProfile" {
         $TestProfilePath = New-Item -Path "TestDrive:\" -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName
     }
     AfterEach {
-        Remove-Module MK.PowerShell.4PS
+        Remove-Module MK.PowerShell.4PS -Force
+        
         Pop-Location
     }
 

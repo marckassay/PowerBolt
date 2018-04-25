@@ -11,7 +11,8 @@ Describe "Test Update-RootModuleUsingStatements" {
         Copy-Item -Path 'test\manifest\resource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
     }
     AfterEach {
-        Remove-Module MK.PowerShell.4PS
+        Remove-Module MK.PowerShell.4PS -Force
+        
         Pop-Location
     }
 

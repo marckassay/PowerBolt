@@ -3,11 +3,14 @@ Describe "Test New-MKPowerShellConfigFile" {
 
     BeforeEach {
         Push-Location
+
         Set-Location -Path $SUT_MODULE_HOME
 
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force -Global
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
     }
     AfterEach {
+        Remove-Module MK.PowerShell.4PS -Force
+
         Pop-Location
     }
 
@@ -35,7 +38,7 @@ Describe "Test New-MKPowerShellConfigFile" {
                     ForEach-Object {if ($_ -like '*MK.PowerShell-config.ps1') {$_}} -OutVariable ModuleConfigFile
             
                 New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
-
+            
                 Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName -Verbose 
             }
             AfterEach {
@@ -44,15 +47,16 @@ Describe "Test New-MKPowerShellConfigFile" {
         
             It "Should prompt user about exisiting file" {
                 Mock WriteWarningWrapper { $true }
-
+                
                 Get-Item $FullName | Should -Exist 
-
+                
                 New-MKPowerShellConfigFile -Path $TestDrive -Verbose
-
+                
                 Assert-MockCalled WriteWarningWrapper 1
-
+                
                 Get-Item $FullName | Should -Exist 
             }
+        
         
             It "Should not prompt user about exisiting file" {
                 Mock WriteWarningWrapper { $true }

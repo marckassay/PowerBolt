@@ -8,7 +8,8 @@ Describe "Test Update-ManifestFunctionsToExportField" {
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
     }
     AfterEach {
-        Remove-Module MK.PowerShell.4PS
+        Remove-Module MK.PowerShell.4PS -Force
+
         Pop-Location
     }
 
