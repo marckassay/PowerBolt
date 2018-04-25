@@ -11,7 +11,7 @@ function Update-ManifestFunctionsToExportField {
         [switch]
         $PassThru
     )
-
+    # TODO: have $ManifestUpdate be typed.
     end {
         $ManifestFile = Get-Item -Path $ManifestUpdate.ManifestPath
         $FunctionNames = $ManifestUpdate.TargetFunctionsToExport.FunctionName
