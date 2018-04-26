@@ -29,23 +29,20 @@ Describe "Test New-MKPowerShellConfigFile" {
         }
     }
 
-    InModuleScope MK.PowerShell.4PS {
-        Context "Call New-MKPowerShellConfigFile when file exists" {
-            BeforeEach {
+    Context "Call New-MKPowerShellConfigFile when file exists" {
+        It "Should prompt user about exisiting file" {
+            InModuleScope MK.PowerShell.4PS {
+                ### HACK: Before and After block is inside here since Pester seems to not like 
+                # nested Before and After
+                ### Before
                 $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'MK.PowerShell-config.ps1'
                 Get-Module MK.PowerShell.4PS | `
                     Select-Object -ExpandProperty FileList | `
                     ForEach-Object {if ($_ -like '*MK.PowerShell-config.ps1') {$_}} -OutVariable ModuleConfigFile
-            
                 New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
-            
                 Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName -Verbose 
-            }
-            AfterEach {
-                Remove-Item -Path "$TestDrive\MK.PowerShell" -Recurse
-            }
-        
-            It "Should prompt user about exisiting file" {
+
+                ### TEST
                 Mock WriteWarningWrapper { $true }
                 
                 Get-Item $FullName | Should -Exist 
@@ -54,21 +51,41 @@ Describe "Test New-MKPowerShellConfigFile" {
                 
                 Assert-MockCalled WriteWarningWrapper 1
                 
-                Get-Item $FullName | Should -Exist 
+                Get-Item $FullName | Should -Exist
+
+                ### After
+                Remove-Item -Path "$TestDrive\MK.PowerShell" -Recurse
             }
-        
-        
-            It "Should not prompt user about exisiting file" {
+        }
+
+        It "Should not prompt user about exisiting file" {
+            InModuleScope MK.PowerShell.4PS {
+                ### HACK: Before and After block is inside here since Pester seems to not like 
+                # nested Before and After
+
+                ### Before
+                $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'MK.PowerShell-config.ps1'
+                Get-Module MK.PowerShell.4PS | `
+                    Select-Object -ExpandProperty FileList | `
+                    ForEach-Object {if ($_ -like '*MK.PowerShell-config.ps1') {$_}} -OutVariable ModuleConfigFile
+                New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
+                Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName -Verbose 
+
+                ### TEST
                 Mock WriteWarningWrapper { $true }
 
                 Get-Item $FullName | Should -Exist 
 
                 New-MKPowerShellConfigFile -Path $TestDrive -Force -Verbose
-
+                # NOTE: although this mock wasnt called '1' time in this 'It', this is from the 
+                # previous 'It' block
                 Assert-MockCalled WriteWarningWrapper 1
 
-                Get-Item $FullName | Should -Exist 
-            }
+                Get-Item $FullName | Should -Exist
+                
+                ### After
+                Remove-Item -Path "$TestDrive\MK.PowerShell" -Recurse
+            } 
         }
     }
 }
