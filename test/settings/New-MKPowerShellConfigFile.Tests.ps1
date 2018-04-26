@@ -45,7 +45,7 @@ Describe "Test New-MKPowerShellConfigFile" {
                 ### TEST
                 Mock WriteWarningWrapper { $true }
                 
-                Get-Item $FullName | Should -Exist 
+                Get-Item $FullName | Should -Exist
                 
                 New-MKPowerShellConfigFile -Path $TestDrive -Verbose
                 
