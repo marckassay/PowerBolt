@@ -1,4 +1,5 @@
 $MKPowerShellConfig = @{ 
-    TurnOnAvailableUpdates = 'true'
-    TurnOnHistoryRecording = 'true'
+    TurnOnAvailableUpdates     = 'true'
+    TurnOnHistoryRecording     = 'true'
+    TurnOnEnchancedSetLocation = 'true'
 }

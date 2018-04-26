@@ -8,7 +8,7 @@ Describe "Test Update-RootModuleUsingStatements" {
 
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
 
-        Copy-Item -Path 'test\manifest\resource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
+        Copy-Item -Path 'test\module\manifest\resource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
     }
     AfterEach {
         Remove-Module MK.PowerShell.4PS -Force

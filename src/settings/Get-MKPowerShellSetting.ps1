@@ -1,4 +1,4 @@
-function Get-MKPowerShellSettings {
+function Get-MKPowerShellSetting {
     [CmdletBinding()]
     Param
     (
