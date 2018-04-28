@@ -33,8 +33,8 @@ function Get-DynamicParameterValues {
     $Script:MKPowerShellConfig = $MKPowerShellConfig
     $SettingNames = $Script:MKPowerShellConfig | ForEach-Object { $_.Keys }
 
-    $ParamAttribute = New-Object Parameter 
-    $ParamAttribute.Mandatory = $true 
+    $ParamAttribute = New-Object Parameter
+    $ParamAttribute.Mandatory = $true
     $ParamAttribute.ParameterSetName = '__AllParameterSets'
 
     $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]

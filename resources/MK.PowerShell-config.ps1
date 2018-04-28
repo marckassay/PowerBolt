@@ -1,5 +1,6 @@
 $MKPowerShellConfig = @{ 
+    LastLocation               = ''
     TurnOnAvailableUpdates     = 'true'
     TurnOnHistoryRecording     = 'true'
-    TurnOnEnchancedSetLocation = 'true'
+    TurnOnRememberLastLocation = 'true'
 }
