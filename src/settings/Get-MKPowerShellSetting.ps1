@@ -1,14 +1,15 @@
-$Script:MKPowerShellConfig
-
 function Get-MKPowerShellSetting {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $True)]
     Param(
         [Parameter(Mandatory = $False)]
-        [String]$Path = [Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData)
+        [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath
     )
 
     DynamicParam {
-        return Get-DynamicParameterValues -Path $Path
+        if (-not $ConfigFilePath) {
+            $ConfigFilePath = $script:MKPowerShellConfigFilePath
+        }
+        return Get-DynamicParameterValues -ConfigFilePath $ConfigFilePath
     }
 
     begin {
@@ -16,30 +17,37 @@ function Get-MKPowerShellSetting {
     }
 
     end {
-        ($Script:MKPowerShellConfig[$Name] -eq $true)
+        $Value = $Script:MKPowerShellConfig[$Name]
+        
+        if ($Value -match "((T|t)rue|(F|f)alse)") {
+            ($Script:MKPowerShellConfig[$Name] -eq $true)
+        }
+        else {
+            $Script:MKPowerShellConfig[$Name]
+        }
     }
 }
 
 function Get-DynamicParameterValues {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $False)]
     Param(
-        [Parameter(Mandatory = $True)]
-        [String]$Path
+        [Parameter(Mandatory = $true)]
+        [String]$ConfigFilePath
     )
-    
     # surfaces the $MKPowerShellConfig variable in the file of $Path
-    Invoke-Expression -Command "using module $Path"
+    Invoke-Expression -Command "using module $ConfigFilePath"
 
     $Script:MKPowerShellConfig = $MKPowerShellConfig
     $SettingNames = $Script:MKPowerShellConfig | ForEach-Object { $_.Keys }
 
+    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
     $ParamAttribute = New-Object Parameter
     $ParamAttribute.Mandatory = $true
-    $ParamAttribute.ParameterSetName = '__AllParameterSets'
-
-    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+    $ParamAttribute.Position = 0
     $AttributeCollection.Add($ParamAttribute)
-    $AttributeCollection.Add((New-Object ValidateSet(@($SettingNames))))
+
+    $ValidateSet = New-Object ValidateSet(@($SettingNames))
+    $AttributeCollection.Add($ValidateSet)
 
     $RuntimeParam = New-Object System.Management.Automation.RuntimeDefinedParameter('Name', [string], $AttributeCollection)
     $RuntimeParamDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary

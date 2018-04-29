@@ -1,38 +1,25 @@
 Describe "Test Set-LocationAndStore" {
-    $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
     BeforeAll {
-        Push-Location
+        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+
+        Push-Location -StackName PriorTest1
 
         Set-Location -Path $SUT_MODULE_HOME
 
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
-
-        Get-Module MK.PowerShell.4PS | `
-            Select-Object -ExpandProperty FileList | `
-            ForEach-Object {if ($_ -like '*MK.PowerShell-config.ps1') {$_}} -OutVariable ModuleConfigFile
-
-        New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
-        Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName -Verbose -PassThru | `
-            Select-Object -ExpandProperty FullName
+        $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
+        
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Verbose -Force
     }
-
     AfterAll {
         Remove-Module MK.PowerShell.4PS -Force
-        
-        Pop-Location
+        Set-Alias sl Set-Location -Scope Global
+        Pop-Location -StackName PriorTest1
     }
 
     Context "When 'TurnOnRememberLastLocation' is set to true" {
-        BeforeEach {
-            Push-Location
-        }
-        AfterEach {
-            Pop-Location
-        }
         
         It "Should (by default) set the alias of 'sl' to Set-LocationAndStore on PowerShell startup" {
-            Get-Alias -Name 'sl' | `
+            Get-Alias -Name 'sl' -Scope Global | `
                 Select-Object -ExpandProperty ReferencedCommand | `
                 Select-Object -ExpandProperty Name | Should -Be 'Set-LocationAndStore'
         }
@@ -42,12 +29,13 @@ Describe "Test Set-LocationAndStore" {
         ) {
             Param($Path)
 
+            # TODO: need to have this method accepth $SUT environment condition. 
+            # Set-MKPowerShellSetting 
+            #Mock Set-MKPowerShellSetting { return @{FullName = "B_File.TXT"} } -ParameterFilter { $Path -eq "$env:temp\me" }
+
             Set-LocationAndStore -Path $Path
             Get-Location | Should -Be $Path
-
-            # surfaces the $MKPowerShellConfig variable in the file of $Path
-            Invoke-Expression -Command "using module $ModuleConfigFile"
-            $MKPowerShellConfig.LastLocation | Should -Be $Path
+            $ConfigFilePath | Should -FileContentMatch ([regex]::Escape("LastLocation = '$Path'"))
         }
     }
 }
