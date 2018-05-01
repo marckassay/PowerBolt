@@ -20,7 +20,7 @@ function Update-ManifestFunctionsToExportField {
 
         # HACK: Perhaps its not possible to have Update-ModuleManifest -FunctionsToExport to be 
         # assigned an array.  So here manually edit it to have just that.
-        $FunctionNames = $FunctionNames | ForEach-Object -Process {"'$_',`r`n"}
+        $FunctionNames = $FunctionNames | ForEach-Object -Process {"'$_',`r`n"} | Sort-Object
         $Tail = $FunctionNames.Count - 1
         $FunctionNames[$Tail] = $FunctionNames[$Tail].Replace(",`r`n", "")
 

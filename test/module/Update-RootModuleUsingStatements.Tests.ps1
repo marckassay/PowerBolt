@@ -49,7 +49,7 @@ function Remove-CFunction {
 
             Update-RootModuleUsingStatements -Path 'TestDrive:\TestModule'
             $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
-            $Results.Count | Should -Be 6
+            $Results.Count | Should -Be 12
 
             $Assert = $Results[0] 
             $Assert | Should -Be 'using module .\src\C\Get-CFunction.ps1'
@@ -81,7 +81,7 @@ function Remove-CFunction {
 
             Update-RootModuleUsingStatements -Path 'TestDrive:\TestModule'
             $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
-            $Results.Count | Should -Be 6
+            $Results.Count | Should -Be 12
 
             $Assert = $Results[0] 
             $Assert | Should -Be 'using module .\src\C\Get-CFunction.ps1'

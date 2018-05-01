@@ -46,7 +46,7 @@ function Update-RootModuleUsingStatements {
             $DotSourceLinesCount++
         }
         else {
-            $_
+            "$_`r`n"
         }
     }
 
