@@ -39,7 +39,7 @@ function Update-RootModuleUsingStatements {
         $TargetDirectory = (Join-Path -Path $ModuleDirectory -ChildPath $SourceDirectory)
     }
 
-    # cleaned as in dot-source lines removed
+    # cleaned as in existing 'using' statements removed
     $ModuleContentsCleaned = Get-Content $ModulePath | `
         ForEach-Object -Begin {$DotSourceLinesCount = 0} -Process {
         if ($_ -match '(?<=(using module \.\\)).*(?=(\.ps1))') {
