@@ -80,8 +80,7 @@ function Build-PlatyPSMarkdown {
         }
         else {
             if ($Data.NoReImportModule -eq $False) {
-                Import-Module $Data.RootModule -Force
-                Start-Sleep -Seconds 3
+                Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
             Update-MarkdownHelp $Data.ModuleMarkdownFolder
         }
