@@ -8,7 +8,7 @@ Describe "Test Add-ModuleToProfile" {
 
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
 
-        Copy-Item -Path 'test\module\manifest\resource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
+        Copy-Item -Path 'testresource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
         $TestProfilePath = New-Item -Path "TestDrive:\" -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName
     }
     AfterEach {

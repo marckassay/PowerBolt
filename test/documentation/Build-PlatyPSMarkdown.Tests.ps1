@@ -6,6 +6,8 @@ Describe "Test Build-PlatyPSMarkdown" {
 
         $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
         
+        Copy-Item -Path 'test\testresource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
+
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Verbose -Force
     }
     AfterAll {
@@ -13,17 +15,10 @@ Describe "Test Build-PlatyPSMarkdown" {
         Set-Alias sl Set-Location -Scope Global
     }
 
-    Context "Lorem Ipsum" {
-        
-        It "Should skip" {
-
-        } -Skip
-
-        It "Should skip" -TestCases @(
-            @{ Path = "C:\"}
-        ) {
-            Param($Path)
-
-        } -Skip
+    Context "non-piped usage" {
+        It "Should generate markdown files with given Path" {
+            Build-PlatyPSMarkdown -Path "$TestDrive\TestModule"
+            "$TestDrive\TestModule\docs" | Should -Exist
+        }
     }
 }
