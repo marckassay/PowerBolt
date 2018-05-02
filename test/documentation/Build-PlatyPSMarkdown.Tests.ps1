@@ -6,19 +6,30 @@ Describe "Test Build-PlatyPSMarkdown" {
 
         $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
         
-        Copy-Item -Path 'test\testresource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
+        Copy-Item -Path 'test\testresource\TestModuleB' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
 
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Verbose -Force
     }
     AfterAll {
         Remove-Module MK.PowerShell.4PS -Force
+        Remove-Module MKPowerShellDocObject -Force
         Set-Alias sl Set-Location -Scope Global
     }
 
     Context "non-piped usage" {
-        It "Should generate markdown files with given Path" {
-            Build-PlatyPSMarkdown -Path "$TestDrive\TestModule"
-            "$TestDrive\TestModule\docs" | Should -Exist
+
+        It "Should generate correct number of files." {
+
+            Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB"
+
+            $FileNames = Get-ChildItem "$TestDrive\TestModuleB\docs" -Recurse | `
+                ForEach-Object {$_.Name} | `
+                Sort-Object
+            $FileNames.Count | Should -Be 4
+
+            $Files = "Get-AFunction.md", "Get-BFunction.md", "Get-CFunction.md", "Set-CFunction.md" | `
+                Sort-Object
+            $FileNames | Should -BeExactly $Files
         }
     }
 }

@@ -9,6 +9,7 @@ class MKPowerShellDocObject {
     [string]$ReadMeBeginBoundary = '## Functions'
     [string]$ReadMeEndBoundary = '## RoadMap'
     [bool]$NoReImportModule
+    [object]$RootManifest
     [object]$RootModule
     [string]$ModuleFolder
     [string]$ModuleMarkdownFolder
@@ -56,10 +57,13 @@ class MKPowerShellDocObject {
             }
         }
 
-        $this.RootModule = Get-ChildItem -Filter '*.psm1' | `
+        $this.RootManifest = Get-ChildItem -Path $this.Path -Filter '*.psd1' | `
+            Select-Object -ExpandProperty FullName
+
+        $this.RootModule = Get-ChildItem -Path $this.Path -Filter '*.psm1' | `
             Select-Object -ExpandProperty FullName
         if (-not $this.RootModule) {
-            $this.RootModule = Get-ChildItem -Filter '*.psm1' | `
+            $this.RootModule = Get-ChildItem -Path $this.Path -Filter '*.psm1' | `
                 Select-Object -ExpandProperty FullName
         }
     }
