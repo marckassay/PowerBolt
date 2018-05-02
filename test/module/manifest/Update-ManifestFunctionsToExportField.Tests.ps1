@@ -15,9 +15,9 @@ Describe "Test Update-ManifestFunctionsToExportField" {
 
     Context "Call Update-RootModuleUsingStatements and pipe result" {
         BeforeEach {
-            Copy-Item -Path 'test\testresource\TestModule' -Destination $TestDrive -Container -Recurse -Force -Verbose
-            $ManifestFile = Join-Path -Path $TestDrive -ChildPath '\TestModule\TestModule.psd1'
-            $ModuleFile = Join-Path -Path $TestDrive -ChildPath '\TestModule\TestModule.psm1'
+            Copy-Item -Path 'test\testresource\TestModuleA' -Destination $TestDrive -Container -Recurse -Force -Verbose
+            $ManifestFile = Join-Path -Path $TestDrive -ChildPath '\TestModuleA\TestModuleA.psd1'
+            $ModuleFile = Join-Path -Path $TestDrive -ChildPath '\TestModuleA\TestModuleA.psm1'
         }
         AfterEach {
 

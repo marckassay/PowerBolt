@@ -6,7 +6,7 @@ Describe "Test Build-PlatyPSMarkdown" {
 
         $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
         
-        Copy-Item -Path 'test\testresource\TestModuleB' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
+        Copy-Item -Path 'test\testresource\TestModuleB' -Destination $TestDrive -Container -Recurse -Force -Verbose
 
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Verbose -Force
     }
@@ -14,6 +14,9 @@ Describe "Test Build-PlatyPSMarkdown" {
     AfterAll {
         Remove-Module MK.PowerShell.4PS -Force
         Remove-Module MKPowerShellDocObject -Force
+        
+        Get-Module TestModuleB | Remove-Module
+
         Set-Alias sl Set-Location -Scope Global
     }
 
@@ -42,7 +45,7 @@ Describe "Test Build-PlatyPSMarkdown" {
 ---
 external help file: TestModuleB-help.xml
 Module Name: TestModuleB
-online version: https://github.com/marckassay/TestModule/blob/master/docs/Get-AFunction.md
+online version: https://github.com/marckassay/TestModuleB/blob/master/docs/Get-AFunction.md
 schema: 2.0.0
 ---
 
@@ -51,7 +54,7 @@ schema: 2.0.0
 ## SYNOPSIS
 {{Fill in the Synopsis}}
 "@
-            $ActualHead = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md" -Raw).Substring(0, 243)
+            $ActualHead = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md" -Raw).Substring(0, 244)
             $ActualHead | Should -BeExactly $ExpectedHead
         }
 

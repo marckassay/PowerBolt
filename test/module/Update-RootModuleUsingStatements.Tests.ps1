@@ -8,7 +8,7 @@ Describe "Test Update-RootModuleUsingStatements" {
 
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
 
-        Copy-Item -Path 'testresource\TestModule' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
+        Copy-Item -Path 'test\testresource\TestModuleA' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
     }
     AfterEach {
         Remove-Module MK.PowerShell.4PS -Force
@@ -19,8 +19,8 @@ Describe "Test Update-RootModuleUsingStatements" {
     Context "Recurse src directory for correct function files" {
 
         It "Should modify empty root module 'using' statments" {
-            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModule'
-            $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModuleA'
+            $Results = Get-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1'
             $Results.Count | Should -Be 4
 
             $Assert = $Results[0] 
@@ -37,7 +37,7 @@ Describe "Test Update-RootModuleUsingStatements" {
         }
 
         It "Should modify root module which declares a function with 'using' statements" {
-            Set-Content -Path 'TestDrive:\TestModule\TestModule.psm1' -Value @"
+            Set-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1' -Value @"
 function Remove-CFunction {
     [CmdletBinding()]
     param (
@@ -47,8 +47,8 @@ function Remove-CFunction {
 }
 "@
 
-            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModule'
-            $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModuleA'
+            $Results = Get-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1'
             $Results.Count | Should -Be 12
 
             $Assert = $Results[0] 
@@ -68,7 +68,7 @@ function Remove-CFunction {
         }
 
         It "Should modify root module which declares a function and contains a 'using' statement with more statements" {
-            Set-Content -Path 'TestDrive:\TestModule\TestModule.psm1' -Value @"
+            Set-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1' -Value @"
 using module .\src\C\New-CFunction.ps1'
 function Remove-CFunction {
     [CmdletBinding()]
@@ -79,8 +79,8 @@ function Remove-CFunction {
 }
 "@ 
 
-            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModule'
-            $Results = Get-Content -Path 'TestDrive:\TestModule\TestModule.psm1'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModuleA'
+            $Results = Get-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1'
             $Results.Count | Should -Be 12
 
             $Assert = $Results[0] 
