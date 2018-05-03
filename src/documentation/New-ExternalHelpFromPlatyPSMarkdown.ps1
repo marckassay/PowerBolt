@@ -2,15 +2,34 @@ function New-ExternalHelpFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $True, ValueFromPipeline = $True)]
-        [PSCustomObject]$Data
+        [Parameter(Mandatory = $False, ValueFromPipeline = $True)]
+        [MKPowerShellDocObject]$Data,
+
+        [Parameter(Mandatory = $False)]
+        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
+
+        [Parameter(Mandatory = $False)]
+        [string]$MarkdownFolder = 'docs',
+
+        [Parameter(Mandatory = $False)]
+        [string]$OutputFolder = 'en-US'
     )
 
-    $HelpLocaleFolder = Join-Path -Path $Data.ModuleFolder -ChildPath $Data.Locale
+    if ($Data) {
+        $Path = $Data.ModuleFolder 
+        $MarkdownFolder = $Data.ModuleMarkdownFolder
+        $OutputFolder = $Data.Locale
+    }
+
+    $MarkdownFolder = Join-Path -Path $Path -ChildPath $MarkdownFolder
+
+    $HelpLocaleFolder = Join-Path -Path $Path -ChildPath $OutputFolder
+
     if ((Test-Path -Path $HelpLocaleFolder -PathType Container) -eq $False) {
         New-Item -Path $HelpLocaleFolder -ItemType Container
     }
-    New-ExternalHelp -Path $Data.ModuleMarkdownFolder -OutputPath $HelpLocaleFolder -Force | `
+
+    New-ExternalHelp -Path $MarkdownFolder -OutputPath $HelpLocaleFolder -Force | `
         Out-Null
     
     $Data

@@ -7,7 +7,8 @@ Describe "Test Build-PlatyPSMarkdown" {
         $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
         
         Copy-Item -Path 'test\testresource\TestModuleB' -Destination $TestDrive -Container -Recurse -Force -Verbose
-
+        # remove docs since ths test files is generating them.
+        Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Verbose -Force
     }
     
