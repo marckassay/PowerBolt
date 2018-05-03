@@ -8,12 +8,12 @@ class MKPowerShellDocObject {
     [string]$OnlineVersionUrlPolicy = 'Auto'
     [string]$ReadMeBeginBoundary = '## Functions'
     [string]$ReadMeEndBoundary = '## RoadMap'
+    [string]$MarkdownSnippetCollection
     [bool]$NoReImportModule
     [object]$RootManifest
     [object]$RootModule
     [string]$ModuleFolder
     [string]$ModuleMarkdownFolder
-    [object]$MarkdownSnippetCollection
 
     MKPowerShellDocObject(
         [string]$Name,
@@ -24,6 +24,7 @@ class MKPowerShellDocObject {
         [string]$OnlineVersionUrlPolicy,
         [string]$ReadMeBeginBoundary,
         [string]$ReadMeEndBoundary,
+        [string]$MarkdownSnippetCollection,
         [bool]$NoReImportModule
     ) {
         $this.ModuleName = $Name
@@ -34,6 +35,7 @@ class MKPowerShellDocObject {
         $this.OnlineVersionUrlPolicy = $OnlineVersionUrlPolicy
         $this.ReadMeBeginBoundary = $ReadMeBeginBoundary
         $this.ReadMeEndBoundary = $ReadMeEndBoundary
+        $this.MarkdownSnippetCollection = $MarkdownSnippetCollection
         $this.NoReImportModule = $NoReImportModule
         
         $this.AssignRemainingFields()
@@ -66,5 +68,33 @@ class MKPowerShellDocObject {
             $this.RootModule = Get-ChildItem -Path $this.Path -Filter '*.psm1' | `
                 Select-Object -ExpandProperty FullName
         }
+    }
+
+    static [string]CreateMarkdownSnippetCollection ([string]$Path, [string]$OnlineVersionUrlValue = '') {
+        
+        $_MarkdownSnippetCollection = Get-ChildItem -Path ($Path + "\*.md") | ForEach-Object {
+            $FileContents = Get-Content -Path $_.FullName
+            $FunctionName = $_.BaseName
+            $MarkdownURL = $OnlineVersionUrlValue -f $FunctionName
+
+            # replace 'online version' value in markdown help file
+            $FileContents -replace '^(online version:)[\w\W]*$', "online version: $MarkdownURL" | Set-Content -Path $_.FullName
+
+            # building content for README...
+            $TitleLine = ("### [``````$FunctionName``````]($MarkdownURL)").Trim()
+            $SynopsisLine = $FileContents[$FileContents.IndexOf('## SYNOPSIS') + 1]
+
+            # this here-string indents $SynopsisLine by four spaces so that it will be rendered in
+            # a rectanglar background shadow
+            @"
+
+$TitleLine
+
+    $SynopsisLine
+
+"@
+        }
+
+        return $_MarkdownSnippetCollection
     }
 }

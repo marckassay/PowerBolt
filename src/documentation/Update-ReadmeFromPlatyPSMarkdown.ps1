@@ -2,26 +2,47 @@ function Update-ReadmeFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $True, ValueFromPipeline = $True)]
-        [PSCustomObject]$Data
+        [Parameter(Mandatory = $False, ValueFromPipeline = $True)]
+        [MKPowerShellDocObject]$Data,
+
+        [Parameter(Mandatory = $False)]
+        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
+
+        [Parameter(Mandatory = $False)]
+        [string]$MarkdownFolder = 'docs',
+
+        [Parameter(Mandatory = $False)]
+        [string]$ReadMeBeginBoundary = '## Functions',
+
+        [Parameter(Mandatory = $False)]
+        [string]$ReadMeEndBoundary = '## RoadMap'
     )
     
+    if ($Data) {
+        $Path = $Data.ModuleFolder 
+        $MarkdownFolder = $Data.ModuleMarkdownFolder
+        $ReadMeBeginBoundary = $Data.ReadMeBeginBoundary
+        $ReadMeEndBoundary = $Data.ReadMeEndBoundary
+    }
+
     try {
-        $ReadMeContents = Get-FileObject -FilePath ($Data.ModuleFolder + "\README*")
+        $ReadMeContents = Get-FileObject -FilePath ($Path + "\README*")
 
         # check to see if ReadMeBeginBoundary exists, if not append it
-        if (-not $($ReadMeContents.FileContent -match $Data.ReadMeBeginBoundary)) {
+        if (-not $($ReadMeContents.FileContent -match $ReadMeBeginBoundary)) {
             $ReadMeContents.FileContent += @"
 
 
-$($Data.ReadMeBeginBoundary)
+$($ReadMeBeginBoundary)
 
 "@
         }
-        [regex]$InsertPointRegEx = "(?(?<=$($Data.ReadMeBeginBoundary))([\w\W]*?)|($))(?(?=$($Data.ReadMeEndBoundary))(?=$($Data.ReadMeEndBoundary))|($))"
+        [regex]$InsertPointRegEx = "(?(?<=$($ReadMeBeginBoundary))([\w\W]*?)|($))(?(?=$($ReadMeEndBoundary))(?=$($ReadMeEndBoundary))|($))"
+        $ModuleMarkdownPath = Join-Path -Path $Path -ChildPath $MarkdownFolder
+        $MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($ModuleMarkdownPath)
         $ReadMeContents.FileContent = $InsertPointRegEx.Replace($ReadMeContents.FileContent, @"
 
-$($Data.MarkdownSnippetCollection)
+$MarkdownSnippetCollection
 
 "@, 1)
         $ReadMeContents | Write-File | Out-Null

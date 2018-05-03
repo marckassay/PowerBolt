@@ -28,6 +28,9 @@ function Build-PlatyPSMarkdown {
         
         [Parameter(Mandatory = $False)]
         [string]$ReadMeEndBoundary = '## Roadmap',
+
+        [Parameter(Mandatory = $False)]
+        [string]$MarkdownSnippetCollection,
         
         [switch]
         $NoReImportModule
@@ -44,6 +47,7 @@ function Build-PlatyPSMarkdown {
                 $OnlineVersionUrlPolicy,
                 $ReadMeBeginBoundary,
                 $ReadMeEndBoundary,
+                $MarkdownSnippetCollection,
                 $NoReImportModule.IsPresent
             )
         }
@@ -85,27 +89,7 @@ function Build-PlatyPSMarkdown {
             Update-MarkdownHelp $Data.ModuleMarkdownFolder
         }
 
-        [string]$Data.MarkdownSnippetCollection = Get-ChildItem -Path ($Data.ModuleMarkdownFolder + "\*.md") | ForEach-Object {
-            $FileContents = Get-Content -Path $_.FullName
-            $FunctionName = $_.BaseName
-            $MarkdownURL = $Data.OnlineVersionUrl -f $FunctionName
-
-            # replace 'online version' value in markdown help file
-            $FileContents -replace '^(online version:)[\w\W]*$', "online version: $MarkdownURL" | Set-Content -Path $_.FullName
-
-            # building content for README...
-            $TitleLine = ("### [``````$FunctionName``````]($MarkdownURL)").Trim()
-            $SynopsisLine = $FileContents[$FileContents.IndexOf('## SYNOPSIS') + 1]
-
-            # this here-string indents $SynopsisLine by four spaces so that it resides in a rectanglar background
-            @"
-
-$TitleLine
-
-    $SynopsisLine
-
-"@
-        }
+        $Data.MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($Data.ModuleMarkdownFolder, $Data.OnlineVersionUrl)
 
         $Data
     }
