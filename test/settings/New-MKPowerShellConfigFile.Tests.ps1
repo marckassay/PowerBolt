@@ -1,7 +1,7 @@
 Describe "Test New-MKPowerShellConfigFile" {
-    $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
+    
     BeforeEach {
+        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
         Push-Location
 
         Set-Location -Path $SUT_MODULE_HOME
@@ -23,7 +23,7 @@ Describe "Test New-MKPowerShellConfigFile" {
         }
 
         It "Should copy a new file to the destination folder ('MK.PowerShell')" {
-            New-MKPowerShellConfigFile -Path $TestDrive -Verbose
+            New-MKPowerShellConfigFile -Path $TestDrive
 
             Get-Item $FullName | Should -Exist 
         }
@@ -47,7 +47,7 @@ Describe "Test New-MKPowerShellConfigFile" {
                 
                 Get-Item $FullName | Should -Exist
                 
-                New-MKPowerShellConfigFile -Path $TestDrive -Verbose
+                New-MKPowerShellConfigFile -Path $TestDrive
                 
                 Assert-MockCalled WriteWarningWrapper 1
                 
@@ -76,7 +76,7 @@ Describe "Test New-MKPowerShellConfigFile" {
 
                 Get-Item $FullName | Should -Exist 
 
-                New-MKPowerShellConfigFile -Path $TestDrive -Force -Verbose
+                New-MKPowerShellConfigFile -Path $TestDrive -Force
                 # NOTE: although this mock wasnt called '1' time in this 'It', this is from the 
                 # previous 'It' block
                 Assert-MockCalled WriteWarningWrapper 1

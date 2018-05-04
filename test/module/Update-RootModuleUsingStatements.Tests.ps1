@@ -1,14 +1,14 @@
 Describe "Test Update-RootModuleUsingStatements" {
-    $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
+    
     BeforeEach {
         Push-Location
+        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
         Set-Location -Path $SUT_MODULE_HOME
 
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Force
 
-        Copy-Item -Path 'test\testresource\TestModuleA' -Destination "TestDrive:\" -Container -Recurse -Force -Verbose
+        Copy-Item -Path 'test\testresource\TestModuleA' -Destination "TestDrive:\" -Container -Recurse -Force
     }
     AfterEach {
         Remove-Module MK.PowerShell.4PS -Force

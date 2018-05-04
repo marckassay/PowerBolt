@@ -11,7 +11,7 @@ Describe "Test Update-ReadmeFromPlatyPSMarkdown" {
 
         Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Force
 
-        Copy-Item -Path 'test\testresource\TestModuleB' -Destination $TestDrive -Container -Recurse -Force -Verbose
+        Copy-Item -Path 'test\testresource\TestModuleB' -Destination $TestDrive -Container -Recurse -Force
 
         Import-Module -Name "$TestDrive\TestModuleB\TestModuleB.psd1"
     }

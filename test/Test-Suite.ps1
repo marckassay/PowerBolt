@@ -1,10 +1,14 @@
-function Test-4PS {
+function Test-Suite {
     [CmdletBinding()]
     Param(
     )
 
     begin {
+        Push-Location -StackName 'TestSuite'
         $ModulePath = Get-Module MK.PowerShell.4PS -OutVariable Module | Select-Object -Property Path
+        $ModuleFolder = $ModulePath | `
+            Split-Path -Parent
+
         if ($ModulePath) {
             $Module | Remove-Module -ErrorAction SilentlyContinue
             Remove-Module MKPowerShellDocObject -ErrorAction SilentlyContinue
@@ -12,15 +16,16 @@ function Test-4PS {
     }
 
     process {
-        Invoke-Pester -Script . -EnableExit
+        Invoke-Pester -Script "$ModuleFolder\test"
     }
 
     end {
-        $ManifestPath = $ModulePath | `
-            Split-Path -Parent | `
+        $ManifestPath = $ModuleFolder | `
             Join-Path -ChildPath '.\MK.PowerShell.4PS.psd1' -Resolve
         
         Import-Module -Name $ManifestPath
+
+        Pop-Location -StackName 'TestSuite'
     }
 }
-Test-4PS
+Test-Suite

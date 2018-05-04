@@ -1,32 +1,21 @@
+$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+Import-Module "$MODULE_FOLDER\test\TestFunctions.ps1" -Global -Force 
+
 Describe "Test Update-ManifestFunctionsToExportField" {
-    $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
+    
     BeforeEach {
-        Push-Location
-        Set-Location -Path $SUT_MODULE_HOME
-
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Force
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleA')
     }
     AfterEach {
-        Remove-Module MK.PowerShell.4PS -Force
-
-        Pop-Location
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))
     }
 
     Context "Call Update-RootModuleUsingStatements and pipe result" {
-        BeforeEach {
-            Copy-Item -Path 'test\testresource\TestModuleA' -Destination $TestDrive -Container -Recurse -Force -Verbose
-            $ManifestFile = Join-Path -Path $TestDrive -ChildPath '\TestModuleA\TestModuleA.psd1'
-            $ModuleFile = Join-Path -Path $TestDrive -ChildPath '\TestModuleA\TestModuleA.psm1'
-        }
-        AfterEach {
-
-        }
 
         It "Should overwrite the default value ('@()') for FunctionsToExport field with 'using' statements" {
-            Update-RootModuleUsingStatements -Path $ModuleFile | Update-ManifestFunctionsToExportField
+            Update-RootModuleUsingStatements -Path $__.TestModulePath | Update-ManifestFunctionsToExportField
 
-            $FunctionNames = Test-ModuleManifest $ManifestFile | `
+            $FunctionNames = Test-ModuleManifest $__.TestManifestPath | `
                 Select-Object -ExpandProperty ExportedCommands | `
                 Select-Object -ExpandProperty Values | `
                 Select-Object -ExpandProperty Name
