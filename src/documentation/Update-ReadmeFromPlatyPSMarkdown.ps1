@@ -1,3 +1,4 @@
+using module .\MKPowerShellDocObject.ps1
 function Update-ReadmeFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -39,7 +40,7 @@ $($ReadMeBeginBoundary)
         }
         [regex]$InsertPointRegEx = "(?(?<=$($ReadMeBeginBoundary))([\w\W]*?)|($))(?(?=$($ReadMeEndBoundary))(?=$($ReadMeEndBoundary))|($))"
         $ModuleMarkdownPath = Join-Path -Path $Path -ChildPath $MarkdownFolder
-        $MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($ModuleMarkdownPath)
+        $MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($ModuleMarkdownPath, '')
         $ReadMeContents.FileContent = $InsertPointRegEx.Replace($ReadMeContents.FileContent, @"
 
 $MarkdownSnippetCollection

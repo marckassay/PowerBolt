@@ -24,7 +24,7 @@ class MKPowerShellDocObject {
         [string]$OnlineVersionUrlPolicy,
         [string]$ReadMeBeginBoundary,
         [string]$ReadMeEndBoundary,
-        [string]$MarkdownSnippetCollection,
+        [object]$MarkdownSnippetCollection,
         [bool]$NoReImportModule
     ) {
         $this.ModuleName = $Name
@@ -70,7 +70,8 @@ class MKPowerShellDocObject {
         }
     }
 
-    static [string]CreateMarkdownSnippetCollection ([string]$Path, [string]$OnlineVersionUrlValue = '') {
+    # TODO: need to have this functions arity better fitted for options
+    static [string]CreateMarkdownSnippetCollection ([string]$Path, [string]$OnlineVersionUrlValue) {
         
         $_MarkdownSnippetCollection = Get-ChildItem -Path ($Path + "\*.md") | ForEach-Object {
             $FileContents = Get-Content -Path $_.FullName
