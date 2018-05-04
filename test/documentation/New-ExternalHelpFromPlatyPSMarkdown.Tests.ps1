@@ -7,7 +7,7 @@ Describe "Test New-ExternalHelpFromPlatyPSMarkdown" {
         # MK.PowerShell.4PS will copy config file to this path:
         $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
         
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Verbose -Force
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Force
 
         Copy-Item -Path 'test\testresource\TestModuleB' -Destination $TestDrive -Container -Recurse -Force -Verbose
 

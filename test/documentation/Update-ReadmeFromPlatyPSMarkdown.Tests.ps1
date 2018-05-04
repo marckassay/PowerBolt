@@ -1,13 +1,15 @@
 Describe "Test Update-ReadmeFromPlatyPSMarkdown" {
     BeforeAll {
         $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
         Set-Location -Path $SUT_MODULE_HOME
- 
+
+        # if this is the first test, module may already be installed, if so remove it.
+        Get-Module MK.PowerShell.4PS | Remove-Module -ErrorAction SilentlyContinue
+
         # MK.PowerShell.4PS will copy config file to this path:
         $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
-        
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Verbose -Force
+
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Force
 
         Copy-Item -Path 'test\testresource\TestModuleB' -Destination $TestDrive -Container -Recurse -Force -Verbose
 

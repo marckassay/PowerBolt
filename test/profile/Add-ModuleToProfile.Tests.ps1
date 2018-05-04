@@ -6,7 +6,7 @@ Describe "Test Add-ModuleToProfile" {
 
         Set-Location -Path $SUT_MODULE_HOME
 
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Force
 
         Copy-Item -Path 'test\testresource\TestModuleA' -Destination $TestDrive -Container -Recurse -Force -Verbose
         $TestProfilePath = New-Item -Path $TestDrive -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName

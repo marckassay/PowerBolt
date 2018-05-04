@@ -9,7 +9,7 @@ Describe "Test Set-MKPowerShellSetting" {
 
         $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
         
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Verbose -Force
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Force
     }
     AfterAll {
         Remove-Module MK.PowerShell.4PS -Force

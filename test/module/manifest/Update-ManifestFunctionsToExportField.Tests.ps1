@@ -5,7 +5,7 @@ Describe "Test Update-ManifestFunctionsToExportField" {
         Push-Location
         Set-Location -Path $SUT_MODULE_HOME
 
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Force
     }
     AfterEach {
         Remove-Module MK.PowerShell.4PS -Force

@@ -6,7 +6,7 @@ Describe "Test New-MKPowerShellConfigFile" {
 
         Set-Location -Path $SUT_MODULE_HOME
 
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Verbose -Force
+        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Force
     }
     AfterEach {
         Remove-Module MK.PowerShell.4PS -Force
@@ -40,7 +40,7 @@ Describe "Test New-MKPowerShellConfigFile" {
                     Select-Object -ExpandProperty FileList | `
                     ForEach-Object {if ($_ -like '*MK.PowerShell-config.ps1') {$_}} -OutVariable ModuleConfigFile
                 New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
-                Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName -Verbose 
+                Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName 
 
                 ### TEST
                 Mock WriteWarningWrapper { $true }
@@ -69,7 +69,7 @@ Describe "Test New-MKPowerShellConfigFile" {
                     Select-Object -ExpandProperty FileList | `
                     ForEach-Object {if ($_ -like '*MK.PowerShell-config.ps1') {$_}} -OutVariable ModuleConfigFile
                 New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
-                Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName -Verbose 
+                Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName 
 
                 ### TEST
                 Mock WriteWarningWrapper { $true }
