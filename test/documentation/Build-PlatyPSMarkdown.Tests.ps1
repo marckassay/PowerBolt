@@ -1,24 +1,13 @@
+using module ..\.\TestFunctions.psm1
+$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+
 Describe "Test Build-PlatyPSMarkdown" {
     BeforeAll {
-        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
-        Set-Location -Path $SUT_MODULE_HOME
-
-        $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
-        
-        Copy-Item -Path 'test\testresource\TestModuleB' -Destination $TestDrive -Container -Recurse -Force
-        # remove docs since ths test files is generating them.
-        Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Force
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleB')
     }
     
     AfterAll {
-        Remove-Module MK.PowerShell.4PS -Force
-        Remove-Module MKPowerShellDocObject -Force
-        
-        Get-Module TestModuleB | Remove-Module
-
-        Set-Alias sl Set-Location -Scope Global
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleB', 'TestFunctions'))
     }
 
     Context "As a non-piped call, with a given Path value to create files and then to update files 
@@ -26,8 +15,9 @@ Describe "Test Build-PlatyPSMarkdown" {
 
         $Files = "Get-AFunction.md", "Get-BFunction.md", "Get-CFunction.md", "Set-CFunction.md" | `
             Sort-Object
-
-        Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB"
+        # if this functions re-imports, it will import into a different scope or session with will pass
+        # but warn and have errors
+        Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB" -NoReImportModule
 
         $FileNames = Get-ChildItem "$TestDrive\TestModuleB\docs" -Recurse | `
             ForEach-Object {$_.Name} | `
@@ -52,7 +42,7 @@ Describe "Test Build-PlatyPSMarkdown" {
             @{ Index = 7; Expected = "# Get-AFunction" }
             @{ Index = 8; Expected = "" }
             @{ Index = 9; Expected = "## SYNOPSIS" }
-            @{ Index = 10; Expected = "{{Fill in the Synopsis}}" }
+            @{ Index = 10; Expected = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam." }
         ) {
             Param($Index, $Expected)
             $Actual = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md")[$Index]
@@ -62,7 +52,7 @@ Describe "Test Build-PlatyPSMarkdown" {
         # second consective call to Build-PlatyPSMarkdown so that Update- will be called.  these 
         # calls to Build-PlatyPSMarkdown must be in the same Context scope because Pester restores 
         # drive to same state as it was in the Describe scope.
-        Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB"
+        # Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB"
 
         # TODO: unable to spy on any functions
         # Assert-MockCalled Update-MarkdownHelp -Times 1

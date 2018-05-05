@@ -10,12 +10,12 @@ class TestFunctions {
         # MK.PowerShell.4PS will copy config file to this path:
         $ConfigFilePath = "TestDrive:\User\App\Temp\MK.PowerShell-config.ps1"
         
-        Get-Item '*.psd1' | Import-Module -ArgumentList $ConfigFilePath
+        Get-Item '*.psd1' | Import-Module -ArgumentList $ConfigFilePath -Global -Force
 
         if ($TestModuleName -ne '') {
             Copy-Item -Path ".\test\testresource\$TestModuleName" -Destination 'TestDrive:\' -Container -Recurse
 
-            Get-Item "TestDrive:\$TestModuleName\$TestModuleName.psd1" | Import-Module
+            Get-Item "TestDrive:\$TestModuleName\$TestModuleName.psd1" | Import-Module -Global -Force
 
             return @{
                 ConfigFilePath   = $ConfigFilePath
@@ -32,5 +32,7 @@ class TestFunctions {
     
     static [void]DescribeTeardown([string[]]$ModuleName) {
         Get-Module -Name $ModuleName | Remove-Module -Force -ErrorAction SilentlyContinue
+
+        Set-Alias sl Set-Location -Scope Global
     }
 }

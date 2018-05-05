@@ -1,3 +1,5 @@
+using module .\.\MKPowerShellDocObject.psm1
+
 function Build-PlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param

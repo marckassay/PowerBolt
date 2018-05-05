@@ -1,4 +1,3 @@
-using module .\MKPowerShellDocObject.ps1
 function Update-ReadmeFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param

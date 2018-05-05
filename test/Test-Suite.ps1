@@ -1,11 +1,13 @@
+# TODO: needs to execute when $MKPowerShellModuleName is not installed too.
 function Test-Suite {
     [CmdletBinding()]
     Param(
+        $MKPowerShellModuleName
     )
 
     begin {
         Push-Location -StackName 'TestSuite'
-        $ModulePath = Get-Module MK.PowerShell.4PS -OutVariable Module | Select-Object -Property Path
+        $ModulePath = Get-Module $MKPowerShellModuleName -OutVariable Module | Select-Object -Property Path
         $ModuleFolder = $ModulePath | `
             Split-Path -Parent
 
@@ -21,11 +23,11 @@ function Test-Suite {
 
     end {
         $ManifestPath = $ModuleFolder | `
-            Join-Path -ChildPath '.\MK.PowerShell.4PS.psd1' -Resolve
+            Join-Path -ChildPath "$MKPowerShellModuleName.psd1" -Resolve
         
         Import-Module -Name $ManifestPath
 
         Pop-Location -StackName 'TestSuite'
     }
 }
-Test-Suite
+Test-Suite -MKPowerShellModuleName 'MK.PowerShell.4PS'

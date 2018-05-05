@@ -1,6 +1,5 @@
 using module .\src\documentation\Build-Documentation.ps1
 using module .\src\documentation\Build-PlatyPSMarkdown.ps1
-using module .\src\documentation\MKPowerShellDocObject.ps1
 using module .\src\documentation\New-ExternalHelpFromPlatyPSMarkdown.ps1
 using module .\src\documentation\Update-ReadmeFromPlatyPSMarkdown.ps1
 using module .\src\error\Get-LatestError.ps1
@@ -18,7 +17,7 @@ Param(
     [Parameter(Mandatory = $False)]
     [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.ps1")
 )
- 
+
 $script:MKPowerShellConfigFilePath = $ConfigFilePath
 
 Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath 
