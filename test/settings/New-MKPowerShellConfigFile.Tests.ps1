@@ -1,19 +1,15 @@
+using module ..\.\TestFunctions.psm1
+$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+
 Describe "Test New-MKPowerShellConfigFile" {
+    BeforeAll {
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleA')
+    }
     
-    BeforeEach {
-        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-        Push-Location
-
-        Set-Location -Path $SUT_MODULE_HOME
-
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Force
+    AfterAll {
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))
     }
-    AfterEach {
-        Remove-Module MK.PowerShell.4PS -Force
-
-        Pop-Location
-    }
-
+    
     Context "Call New-MKPowerShellConfigFile when no file exists" {
         BeforeEach {
             $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'MK.PowerShell-config.ps1'

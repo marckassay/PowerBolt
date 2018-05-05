@@ -1,3 +1,5 @@
+using module .\.\MKPowerShellDocObject.psm1
+
 function New-ExternalHelpFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -15,22 +17,30 @@ function New-ExternalHelpFromPlatyPSMarkdown {
         [string]$OutputFolder = 'en-US'
     )
 
-    if ($Data) {
-        $Path = $Data.ModuleFolder 
-        $MarkdownFolder = $Data.ModuleMarkdownFolder
-        $OutputFolder = $Data.Locale
+    begin {
+        if (-not $Data) {
+            $Data = [MKPowerShellDocObject]::new(
+                $Path,
+                $MarkdownFolder,
+                $OutputFolder
+            )
+        }
     }
 
-    $MarkdownFolder = Join-Path -Path $Path -ChildPath $MarkdownFolder
+    process {
+        $MarkdownFolder = Join-Path -Path $Data.Path -ChildPath $Data.MarkdownFolder
 
-    $HelpLocaleFolder = Join-Path -Path $Path -ChildPath $OutputFolder
+        $HelpLocaleFolder = Join-Path -Path $Data.Path -ChildPath $Data.Locale
 
-    if ((Test-Path -Path $HelpLocaleFolder -PathType Container) -eq $False) {
-        New-Item -Path $HelpLocaleFolder -ItemType Container
+        if ((Test-Path -Path $HelpLocaleFolder -PathType Container) -eq $False) {
+            New-Item -Path $HelpLocaleFolder -ItemType Container | Out-Null
+        }
+
+        New-ExternalHelp -Path $MarkdownFolder -OutputPath $HelpLocaleFolder -Force | `
+            Out-Null
     }
 
-    New-ExternalHelp -Path $MarkdownFolder -OutputPath $HelpLocaleFolder -Force | `
-        Out-Null
-    
-    $Data
+    end {
+        Write-Output $Data
+    }
 }

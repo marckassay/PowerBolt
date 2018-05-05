@@ -1,22 +1,17 @@
+using module ..\.\TestFunctions.psm1
+$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+
 Describe "Test Add-ModuleToProfile" {
-    
-    BeforeEach {
-        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-        Push-Location
+    BeforeAll {
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleA')
 
-        Set-Location -Path $SUT_MODULE_HOME
-
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Force
-
-        Copy-Item -Path 'test\testresource\TestModuleA' -Destination $TestDrive -Container -Recurse -Force
         $TestProfilePath = New-Item -Path $TestDrive -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName
     }
-    AfterEach {
-        Remove-Module MK.PowerShell.4PS -Force
-        
-        Pop-Location
+    
+    AfterAll {
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))
     }
-
+    
     Context "Appending by importing module to profile" {
 
         It "Should add to profile" {
@@ -31,7 +26,7 @@ Describe "Test Add-ModuleToProfile" {
         }
         
         It "Should append to profile" {
-            Set-Content -Path $TestProfilePath -Value ("Import-Module C:\temp\non\existing\NoModule") -NoNewline:$NoNewline.IsPresent
+            Set-Content -Path $TestProfilePath -Value ("Import-Module C:\temp\non\existing\NoModule") -NoNewline
             
             [string]$Before = Get-Content -Path $TestProfilePath -Raw
             $Before | Should -Match '^Import-Module C\:\\temp\\non\\existing\\NoModule$'

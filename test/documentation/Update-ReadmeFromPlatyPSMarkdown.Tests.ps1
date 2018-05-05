@@ -1,29 +1,15 @@
+using module ..\.\TestFunctions.psm1
+$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+
 Describe "Test Update-ReadmeFromPlatyPSMarkdown" {
     BeforeAll {
-        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-        Set-Location -Path $SUT_MODULE_HOME
-
-        # if this is the first test, module may already be installed, if so remove it.
-        Get-Module MK.PowerShell.4PS | Remove-Module -ErrorAction SilentlyContinue
-
-        # MK.PowerShell.4PS will copy config file to this path:
-        $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
-
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Force
-
-        Copy-Item -Path 'test\testresource\TestModuleB' -Destination $TestDrive -Container -Recurse -Force
-
-        Import-Module -Name "$TestDrive\TestModuleB\TestModuleB.psd1"
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleB')
     }
     
     AfterAll {
-        Get-Module MK.PowerShell.4PS | Remove-Module
-        Get-Module MKPowerShellDocObject | Remove-Module
-        Get-Module TestModuleB | Remove-Module
-
-        Set-Alias sl Set-Location -Scope Global
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleB', 'TestFunctions'))
     }
-
+    
     Context "As a non-piped call, with a given Path modify existing empty README.md file." {
 
         New-Item -Path "$TestDrive\TestModuleB\README.md" -ItemType File

@@ -1,10 +1,12 @@
 using module ..\.\TestFunctions.psm1
 $MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
-Describe "Test Build-PlatyPSMarkdown" {
+Describe "Test Build-Documentation" {
     BeforeAll {
         $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleB')
         
+        New-Item -Path "$TestDrive\TestModuleB\README.md" -ItemType File
+
         # this test file needs the .git repo but not the docs folder
         Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
     }
@@ -13,15 +15,18 @@ Describe "Test Build-PlatyPSMarkdown" {
         [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleB', 'TestFunctions'))
     }
 
-    Context "As a non-piped call, with a given Path value to create files and then to update files 
-    with a second call." {
+    Context "Given a value for Path, this function internally contains the following pipeline: Build-PlatyPSMarkdown | New-ExternalHelpFromPlatyPSMarkdown | Update-ReadmeFromPlatyPSMarkdown" {
 
         $Files = "Get-AFunction.md", "Get-BFunction.md", "Get-CFunction.md", "Set-CFunction.md" | `
             Sort-Object
-            
+        
+        $BeforeReadMeContents = Get-Content "$TestDrive\TestModuleB\README.md" 
+
         # NOTE: if this functions re-imports, it will import into a different scope or session.  
         # Although it will still pass, it will write warnings and errors
-        Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB" -NoReImportModule
+        Build-Documentation -Path "$TestDrive\TestModuleB" -NoReImportModule
+
+        $AfterReadMeContents = Get-Content "$TestDrive\TestModuleB\README.md" 
 
         $FileNames = Get-ChildItem "$TestDrive\TestModuleB\docs" -Recurse | `
             ForEach-Object {$_.Name} | `
@@ -33,6 +38,10 @@ Describe "Test Build-PlatyPSMarkdown" {
 
         It "Should generate exactly filenames." {
             $FileNames | Should -BeExactly $Files
+        }
+
+        It "Should modified ReadMe file." {
+            $AfterReadMeContents | Should -Not -BeExactly $BeforeReadMeContents
         }
 
         It "Should modify Get-AFunction.md file at line number <Index> with: {<Expected>} " -TestCases @(
@@ -53,12 +62,23 @@ Describe "Test Build-PlatyPSMarkdown" {
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
         }
 
-        # second consective call to Build-PlatyPSMarkdown so that Update- will be called.  these 
-        # calls to Build-PlatyPSMarkdown must be in the same Context scope because Pester restores 
-        # drive to same state as it was in the Describe scope.
-        # Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB"
-
-        # TODO: unable to spy on any functions
-        # Assert-MockCalled Update-MarkdownHelp -Times 1
+        # TODO: comment this out, since this will need to be in a different context.  context of updating
+        # existing files
+        <# 
+        It "Should modify README.md file at line number <Index> with: {<Expected>} " -TestCases @(
+            @{ Index = 0; Expected = "" },
+            @{ Index = 1; Expected = "" },
+            @{ Index = 2; Expected = "## Functions" },
+            @{ Index = 3; Expected = "" },
+            @{ Index = 4; Expected = "### [```Get-AFunction```]()" }
+            @{ Index = 5; Expected = "" }
+            @{ Index = 6; Expected = "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam." }
+            @{ Index = 7; Expected = " " }
+            @{ Index = 8; Expected = "### [```Get-BFunction```]()" }
+        ) {
+            Param($Index, $Expected)
+            $Actual = (Get-Content "$TestDrive\TestModuleB\README.md")[$Index]
+            $Actual.Replace('```', '`') | Should -BeExactly $Expected
+        } #>
     }
 }

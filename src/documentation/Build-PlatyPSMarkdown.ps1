@@ -22,6 +22,7 @@ function Build-PlatyPSMarkdown {
         [Parameter(Mandatory = $False)]
         [string]$OnlineVersionUrlTemplate,
 
+        [Parameter(Mandatory = $False)]
         [ValidateSet("Auto", "Omit")]
         [string]$OnlineVersionUrlPolicy = 'Auto',
         
@@ -55,7 +56,7 @@ function Build-PlatyPSMarkdown {
         }
     }
 
-    end {
+    process {
         if ($Data.OnlineVersionUrlPolicy -eq 'Auto') {
             if ((Get-Content ($Data.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
                 $Data.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/master/docs/{0}.md"
@@ -77,22 +78,24 @@ function Build-PlatyPSMarkdown {
         }
 
         if ($PredicateA -or $PredicateB) {
-            New-Item -Path $Data.ModuleMarkdownFolder -ItemType Container -Force
+            New-Item -Path $Data.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
 
             if ($Data.NoReImportModule -eq $False) {
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
-            New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder
+            New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
         }
         else {
             if ($Data.NoReImportModule -eq $False) {
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
-            Update-MarkdownHelp $Data.ModuleMarkdownFolder
+            Update-MarkdownHelp $Data.ModuleMarkdownFolder | Out-Null
         }
 
         $Data.MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($Data.ModuleMarkdownFolder, $Data.OnlineVersionUrl)
+    }
 
-        $Data
+    end {
+        Write-Output $Data
     }
 }

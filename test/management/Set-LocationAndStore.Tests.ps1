@@ -1,21 +1,15 @@
+using module ..\.\TestFunctions.psm1
+$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+
 Describe "Test Set-LocationAndStore" {
     BeforeAll {
-        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
-        Push-Location -StackName PriorTest1
-
-        Set-Location -Path $SUT_MODULE_HOME
-
-        $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
-        
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Force
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleB')
     }
+    
     AfterAll {
-        Remove-Module MK.PowerShell.4PS -Force
-        Set-Alias sl Set-Location -Scope Global
-        Pop-Location -StackName PriorTest1
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleB', 'TestFunctions'))
     }
-
+    
     Context "When 'TurnOnRememberLastLocation' is set to true" {
         
         It "Should (by default) set the alias of 'sl' to Set-LocationAndStore on PowerShell startup" {
@@ -35,7 +29,7 @@ Describe "Test Set-LocationAndStore" {
 
             Set-LocationAndStore -Path $Path
             Get-Location | Should -Be $Path
-            $ConfigFilePath | Should -FileContentMatch ([regex]::Escape("LastLocation = '$Path'"))
+            $__.ConfigFilePath | Should -FileContentMatch ([regex]::Escape("LastLocation = '$Path'"))
         }
     }
 }

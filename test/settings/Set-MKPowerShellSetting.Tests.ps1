@@ -1,22 +1,15 @@
+using module ..\.\TestFunctions.psm1
+$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+
 Describe "Test Set-MKPowerShellSetting" {
-
     BeforeAll {
-        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
-        Push-Location
-
-        Set-Location -Path $SUT_MODULE_HOME
-
-        $ConfigFilePath = "$TestDrive\MK.PowerShell\MK.PowerShell-config.ps1"
-        
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -ArgumentList $ConfigFilePath -Force
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, '')
     }
+    
     AfterAll {
-        Remove-Module MK.PowerShell.4PS -Force
-
-        Pop-Location
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestFunctions'))
     }
-
+    
     Context "Call Set-MKPowerShellSetting" {
 
         It "Should set field of '<Name>' to value of '<Value>'" -TestCases @(
@@ -25,7 +18,7 @@ Describe "Test Set-MKPowerShellSetting" {
         ) {
             Param($Name, $Value)
             Set-MKPowerShellSetting -Name $Name -Value $Value
-            $ConfigFilePath | Should -FileContentMatch ([regex]::Escape("$Name = '$Value'"))
+            $__.ConfigFilePath | Should -FileContentMatch ([regex]::Escape("$Name = '$Value'"))
         }
     }
 }

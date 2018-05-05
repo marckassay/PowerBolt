@@ -1,3 +1,5 @@
+using module .\.\MKPowerShellDocObject.psm1
+
 function Update-ReadmeFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -18,36 +20,43 @@ function Update-ReadmeFromPlatyPSMarkdown {
         [string]$ReadMeEndBoundary = '## RoadMap'
     )
     
-    if ($Data) {
-        $Path = $Data.ModuleFolder 
-        $MarkdownFolder = $Data.ModuleMarkdownFolder
-        $ReadMeBeginBoundary = $Data.ReadMeBeginBoundary
-        $ReadMeEndBoundary = $Data.ReadMeEndBoundary
+    begin {
+        if (-not $Data) {
+            $Data = [MKPowerShellDocObject]::new(
+                $Path,
+                $MarkdownFolder,
+                $ReadMeBeginBoundary,
+                $ReadMeEndBoundary
+            )
+        }
     }
 
-    try {
-        $ReadMeContents = Get-FileObject -FilePath ($Path + "\README*")
+    end {
+        try {
+            $ReadMePath = Join-Path -Path $Data.Path -ChildPath "\README*" -Resolve
+            [string]$ReadMeContents = Get-Content -Path $ReadMePath -Raw
 
-        # check to see if ReadMeBeginBoundary exists, if not append it
-        if (-not $($ReadMeContents.FileContent -match $ReadMeBeginBoundary)) {
-            $ReadMeContents.FileContent += @"
+            # check to see if ReadMeBeginBoundary exists, if not append it
+            if (-not $($ReadMeContents -match $Data.ReadMeBeginBoundary)) {
+                $ReadMeContents += @"
 
 
-$($ReadMeBeginBoundary)
+$($Data.ReadMeBeginBoundary)
 
 "@
-        }
-        [regex]$InsertPointRegEx = "(?(?<=$($ReadMeBeginBoundary))([\w\W]*?)|($))(?(?=$($ReadMeEndBoundary))(?=$($ReadMeEndBoundary))|($))"
-        $ModuleMarkdownPath = Join-Path -Path $Path -ChildPath $MarkdownFolder
-        $MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($ModuleMarkdownPath, '')
-        $ReadMeContents.FileContent = $InsertPointRegEx.Replace($ReadMeContents.FileContent, @"
+            }
+            [regex]$InsertPointRegEx = "(?(?<=$($Data.ReadMeBeginBoundary))([\w\W]*?)|($))(?(?=$($Data.ReadMeEndBoundary))(?=$($Data.ReadMeEndBoundary))|($))"
+            $ModuleMarkdownPath = Join-Path -Path $Data.Path -ChildPath $Data.MarkdownFolder
+            $MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($ModuleMarkdownPath, $Data.OnlineVersionUrl)
+            $ReadMeContents = $InsertPointRegEx.Replace($ReadMeContents, @"
 
 $MarkdownSnippetCollection
 
 "@, 1)
-        $ReadMeContents | Write-File | Out-Null
-    }
-    catch {
-        Write-Error "Unable to update README file."
+            Set-Content -Path $ReadMePath -Value $ReadMeContents | Out-Null
+        }
+        catch {
+            Write-Error "Unable to update README file."
+        }
     }
 }

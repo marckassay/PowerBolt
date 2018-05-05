@@ -1,21 +1,15 @@
+using module ..\.\TestFunctions.psm1
+$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+
 Describe "Test Update-RootModuleUsingStatements" {
+    BeforeAll {
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleA')
+    }
     
-    BeforeEach {
-        Push-Location
-        $SUT_MODULE_HOME = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-
-        Set-Location -Path $SUT_MODULE_HOME
-
-        Import-Module -Name '.\MK.PowerShell.4PS.psd1' -Force
-
-        Copy-Item -Path 'test\testresource\TestModuleA' -Destination "TestDrive:\" -Container -Recurse -Force
+    AfterAll {
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))
     }
-    AfterEach {
-        Remove-Module MK.PowerShell.4PS -Force
-        
-        Pop-Location
-    }
-
+    
     Context "Recurse src directory for correct function files" {
 
         It "Should modify empty root module 'using' statments" {

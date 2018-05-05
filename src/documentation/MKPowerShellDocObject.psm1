@@ -15,6 +15,35 @@ class MKPowerShellDocObject {
     [string]$ModuleFolder
     [string]$ModuleMarkdownFolder
 
+    # design for Update-ReadmeFromPlatyPSMarkdown
+    MKPowerShellDocObject(
+        [string]$Path,
+        [string]$MarkdownFolder,
+        [string]$ReadMeBeginBoundary,
+        [string]$ReadMeEndBoundary
+    ) {
+        $this.Path = Resolve-Path $Path
+        $this.MarkdownFolder = $MarkdownFolder
+        $this.ReadMeBeginBoundary = $ReadMeBeginBoundary
+        $this.ReadMeEndBoundary = $ReadMeEndBoundary
+        
+        $this.AssignRemainingFields()
+    }
+
+    # design for New-ExternalHelpFromPlatyPSMarkdown
+    MKPowerShellDocObject(
+        [string]$Path,
+        [string]$MarkdownFolder,
+        [string]$Locale
+    ) {
+        $this.Path = Resolve-Path $Path
+        $this.MarkdownFolder = $MarkdownFolder
+        $this.Locale = $Locale
+        
+        $this.AssignRemainingFields()
+    }
+
+    # design for Build-Documentation and Build-PlatyPSMarkdown
     MKPowerShellDocObject(
         [string]$Name,
         [string]$Path,
