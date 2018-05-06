@@ -12,6 +12,7 @@ using module .\src\settings\Get-MKPowerShellSetting.ps1
 using module .\src\settings\New-MKPowerShellConfigFile.ps1
 using module .\src\settings\Set-MKPowerShellSetting.ps1
 using module .\src\management\Start-MKPowerShell.ps1
+using module .\src\publish\Publish-ModuleToNuGetGallery.ps1
 
 Param(
     [Parameter(Mandatory = $False)]
