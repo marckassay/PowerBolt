@@ -10,15 +10,19 @@ Describe "Test Set-MKPowerShellSetting" {
         [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestFunctions'))
     }
     
-    Context "Call Set-MKPowerShellSetting" {
+    Context "Setting TurnOnRememberLastLocation" {
 
-        It "Should set field of '<Name>' to value of '<Value>'" -TestCases @(
-            @{ Name = "TurnOnAvailableUpdates"; Value = "false" },
-            @{ Name = "LastLocation"; Value = "c:\" }
+        Mock Restore-RememberLastLocation {} -ModuleName MK.PowerShell.4PS
+
+        It "Should set TurnOnRememberLastLocation to '<Value>' in config file" -TestCases @(
+            @{ Value = $true}
+            @{ Value = $false}
         ) {
-            Param($Name, $Value)
-            Set-MKPowerShellSetting -Name $Name -Value $Value
-            $__.ConfigFilePath | Should -FileContentMatch ([regex]::Escape("$Name = '$Value'"))
+            Param($Value)
+
+            Set-MKPowerShellSetting -Name 'TurnOnRememberLastLocation' -Value $Value
+            $__.ConfigFilePath | Should -FileContentMatch "TurnOnRememberLastLocation = '$Value'"
+            Assert-MockCalled Restore-RememberLastLocation -ModuleName MK.PowerShell.4PS -Times 1
         }
     }
 }

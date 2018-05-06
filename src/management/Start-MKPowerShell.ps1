@@ -14,16 +14,5 @@ function Start-MKPowerShell {
         Copy-Item -Path "$PSScriptRoot\..\..\resources\MK.PowerShell-config.ps1" -Destination $ConfigFileParentPath -Verbose -PassThru
     }
 
-    if ((Get-MKPowerShellSetting -Name 'TurnOnRememberLastLocation') -eq $true) {
-        Set-Alias sl Set-LocationAndStore -Scope Global -Force
-        Write-Host "'sl' alias is now mapped to 'Set-LocationAndStore'." -ForegroundColor Green
-
-        $LastLocation = Get-MKPowerShellSetting -Name 'LastLocation'
-        if ($LastLocation -ne '') {
-            Set-LocationAndStore -Path $LastLocation
-        }
-        else {
-            Set-LocationAndStore -Path $(Get-Location)
-        }
-    }
+    Restore-RememberLastLocation -ExecutePostAction
 }

@@ -29,7 +29,7 @@ function Publish-ModuleToNuGetGallery {
     }
     
     # setup deploy directory
-    New-Item $DestinationDirectory -ItemType Directory -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)| `
+    New-Item $DestinationDirectory -ItemType Directory -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent) | `
         Out-Null
     
     # setup deploy directory

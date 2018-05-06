@@ -8,7 +8,7 @@ class TestFunctions {
             Remove-Module -ErrorAction SilentlyContinue
 
         # MK.PowerShell.4PS will copy config file to this path:
-        $ConfigFilePath = "TestDrive:\User\App\Temp\MK.PowerShell-config.ps1"
+        $ConfigFilePath = "TestDrive:\User\Bob\AppData\Local\MK.PowerShell.4PS\MK.PowerShell-config.ps1"
         
         Get-Item '*.psd1' | Import-Module -ArgumentList $ConfigFilePath -Global -Force
 

@@ -54,11 +54,15 @@ function Update-RootModuleUsingStatements {
         Get-Item -Include $Include -PipelineVariable File | `
         Get-Content | `
         ForEach-Object {
+        $NoExportMatches = [regex]::Matches($_, '(?<=NoExport: )[\w]*[-][\w]*')
         $FunctionMatches = [regex]::Matches($_, '(?<=function )[\w]*[-][\w]*')
         for ($i = 0; $i -lt $FunctionMatches.Count; $i++) {
-            @{
-                FilePath     = $File
-                FunctionName = $FunctionMatches[$i].Value
+            $FunctionName = $FunctionMatches[$i].Value
+            if ($NoExportMatches.Value -notcontains $FunctionName) {
+                @{
+                    FilePath     = $File
+                    FunctionName = $FunctionName
+                }
             }
         }
     }
