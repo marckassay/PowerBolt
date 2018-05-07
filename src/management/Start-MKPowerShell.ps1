@@ -14,5 +14,6 @@ function Start-MKPowerShell {
         Copy-Item -Path "$PSScriptRoot\..\..\resources\MK.PowerShell-config.ps1" -Destination $ConfigFileParentPath -Verbose -PassThru
     }
 
-    Restore-RememberLastLocation -ExecutePostAction
+    Restore-RememberLastLocation -Initialize
+    Restore-QuickRestartSetting -Initialize
 }
