@@ -52,7 +52,7 @@ function Update-RootModuleUsingStatements {
 
     $TargetFunctionsToExport = Get-ChildItem -Path $TargetDirectory -Include $Include -Exclude $Exclude -Recurse | `
         Get-Item -Include $Include -PipelineVariable File | `
-        Get-Content | `
+        Get-Content -Raw | `
         ForEach-Object {
         $NoExportMatches = [regex]::Matches($_, '(?<=NoExport: )[\w]*[-][\w]*')
         $FunctionMatches = [regex]::Matches($_, '(?<=function )[\w]*[-][\w]*')
