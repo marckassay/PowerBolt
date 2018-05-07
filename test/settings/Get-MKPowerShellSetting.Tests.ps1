@@ -3,7 +3,7 @@ $MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
 Describe "Test Get-MKPowerShellSetting" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER,'')
+        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, '')
     }
     
     AfterAll {
@@ -18,6 +18,11 @@ Describe "Test Get-MKPowerShellSetting" {
 
             $Setting = Get-MKPowerShellSetting -Name 'TurnOnRememberLastLocation'
             $Setting | Should -Be $true
+
+            $Setting = Get-MKPowerShellSetting -Name 'BackupLocations'
+            $Setting | Should -BeOfType Hashtable
+            $Setting.Keys -contains 'Path' | Should -Be $true 
+            $Setting.Keys -contains 'Destination' | Should -Be $true 
         }
     }
 }
