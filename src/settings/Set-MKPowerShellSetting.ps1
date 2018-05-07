@@ -25,19 +25,16 @@ function Set-MKPowerShellSetting {
     end {
         # cast to bool, make all chars lowercase...
         if ($Value -match "^(T|t)rue|(F|f)alse$") {
-            $StringValue = $Value.ToLower()
+            $Value = $Value.ToLower()
         }
-        else {
-            $StringValue = $Value
-        }
-        
-        $EntryValue = @"
-    $Name = '$StringValue'
-"@
+       
+        $Script:MKPowerShellConfig = Get-Content -Path $ConfigFilePath | `
+            ConvertFrom-Json -AsHashtable
+        $Script:MKPowerShellConfig[$Name] = $Value
 
-        $ModifiedContent = (Get-Content -Path $ConfigFilePath) | `
-            ForEach-Object {$_ -Replace "^\s*$Name(\s*\=\s*)[\w\W]*", $EntryValue}
-        Set-Content -Path $ConfigFilePath -Value $ModifiedContent -PassThru:$PassThru.IsPresent
+        $Script:MKPowerShellConfig | `
+            ConvertTo-Json | `
+            Set-Content -Path $ConfigFilePath -PassThru:$PassThru.IsPresent
 
         switch ($Name) {
             TurnOnRememberLastLocation { Restore-RememberLastLocation }

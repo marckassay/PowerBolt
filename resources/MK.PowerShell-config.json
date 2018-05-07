@@ -1,0 +1,14 @@
+{
+  "LastLocation": "",
+  "TurnOnAvailableUpdates": "true",
+  "BackupLocations": {
+    "Destination": "'E:\\Temp\\User\\Bob\\CloudDrive\\PowerShell'",
+    "Path": [
+      "'E:\\marckassay\\MK.PowerShell\\MK.PowerShell.4PS\\resources\\MK.PowerShell-config.ps1','E:\\mk\\temp'"
+    ]
+  },
+  "TurnOnQuickRestart": "true",
+  "TurnOnRememberLastLocation": "true",
+  "TurnOnHistoryRecording": "true",
+  "NuGetApiKey": ""
+}

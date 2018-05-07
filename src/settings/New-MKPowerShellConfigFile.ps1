@@ -3,7 +3,7 @@ function WriteWarningWrapper($FullName) {
 The following file already exists:`r`n
 $FullName`r`n
 
-If you wish to overwrite this file with the default 'MK.PowerShell-config.ps1' file, call this function with the -Force switch. 
+If you wish to overwrite this file with the default 'MK.PowerShell-config.json' file, call this function with the -Force switch. 
 "@
 }
 
@@ -24,7 +24,7 @@ function New-MKPowerShellConfigFile {
         $Confirm
     )
 
-    $FullName = Join-Path -Path $Path -ChildPath '\MK.PowerShell\MK.PowerShell-config.ps1'
+    $FullName = Join-Path -Path $Path -ChildPath '\MK.PowerShell\MK.PowerShell-config.json'
     
     if (((Test-Path -Path $FullName) -eq $false) -or ($Force.IsPresent -eq $True)) {
         $LeafBase = Join-Path -Path $Path -ChildPath '\MK.PowerShell\'
@@ -34,7 +34,7 @@ function New-MKPowerShellConfigFile {
 
         Get-Module MK.PowerShell.4PS | `
             Select-Object -ExpandProperty FileList | `
-            ForEach-Object {if ($_ -like '*MK.PowerShell-config.ps1') {$_}} -OutVariable ModuleConfigFile
+            ForEach-Object {if ($_ -like '*MK.PowerShell-config.json') {$_}} -OutVariable ModuleConfigFile
 
         Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName -PassThru:$PassThru.IsPresent -Force:$Force.IsPresent  -Confirm:$Confirm.IsPresent
     }

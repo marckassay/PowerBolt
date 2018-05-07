@@ -21,8 +21,10 @@ Describe "Test Set-MKPowerShellSetting" {
             Param($Value)
 
             Set-MKPowerShellSetting -Name 'TurnOnRememberLastLocation' -Value $Value
+            
+            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
+            $MKPowerShellConfig["TurnOnRememberLastLocation"]| Should -Be $true
 
-            $__.ConfigFilePath | Should -FileContentMatch "TurnOnRememberLastLocation = '$Value'"
             Assert-MockCalled Restore-RememberLastLocation -ModuleName MK.PowerShell.4PS -Times 1
         }
     } 
@@ -37,6 +39,9 @@ Describe "Test Set-MKPowerShellSetting" {
 
             Set-MKPowerShellSetting -Name 'TurnOnQuickRestart' -Value $Value
 
+            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
+            $MKPowerShellConfig["TurnOnQuickRestart"] | Should -Be $true
+
             $PWSHSet = Get-Alias pwsh -Scope Global -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Definition
             $PWSHASet = Get-Alias pwsha -Scope Global -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Definition
 
@@ -44,13 +49,10 @@ Describe "Test Set-MKPowerShellSetting" {
                 $PWSHSet | Should -Be 'Restart-PWSH'
                 $PWSHASet | Should -Be 'Restart-PWSHAdmin'
             }
-            # TODO: fails on false value, but -FileContentMatch below passes 
-            <#             else {
+            else {
                 $PWSHSet | Should -BeNullOrEmpty
                 $PWSHASet | Should -BeNullOrEmpty
-            }  #>
-
-            $__.ConfigFilePath | Should -FileContentMatch "TurnOnQuickRestart = '$Value'"
+            } 
         }
     }
 }

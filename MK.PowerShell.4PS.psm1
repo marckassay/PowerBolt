@@ -17,7 +17,7 @@ using module .\src\publish\Publish-ModuleToNuGetGallery.ps1
 
 Param(
     [Parameter(Mandatory = $False)]
-    [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.ps1")
+    [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")
 )
 
 $script:MKPowerShellConfigFilePath = $ConfigFilePath

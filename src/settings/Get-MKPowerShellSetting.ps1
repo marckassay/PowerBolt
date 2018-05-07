@@ -34,10 +34,9 @@ function Get-DynamicParameterValues {
         [Parameter(Mandatory = $true)]
         [String]$ConfigFilePath
     )
-    # surfaces the $MKPowerShellConfig variable in the file of $ConfigFilePath
-    Invoke-Expression -Command "using module $ConfigFilePath"
 
-    $Script:MKPowerShellConfig = $MKPowerShellConfig
+    $Script:MKPowerShellConfig = Get-Content -Path $ConfigFilePath | ConvertFrom-Json -AsHashtable
+
     $SettingNames = $Script:MKPowerShellConfig | ForEach-Object { $_.Keys }
 
     $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
