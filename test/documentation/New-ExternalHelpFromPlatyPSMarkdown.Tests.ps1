@@ -1,9 +1,9 @@
 using module ..\.\TestFunctions.psm1
-$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
 Describe "Test New-ExternalHelpFromPlatyPSMarkdown" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleB')
+        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
     }
     
     AfterAll {

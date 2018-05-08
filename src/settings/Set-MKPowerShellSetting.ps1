@@ -2,7 +2,7 @@ function Set-MKPowerShellSetting {
     [CmdletBinding(PositionalBinding = $True)]
     Param(
         [Parameter(Mandatory = $True)]
-        [String]$Value,
+        [object]$Value,
 
         [Parameter(Mandatory = $False)]
         [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath,
@@ -23,10 +23,6 @@ function Set-MKPowerShellSetting {
     }
 
     end {
-        # cast to bool, make all chars lowercase...
-        if ($Value -match "^(T|t)rue|(F|f)alse$") {
-            $Value = $Value.ToLower()
-        }
        
         $Script:MKPowerShellConfig = Get-Content -Path $ConfigFilePath | `
             ConvertFrom-Json -AsHashtable

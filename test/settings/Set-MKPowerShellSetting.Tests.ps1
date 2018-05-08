@@ -1,9 +1,9 @@
 using module ..\.\TestFunctions.psm1
-$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
 Describe "Test Set-MKPowerShellSetting" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, '')
+        $__ = [TestFunctions]::DescribeSetup()
     }
     
     AfterAll {
@@ -23,40 +23,13 @@ Describe "Test Set-MKPowerShellSetting" {
             Set-MKPowerShellSetting -Name 'TurnOnRememberLastLocation' -Value $Value
             
             $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
-            $MKPowerShellConfig["TurnOnRememberLastLocation"]| Should -Be $true
+            $MKPowerShellConfig["TurnOnRememberLastLocation"] -eq $true | Should -Be $Value
 
             Assert-MockCalled Restore-RememberLastLocation -ModuleName MK.PowerShell.4PS -Times 1
         }
     } 
     
     Context "Setting TurnOnQuickRestart" {
-
-        It "Should set TurnOnQuickRestart to '<Value>' in config file and change alias accordingly" -TestCases @(
-            @{ Value = $false}
-            @{ Value = $true}
-        ) {
-            Param($Value)
-
-            Set-MKPowerShellSetting -Name 'TurnOnQuickRestart' -Value $Value
-
-            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
-            $MKPowerShellConfig["TurnOnQuickRestart"] | Should -Be $true
-
-            $PWSHSet = Get-Alias pwsh -Scope Global -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Definition
-            $PWSHASet = Get-Alias pwsha -Scope Global -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Definition
-
-            if ($Value) {
-                $PWSHSet | Should -Be 'Restart-PWSH'
-                $PWSHASet | Should -Be 'Restart-PWSHAdmin'
-            }
-            else {
-                $PWSHSet | Should -BeNullOrEmpty
-                $PWSHASet | Should -BeNullOrEmpty
-            } 
-        }
-    }
-
-    Context "Setting Backupdata" {
 
         It "Should set TurnOnQuickRestart to '<Value>' in config file and change alias accordingly" -TestCases @(
             @{ Value = $false}
@@ -80,6 +53,39 @@ Describe "Test Set-MKPowerShellSetting" {
                 $PWSHSet | Should -BeNullOrEmpty
                 $PWSHASet | Should -BeNullOrEmpty
             } 
+        }
+    }
+
+    Context "Setting BackupLocations" {
+        $Value1 = @{
+            Path        = "'$PROFILE'"
+            Destination = 'D:\Google Drive\Documents\PowerShell\'
+        }
+
+        It "Should set BackupLocations to valid hashtables in config file." -TestCases @(
+            @{ Value = $Value1 }
+        ) {
+            Param($Value)
+
+            Set-MKPowerShellSetting -Name 'BackupLocations' -Value $Value
+
+            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
+            $MKPowerShellConfig.BackupLocations.Path | Should -BeLike "'$PROFILE'"
+            $MKPowerShellConfig.BackupLocations.Destination | Should -Be $Value.Destination 
+        }
+
+        It "Should remove strings that have single quotes from config file." -TestCases @(
+            @{ Value = $Value1 }
+        ) {
+            Param($Value)
+
+            Set-MKPowerShellSetting -Name 'BackupLocations' -Value $Value
+
+            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
+            $SingleQuotedPath = $MKPowerShellConfig.BackupLocations.Path
+            Test-Path $SingleQuotedPath | Should -Be $false
+            $NoQuotedPath = $SingleQuotedPath -replace "\'", ""
+            Test-Path $NoQuotedPath | Should -Be $true
         }
     }
 }

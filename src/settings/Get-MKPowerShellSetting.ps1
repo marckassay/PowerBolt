@@ -20,10 +20,14 @@ function Get-MKPowerShellSetting {
         $Value = $Script:MKPowerShellConfig[$Name]
         
         if ($Value -match "((T|t)rue|(F|f)alse)") {
-            ($Script:MKPowerShellConfig[$Name] -eq $true)
+            ($Value -eq $true)
         }
         else {
-            $Script:MKPowerShellConfig[$Name]
+            if ($Value -is [string]) {
+                $Value = $Value -replace "\'", ""
+            }
+
+            $Value
         }
     }
 }

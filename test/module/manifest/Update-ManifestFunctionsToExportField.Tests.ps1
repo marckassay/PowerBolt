@@ -1,10 +1,10 @@
 using module ..\..\.\TestFunctions.psm1
-$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
 Describe "Test Update-ManifestFunctionsToExportField" {
     
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleA')
+        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleA')
     }
     AfterAll {
         [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))

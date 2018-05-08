@@ -1,9 +1,9 @@
 using module ..\.\TestFunctions.psm1
-$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
 Describe "Test Build-Documentation" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleB')
+        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
         
         New-Item -Path "$TestDrive\TestModuleB\README.md" -ItemType File
 

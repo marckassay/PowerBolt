@@ -8,7 +8,7 @@
     ]
   },
   "TurnOnQuickRestart": "true",
-  "TurnOnBackup": "true",
+  "TurnOnBackup": "false",
   "BackupPolicy": "auto",
   "TurnOnRememberLastLocation": "true",
   "TurnOnHistoryRecording": "true",

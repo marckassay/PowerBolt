@@ -1,9 +1,9 @@
 using module ..\.\TestFunctions.psm1
-$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
 Describe "Test Get-MKPowerShellSetting" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, '')
+        $__ = [TestFunctions]::DescribeSetup()
     }
     
     AfterAll {
@@ -12,13 +12,15 @@ Describe "Test Get-MKPowerShellSetting" {
     
     Context "Call Get-MKPowerShellSetting" {
 
-        It "Should return value of dynamic param value given" {
+        It "Should accept dynamic param value and return correct boolean value" {
             $Setting = Get-MKPowerShellSetting -Name 'TurnOnAvailableUpdates'
             $Setting | Should -Be $true
 
             $Setting = Get-MKPowerShellSetting -Name 'TurnOnRememberLastLocation'
             $Setting | Should -Be $true
+        }
 
+        It "Should accept dynamic param value and return a hashtable" {
             $Setting = Get-MKPowerShellSetting -Name 'BackupLocations'
             $Setting | Should -BeOfType Hashtable
             $Setting.Keys -contains 'Path' | Should -Be $true 

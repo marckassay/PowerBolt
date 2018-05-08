@@ -4,7 +4,7 @@ function Start-MKPowerShell {
         [Parameter(Mandatory = $False)]
         [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")
     )
-
+    
     if ((Test-Path -Path $ConfigFilePath) -eq $false) {
         $ConfigFileParentPath = $(Split-Path $ConfigFilePath -Parent)
         if ((Test-Path -Path $ConfigFileParentPath) -eq $false) {
@@ -16,9 +16,8 @@ function Start-MKPowerShell {
 
     Restore-RememberLastLocation -Initialize
     Restore-QuickRestartSetting -Initialize
-    #  Backup-SelectedData -Initialize
+    Backup-SelectedData -Initialize
 }
-
 
 # NoExport: Restore-RememberLastLocation
 function Restore-RememberLastLocation {
@@ -79,21 +78,52 @@ function Backup-SelectedData {
     )
 
     $PredicateEnabled = (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true
-    $PredicateAuto = (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto'
-    $BackupLocations = Get-MKPowerShellSetting -Name 'BackupLocations'
 
     if ($PredicateEnabled) {
-        if ($PredicateAuto -and $($BackupLocations.Destination -ne '')) {
-            Write-Host "Backup data sources completed." -ForegroundColor Green
-            Copy-Item -Path $BackupLocations.Path -Destination $BackupLocations.Destination
+        if ($Initialize.IsPresent) { 
+            $PredicateAuto = (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto'
         }
         else {
-            Write-Host "Backup data sources was not completed due to incomplete entry for 'BackupLocations'." -ForegroundColor Red
+            # if called manually, disregard BackupPolicy value 
+            $PredicateAuto = $true
+        }
+
+        if ($PredicateAuto) {
+            $BackupLocations = Get-MKPowerShellSetting -Name 'BackupLocations'
+
+            try {
+                $IsPathValid = Test-Path -Path $BackupLocations.Path
+            }
+            catch {
+                $IsPathValid = $false
+            }
+            
+            try {
+                $IsDestinationValid = Test-Path -Path $BackupLocations.Destination
+            }
+            catch {
+                $IsDestinationValid = $false
+            }
+
+            if (($IsPathValid) -and ($IsDestinationValid)) {
+                Copy-Item -Path $BackupLocations.Path -Destination $BackupLocations.Destination
+                Write-Host "Backup data sources completed." -ForegroundColor Green
+            }
+            elseif ((-not $IsPathValid) -and (-not $IsDestinationValid)) {
+                Write-Host "Backup data sources was not completed due to invalid entries for 'BackupLocations' Path and Destination field.  To set a new value for 'BackupLocations' call the following: Set-MKPowerShellSetting -Name BackupLocations -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+            }
+            elseif (-not $IsPathValid) {
+                Write-Host "Backup data sources was not completed due to invalid entry (or entries) for 'BackupLocations' Path field.  To set a new value for 'BackupLocations' call the following: Set-MKPowerShellSetting -Name BackupLocations -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+            }
+            elseif (-not $IsDestinationValid) {
+                Write-Host "Backup data sources was not completed due to invalid entry for 'BackupLocations' Destination field.  To set a new value for 'BackupLocations' call the following: Set-MKPowerShellSetting -Name BackupLocations -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+            }
         }
     }
     else {
+        # if called manually when 'TurnOnBackup' is false 
         if (-not $Initialize.IsPresent) { 
-            Write-Host "'TurnOnBackup' is currently disabled.  To enable call: Set-MKPowerShellSetting -Name TurnOnBackup -Value $true." -ForegroundColor Red
+            Write-Host "'TurnOnBackup' is currently disabled.  To enable call: Set-MKPowerShellSetting -Name TurnOnBackup -Value '$true'." -ForegroundColor Yellow
         }
     }
 }

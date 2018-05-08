@@ -1,9 +1,9 @@
 using module ..\.\TestFunctions.psm1
-$MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 
 Describe "Test Add-ModuleToProfile" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup($MODULE_FOLDER, 'TestModuleA')
+        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleA')
 
         $TestProfilePath = New-Item -Path $TestDrive -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName
     }
