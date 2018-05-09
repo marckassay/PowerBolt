@@ -1,6 +1,7 @@
 {
   "LastLocation": "",
   "TurnOnAvailableUpdates": "true",
+  "HistoryLocation": "",
   "BackupLocations": {
     "Destination": "",
     "Path": [

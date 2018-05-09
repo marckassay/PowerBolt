@@ -14,6 +14,9 @@ using module .\src\settings\Set-MKPowerShellSetting.ps1
 using module .\src\management\Start-MKPowerShell.ps1
 using module .\src\management\Restart-PWSH.ps1
 using module .\src\publish\Publish-ModuleToNuGetGallery.ps1
+using module .\src\history\Export-History.ps1
+using module .\src\history\Import-History.ps1
+using module .\src\events\Register-Shutdown.ps1
 
 Param(
     [Parameter(Mandatory = $False)]
@@ -22,4 +25,6 @@ Param(
 
 $script:MKPowerShellConfigFilePath = $ConfigFilePath
 
-Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath 
+Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath
+
+Register-Shutdown

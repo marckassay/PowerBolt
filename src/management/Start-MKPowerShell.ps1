@@ -1,3 +1,4 @@
+$script:ConfigFileParentPath 
 function Start-MKPowerShell {
     [CmdletBinding(PositionalBinding = $False)]
     Param(
@@ -6,7 +7,7 @@ function Start-MKPowerShell {
     )
     
     if ((Test-Path -Path $ConfigFilePath) -eq $false) {
-        $ConfigFileParentPath = $(Split-Path $ConfigFilePath -Parent)
+        $script:ConfigFileParentPath = $(Split-Path $ConfigFilePath -Parent)
         if ((Test-Path -Path $ConfigFileParentPath) -eq $false) {
             New-Item -Path $ConfigFileParentPath -ItemType Directory -Verbose
         }
@@ -17,6 +18,7 @@ function Start-MKPowerShell {
     Restore-RememberLastLocation -Initialize
     Restore-QuickRestartSetting -Initialize
     Backup-SelectedData -Initialize
+    Restore-History -Initialize
 }
 
 # NoExport: Restore-RememberLastLocation
@@ -77,9 +79,9 @@ function Backup-SelectedData {
         [switch]$Initialize
     )
 
-    $PredicateEnabled = (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true
+    $IsTurnOnBackupEnabled = (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true
 
-    if ($PredicateEnabled) {
+    if ($IsTurnOnBackupEnabled) {
         if ($Initialize.IsPresent) { 
             $PredicateAuto = (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto'
         }
@@ -124,6 +126,32 @@ function Backup-SelectedData {
         # if called manually when 'TurnOnBackup' is false 
         if (-not $Initialize.IsPresent) { 
             Write-Host "'TurnOnBackup' is currently disabled.  To enable call: Set-MKPowerShellSetting -Name TurnOnBackup -Value '$true'." -ForegroundColor Yellow
+        }
+    }
+}
+
+function Restore-History {
+    [CmdletBinding()]
+    Param(
+        [switch]$Initialize
+    )
+
+    $IsHistoryRecordingEnabled = (Get-MKPowerShellSetting -Name 'TurnOnHistoryRecording') -eq $true
+
+    if ($IsHistoryRecordingEnabled) { 
+
+        $HistoryLocation = Get-MKPowerShellSetting -Name 'HistoryLocation'
+        if ((Test-Path $HistoryLocation -ErrorAction SilentlyContinue) -eq $false) {
+            $SessionHistoriesPath = New-Item -Path "$ConfigFileParentPath\SessionHistories.csv" -ItemType File | Select-Object -ExpandProperty FullName
+
+            Set-MKPowerShellSetting -Name 'HistoryLocation' -Value $SessionHistoriesPath
+            
+            Write-Host "History file has been created." -ForegroundColor Green
+        }
+        else {
+            Import-History
+
+            Write-Host "History is restored from previous session(s)." -ForegroundColor Green
         }
     }
 }

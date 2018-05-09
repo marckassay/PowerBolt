@@ -90,7 +90,9 @@
         'Write-File',
         'Publish-ModuleToNuGetGallery',
         'Restart-PWSH',
-        'Restart-PWSHA'
+        'Restart-PWSHA',
+        'Import-History',
+        'Export-History'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
