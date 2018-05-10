@@ -3,9 +3,13 @@ function Set-LocationAndStore {
     Param
     (
         [Parameter(Mandatory = $False, Position = 0)]
+        [AllowEmptyString()]
+        [AllowNull()]
         [string]$Path,
 
         [Parameter(Mandatory = $False)]
+        [AllowEmptyString()]
+        [AllowNull()]
         [string]$LiteralPath,
 
         [switch]$PassThru

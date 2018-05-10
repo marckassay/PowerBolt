@@ -8,11 +8,11 @@ function Start-MKPowerShell {
     
     if ((Test-Path -Path $ConfigFilePath) -eq $false) {
         $script:ConfigFileParentPath = $(Split-Path $ConfigFilePath -Parent)
-        if ((Test-Path -Path $ConfigFileParentPath) -eq $false) {
-            New-Item -Path $ConfigFileParentPath -ItemType Directory -Verbose
+        if ((Test-Path -Path $script:ConfigFileParentPath) -eq $false) {
+            New-Item -Path $script:ConfigFileParentPath -ItemType Directory -Verbose
         }
 
-        Copy-Item -Path "$PSScriptRoot\..\..\resources\MK.PowerShell-config.json" -Destination $ConfigFileParentPath -Verbose -PassThru
+        Copy-Item -Path "$PSScriptRoot\..\..\resources\MK.PowerShell-config.json" -Destination $script:ConfigFileParentPath -Verbose -PassThru
     }
 
     Restore-RememberLastLocation -Initialize
@@ -59,7 +59,7 @@ function Restore-QuickRestartSetting {
         Set-Alias pwsh Restart-PWSH -Scope Global
         Write-Host "'pwsh' alias is now mapped to 'Restart-PWSH'." -ForegroundColor Green
 
-        Set-Alias pwsha Restart-PWSHAdmin -Scope Global
+        Set-Alias pwsha Restart-PWSH -Scope Global
         Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'." -ForegroundColor Green
     }
     else {
@@ -141,8 +141,8 @@ function Restore-History {
     if ($IsHistoryRecordingEnabled) { 
 
         $HistoryLocation = Get-MKPowerShellSetting -Name 'HistoryLocation'
-        if ((Test-Path $HistoryLocation -ErrorAction SilentlyContinue) -eq $false) {
-            $SessionHistoriesPath = New-Item -Path "$ConfigFileParentPath\SessionHistories.csv" -ItemType File | Select-Object -ExpandProperty FullName
+        if (($HistoryLocation -eq '') -or (Test-Path -Path $HistoryLocation -ErrorAction SilentlyContinue) -eq $false) {
+            $SessionHistoriesPath = New-Item -Path $script:ConfigFileParentPath"\SessionHistories.csv" -ItemType File | Select-Object -ExpandProperty FullName
 
             Set-MKPowerShellSetting -Name 'HistoryLocation' -Value $SessionHistoriesPath
             

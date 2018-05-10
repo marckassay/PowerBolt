@@ -1,19 +1,11 @@
-$Script:RestartPWSHas = ''
-
 function Register-Shutdown {
     [CmdletBinding(PositionalBinding = $False)]
     Param()
 
-    Unregister-Event -SourceIdentifier PowerShell.Exiting -ErrorAction SilentlyContinue
-    Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
-        $IsHistoryRecordingEnabled = (Get-MKPowerShellSetting -Name 'TurnOnHistoryRecording') -eq $true
-        if ($IsHistoryRecordingEnabled) {
+    $IsHistoryRecordingEnabled = (Get-MKPowerShellSetting -Name 'TurnOnHistoryRecording') -eq $true
+    Register-EngineEvent -SourceIdentifier ([System.Management.Automation.PsEngineEvent]::Exiting) -MessageData $IsHistoryRecordingEnabled -Action {
+        if ($Event.MessageData) {
             Export-History
-        }
-
-        if ($Script:RestartPWSHas -ne '') {
-            Start-Process -FilePath "pwsh.exe" -Verb $Script:RestartPWSHas
-        }
-
-    } | Out-Null
+        } 
+    } -SupportEvent | Out-Null
 }  

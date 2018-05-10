@@ -90,7 +90,7 @@
         'Write-File',
         'Publish-ModuleToNuGetGallery',
         'Restart-PWSH',
-        'Restart-PWSHA',
+        'Register-Shutdown',
         'Import-History',
         'Export-History'
     )

@@ -11,12 +11,12 @@ using module .\src\profile\Add-ModuleToProfile.ps1
 using module .\src\settings\Get-MKPowerShellSetting.ps1 
 using module .\src\settings\New-MKPowerShellConfigFile.ps1
 using module .\src\settings\Set-MKPowerShellSetting.ps1
-using module .\src\management\Start-MKPowerShell.ps1
-using module .\src\management\Restart-PWSH.ps1
 using module .\src\publish\Publish-ModuleToNuGetGallery.ps1
+using module .\src\management\Start-MKPowerShell.ps1
+using module .\src\events\Register-Shutdown.ps1
+using module .\src\management\Restart-PWSH.ps1
 using module .\src\history\Export-History.ps1
 using module .\src\history\Import-History.ps1
-using module .\src\events\Register-Shutdown.ps1
 
 Param(
     [Parameter(Mandatory = $False)]
