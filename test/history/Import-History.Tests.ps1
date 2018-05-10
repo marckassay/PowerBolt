@@ -14,10 +14,18 @@ Describe "Test Import-History" {
         Pop-Location -StackName History
     }
 
-    Context "Using default value for Path, PWSH history session should be imported as expected." {
-
+    Context "Lame testing here, ideally need to find out how to have Add-History return mock object since pester history interfers." {
+   
         It "Should import previous session as expected." {
 
-        } -Skip
+            Mock Add-History -ModuleName MK.PowerShell.4PS
+            $SessionHistories = Import-Csv -Path .\test\history\TestHistory.csv
+
+            Import-History -Path .\test\history\TestHistory.csv
+
+            Assert-MockCalled Add-History -ModuleName MK.PowerShell.4PS -Times 1 -ParameterFilter {
+                $InputObject -ne $null
+            }
+        }
     } 
 } 

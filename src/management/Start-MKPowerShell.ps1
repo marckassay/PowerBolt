@@ -59,7 +59,7 @@ function Restore-QuickRestartSetting {
         Set-Alias pwsh Restart-PWSH -Scope Global
         Write-Host "'pwsh' alias is now mapped to 'Restart-PWSH'." -ForegroundColor Green
 
-        Set-Alias pwsha Restart-PWSH -Scope Global
+        Set-Alias pwsha Restart-PWSHAdmin -Scope Global
         Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'." -ForegroundColor Green
     }
     else {

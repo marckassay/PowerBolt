@@ -15,6 +15,7 @@ using module .\src\publish\Publish-ModuleToNuGetGallery.ps1
 using module .\src\management\Start-MKPowerShell.ps1
 using module .\src\events\Register-Shutdown.ps1
 using module .\src\management\Restart-PWSH.ps1
+using module .\src\management\Restart-PWSHAdmin.ps1
 using module .\src\history\Export-History.ps1
 using module .\src\history\Import-History.ps1
 

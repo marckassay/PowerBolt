@@ -14,24 +14,19 @@ Describe "Test Export-History" {
         Pop-Location -StackName History
     }
 
-    Context "Using default value for Path, PWSH history session should be exported as expected." {
-
-        It "Should export current session as expected." {
+    Context "Lame testing here, ideally need to find out how to have Get-History return mock object since pester history interfers." {
+        It "Should export current session and expected something greater than 1." {
             $SessionHistoriesPath = New-Item -Path "TestDrive:\SessionHistories.csv" -ItemType File | Select-Object -ExpandProperty FullName
             
-            # TODO: perhaps try DATA{} directive
             Mock Get-History {
-                $Session = @"
-"1","exit","Completed","5/9/2018 2:55:51 PM","5/9/2018 2:55:51 PM"
-"2","sl e:\","Completed","5/9/2018 2:56:02 PM","5/9/2018 2:56:02 PM"
-}
-"@
+                $TestHistory = Import-Csv -Path .\test\history\TestHistory.csv | Add-History
+                return $TestHistory
             }
             
             Export-History -Path $SessionHistoriesPath
 
             $SessionHistories = Import-Csv -Path $Path
             $SessionHistories.Count | Should -BeGreaterThan 1
-        } -Skip
+        }
     } 
 } 

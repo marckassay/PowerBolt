@@ -9,8 +9,6 @@ function Export-History {
 
     # TODO: check $MaximumHistoryCount; we shouldnt disregard that var
     $SessionHistory = Get-History
-    $EntriesToExport = [math]::Abs($Script:SessionHistories.Count - $SessionHistory.Count)
-    
-    Get-History -Count $EntriesToExport | `
+    $SessionHistory[$Script:SessionHistories.Count..$SessionHistory.Count] | `
         Export-Csv -Path $Path
 }

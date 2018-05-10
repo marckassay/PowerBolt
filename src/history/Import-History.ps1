@@ -7,7 +7,6 @@ function Import-History {
     )
 
     $SessionHistories = Import-Csv -Path $Path
-    $Script:SessionHistoriesCount = $SessionHistories.Count;
 
-    $SessionHistories | Add-History
+    Add-History -InputObject $SessionHistories
 }
