@@ -17,7 +17,7 @@ function Start-MKPowerShell {
 
     Restore-RememberLastLocation -Initialize
     Restore-QuickRestartSetting -Initialize
-    Backup-SelectedData -Initialize
+    Backup-Sources -Initialize
     Restore-History -Initialize
 }
 
@@ -73,7 +73,7 @@ function Restore-QuickRestartSetting {
     }
 }
 
-function Backup-SelectedData {
+function Backup-Sources {
     [CmdletBinding()]
     Param(
         [switch]$Initialize
@@ -91,34 +91,73 @@ function Backup-SelectedData {
         }
 
         if ($PredicateAuto) {
-            $BackupLocations = Get-MKPowerShellSetting -Name 'BackupLocations'
+            $Backups = Get-MKPowerShellSetting -Name 'Backups'
 
             try {
-                $IsPathValid = Test-Path -Path $BackupLocations.Path
+                $IsPathValid = Test-Path -Path $Backups.Path
             }
             catch {
                 $IsPathValid = $false
             }
             
             try {
-                $IsDestinationValid = Test-Path -Path $BackupLocations.Destination
+                if ($Backups.UpdatePolicy -eq "Overwrite") {
+                    $IsDestinationValid = Test-Path -Path $Backups.Destination
+
+                    if ($IsDestinationValid -eq $false) {
+                        New-Item -Path $Backups.Destination -ItemType Directory
+                    }
+
+                    $IsDestinationValid = Test-Path -Path $Backups.Destination
+                }
+                elseif ($Backups.UpdatePolicy -eq "New") {
+                    
+                    $LastIndexedName = Get-ChildItem $Backups.Destination -Recurse | `
+                        Where-Object Name -match '.*\(\d+\)' | `
+                        Sort-Object -Descending | `
+                        Select-Object Name -First 1 -ExpandProperty Name
+
+                    [int]$LastIndexValue = [regex]::Match($LastIndexedName, "(?<=\()\d+(?=\))").Value
+                    $NewIndexValue = $LastIndexValue++
+                    
+                    $LeafName = Split-Path -Path $Backups.Path -Leaf
+                    $NewPath = Join-Path -Path $Backups.Destination -ChildPath "$LeafName($NewIndexValue)"
+
+                    if ((Test-Path $Backups.Path -PathType Leaf) -eq $true) {
+                        $LeafExt = Split-Path -Path -Extension
+                        $NewFileName = New-Item "$NewPath.$LeafExt" -ItemType File
+                        Copy-Item -Path $Backups.Path -Destination $NewFileName
+                    }
+                    else {
+                        New-Item $NewPath -ItemType Directory
+                        Copy-Item -Path $Backups.Path -Destination $NewPath -Recurse -Container
+                    }
+                    
+                    Copy-Item -Path $Backups.Path -Destination $Backups.Destination -Force -Recurse
+                }
             }
             catch {
                 $IsDestinationValid = $false
             }
 
             if (($IsPathValid) -and ($IsDestinationValid)) {
-                Copy-Item -Path $BackupLocations.Path -Destination $BackupLocations.Destination
-                Write-Host "Backup data sources completed." -ForegroundColor Green
+                if ($Backups.UpdatePolicy -eq "Overwrite") {
+                    Copy-Item -Path $Backups.Path -Destination $Backups.Destination -Force -Recurse
+                    Write-Host "Backup data sources completed." -ForegroundColor Green
+                }
+                elseif ($Backups.UpdatePolicy -eq "New") {
+                    Split-Path $Backups.Path -LeafBase
+                    Copy-Item -Path $Backups.Path -Destination $Backups.Destination -Force -Recurse
+                }
             }
             elseif ((-not $IsPathValid) -and (-not $IsDestinationValid)) {
-                Write-Host "Backup data sources was not completed due to invalid entries for 'BackupLocations' Path and Destination field.  To set a new value for 'BackupLocations' call the following: Set-MKPowerShellSetting -Name BackupLocations -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+                Write-Host "Backup data sources was not completed due to invalid entries for 'Backups' Path and Destination field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
             }
             elseif (-not $IsPathValid) {
-                Write-Host "Backup data sources was not completed due to invalid entry (or entries) for 'BackupLocations' Path field.  To set a new value for 'BackupLocations' call the following: Set-MKPowerShellSetting -Name BackupLocations -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+                Write-Host "Backup data sources was not completed due to invalid entry (or entries) for 'Backups' Path field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
             }
             elseif (-not $IsDestinationValid) {
-                Write-Host "Backup data sources was not completed due to invalid entry for 'BackupLocations' Destination field.  To set a new value for 'BackupLocations' call the following: Set-MKPowerShellSetting -Name BackupLocations -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+                Write-Host "Backup data sources was not completed due to invalid entry for 'Backups' Destination field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
             }
         }
     }
