@@ -19,6 +19,8 @@ function Start-MKPowerShell {
     Restore-QuickRestartSetting -Initialize
     Backup-Sources -Initialize
     Restore-History -Initialize
+
+    Register-Shutdown
 }
 
 # NoExport: Restore-RememberLastLocation

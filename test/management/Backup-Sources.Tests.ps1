@@ -3,43 +3,54 @@ using module ..\.\TestFunctions.psm1
 
 Describe "Test Backup-Sources" {
     BeforeAll {
-        $CloudConfigFolderPath = New-Item -Path "TestDrive:\User\Bob\CloudDrive\PowerShell" -ItemType Directory | `
+        $__ = [TestFunctions]::DescribeSetup()
+
+        $CloudFolderPath = New-Item -Path "TestDrive:\User\Bob\CloudDrive\PowerShell" -ItemType Directory | `
             Select-Object -ExpandProperty FullName
-        $TESTFILE = 'E:\temp\colors.csv\'
+        
+        New-Item -Path "TestDrive:\User\Bob\Passwords.csv" -Force -ItemType File -OutVariable TestFileA | `
+            Add-Content -Value $(Get-Date)
+
+        $TestFolderB = New-Item -Path "TestDrive:\User\Bob\Accounts" -Force -ItemType Directory
+
+        New-Item -Path "TestDrive:\User\Bob\Accounts\audit.txt" -Force -ItemType File -OutVariable TestFileB | `
+            Add-Content -Value $(Get-Date)
     }
 
     AfterAll {
         [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'TestFunctions'))
     }
     
-    Context "When 'TurnOnBackup' set to 'true' and 'BackupPolicy' set to 'Auto' with valid values for 'BackupLocations'." {
+    Context "When valid Backups' Path, Destination and UpdatePolicy values." {
 
         $InputObject = @"
 {
   "LastLocation": "",
-  "TurnOnAvailableUpdates": "true",
+  "TurnOnAvailableUpdates": "false",
   "HistoryLocation": "",
   "Backups": [{
-    "Path": "$TESTFILE",
-    "Destination": "$CloudConfigFolderPath",
+    "Path": "$TestFileA",
+    "Destination": "$CloudFolderPath",
     "UpdatePolicy": "Overwrite"
   }],
-  "TurnOnQuickRestart": "true",
-  "TurnOnBackup": "false",
+  "TurnOnQuickRestart": "false",
+  "TurnOnBackup": "true",
   "BackupPolicy": "auto",
-  "TurnOnRememberLastLocation": "true",
-  "TurnOnHistoryRecording": "true",
+  "TurnOnRememberLastLocation": "false",
+  "TurnOnHistoryRecording": "false",
   "NuGetApiKey": ""
 }
 "@
-        New-Item -Path  "TestDrive:\User\Bob\AppData\Local\MK.PowerShell.4PS\MK.PowerShell-config.json" -Force -ItemType File
-        Add-Content -Value $InputObject -Path "TestDrive:\User\Bob\AppData\Local\MK.PowerShell.4PS\MK.PowerShell-config.json" -Force
+        Clear-Content -Path  $__.ConfigFilePath
+        $InputObject -replace '\\', '\\' | Add-Content -Path $__.ConfigFilePath -Encoding utf8
 
-        $__ = [TestFunctions]::DescribeSetupUsingTestConfigFile($ConfigFilePath)
+        Start-MKPowerShell -ConfigFilePath $__.ConfigFilePath
 
-        It "Should call Backup-Sources on PowerShell startup" {
-            $ConfigFileSourceHash = Get-FileHash $__.ConfigFilePath | Select-Object -ExpandProperty Hash
-            $CloudConfigFileHash = Get-ChildItem $CloudConfigFolderPath | Get-FileHash | Select-Object -ExpandProperty Hash
+        It "Should overwrite file in destination folder" {
+            $ConfigFileJson = Get-Content -Path $__.ConfigFilePath -Raw | ConvertFrom-Json -AsHashtable
+            
+            $ConfigFileSourceHash = Get-FileHash ($ConfigFileJson.Backups[0]['Path']) | Select-Object -ExpandProperty Hash
+            $CloudConfigFileHash = Get-ChildItem $CloudFolderPath | Get-FileHash | Select-Object -ExpandProperty Hash
             $CloudConfigFileHash | Should -Be $ConfigFileSourceHash
         }
     }

@@ -27,5 +27,3 @@ Param(
 $script:MKPowerShellConfigFilePath = $ConfigFilePath
 
 Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath
-
-Register-Shutdown
