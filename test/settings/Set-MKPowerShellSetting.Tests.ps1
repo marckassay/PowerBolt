@@ -56,22 +56,22 @@ Describe "Test Set-MKPowerShellSetting" {
         }
     }
 
-    Context "Setting BackupLocations" {
+    Context "Setting Backups" {
         $Value1 = @{
             Path        = "'$PROFILE'"
             Destination = 'D:\Google Drive\Documents\PowerShell\'
         }
 
-        It "Should set BackupLocations to valid hashtables in config file." -TestCases @(
+        It "Should set Backups to valid hashtables in config file." -TestCases @(
             @{ Value = $Value1 }
         ) {
             Param($Value)
 
-            Set-MKPowerShellSetting -Name 'BackupLocations' -Value $Value
+            Set-MKPowerShellSetting -Name 'Backups' -Value $Value
 
             $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
-            $MKPowerShellConfig.BackupLocations.Path | Should -BeLike "'$PROFILE'"
-            $MKPowerShellConfig.BackupLocations.Destination | Should -Be $Value.Destination 
+            $MKPowerShellConfig.Backups.Path | Should -BeLike "'$PROFILE'"
+            $MKPowerShellConfig.Backups.Destination | Should -Be $Value.Destination 
         }
 
         It "Should remove strings that have single quotes from config file." -TestCases @(
@@ -79,10 +79,10 @@ Describe "Test Set-MKPowerShellSetting" {
         ) {
             Param($Value)
 
-            Set-MKPowerShellSetting -Name 'BackupLocations' -Value $Value
+            Set-MKPowerShellSetting -Name 'Backups' -Value $Value
 
             $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
-            $SingleQuotedPath = $MKPowerShellConfig.BackupLocations.Path
+            $SingleQuotedPath = $MKPowerShellConfig.Backups.Path
             Test-Path $SingleQuotedPath | Should -Be $false
             $NoQuotedPath = $SingleQuotedPath -replace "\'", ""
             Test-Path $NoQuotedPath | Should -Be $true

@@ -21,10 +21,11 @@ Describe "Test Get-MKPowerShellSetting" {
         }
 
         It "Should accept dynamic param value and return a hashtable" {
-            $Setting = Get-MKPowerShellSetting -Name 'BackupLocations'
+            $Setting = Get-MKPowerShellSetting -Name 'Backups'
             $Setting | Should -BeOfType Hashtable
             $Setting.Keys -contains 'Path' | Should -Be $true 
             $Setting.Keys -contains 'Destination' | Should -Be $true 
+            $Setting.Keys -contains 'UpdatePolicy' | Should -Be $true 
         }
     }
 }
