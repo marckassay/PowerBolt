@@ -58,8 +58,9 @@ Describe "Test Set-MKPowerShellSetting" {
 
     Context "Setting Backups" {
         $Value1 = @{
-            Path        = "'$PROFILE'"
-            Destination = 'D:\Google Drive\Documents\PowerShell\'
+            Path         = "'$PROFILE'"
+            Destination  = 'D:\Google Drive\Documents\PowerShell\'
+            UpdatePolicy = 'Overwrite'
         }
 
         It "Should set Backups to valid hashtables in config file." -TestCases @(

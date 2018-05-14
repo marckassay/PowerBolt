@@ -113,29 +113,35 @@ function Backup-Sources {
                     $IsDestinationValid = Test-Path -Path $Backups.Destination
                 }
                 elseif ($Backups.UpdatePolicy -eq "New") {
-                    
-                    $LastIndexedName = Get-ChildItem $Backups.Destination -Recurse | `
-                        Where-Object Name -match '.*\(\d+\)' | `
-                        Sort-Object -Descending | `
-                        Select-Object Name -First 1 -ExpandProperty Name
+                    $Items = Get-ChildItem $Backups.Destination -Recurse
+                    if ($Items) {
+                        $LastIndexedName = $Items | `
+                            Where-Object Name -match '.*\(\d+\)' | `
+                            Sort-Object -Descending | `
+                            Select-Object Name -First 1 -ExpandProperty Name
 
-                    [int]$LastIndexValue = [regex]::Match($LastIndexedName, "(?<=\()\d+(?=\))").Value
-                    $NewIndexValue = $LastIndexValue++
-                    
-                    $LeafName = Split-Path -Path $Backups.Path -Leaf
-                    $NewPath = Join-Path -Path $Backups.Destination -ChildPath "$LeafName($NewIndexValue)"
-
-                    if ((Test-Path $Backups.Path -PathType Leaf) -eq $true) {
-                        $LeafExt = Split-Path -Path -Extension
-                        $NewFileName = New-Item "$NewPath.$LeafExt" -ItemType File
-                        Copy-Item -Path $Backups.Path -Destination $NewFileName
+                        [int]$LastIndexValue = [regex]::Match($LastIndexedName, "(?<=\()\d+(?=\))").Value
+                        $NewIndexValue = ++$LastIndexValue
                     }
                     else {
-                        New-Item $NewPath -ItemType Directory
-                        Copy-Item -Path $Backups.Path -Destination $NewPath -Recurse -Container
+                        $NewIndexValue = 1
                     }
                     
-                    Copy-Item -Path $Backups.Path -Destination $Backups.Destination -Force -Recurse
+                    $LeafName = Split-Path -Path $Backups.Path -LeafBase
+                    $LeafEx = Split-Path -Path $Backups.Path -Extension
+                    $NewName = "$LeafName($NewIndexValue)$LeafEx"
+
+                    $NewPath = Join-Path -Path $Backups.Destination -ChildPath $NewName
+
+                    if ((Test-Path $Backups.Path -PathType Leaf) -eq $true) {
+                        $NewItem = New-Item $NewPath -ItemType File
+                    }
+                    else {
+                        $NewItem = New-Item $NewPath -ItemType Directory
+                    }
+
+                    $Backups.Destination = $NewItem.FullName
+                    $IsDestinationValid = Test-Path -Path $NewItem
                 }
             }
             catch {
@@ -148,8 +154,12 @@ function Backup-Sources {
                     Write-Host "Backup data sources completed." -ForegroundColor Green
                 }
                 elseif ($Backups.UpdatePolicy -eq "New") {
-                    Split-Path $Backups.Path -LeafBase
-                    Copy-Item -Path $Backups.Path -Destination $Backups.Destination -Force -Recurse
+                    if ((Test-Path $Backups.Path -PathType Leaf) -eq $true) {
+                        Copy-Item -Path $Backups.Path -Destination $NewItem.FullName
+                    }
+                    else {
+                        Copy-Item -Path $Backups.Path -Destination $NewItem.FullName -Recurse -Container
+                    }
                 }
             }
             elseif ((-not $IsPathValid) -and (-not $IsDestinationValid)) {
