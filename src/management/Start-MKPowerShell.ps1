@@ -93,83 +93,86 @@ function Backup-Sources {
         }
 
         if ($PredicateAuto) {
-            $Backups = Get-MKPowerShellSetting -Name 'Backups'
-
-            try {
-                $IsPathValid = Test-Path -Path $Backups.Path
-            }
-            catch {
-                $IsPathValid = $false
-            }
+            Get-MKPowerShellSetting -Name 'Backups' | ForEach-Object {
+                try {
+                    $IsPathValid = Test-Path -Path $_.Path
+                }
+                catch {
+                    $IsPathValid = $false
+                }
             
-            try {
-                if ($Backups.UpdatePolicy -eq "Overwrite") {
-                    $IsDestinationValid = Test-Path -Path $Backups.Destination
+                try {
+                    if ($_.UpdatePolicy -eq "Overwrite") {
+                        $IsDestinationValid = Test-Path -Path $_.Destination
 
-                    if ($IsDestinationValid -eq $false) {
-                        New-Item -Path $Backups.Destination -ItemType Directory
+                        if ($IsDestinationValid -eq $false) {
+                            New-Item -Path $_.Destination -ItemType Directory
+                        }
                     }
+                    elseif ($_.UpdatePolicy -eq "New") {
+                        $Items = Get-ChildItem $_.Destination -Recurse
+                        if ($Items) {
+                            $LastIndexedName = $Items | `
+                                Where-Object Name -match '.*\(\d+\)' | `
+                                Sort-Object -Descending | `
+                                Select-Object Name -First 1 -ExpandProperty Name
 
-                    $IsDestinationValid = Test-Path -Path $Backups.Destination
-                }
-                elseif ($Backups.UpdatePolicy -eq "New") {
-                    $Items = Get-ChildItem $Backups.Destination -Recurse
-                    if ($Items) {
-                        $LastIndexedName = $Items | `
-                            Where-Object Name -match '.*\(\d+\)' | `
-                            Sort-Object -Descending | `
-                            Select-Object Name -First 1 -ExpandProperty Name
-
-                        [int]$LastIndexValue = [regex]::Match($LastIndexedName, "(?<=\()\d+(?=\))").Value
-                        $NewIndexValue = ++$LastIndexValue
-                    }
-                    else {
-                        $NewIndexValue = 1
-                    }
+                            if ($LastIndexedName) {
+                                [int]$LastIndexValue = [regex]::Match($LastIndexedName, "(?<=\()\d+(?=\))").Value
+                                $NewIndexValue = ++$LastIndexValue
+                            }
+                            else {
+                                $NewIndexValue = 1
+                            }
+                        }
+                        else {
+                            $NewIndexValue = 1
+                        }
                     
-                    $LeafName = Split-Path -Path $Backups.Path -LeafBase
-                    $LeafEx = Split-Path -Path $Backups.Path -Extension
-                    $NewName = "$LeafName($NewIndexValue)$LeafEx"
+                        $LeafName = Split-Path -Path $_.Path -LeafBase
+                        $LeafEx = Split-Path -Path $_.Path -Extension
+                        $NewName = "$LeafName($NewIndexValue)$LeafEx"
 
-                    $NewPath = Join-Path -Path $Backups.Destination -ChildPath $NewName
+                        $NewPath = Join-Path -Path $_.Destination -ChildPath $NewName
 
-                    if ((Test-Path $Backups.Path -PathType Leaf) -eq $true) {
-                        $NewItem = New-Item $NewPath -ItemType File
-                    }
-                    else {
-                        $NewItem = New-Item $NewPath -ItemType Directory
-                    }
+                        if ((Test-Path $_.Path -PathType Leaf) -eq $true) {
+                            $NewItem = New-Item $NewPath -ItemType File
+                        }
+                        else {
+                            $NewItem = New-Item $NewPath -ItemType Directory
+                        }
 
-                    $Backups.Destination = $NewItem.FullName
-                    $IsDestinationValid = Test-Path -Path $NewItem
-                }
-            }
-            catch {
-                $IsDestinationValid = $false
-            }
-
-            if (($IsPathValid) -and ($IsDestinationValid)) {
-                if ($Backups.UpdatePolicy -eq "Overwrite") {
-                    Copy-Item -Path $Backups.Path -Destination $Backups.Destination -Force -Recurse
-                    Write-Host "Backup data sources completed." -ForegroundColor Green
-                }
-                elseif ($Backups.UpdatePolicy -eq "New") {
-                    if ((Test-Path $Backups.Path -PathType Leaf) -eq $true) {
-                        Copy-Item -Path $Backups.Path -Destination $NewItem.FullName
-                    }
-                    else {
-                        Copy-Item -Path $Backups.Path -Destination $NewItem.FullName -Recurse -Container
+                        $_.Destination = $NewItem.FullName
+                        $IsDestinationValid = Test-Path -Path $NewItem
                     }
                 }
-            }
-            elseif ((-not $IsPathValid) -and (-not $IsDestinationValid)) {
-                Write-Host "Backup data sources was not completed due to invalid entries for 'Backups' Path and Destination field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
-            }
-            elseif (-not $IsPathValid) {
-                Write-Host "Backup data sources was not completed due to invalid entry (or entries) for 'Backups' Path field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
-            }
-            elseif (-not $IsDestinationValid) {
-                Write-Host "Backup data sources was not completed due to invalid entry for 'Backups' Destination field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+                catch {
+                    $IsDestinationValid = $false
+                }
+
+                if (($IsPathValid) -and ($IsDestinationValid)) {
+                    if ($_.UpdatePolicy -eq "Overwrite") {
+                        Copy-Item -Path $_.Path -Destination $_.Destination -Force -Recurse
+                        Write-Host "Backup data sources completed." -ForegroundColor Green
+                    }
+                    elseif ($_.UpdatePolicy -eq "New") {
+                        if ((Test-Path $_.Path -PathType Leaf) -eq $true) {
+                            Copy-Item -Path $_.Path -Destination $NewItem.FullName
+                        }
+                        else {
+                            Copy-Item -Path $_.Path -Destination $NewItem.FullName -Recurse -Container
+                        }
+                    }
+                }
+                elseif ((-not $IsPathValid) -and (-not $IsDestinationValid)) {
+                    Write-Host "Backup data sources was not completed due to invalid entries for 'Backups' Path and Destination field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+                }
+                elseif (-not $IsPathValid) {
+                    Write-Host "Backup data sources was not completed due to invalid entry (or entries) for 'Backups' Path field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+                }
+                elseif (-not $IsDestinationValid) {
+                    Write-Host "Backup data sources was not completed due to invalid entry for 'Backups' Destination field.  To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+                }
             }
         }
     }
