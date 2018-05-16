@@ -110,9 +110,25 @@ function Backup-Sources {
                         }
                     }
                     elseif ($_.UpdatePolicy -eq "New") {
+                        $IsAFile = (Test-Path $_.Path -PathType Leaf) -eq $true
+                        $LeafName = Split-Path -Path $_.Path -LeafBase
+                        $LeafEx = Split-Path -Path $_.Path -Extension
+
                         $Items = Get-ChildItem $_.Destination -Recurse
                         if ($Items) {
+
+                            if ($IsAFile) {
+                                $ItemNamePattern = "[$LeafName].*[$LeafEx]"
+                                $ItemModePattern = '.*[a].*'
+                            }
+                            else {
+                                $ItemNamePattern = "[$LeafName].*"
+                                $ItemModePattern = '.*[d].*'
+                            }
+                                    
                             $LastIndexedName = $Items | `
+                                Where-Object Name -match $ItemNamePattern | `
+                                Where-Object Mode -match $ItemModePattern | `
                                 Where-Object Name -match '.*\(\d+\)' | `
                                 Sort-Object -Descending | `
                                 Select-Object Name -First 1 -ExpandProperty Name
@@ -129,13 +145,12 @@ function Backup-Sources {
                             $NewIndexValue = 1
                         }
                     
-                        $LeafName = Split-Path -Path $_.Path -LeafBase
-                        $LeafEx = Split-Path -Path $_.Path -Extension
+
                         $NewName = "$LeafName($NewIndexValue)$LeafEx"
 
                         $NewPath = Join-Path -Path $_.Destination -ChildPath $NewName
 
-                        if ((Test-Path $_.Path -PathType Leaf) -eq $true) {
+                        if ($IsAFile) {
                             $NewItem = New-Item $NewPath -ItemType File
                         }
                         else {
