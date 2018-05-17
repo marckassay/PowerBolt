@@ -4,6 +4,7 @@ using module .\src\documentation\New-ExternalHelpFromPlatyPSMarkdown.ps1
 using module .\src\documentation\Update-ReadmeFromPlatyPSMarkdown.ps1
 using module .\src\error\Get-LatestError.ps1
 using module .\src\management\Set-LocationAndStore.ps1
+using module .\src\management\backupsources\Backup-Sources.ps1
 using module .\src\module\Get-ModuleInfo.ps1
 using module .\src\module\manifest\Update-ManifestFunctionsToExportField.ps1
 using module .\src\module\Update-RootModuleUsingStatements.ps1

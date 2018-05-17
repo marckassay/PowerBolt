@@ -2,7 +2,10 @@ function Get-MKPowerShellSetting {
     [CmdletBinding(PositionalBinding = $True)]
     Param(
         [Parameter(Mandatory = $False)]
-        [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath
+        [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath,
+
+        [switch]
+        $ShowAll
     )
 
     DynamicParam {
@@ -13,21 +16,30 @@ function Get-MKPowerShellSetting {
     }
 
     begin {
-        $Name = $PSBoundParameters['Name']
+        if (-not $ShowAll.IsPresent) {
+            $Name = $PSBoundParameters['Name']
+        }
     }
 
     end {
-        $Value = $Script:MKPowerShellConfig[$Name]
+        if (-not $ShowAll.IsPresent) {
+            $Value = $Script:MKPowerShellConfig[$Name]
         
-        if ($Value -match "((T|t)rue|(F|f)alse)") {
-            ($Value -eq $true)
+            if ($Value -match "((T|t)rue|(F|f)alse)") {
+                ($Value -eq $true)
+            }
+            else {
+                if ($Value -is [string]) {
+                    $Value = $Value -replace "\'", ""
+                }
+
+                $Value
+            }
         }
         else {
-            if ($Value -is [string]) {
-                $Value = $Value -replace "\'", ""
-            }
-
-            $Value
+            Write-Output $ConfigFilePath":"
+            Write-Output ''
+            Get-Content -Path $ConfigFilePath | Write-Output
         }
     }
 }
@@ -45,7 +57,7 @@ function Get-DynamicParameterValues {
 
     $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
     $ParamAttribute = New-Object Parameter
-    $ParamAttribute.Mandatory = $true
+    $ParamAttribute.Mandatory = $false
     $ParamAttribute.Position = 0
     $AttributeCollection.Add($ParamAttribute)
 
