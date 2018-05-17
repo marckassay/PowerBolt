@@ -33,17 +33,17 @@ function Deploy-TestFakes {
             Select-Object -ExpandProperty FullName
     }
 
-    # create test files A-G; eg. 'TestFolder_A'
-    65..67 | `
+    # create test files A-H; eg. 'TestFolder_A'
+    65..72 | `
         ForEach-Object { Write-Output ("TestDrive:\User\Bob\TestFolder_$([System.Text.Encoding]::UTF8.GetChars($_))") } -OutVariable TestFolderNames | `
         ForEach-Object {New-Item $_ -ItemType Directory -Force} | Out-Null
-    $TestFolderNames.Add("TestDrive:\User\Bob")
-
+        
     $TFolderNames = New-Object System.Collections.ArrayList
     $TestFolderNames | ForEach-Object {$TFolderNames.Add($_)}
+    $TFolderNames.Add("TestDrive:\User\Bob")
 
     # create test files a-z inside ; eg. 'TestFile_a.txt'
-    97..99 | `
+    97..122 | `
         ForEach-Object { Write-Output ("TestFile_$([System.Text.Encoding]::UTF8.GetChars($_)).txt") } | `
         ForEach-Object {
         New-Item -Path (Join-Path -Path (Get-Random -InputObject $TestFolderNames) -ChildPath $_) -Value (New-Guid) -ItemType File -Force 
