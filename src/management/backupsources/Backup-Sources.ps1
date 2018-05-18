@@ -1,5 +1,6 @@
-using module .\BackupPredicates.ps1
 using module .\..\..\ConvertTo-EnumFlag.ps1
+using module .\.\BackupPredicates.ps1
+
 
 function Backup-Sources {
     [CmdletBinding(PositionalBinding = $False)]
@@ -13,7 +14,7 @@ function Backup-Sources {
 
     # TODO: need to create a config validator and use it at least here
     if ($ConfigFilePath) {
-        [BackupPredicates]$Predicates = Test-Path $ConfigFilePath | ConvertTo-EnumFlag [BackupPredicates]::IsConfigFileValid
+        [BackupPredicates]$Predicates = Test-Path $ConfigFilePath | ConvertTo-EnumFlag ([BackupPredicates]::IsConfigFileValid)
         $script:MKPowerShellConfigFilePath = $ConfigFilePath
     }
     else {
@@ -22,11 +23,11 @@ function Backup-Sources {
 
     if ($Predicates -band [BackupPredicates]::IsConfigFileValid) {
         if (-not $Force.IsPresent) { 
-            $Predicates += (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true | ConvertTo-EnumFlag [BackupPredicates]::IsTurnOnBackupValid
+            $Predicates += (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true | ConvertTo-EnumFlag ([BackupPredicates]::IsTurnOnBackupValid)
 
             # during startup, when Backup-Sources is called the 'BackupPolicy' needs to be considered.
             if ($Initialize.IsPresent) {
-                $Predicates += (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto' | ConvertTo-EnumFlag [BackupPredicates]::IsBackupPolicyValid
+                $Predicates += (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto' | ConvertTo-EnumFlag ([BackupPredicates]::IsBackupPolicyValid)
             }
             else {
                 $Predicates += [BackupPredicates]::IsBackupPolicyValid
@@ -41,7 +42,7 @@ function Backup-Sources {
     if ($Predicates -band [BackupPredicates]::IsPrecheckValid) {
         Get-MKPowerShellSetting -Name 'Backups' | ForEach-Object {
             try {
-                $Predicates += Test-Path -Path $_.Path | ConvertTo-EnumFlag [BackupPredicates]::IsPathValid
+                $Predicates += Test-Path -Path $_.Path | ConvertTo-EnumFlag ([BackupPredicates]::IsPathValid)
 
                 $IsAFile = (Test-Path $_.Path -PathType Leaf) -eq $true
                 $Leaf = Split-Path -Path $_.Path -Leaf
