@@ -1,172 +1,220 @@
+using module .\BackupPredicates.ps1
+using module .\..\..\ConvertTo-EnumFlag.ps1
+
 function Backup-Sources {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $False)]
     Param(
+        [Parameter(Mandatory = $False)]
+        [String]$ConfigFilePath,
+
+        [switch]$Force,
         [switch]$Initialize
     )
 
-    $IsTurnOnBackupEnabled = (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true
+    # TODO: need to create a config validator and use it at least here
+    if ($ConfigFilePath) {
+        [BackupPredicates]$Predicates = Test-Path $ConfigFilePath | ConvertTo-EnumFlag [BackupPredicates]::IsConfigFileValid
+        $script:MKPowerShellConfigFilePath = $ConfigFilePath
+    }
+    else {
+        [BackupPredicates]$Predicates = [BackupPredicates]::IsConfigFileValid
+    }
 
-    if ($IsTurnOnBackupEnabled) {
-        if ($Initialize.IsPresent) { 
-            $PredicateAuto = (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto'
-        }
-        else {
-            # if called manually, disregard BackupPolicy value 
-            $PredicateAuto = $true
-        }
+    if ($Predicates -band [BackupPredicates]::IsConfigFileValid) {
+        if (-not $Force.IsPresent) { 
+            $Predicates += (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true | ConvertTo-EnumFlag [BackupPredicates]::IsTurnOnBackupValid
 
-        if ($PredicateAuto) {
-            Get-MKPowerShellSetting -Name 'Backups' | ForEach-Object {
-                try {
-                    $IsPathValid = Test-Path -Path $_.Path
-                }
-                catch {
-                    $IsPathValid = $false
-                }
-                
+            # during startup, when Backup-Sources is called the 'BackupPolicy' needs to be considered.
+            if ($Initialize.IsPresent) {
+                $Predicates += (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto' | ConvertTo-EnumFlag [BackupPredicates]::IsBackupPolicyValid
+            }
+            else {
+                $Predicates += [BackupPredicates]::IsBackupPolicyValid
+            }
+        }
+        elseif ($Force.IsPresent) {
+            $Predicates += [BackupPredicates]::IsTurnOnBackupValid
+            $Predicates += [BackupPredicates]::IsBackupPolicyValid
+        }
+    }
+
+    if ($Predicates -band [BackupPredicates]::IsPrecheckValid) {
+        Get-MKPowerShellSetting -Name 'Backups' | ForEach-Object {
+            try {
+                $Predicates += Test-Path -Path $_.Path | ConvertTo-EnumFlag [BackupPredicates]::IsPathValid
+
                 $IsAFile = (Test-Path $_.Path -PathType Leaf) -eq $true
                 $Leaf = Split-Path -Path $_.Path -Leaf
 
-                try {
-                    if ($IsAFile) {
-                        $SourceItemTicks = Get-Item $_.Path | `
-                            Get-ItemPropertyValue -Name LastWriteTime | `
-                            Select-Object -ExpandProperty Ticks
-                    }
-                    else {
-                        $SourceItemTicks = Get-ChildItem $_.Path -Recurse | `
-                            Sort-Object -Property LastWriteTime -Descending -Top 1 | `
-                            Get-ItemPropertyValue -Name LastWriteTime | `
-                            Select-Object -ExpandProperty Ticks
-                    }
+                if ($IsAFile) {
+                    $SourceItemTick = Get-Item $_.Path | `
+                        Get-ItemPropertyValue -Name LastWriteTime | `
+                        Select-Object -ExpandProperty Ticks
                 }
-                catch {
-                    $SourceItemTicks = $null
+                else {
+                    $SourceItemTick = Get-ChildItem $_.Path -Recurse | `
+                        Sort-Object -Property LastWriteTime -Descending -Top 1 | `
+                        Get-ItemPropertyValue -Name LastWriteTime | `
+                        Select-Object -ExpandProperty Ticks
                 }
+            }
+            catch {
+                $SourceItemTick = $null
+            }
 
-                try {
+            if (-not $SourceItemTick) {
+                $Predicates -= [BackupPredicates]::IsPathValid
+            }
+
+            try {
+                $DestinationItemTick
+
+                # if running for this source for first time, this path will not exist.
+                if (Test-Path -Path $_.Destination) {
                     if ($IsAFile) {
-                        $DestinationItemTicks = Join-Path -Path $_.Destination -ChildPath $Leaf | `
-                            Get-Item -ErrorAction SilentlyContinue | `
+                        $DestinationItemTick = Join-Path -Path $_.Destination -ChildPath $Leaf | `
+                            Get-Item | `
                             Get-ItemPropertyValue -Name LastWriteTime | `
                             Select-Object -ExpandProperty Ticks
                     }
                     else {
-                        $DestinationItemTicks = Join-Path -Path $_.Destination -ChildPath $Leaf | `
+                        $DestinationItemTick = Join-Path -Path $_.Destination -ChildPath $Leaf | `
                             Get-ChildItem -Recurse | `
                             Sort-Object -Property LastWriteTime -Descending -Top 1 | `
                             Get-ItemPropertyValue -Name LastWriteTime | `
                             Select-Object -ExpandProperty Ticks
                     }
                 }
-                catch {
-                    $DestinationItemTicks = $null
-                }
-
-                if (-not $SourceItemTicks) {
-                    $IsPathValid = $false
-                }
-                else {
-                    $NilDiff = $SourceItemTicks -eq $DestinationItemTicks
-                }
-
-                if ((-not $NilDiff) -and ($IsPathValid)) {
-                    try {
-                        if ($_.UpdatePolicy -eq "Overwrite") {
-                            $IsDestinationValid = Test-Path -Path $_.Destination
-
-                            if ($IsDestinationValid -eq $false) {
-                                New-Item -Path $_.Destination -ItemType Directory
-                            }
+            }
+            catch {
+                $DestinationItemTick = $null
+            }
+            
+            if ($SourceItemTick -ne $DestinationItemTick) {
+                $Predicates += [BackupPredicates]::IsItemDirty
+            }
+            
+            if ($Predicates -band [BackupPredicates]::IsItemDirty) {
+                try {
+                    if ($_.UpdatePolicy -eq "Overwrite") {
+                        if ((Test-Path -Path $_.Destination) -eq $false) {
+                            New-Item -Path $_.Destination -ItemType Directory
                         }
-                        elseif ($_.UpdatePolicy -eq "New") {
-                            $LeafName = Split-Path -Path $_.Path -LeafBase
-                            $LeafEx = Split-Path -Path $_.Path -Extension
+                    }
+                    elseif ($_.UpdatePolicy -eq "New") {
+                        $LeafName = Split-Path -Path $_.Path -LeafBase
+                        $LeafEx = Split-Path -Path $_.Path -Extension
 
-                            $Items = Get-ChildItem $_.Destination -Recurse
-                            if ($Items) {
+                        $Items = Get-ChildItem $_.Destination -Recurse
+                        if ($Items) {
 
-                                if ($IsAFile) {
-                                    $ItemNamePattern = "[$LeafName].*[$LeafEx]"
-                                    $ItemModePattern = '.*[a].*'
-                                }
-                                else {
-                                    $ItemNamePattern = "[$LeafName].*"
-                                    $ItemModePattern = '.*[d].*'
-                                }
+                            if ($IsAFile) {
+                                $ItemNamePattern = "[$LeafName].*[$LeafEx]"
+                                $ItemModePattern = '.*[a].*'
+                            }
+                            else {
+                                $ItemNamePattern = "[$LeafName].*"
+                                $ItemModePattern = '.*[d].*'
+                            }
                                     
-                                $LastIndexedName = $Items | `
-                                    Where-Object Name -match $ItemNamePattern | `
-                                    Where-Object Mode -match $ItemModePattern | `
-                                    Where-Object Name -match '.*\(\d+\)' | `
-                                    Sort-Object -Descending | `
-                                    Select-Object Name -First 1 -ExpandProperty Name
+                            $LastIndexedName = $Items | `
+                                Where-Object Name -match $ItemNamePattern | `
+                                Where-Object Mode -match $ItemModePattern | `
+                                Where-Object Name -match '.*\(\d+\)' | `
+                                Sort-Object -Descending | `
+                                Select-Object Name -First 1 -ExpandProperty Name
 
-                                if ($LastIndexedName) {
-                                    [int]$LastIndexValue = [regex]::Match($LastIndexedName, "(?<=\()\d+(?=\))").Value
-                                    $NewIndexValue = ++$LastIndexValue
-                                }
-                                else {
-                                    $NewIndexValue = 1
-                                }
+                            if ($LastIndexedName) {
+                                [int]$LastIndexValue = [regex]::Match($LastIndexedName, "(?<=\()\d+(?=\))").Value
+                                $NewIndexValue = ++$LastIndexValue
                             }
                             else {
                                 $NewIndexValue = 1
                             }
-                    
-                            $NewName = "$LeafName($NewIndexValue)$LeafEx"
-
-                            $NewPath = Join-Path -Path $_.Destination -ChildPath $NewName
-
-                            if ($IsAFile) {
-                                $NewItem = New-Item $NewPath -ItemType File
-                            }
-                            else {
-                                $NewItem = New-Item $NewPath -ItemType Directory
-                            }
-
-                            $_.Destination = $NewItem.FullName
-                            $IsDestinationValid = Test-Path -Path $NewItem
-                        }
-                    }
-                    catch {
-                        $IsDestinationValid = $false
-                    }
-                }
-
-                if ($NilDiff) {
-                    Write-Host "Backup data sources has no changes." -ForegroundColor Green 
-                }
-                elseif (($IsPathValid) -and ($IsDestinationValid)) {
-                    if ($_.UpdatePolicy -eq "Overwrite") {
-                        Copy-Item -Path $_.Path -Destination $_.Destination -Force -Recurse
-                        Write-Host "Backup data sources completed." -ForegroundColor Green
-                    }
-                    elseif ($_.UpdatePolicy -eq "New") {
-                        if ((Test-Path $_.Path -PathType Leaf) -eq $true) {
-                            Copy-Item -Path $_.Path -Destination $NewItem.FullName
                         }
                         else {
-                            Copy-Item -Path $_.Path -Destination $NewItem.FullName -Recurse -Container
+                            $NewIndexValue = 1
                         }
+                    
+                        $NewName = "$LeafName($NewIndexValue)$LeafEx"
+
+                        $NewPath = Join-Path -Path $_.Destination -ChildPath $NewName
+
+                        if ($IsAFile) {
+                            $NewItem = New-Item $NewPath -ItemType File
+                        }
+                        else {
+                            $NewItem = New-Item $NewPath -ItemType Directory
+                        }
+
+                        $_.Destination = $NewItem.FullName
+                        $Predicates += [BackupPredicates]::IsDestinationValid
                     }
                 }
-                elseif ((-not $IsPathValid) -and (-not $IsDestinationValid)) {
-                    Write-Host "Backup data sources was not completed due to invalid entries for 'Backups' Path and Destination field. To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
-                }
-                elseif (-not $IsPathValid) {
-                    Write-Host "Backup data sources was not completed due to invalid entry (or entries) for 'Backups' Path field. To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
-                }
-                elseif (-not $IsDestinationValid) {
-                    Write-Host "Backup data sources was not completed due to invalid entry for 'Backups' Destination field. To set a new value for 'Backups' call the following: Set-MKPowerShellSetting -Name Backups -Value @{Path: 'E:\file', Destination: 'E:\CloudFolder'}" -ForegroundColor Red 
+                catch {
+                    $Predicates -= [BackupPredicates]::IsDestinationValid
                 }
             }
+            
+            if ($Predicates -band [BackupPredicates]::AreSourcesReady) {
+                if ($_.UpdatePolicy -eq "Overwrite") {
+                    Copy-Item -Path $_.Path -Destination $_.Destination -Force -Recurse
+                }
+                elseif ($_.UpdatePolicy -eq "New") {
+                    if ($IsAFile) {
+                        Copy-Item -Path $_.Path -Destination $NewItem.FullName
+                    }
+                    else {
+                        Copy-Item -Path $_.Path -Destination $NewItem.FullName -Recurse -Container
+                    }
+                }
+                $Predicates += [BackupPredicates]::HasUpdatedSuccessfully
+            }
+            Write-SourceReport $Predicates $_
         }
     }
     else {
-        # if called manually when 'TurnOnBackup' is false 
-        if (-not $Initialize.IsPresent) { 
-            Write-Host "'TurnOnBackup' is currently disabled. To enable call: Set-MKPowerShellSetting -Name TurnOnBackup -Value '$true'." -ForegroundColor Yellow
+        # if called manually when 'TurnOnBackup' is false or config is invalid
+        Write-SourceReport $Predicates
+    }
+}
+
+function Write-SourceReport {
+    [CmdletBinding(PositionalBinding = $true)]
+    Param(
+        [Parameter(Mandatory = $true)]
+        [int]$Predicates,
+
+        [Parameter(Mandatory = $false)]
+        [psobject]$SourceItem
+    )
+    if ($SourceItem) {
+        $ItemName = Split-Path -Path $SourceItem -Leaf
+    }
+    
+    if (-not ($Predicates -band [BackupPredicates]::IsTurnOnBackupValid)) {
+        Write-Host @"
+'TurnOnBackup' is currently disabled. To enable call with -Force switch or enable by calling: 
+    Set-MKPowerShellSetting -Name TurnOnBackup -Value '$true'
+"@ -ForegroundColor Yellow
+    }
+    elseif (-not ($Predicates -band [BackupPredicates]::IsItemDirty)) {
+        Write-Host "The following item for MKPowerShell's Backup module detected no changes: $ItemName" -ForegroundColor Green 
+    }
+    elseif (-not ($Predicates -band [BackupPredicates]::IsPathValid)) {
+        Write-Host "The following item for MKPowerShell's Backup module cannot be found or accessed: $ItemName" -ForegroundColor Red
+    }
+    elseif (-not ($Predicates -band [BackupPredicates]::IsDestinationValid)) {
+        Write-Host @"
+The following item's destination folder for MKPowerShell's Backup module cannot be found or accessed: $ItemName
+"@ -ForegroundColor Red
+    }
+    elseif ($Predicates -band [BackupPredicates]::HasUpdatedSuccessfully) {
+        if ($SourceItem.UpdatePolicy -eq "Overwrite") {
+            Write-Host "The following item for MKPowerShell's Backup module has been updated: $ItemName" -ForegroundColor Green 
+        }
+        elseif ($SourceItem.UpdatePolicy -eq "New") {
+            Write-Host "The following item for MKPowerShell's Backup module has created an incremental copy: $ItemName" -ForegroundColor Green 
         }
     }
 }

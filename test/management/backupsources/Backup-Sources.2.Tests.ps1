@@ -11,7 +11,7 @@ Describe "Test Backup-Sources.2" {
     AfterAll {
         [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'TestFunctions', 'Deploy-TestFakes'))
     }
-    
+
     Context @"
 With 'Backups' field having 2 given file paths and 2 folder paths to same destination folder.
 Execute the following:
@@ -38,7 +38,7 @@ Execute the following:
             $ConfigFileJson = Get-Content -Path $__.ConfigFilePath -Raw | ConvertFrom-Json -AsHashtable
             $ConfigFileJson.Backups.Count | Should -Be 4
             
-            Start-MKPowerShell -ConfigFilePath $__.ConfigFilePath
+            Backup-Sources -ConfigFilePath $__.ConfigFilePath
 
             Get-ChildItem -Path $ConfigFileJson.Backups[0].Destination | ForEach-Object -Begin {$Items = 0} -Process {$Items++} -End {$Items} | Should -Be 4
 
