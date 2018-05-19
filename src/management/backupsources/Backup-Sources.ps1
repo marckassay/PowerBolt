@@ -170,6 +170,8 @@ function Backup-Sources {
                 $Predicates += [BackupPredicates]::HasUpdatedSuccessfully
             }
             Write-SourceReport $Predicates $_
+            # set $Predicates to value prior to entering into for-loop
+            $Predicates = [BackupPredicates]::IsPrecheckValid
         }
     }
     else {

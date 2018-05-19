@@ -64,7 +64,7 @@ function Deploy-TestFakes {
 
     $Backups = New-Object System.Collections.ArrayList
 
-    # TODO: this algorythm can be cleaned, just be mindful that I had issues calling Remove() directly
+    # TODO: this algorhythm can be cleaned, just be mindful that I had issues calling Remove() directly
     # hence the IndexOf and RemoveAt calls.
     for ($i = 0; $i -lt $UpdatePolicy.Count; $i++) {
 
@@ -88,13 +88,15 @@ function Deploy-TestFakes {
                     Get-Random -OutVariable SelectedFolder
 
                 if ($Path -match "(?<=[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}).*$") {
-                    $DeletedIndex3 = $(Join-Path -Path 'TestDrive:' -ChildPath $Matches[0])
+                    $DeletedIndex3 = $TFolderNames.IndexOf($(Join-Path -Path 'TestDrive:' -ChildPath $Matches[0]))
                     $TFolderNames.RemoveAt($DeletedIndex3)
                 }
 
                 Get-ChildItem -Path $Path -Recurse | ForEach-Object {
-                    $DeletedIndex4 = $TFileNames.IndexOf($_)
-                    $TFileNames.RemoveAt($DeletedIndex4)
+                    if (($_.FullName -match "(?<=[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}).+") ) {
+                        $DeletedIndex4 = $TFileNames.IndexOf($(Join-Path -Path 'TestDrive:' -ChildPath $Matches[0]))
+                        $TFileNames.RemoveAt($DeletedIndex4)
+                    }
                 }
             }
             "InvalidFile" {$Path = "TestDrive:\User\Bob\TestFile_xxx.txt"}
@@ -103,7 +105,7 @@ function Deploy-TestFakes {
         
         switch ($DestinationType[$i]) {
             "ValidFolder" { $Destination = $CloudFolderPath }
-            "InvalidFolder" {$Destination = "TestDrive:\User\Bob\CloudDrive\PowerSheXXXll" }
+            "InvalidFolder" {$Destination = "TestDrive:\User\Bob\CloudDrive\PowerSSShell" }
         }
 
         $Backups.Add(@{Path = "$Path"; Destination = "$Destination"; UpdatePolicy = "$($UpdatePolicy[$i])"})
