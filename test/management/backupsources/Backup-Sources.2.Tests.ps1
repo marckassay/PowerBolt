@@ -66,7 +66,6 @@ Execute the following:
             # call Backup-Sources to have files deployed to destination folder
             Backup-Sources
 
-
             Get-ChildItem -Path $ConfigFileJson.Backups[0].Destination | ForEach-Object -Begin {$Items = 0} -Process {$Items++} -End {$Items} | Should -Be 6
 
             $TestItemName = Get-Item $ConfigFileJson.Backups[0].Path | Select-Object -ExpandProperty Name | Split-Path -LeafBase

@@ -42,18 +42,16 @@ function Backup-Sources {
     if ($Predicates -band [BackupPredicates]::IsPrecheckValid) {
         Get-MKPowerShellSetting -Name 'Backups' | ForEach-Object {
             try {
-                $Predicates += Test-Path -Path $_.Path | ConvertTo-EnumFlag ([BackupPredicates]::IsPathValid)
-
                 $IsAFile = (Test-Path $_.Path -PathType Leaf) -eq $true
                 $Leaf = Split-Path -Path $_.Path -Leaf
 
                 if ($IsAFile) {
-                    $SourceItemTick = Get-Item $_.Path | `
+                    $SourceItemTick = Get-Item $_.Path -ErrorAction SilentlyContinue | `
                         Get-ItemPropertyValue -Name LastWriteTime | `
                         Select-Object -ExpandProperty Ticks
                 }
                 else {
-                    $SourceItemTick = Get-ChildItem $_.Path -Recurse | `
+                    $SourceItemTick = Get-ChildItem $_.Path -Recurse -ErrorAction SilentlyContinue| `
                         Sort-Object -Property LastWriteTime -Descending -Top 1 | `
                         Get-ItemPropertyValue -Name LastWriteTime | `
                         Select-Object -ExpandProperty Ticks
@@ -63,8 +61,8 @@ function Backup-Sources {
                 $SourceItemTick = $null
             }
 
-            if (-not $SourceItemTick) {
-                $Predicates -= [BackupPredicates]::IsPathValid
+            if ($SourceItemTick) {
+                $Predicates += [BackupPredicates]::IsPathValid
             }
 
             try {
@@ -74,13 +72,13 @@ function Backup-Sources {
                 if (Test-Path -Path $_.Destination) {
                     if ($IsAFile) {
                         $DestinationItemTick = Join-Path -Path $_.Destination -ChildPath $Leaf | `
-                            Get-Item | `
+                            Get-Item -ErrorAction SilentlyContinue | `
                             Get-ItemPropertyValue -Name LastWriteTime | `
                             Select-Object -ExpandProperty Ticks
                     }
                     else {
                         $DestinationItemTick = Join-Path -Path $_.Destination -ChildPath $Leaf | `
-                            Get-ChildItem -Recurse | `
+                            Get-ChildItem -Recurse -ErrorAction SilentlyContinue | `
                             Sort-Object -Property LastWriteTime -Descending -Top 1 | `
                             Get-ItemPropertyValue -Name LastWriteTime | `
                             Select-Object -ExpandProperty Ticks
@@ -91,7 +89,7 @@ function Backup-Sources {
                 $DestinationItemTick = $null
             }
             
-            if ($SourceItemTick -ne $DestinationItemTick) {
+            if (($SourceItemTick -ne $DestinationItemTick) -or ((-not $SourceItemTick) -and (-not $DestinationItemTick))) {
                 $Predicates += [BackupPredicates]::IsItemDirty
             }
             
@@ -190,7 +188,7 @@ function Write-SourceReport {
         [psobject]$SourceItem
     )
     if ($SourceItem) {
-        $ItemName = Split-Path -Path $SourceItem -Leaf
+        $ItemName = Split-Path -Path $SourceItem.Path -Leaf
     }
     
     if (-not ($Predicates -band [BackupPredicates]::IsTurnOnBackupValid)) {
