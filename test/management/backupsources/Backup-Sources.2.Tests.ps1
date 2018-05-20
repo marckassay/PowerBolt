@@ -35,12 +35,16 @@ Execute the following:
                 -DestinationType $DestinationType `
                 -UpdatePolicy $UpdatePolicy
 
-            $ConfigFileJson = Get-Content -Path $__.ConfigFilePath -Raw | ConvertFrom-Json -AsHashtable
+            $ConfigFileJson = Get-Content -Path $__.ConfigFilePath -Raw | `
+                ConvertFrom-Json -AsHashtable
+            
             $ConfigFileJson.Backups.Count | Should -Be 4
             
             Backup-Sources -ConfigFilePath $__.ConfigFilePath
 
-            Get-ChildItem -Path $ConfigFileJson.Backups[0].Destination | ForEach-Object -Begin {$Items = 0} -Process {$Items++} -End {$Items} | Should -Be 4
+            Get-ChildItem -Path $ConfigFileJson.Backups[0].Destination | `
+                ForEach-Object -Begin {$Items = 0} -Process {$Items++} -End {$Items} | `
+                Should -Be 4
 
             $TestItemName = Get-Item $ConfigFileJson.Backups[0].Path | Select-Object -ExpandProperty Name | Split-Path -LeafBase
             Get-ChildItem $ConfigFileJson.Backups[0].Destination | Where-Object -Property Name -Match "$TestItemName[(][\d]+[)]\.txt" | Should -BeOfType System.IO.FileInfo

@@ -1,7 +1,6 @@
 using module .\..\..\ConvertTo-EnumFlag.ps1
 using module .\.\BackupPredicates.ps1
 
-
 function Backup-Sources {
     [CmdletBinding(PositionalBinding = $False)]
     Param(
@@ -14,13 +13,27 @@ function Backup-Sources {
 
     # TODO: need to create a config validator and use it at least here
     if ($ConfigFilePath) {
-        [BackupPredicates]$Predicates = Test-Path $ConfigFilePath | ConvertTo-EnumFlag ([BackupPredicates]::IsConfigFileValid)
         $script:MKPowerShellConfigFilePath = $ConfigFilePath
     }
-    else {
-        [BackupPredicates]$Predicates = [BackupPredicates]::IsConfigFileValid
-    }
+    
+    try {
+        $ProbeBackups = Get-MKPowerShellSetting -Name 'Backups'
+        $Predicates = $ProbeBackups[0] -is [hashtable] | ConvertTo-EnumFlag ([BackupPredicates]::IsConfigFileValid)
 
+        # doing deeper test against Backups
+        if ($Predicates -band [BackupPredicates]::IsConfigFileValid) {
+            if (($ProbeBackups.Path[0] -ne "") -or ($ProbeBackups.Destination[0] -ne "") -or (($ProbeBackups.UpdatePolicy[0] -eq "New") -or ($ProbeBackups.UpdatePolicy[0] -eq "Overwrite"))) {
+                [BackupPredicates]$Predicates = [BackupPredicates]::IsConfigFileValid
+            }
+            else {
+                $Predicates = 0
+            }
+        }
+    }
+    catch {
+        $Predicates = 0
+    }
+    
     if ($Predicates -band [BackupPredicates]::IsConfigFileValid) {
         if (-not $Force.IsPresent) { 
             $Predicates += (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true | ConvertTo-EnumFlag ([BackupPredicates]::IsTurnOnBackupValid)
@@ -51,7 +64,7 @@ function Backup-Sources {
                         Select-Object -ExpandProperty Ticks
                 }
                 else {
-                    $SourceItemTick = Get-ChildItem $_.Path -Recurse -ErrorAction SilentlyContinue| `
+                    $SourceItemTick = Get-ChildItem $_.Path -Recurse -ErrorAction SilentlyContinue | `
                         Sort-Object -Property LastWriteTime -Descending -Top 1 | `
                         Get-ItemPropertyValue -Name LastWriteTime | `
                         Select-Object -ExpandProperty Ticks
@@ -99,6 +112,8 @@ function Backup-Sources {
                         if ((Test-Path -Path $_.Destination) -eq $false) {
                             New-Item -Path $_.Destination -ItemType Directory
                         }
+
+                        $Predicates += [BackupPredicates]::IsDestinationValid
                     }
                     elseif ($_.UpdatePolicy -eq "New") {
                         $LeafName = Split-Path -Path $_.Path -LeafBase
@@ -106,7 +121,6 @@ function Backup-Sources {
 
                         $Items = Get-ChildItem $_.Destination -Recurse
                         if ($Items) {
-
                             if ($IsAFile) {
                                 $ItemNamePattern = "[$LeafName].*[$LeafEx]"
                                 $ItemModePattern = '.*[a].*'
@@ -143,7 +157,11 @@ function Backup-Sources {
                             $NewItem = New-Item $NewPath -ItemType File
                         }
                         else {
-                            $NewItem = New-Item $NewPath -ItemType Directory
+                            # NOTE: if a folder is created for a directory items, the Copy-Item will move
+                            # a folder inside a folder, which is not want we want; hence no New-Item for 
+                            # folder items
+                            $NewItem = @{FullName = ''}
+                            $NewItem.FullName = $NewPath
                         }
 
                         $_.Destination = $NewItem.FullName
@@ -151,7 +169,7 @@ function Backup-Sources {
                     }
                 }
                 catch {
-                    $Predicates -= [BackupPredicates]::IsDestinationValid
+                    Write-Error $Error
                 }
             }
             
@@ -164,11 +182,12 @@ function Backup-Sources {
                         Copy-Item -Path $_.Path -Destination $NewItem.FullName
                     }
                     else {
-                        Copy-Item -Path $_.Path -Destination $NewItem.FullName -Recurse -Container
+                        Copy-Item -Path $_.Path -Destination $NewItem.FullName -Recurse -Container -Force
                     }
                 }
                 $Predicates += [BackupPredicates]::HasUpdatedSuccessfully
             }
+
             Write-SourceReport $Predicates $_
             # set $Predicates to value prior to entering into for-loop
             $Predicates = [BackupPredicates]::IsPrecheckValid
@@ -192,25 +211,26 @@ function Write-SourceReport {
     if ($SourceItem) {
         $ItemName = Split-Path -Path $SourceItem.Path -Leaf
     }
-    
-    if (-not ($Predicates -band [BackupPredicates]::IsTurnOnBackupValid)) {
+
+    if (-not ([BackupPredicates]$Predicates -band [BackupPredicates]::IsTurnOnBackupValid)) {
         Write-Host @"
 'TurnOnBackup' is currently disabled. To enable call with -Force switch or enable by calling: 
     Set-MKPowerShellSetting -Name TurnOnBackup -Value '$true'
 "@ -ForegroundColor Yellow
     }
-    elseif (-not ($Predicates -band [BackupPredicates]::IsItemDirty)) {
+    elseif (-not ([BackupPredicates]$Predicates -band [BackupPredicates]::IsItemDirty)) {
         Write-Host "The following item for MKPowerShell's Backup module detected no changes: $ItemName" -ForegroundColor Green 
     }
-    elseif (-not ($Predicates -band [BackupPredicates]::IsPathValid)) {
+    elseif (-not ([BackupPredicates]$Predicates -band [BackupPredicates]::IsPathValid)) {
         Write-Host "The following item for MKPowerShell's Backup module cannot be found or accessed: $ItemName" -ForegroundColor Red
     }
-    elseif (-not ($Predicates -band [BackupPredicates]::IsDestinationValid)) {
+    elseif (-not ([BackupPredicates]$Predicates -band [BackupPredicates]::IsDestinationValid)) {
         Write-Host @"
 The following item's destination folder for MKPowerShell's Backup module cannot be found or accessed: $ItemName
-"@ -ForegroundColor Red
+This may be due to initial Backup execution.
+"@ -ForegroundColor Yellow
     }
-    elseif ($Predicates -band [BackupPredicates]::HasUpdatedSuccessfully) {
+    elseif ([BackupPredicates]$Predicates -band [BackupPredicates]::HasUpdatedSuccessfully) {
         if ($SourceItem.UpdatePolicy -eq "Overwrite") {
             Write-Host "The following item for MKPowerShell's Backup module has been updated: $ItemName" -ForegroundColor Green 
         }

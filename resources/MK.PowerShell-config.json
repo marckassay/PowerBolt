@@ -2,7 +2,12 @@
   "LastLocation": "",
   "TurnOnAvailableUpdates": "true",
   "HistoryLocation": "",
-  "Backups": "",
+  "Backups": [{
+    "UpdatePolicy": "",
+    "Path": "",
+    "Destination": ""
+  }],
+
   "TurnOnQuickRestart": "true",
   "TurnOnBackup": "false",
   "BackupPolicy": "auto",
