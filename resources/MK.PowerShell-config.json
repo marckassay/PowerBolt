@@ -1,17 +1,16 @@
 {
-  "LastLocation": "",
-  "TurnOnAvailableUpdates": "true",
-  "HistoryLocation": "",
-  "Backups": [{
-    "UpdatePolicy": "",
-    "Path": "",
-    "Destination": ""
-  }],
-
-  "TurnOnQuickRestart": "true",
-  "TurnOnBackup": "false",
   "BackupPolicy": "auto",
-  "TurnOnRememberLastLocation": "true",
+  "Backups": [{
+    "Destination": "",
+    "Path": "",
+    "UpdatePolicy": ""
+  }],
+  "HistoryLocation": "",
+  "LastLocation": "",
+  "NuGetApiKey": "",
+  "TurnOnAvailableUpdates": "true",
+  "TurnOnBackup": "false",
   "TurnOnHistoryRecording": "true",
-  "NuGetApiKey": ""
+  "TurnOnQuickRestart": "true",
+  "TurnOnRememberLastLocation": "true"
 }
