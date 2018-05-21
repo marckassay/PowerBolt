@@ -1,9 +1,7 @@
-using module .\management\backupsources\BackupPredicates.ps1
-
 # TODO: look into EnumConverter to see if it can be used here
 # https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.enumconverter?view=netframework-4.7.1
 
-# Must be called as the following (note the parenthesis)
+# Must be called as the following (note the parentheses)
 # ConvertTo-EnumFlag ([BackupPredicates]::IsConfigFileValid)
 function ConvertTo-EnumFlag {
     [CmdletBinding()]

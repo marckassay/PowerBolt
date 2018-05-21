@@ -22,10 +22,13 @@ function Backup-Sources {
 
         # doing deeper test against Backups
         if ($Predicates -band [BackupPredicates]::IsConfigFileValid) {
-            if (($ProbeBackups.Path[0] -ne "") -or ($ProbeBackups.Destination[0] -ne "") -or (($ProbeBackups.UpdatePolicy[0] -eq "New") -or ($ProbeBackups.UpdatePolicy[0] -eq "Overwrite"))) {
-                [BackupPredicates]$Predicates = [BackupPredicates]::IsConfigFileValid
-            }
-            else {
+            if (
+                ($ProbeBackups.Path[0] -eq "") -or 
+                ($ProbeBackups.Destination[0] -eq "") -or 
+                (
+                    ($ProbeBackups.UpdatePolicy[0] -ne "New") -and ($ProbeBackups.UpdatePolicy[0] -ne "Overwrite")
+                )
+            ) {
                 $Predicates = 0
             }
         }
@@ -79,8 +82,6 @@ function Backup-Sources {
             }
 
             try {
-                $DestinationItemTick
-
                 # if running for this source for first time, this path will not exist.
                 if (Test-Path -Path $_.Destination) {
                     if ($IsAFile) {
