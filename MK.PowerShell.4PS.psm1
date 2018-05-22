@@ -27,4 +27,7 @@ Param(
 
 $script:MKPowerShellConfigFilePath = $ConfigFilePath
 
+# setting this to -1 to display all items for ListItems.  For instance, Get-Module's ExportedFunction
+$global:FormatEnumerationLimit = -1
+
 Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath

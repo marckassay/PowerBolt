@@ -63,10 +63,13 @@
     # TypesToProcess = @()
 
     # Format files (.ps1xml) to be loaded when importing this module
-    FormatsToProcess  = @('.\src\formats\HistoryInfo.format.ps1xml')
+    FormatsToProcess  = @(
+        '.\src\format\HistoryInfo.format.ps1xml',
+        '.\src\format\PSModuleInfo.format.ps1xml'
+    )
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-    # NestedModules = @()
+    NestedModules     = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     FunctionsToExport = @(
@@ -126,7 +129,7 @@
             # LicenseUri = ''
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/marckassay/MK.PowerShell.4PS'
 
             # A URL to an icon representing this module.
             # IconUri = ''
@@ -152,6 +155,4 @@
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''
-
 }
-

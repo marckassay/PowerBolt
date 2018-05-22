@@ -2,7 +2,7 @@
 <Configuration>
     <ViewDefinitions>
         <View>
-            <Name>MKPowerShell4PS.Formats.HistoryInfo</Name>
+            <Name>MKPowerShell4PS.Format.HistoryInfo</Name>
             <ViewSelectedBy>
                 <TypeName>Microsoft.PowerShell.Commands.HistoryInfo</TypeName>
             </ViewSelectedBy>
@@ -29,7 +29,7 @@
                         <TableColumnItems>
                             <TableColumnItem>
                                 <PropertyName>StartExecutionTime</PropertyName>
-                                <FormatString>{0:HH}:{0:MM}</FormatString>
+                                <FormatString>{0:hh}:{0:mm}</FormatString>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <PropertyName>CommandLine</PropertyName>
