@@ -2,6 +2,63 @@
 <Configuration>
     <ViewDefinitions>
         <View>
+            <Name>Module</Name>
+            <ViewSelectedBy>
+                <TypeName>System.Management.Automation.PSModuleInfo</TypeName>
+            </ViewSelectedBy>
+            <ListControl>
+                <ListEntries>
+                    <ListEntry>
+                        <ListItems>
+                            <ListItem>
+                                <PropertyName>Name</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Path</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Description</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>ModuleType</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Version</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <Label>ProjectUri</Label>
+                                <ScriptBlock>$_.PrivateData.PSData.ProjectUri</ScriptBlock>
+                            </ListItem>
+                            <ListItem>
+                                <Label>NestedModules</Label>
+                                <ScriptBlock>$_.NestedModules.Name | Foreach-Object {"`n$_"}</ScriptBlock>
+                            </ListItem>
+                            <ListItem>
+                                <Label>ExportedFormatFiles</Label>
+                                <ScriptBlock>$_.ExportedFormatFiles | Foreach-Object {"`n$_"}</ScriptBlock>
+                            </ListItem>
+                            <ListItem>
+                                <Label>ExportedFunctions</Label>
+                                <ScriptBlock>$_.ExportedFunctions.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
+                            </ListItem>
+                            <ListItem>
+                                <Label>ExportedCmdlets</Label>
+                                <ScriptBlock>$_.ExportedCmdlets.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
+                            </ListItem>
+                            <ListItem>
+                                <Label>ExportedVariables</Label>
+                                <ScriptBlock>$_.ExportedVariables.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
+                            </ListItem>
+                            <ListItem>
+                                <Label>ExportedAliases</Label>
+                                <ScriptBlock>$_.ExportedAliases.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
+                            </ListItem>
+                        </ListItems>
+                    </ListEntry>
+                </ListEntries>
+            </ListControl>
+        </View>
+        <View>
             <Name>MKPowerShell4PS.Format.PSModuleInfo</Name>
             <ViewSelectedBy>
                 <TypeName>System.Management.Automation.PSModuleInfo</TypeName>
@@ -59,63 +116,6 @@
                     </WideEntry>
                 </WideEntries>
             </WideControl>
-        </View>
-        <View>
-            <Name>Module</Name>
-            <ViewSelectedBy>
-                <TypeName>System.Management.Automation.PSModuleInfo</TypeName>
-            </ViewSelectedBy>
-            <ListControl>
-                <ListEntries>
-                    <ListEntry>
-                        <ListItems>
-                            <ListItem>
-                                <PropertyName>Name</PropertyName>
-                            </ListItem>
-                            <ListItem>
-                                <PropertyName>Path</PropertyName>
-                            </ListItem>
-                            <ListItem>
-                                <PropertyName>Description</PropertyName>
-                            </ListItem>
-                            <ListItem>
-                                <PropertyName>ModuleType</PropertyName>
-                            </ListItem>
-                            <ListItem>
-                                <PropertyName>Version</PropertyName>
-                            </ListItem>
-                            <ListItem>
-                                <Label>ProjectUri</Label>
-                                <ScriptBlock>$_.PrivateData.PSData.ProjectUri</ScriptBlock>
-                            </ListItem>
-                            <ListItem>
-                                <Label>NestedModules</Label>
-                                <ScriptBlock>$_.NestedModules.Name | Foreach-Object {"`n$_"}</ScriptBlock>
-                            </ListItem>
-                            <ListItem>
-                                <Label>ExportedFormatFiles</Label>
-                                <ScriptBlock>$_.ExportedFormatFiles | Foreach-Object {"`n$_"}</ScriptBlock>
-                            </ListItem>
-                            <ListItem>
-                                <Label>ExportedFunctions</Label>
-                                <ScriptBlock>$_.ExportedFunctions.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
-                            </ListItem>
-                            <ListItem>
-                                <Label>ExportedCmdlets</Label>
-                                <ScriptBlock>$_.ExportedCmdlets.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
-                            </ListItem>
-                            <ListItem>
-                                <Label>ExportedVariables</Label>
-                                <ScriptBlock>$_.ExportedVariables.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
-                            </ListItem>
-                            <ListItem>
-                                <Label>ExportedAliases</Label>
-                                <ScriptBlock>$_.ExportedAliases.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
-                            </ListItem>
-                        </ListItems>
-                    </ListEntry>
-                </ListEntries>
-            </ListControl>
         </View>
     </ViewDefinitions>
 </Configuration>

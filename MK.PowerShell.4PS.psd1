@@ -90,6 +90,7 @@
         'Update-ManifestFunctionsToExportField',
         'Update-ReadmeFromPlatyPSMarkdown',
         'Update-RootModuleUsingStatements',
+        'Get-ManifestKey',
         'Write-File',
         'Publish-ModuleToNuGetGallery',
         'Restart-PWSH',

@@ -3,7 +3,7 @@ function Start-MKPowerShell {
     [CmdletBinding(PositionalBinding = $False)]
     Param(
         [Parameter(Mandatory = $False)]
-        [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")
+        [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath
     )
     
     if ((Test-Path -Path $ConfigFilePath) -eq $false) {
@@ -19,6 +19,7 @@ function Start-MKPowerShell {
     Restore-QuickRestartSetting -Initialize
     Backup-Sources -Initialize
     Restore-History -Initialize
+    Restore-Formats -Initialize
 
     Register-Shutdown
 }
@@ -98,5 +99,23 @@ function Restore-History {
 
             Write-Host "History is restored from previous session(s)." -ForegroundColor Green
         }
+    }
+}
+
+function Restore-Formats {
+    [CmdletBinding()]
+    Param(
+        [switch]$Initialize
+    )
+    
+    # TODO: can't seem to have manifest's 'FormatsToProcess' key  to load files listed in it.  So 
+    # manually doing it for now.
+    if ((Get-MKPowerShellSetting -Name 'TurnOnBetterFormats') -eq $true) {
+        # setting this to -1 to display/view all items for ListItems.  For instance, Get-Module's 
+        # ExportedFunction
+        $global:FormatEnumerationLimit = -1
+        
+        $FormatFilePaths = Get-ManifestKey -Path $Script:PSCommandPath -Key 'FormatsToProcess' 
+        Update-FormatData -PrependPath $FormatFilePaths
     }
 }

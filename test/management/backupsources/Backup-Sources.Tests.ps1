@@ -2,6 +2,7 @@ using module ..\..\.\TestFunctions.psm1
 using module .\Deploy-TestFakes.psm1
 
 [TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+[TestFunctions]::AUTO_START = $true
 
 $script:PreTicks
 $script:ConfigFileJson

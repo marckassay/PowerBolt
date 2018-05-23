@@ -7,6 +7,7 @@ using module .\src\management\Set-LocationAndStore.ps1
 using module .\src\management\backupsources\Backup-Sources.ps1
 using module .\src\module\Get-ModuleInfo.ps1
 using module .\src\module\manifest\Update-ManifestFunctionsToExportField.ps1
+using module .\src\module\manifest\Get-ManifestKey.ps1
 using module .\src\module\Update-RootModuleUsingStatements.ps1
 using module .\src\profile\Add-ModuleToProfile.ps1
 using module .\src\settings\Get-MKPowerShellSetting.ps1 
@@ -22,12 +23,14 @@ using module .\src\history\Import-History.ps1
 
 Param(
     [Parameter(Mandatory = $False)]
-    [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")
+    [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json"),
+
+    [Parameter(Mandatory = $False)]
+    [bool]$SUT = $False
 )
 
-$script:MKPowerShellConfigFilePath = $ConfigFilePath
-
-# setting this to -1 to display all items for ListItems.  For instance, Get-Module's ExportedFunction
-$global:FormatEnumerationLimit = -1
-
-Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath
+$script:MKPowerShellConfigFilePath = $script:ConfigFilePath
+$script:MKPowerShellSUT = $script:SUT
+if ($script:SUT -eq $False) {
+    Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath
+}

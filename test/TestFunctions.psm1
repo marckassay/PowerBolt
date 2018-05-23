@@ -1,22 +1,23 @@
 class TestFunctions {
     
     static [string]$MODULE_FOLDER
+    static [string]$AUTO_START
 
     static [PSObject]DescribeSetup() {
         return [TestFunctions]::DescribeSetup([TestFunctions]::MODULE_FOLDER, '', '')
     }
 
-    static [PSObject]DescribeSetupUsingTestFiles([string]$TestModuleName, [string]$TestConfigFile) {
+    <#     static [PSObject]DescribeSetupUsingTestFiles([string]$TestModuleName, [string]$TestConfigFile) {
         return [TestFunctions]::DescribeSetup([TestFunctions]::MODULE_FOLDER, $TestModuleName, $TestConfigFile)
-    }
+    } #>
 
     static [PSObject]DescribeSetupUsingTestModule([string]$TestModuleName) {
         return [TestFunctions]::DescribeSetup([TestFunctions]::MODULE_FOLDER, $TestModuleName, '')
     }
 
-    static [PSObject]DescribeSetupUsingTestConfigFile([string]$TestConfigFile) {
+    <#     static [PSObject]DescribeSetupUsingTestConfigFile([string]$TestConfigFile) {
         return [TestFunctions]::DescribeSetup([TestFunctions]::MODULE_FOLDER, '', $TestConfigFile)
-    }
+    } #>
 
     static [PSObject]DescribeSetup([string]$ModuleFolder, [string]$TestModuleName, [string]$TestConfigFilePath) {
         Set-Location -Path $ModuleFolder
@@ -34,7 +35,12 @@ class TestFunctions {
             $ConfigFilePath = $TestConfigFilePath
         }
 
-        Get-Item '*.psd1' | Import-Module -ArgumentList $ConfigFilePath -Global -Force
+        # ArgumentList: ConfigFilePath and switch for SUT var
+        Get-Item '*.psd1' | Import-Module -ArgumentList @($ConfigFilePath, $true) -Global -Force
+
+        if ([TestFunctions]::AUTO_START -eq $true) {
+            Start-MKPowerShell -ConfigFilePath $ConfigFilePath
+        }
 
         if ($TestModuleName -ne '') {
             Copy-Item -Path ".\test\testresource\$TestModuleName" -Destination 'TestDrive:\' -Container -Recurse
@@ -57,6 +63,6 @@ class TestFunctions {
     static [void]DescribeTeardown([string[]]$ModuleName) {
         Get-Module -Name $ModuleName | Remove-Module -Force -ErrorAction SilentlyContinue
 
-        Set-Alias sl Set-Location -Scope Global
+        Set-Alias sl Set-Location -Scope Global -Force -ErrorAction SilentlyContinue
     }
 }
