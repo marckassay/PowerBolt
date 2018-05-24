@@ -17,13 +17,13 @@ function Search-Items {
         [switch]$Recurse
     )
 
-    Get-ChildItem $Path -Include $Include -Exclude $Exclude -Recurse:$Recurse.IsPresent -PipelineVariable Fi | `
+    Get-ChildItem $Path -Include $Include -Exclude $Exclude -Recurse:$Recurse.IsPresent -PipelineVariable Fi -File | `
         Get-Content | `
         Select-String -Pattern $Pattern -PipelineVariable Ss | `
         ForEach-Object {
         @"
 Item: $($Fi.FullName)
-$Ss.Line
+$($Ss.Line)
 
 "@
     }

@@ -1,3 +1,5 @@
+using module .\..\module\manifest\Get-ManifestKey.ps1
+
 $script:ConfigFileParentPath 
 function Start-MKPowerShell {
     [CmdletBinding(PositionalBinding = $False)]
