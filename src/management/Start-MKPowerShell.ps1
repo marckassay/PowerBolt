@@ -115,7 +115,10 @@ function Restore-Formats {
         # ExportedFunction
         $global:FormatEnumerationLimit = -1
         
-        $FormatFilePaths = Get-ManifestKey -Path $Script:PSCommandPath -Key 'FormatsToProcess' 
+        $ModuleHome = $MyInvocation.ScriptName | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
+        $FormatFilePaths = Get-ManifestKey -Path $ModuleHome -Key 'FormatsToProcess' | `
+            ForEach-Object {Join-Path -Path $ModuleHome -ChildPath $_}
+        
         Update-FormatData -PrependPath $FormatFilePaths
     }
 }

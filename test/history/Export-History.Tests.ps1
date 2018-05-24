@@ -21,6 +21,7 @@ Describe "Test Export-History" {
                 Select-Object -ExpandProperty FullName
             
             Mock Get-History {
+                # NOTE: this relative path sometimes causes an issue when running TestSuite.ps1
                 $TestHistory = Import-Csv -Path .\test\history\TestHistory.csv | Add-History
                 return $TestHistory
             }

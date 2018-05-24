@@ -60,7 +60,7 @@
     # ScriptsToProcess  = @()
 
     # Type files (.ps1xml) to be loaded when importing this module
-    # TypesToProcess = @()
+    TypesToProcess    = @( '.\src\type\Gen.type.ps1xml')
 
     # Format files (.ps1xml) to be loaded when importing this module
     FormatsToProcess  = @(

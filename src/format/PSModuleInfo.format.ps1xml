@@ -2,13 +2,16 @@
 <Configuration>
     <ViewDefinitions>
         <View>
-            <Name>Module</Name>
+            <Name>MKPowerShell4PS.Format.PSModuleInfo.List</Name>
             <ViewSelectedBy>
                 <TypeName>System.Management.Automation.PSModuleInfo</TypeName>
             </ViewSelectedBy>
             <ListControl>
                 <ListEntries>
                     <ListEntry>
+                        <!-- TODO: trying to limit this view only when PSModuleInfo has single element for its Name property -->
+                        <!-- https://msdn.microsoft.com/en-us/library/gg580904(v=vs.85).aspx -->
+                        <!--                         <EntrySelectedBy><SelectionCondition><TypeName>MKPowerShell4PS.Format.PSModuleInfo.List</TypeName><ScriptBlock>$_.Name.GetType() -is [System.String]</ScriptBlock></SelectionCondition></EntrySelectedBy> -->
                         <ListItems>
                             <ListItem>
                                 <PropertyName>Name</PropertyName>
@@ -31,27 +34,27 @@
                             </ListItem>
                             <ListItem>
                                 <Label>NestedModules</Label>
-                                <ScriptBlock>$_.NestedModules.Name | Foreach-Object {"`n$_"}</ScriptBlock>
+                                <ScriptBlock>$_.NestedModules.Name | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
                             </ListItem>
                             <ListItem>
                                 <Label>ExportedFormatFiles</Label>
-                                <ScriptBlock>$_.ExportedFormatFiles | Foreach-Object {"`n$_"}</ScriptBlock>
+                                <ScriptBlock>$_.ExportedFormatFiles | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
                             </ListItem>
                             <ListItem>
                                 <Label>ExportedFunctions</Label>
-                                <ScriptBlock>$_.ExportedFunctions.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
+                                <ScriptBlock>$_.ExportedFunctions.Keys | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
                             </ListItem>
                             <ListItem>
                                 <Label>ExportedCmdlets</Label>
-                                <ScriptBlock>$_.ExportedCmdlets.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
+                                <ScriptBlock>$_.ExportedCmdlets.Keys | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
                             </ListItem>
                             <ListItem>
                                 <Label>ExportedVariables</Label>
-                                <ScriptBlock>$_.ExportedVariables.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
+                                <ScriptBlock>$_.ExportedVariables.Keys | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
                             </ListItem>
                             <ListItem>
                                 <Label>ExportedAliases</Label>
-                                <ScriptBlock>$_.ExportedAliases.Keys | Foreach-Object {"`n$_"}</ScriptBlock>
+                                <ScriptBlock>$_.ExportedAliases.Keys | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
                             </ListItem>
                         </ListItems>
                     </ListEntry>
@@ -59,7 +62,7 @@
             </ListControl>
         </View>
         <View>
-            <Name>MKPowerShell4PS.Format.PSModuleInfo</Name>
+            <Name>Module</Name>
             <ViewSelectedBy>
                 <TypeName>System.Management.Automation.PSModuleInfo</TypeName>
             </ViewSelectedBy>
