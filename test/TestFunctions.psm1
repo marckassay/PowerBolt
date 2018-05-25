@@ -35,6 +35,9 @@ class TestFunctions {
             $ConfigFilePath = $TestConfigFilePath
         }
 
+        # TODO: find all functions mark as exported and insert them into test version of .psd1 and .psm1 file
+        #Search-Items .\src\ -Pattern "\#.?NoExport:" -Recurse | Where-Object {$_ -match '(?<=NoExport:)[\w]*[-][\w]*'}
+
         # ArgumentList: ConfigFilePath and switch for SUT var
         Get-Item '*.psd1' | Import-Module -ArgumentList @($ConfigFilePath, $true) -Global -Force
 
@@ -48,9 +51,10 @@ class TestFunctions {
             Get-Item "TestDrive:\$TestModuleName\$TestModuleName.psd1" | Import-Module -Global -Force
 
             return @{
-                ConfigFilePath   = $ConfigFilePath
-                TestManifestPath = (Join-Path -Path 'TestDrive:\' -ChildPath "\$TestModuleName\$TestModuleName.psd1")
-                TestModulePath   = (Join-Path -Path 'TestDrive:\' -ChildPath "\$TestModuleName\$TestModuleName.psm1")
+                ConfigFilePath          = $ConfigFilePath
+                TestModuleDirectoryPath = (Join-Path -Path 'TestDrive:\' -ChildPath $TestModuleName)
+                TestManifestPath        = (Join-Path -Path 'TestDrive:\' -ChildPath "\$TestModuleName\$TestModuleName.psd1")
+                TestModulePath          = (Join-Path -Path 'TestDrive:\' -ChildPath "\$TestModuleName\$TestModuleName.psm1")
             }
         }
         else {

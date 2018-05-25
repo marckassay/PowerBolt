@@ -26,7 +26,7 @@ function Start-MKPowerShell {
     Register-Shutdown
 }
 
-# NoExport: Restore-RememberLastLocation
+# Export: Restore-RememberLastLocation
 function Restore-RememberLastLocation {
     [CmdletBinding()]
     Param(
@@ -53,7 +53,7 @@ function Restore-RememberLastLocation {
     }
 }
 
-# NoExport: Restore-QuickRestartSetting
+# Export: Restore-QuickRestartSetting
 function Restore-QuickRestartSetting {
     [CmdletBinding()]
     Param(

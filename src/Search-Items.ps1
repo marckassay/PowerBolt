@@ -17,14 +17,17 @@ function Search-Items {
         [switch]$Recurse
     )
 
-    Get-ChildItem $Path -Include $Include -Exclude $Exclude -Recurse:$Recurse.IsPresent -PipelineVariable Fi -File | `
+    [hashtable[]]$Results = Get-ChildItem $Path -Include $Include -Exclude $Exclude -Recurse:$Recurse.IsPresent -PipelineVariable Fi -File | `
         Get-Content | `
         Select-String -Pattern $Pattern -PipelineVariable Ss | `
-        ForEach-Object {
-        @"
-Item: $($Fi.FullName)
-$($Ss.Line)
-
-"@
+        ForEach-Object -Process {
+        $Result = @{
+            Item        = $Fi
+            MatchedLine = $Ss.Line
+            Match       = $Ss.Matches[0].Value.Trim()
+        }
+        $Result
     }
+
+    $Results
 }
