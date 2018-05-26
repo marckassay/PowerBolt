@@ -1,11 +1,11 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md
 schema: 2.0.0
 ---
 
-# Set-LocationAndStore
+# Import-History
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-LocationAndStore [[-Path] <String>] [-LiteralPath <String>] [-PassThru] [<CommonParameters>]
+Import-History [[-Path] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,36 +29,6 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
-
-### -LiteralPath
-{{Fill LiteralPath Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-{{Fill PassThru Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Path
 {{Fill Path Description}}

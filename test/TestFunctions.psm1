@@ -36,7 +36,7 @@ class TestFunctions {
         }
 
         # TODO: find all functions mark as exported and insert them into test version of .psd1 and .psm1 file
-        #Search-Items .\src\ -Pattern "\#.?NoExport:" -Recurse | Where-Object {$_ -match '(?<=NoExport:)[\w]*[-][\w]*'}
+        #Search-Items .\src\ -Pattern "\#.?NoExport:" -Recurse | Where-Object {$_ -match '(?<=NoExport: )[\w]*[-][\w]*'}
 
         # ArgumentList: ConfigFilePath and switch for SUT var
         Get-Item '*.psd1' | Import-Module -ArgumentList @($ConfigFilePath, $true) -Global -Force

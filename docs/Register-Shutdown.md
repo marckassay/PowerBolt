@@ -1,11 +1,11 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Register-Shutdown.md
 schema: 2.0.0
 ---
 
-# Restart-PWSH
+# Register-Shutdown
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Restart-PWSH [<CommonParameters>]
+Register-Shutdown [<CommonParameters>]
 ```
 
 ## DESCRIPTION

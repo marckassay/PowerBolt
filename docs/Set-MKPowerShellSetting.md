@@ -1,11 +1,11 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md
 schema: 2.0.0
 ---
 
-# Set-LocationAndStore
+# Set-MKPowerShellSetting
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-LocationAndStore [[-Path] <String>] [-LiteralPath <String>] [-PassThru] [<CommonParameters>]
+Set-MKPowerShellSetting [-Value] <Object> [[-ConfigFilePath] <String>] [-PassThru] [[-Name] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,8 +31,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -LiteralPath
-{{Fill LiteralPath Description}}
+### -ConfigFilePath
+{{Fill ConfigFilePath Description}}
 
 ```yaml
 Type: String
@@ -39,7 +40,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: TurnOnQuickRestart, LastLocation, TurnOnRememberLastLocation, TurnOnBetterFormats, HistoryLocation, BackupPolicy, NuGetApiKey, TurnOnHistoryRecording, TurnOnAvailableUpdates, TurnOnBackup, Backups
+
+Required: False
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -60,15 +77,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-{{Fill Path Description}}
+### -Value
+{{Fill Value Description}}
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False

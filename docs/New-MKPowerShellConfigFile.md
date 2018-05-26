@@ -1,11 +1,11 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-MKPowerShellConfigFile.md
 schema: 2.0.0
 ---
 
-# Set-LocationAndStore
+# New-MKPowerShellConfigFile
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-LocationAndStore [[-Path] <String>] [-LiteralPath <String>] [-PassThru] [<CommonParameters>]
+New-MKPowerShellConfigFile [[-Path] <String>] [-PassThru] [-Force] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,11 +30,26 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -LiteralPath
-{{Fill LiteralPath Description}}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: String
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Force
+{{Fill Force Description}}
+
+```yaml
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 

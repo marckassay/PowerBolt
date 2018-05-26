@@ -1,13 +1,13 @@
 function Add-ModuleToProfile {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $True)]
     [OutputType([String])]
     Param
     (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, Position = 0)]
         [string]
         $Path,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $False, Position = 1)]
         [string]
         $ProfilePath = $(Get-Variable Profile -ValueOnly),
 

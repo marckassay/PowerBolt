@@ -1,11 +1,11 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Write-SourceReport.md
 schema: 2.0.0
 ---
 
-# Set-LocationAndStore
+# Write-SourceReport
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-LocationAndStore [[-Path] <String>] [-LiteralPath <String>] [-PassThru] [<CommonParameters>]
+Write-SourceReport [-Predicates] <Int32> [[-SourceItem] <PSObject>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,46 +30,31 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -LiteralPath
-{{Fill LiteralPath Description}}
+### -Predicates
+{{Fill Predicates Description}}
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-{{Fill PassThru Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-{{Fill Path Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
+Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SourceItem
+{{Fill SourceItem Description}}
+
+```yaml
+Type: PSObject
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

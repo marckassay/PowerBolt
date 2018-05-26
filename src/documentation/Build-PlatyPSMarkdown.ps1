@@ -7,10 +7,12 @@ function Build-PlatyPSMarkdown {
         [Parameter(Mandatory = $False, ValueFromPipeline = $True)]
         [MKPowerShellDocObject]$Data,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $False, Position = 0)]
         [string]$Name,
-        
+
         [Parameter(Mandatory = $False)]
+        [AllowEmptyString()]
+        [AllowNull()]
         [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
 
         [Parameter(Mandatory = $False)]
@@ -77,20 +79,27 @@ function Build-PlatyPSMarkdown {
             $PredicateB = $False
         }
 
+        $PostErrorPreference = Get-Variable -Name ErrorActionPreference -ValueOnly
+        Set-Variable -Name ErrorActionPreference -Value SilentlyContinue
+
         if ($PredicateA -or $PredicateB) {
             New-Item -Path $Data.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
 
             if ($Data.NoReImportModule -eq $False) {
+                Remove-Module -Name $Data.ModuleName
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
             New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
         }
         else {
             if ($Data.NoReImportModule -eq $False) {
+                Remove-Module -Name $Data.ModuleName
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
             Update-MarkdownHelp $Data.ModuleMarkdownFolder | Out-Null
         }
+
+        Set-Variable -Name ErrorActionPreference -Value $PostErrorPreference
 
         $Data.MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($Data.ModuleMarkdownFolder, $Data.OnlineVersionUrl)
     }

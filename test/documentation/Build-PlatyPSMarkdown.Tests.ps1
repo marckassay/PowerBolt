@@ -2,12 +2,19 @@ using module ..\.\TestFunctions.psm1
 [TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
 [TestFunctions]::AUTO_START = $true
 
+$script:Files
+$script:FileNames
+
 Describe "Test Build-PlatyPSMarkdown" {
+
     BeforeAll {
         $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
         
         # this test file needs the .git repo but not the docs folder
         Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
+
+        $script:Files = "Get-AFunction.md", "Get-BFunction.md", "Get-CFunction.md", "Set-CFunction.md" | `
+            Sort-Object
     }
     
     AfterAll {
@@ -17,26 +24,23 @@ Describe "Test Build-PlatyPSMarkdown" {
     Context "As a non-piped call, with a given Path value to create files and then to update files 
     with a second call." {
 
-        $Files = "Get-AFunction.md", "Get-BFunction.md", "Get-CFunction.md", "Set-CFunction.md" | `
-            Sort-Object
-            
-        # NOTE: if this functions re-imports, it will import into a different scope or session.  
-        # Although it will still pass, it will write warnings and errors
-        Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB" -NoReImportModule
-
-        $FileNames = Get-ChildItem "$TestDrive\TestModuleB\docs" -Recurse | `
-            ForEach-Object {$_.Name} | `
-            Sort-Object
-
         It "Should generate correct number of files." {
-            $FileNames.Count | Should -Be 4
+            # NOTE: if this functions re-imports, it will import into a different scope or session.  
+            # Although it will still pass, it will write warnings and errors
+            Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB" -NoReImportModule
+
+            $script:FileNames = Get-ChildItem "$TestDrive\TestModuleB\docs" -Recurse | `
+                ForEach-Object {$_.Name} | `
+                Sort-Object
+            
+            $script:FileNames.Count | Should -Be 4
         }
 
         It "Should generate exactly filenames." {
-            $FileNames | Should -BeExactly $Files
+            $FileNames | Should -BeExactly $script:Files
         }
 
-        It "Should modify Get-AFunction.md file at line number <Index> with: {<Expected>} " -TestCases @(
+        It "Should *create* Get-AFunction.md file at line number <Index> with: {<Expected>}" -TestCases @(
             @{ Index = 0; Expected = "---" },
             @{ Index = 1; Expected = "external help file: TestModuleB-help.xml" },
             @{ Index = 2; Expected = "Module Name: TestModuleB" },
@@ -54,12 +58,46 @@ Describe "Test Build-PlatyPSMarkdown" {
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
         }
 
-        # second consective call to Build-PlatyPSMarkdown so that Update- will be called.  these 
-        # calls to Build-PlatyPSMarkdown must be in the same Context scope because Pester restores 
-        # drive to same state as it was in the Describe scope.
-        # Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB"
+        It "Should *update* Get-AFunction.md file with new parameter and preserve md modification." {
+            $NewSynopsisContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
 
-        # TODO: unable to spy on any functions
-        # Assert-MockCalled Update-MarkdownHelp -Times 1
+            # modifiy Get-AFunction.md by adding a new parameter
+            $NewGetAFunctionMDContent = Get-Item -Path "$TestDrive\TestModuleB\docs\Get-AFunction.md" | `
+                Get-Content -Raw 
+
+            $NewGetAFunctionMDContent = $NewGetAFunctionMDContent.Replace("{{Fill in the Synopsis}}", $NewSynopsisContent)
+
+            Set-Content -Path "$TestDrive\TestModuleB\docs\Get-AFunction.md" -Value $NewGetAFunctionMDContent
+
+
+            # modifiy Get-AFunction.md by adding a synopsis
+            Clear-Content "$TestDrive\TestModuleB\src\Get-AFunction.ps1"
+
+            $NewGetAFunctionPS1Content = @"
+function Get-AFunction {
+    [CmdletBinding(PositionalBinding = `$False)]
+    Param(
+        [Parameter(Mandatory = `$False)]
+        [String]`$Path,
+
+        [Parameter(Mandatory = `$False)]
+        [String]`$Key
+    )
+    
+    Out-String -InputObject `$("Hello, from Get-AFunction!")
+}
+"@
+            Set-Content "$TestDrive\TestModuleB\src\Get-AFunction.ps1" -Value $NewGetAFunctionPS1Content
+            
+            New-ExternalHelpFromPlatyPSMarkdown -Path "$TestDrive\TestModuleB"
+
+            Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB" 
+
+            $SynopsisContent = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md")[10]
+            $SynopsisContent | Should -Be $NewSynopsisContent
+
+            $GetAFunctionSyntax = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md")[15]
+            $GetAFunctionSyntax | Should -Be "Get-AFunction [-Path <String>] [-Key <String>] [<CommonParameters>]"
+        }
     }
 }

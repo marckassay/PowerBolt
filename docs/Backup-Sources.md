@@ -1,11 +1,11 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Backup-Sources.md
 schema: 2.0.0
 ---
 
-# Set-LocationAndStore
+# Backup-Sources
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-LocationAndStore [[-Path] <String>] [-LiteralPath <String>] [-PassThru] [<CommonParameters>]
+Backup-Sources [-ConfigFilePath <String>] [-Force] [-Initialize] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,8 +30,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -LiteralPath
-{{Fill LiteralPath Description}}
+### -ConfigFilePath
+{{Fill ConfigFilePath Description}}
 
 ```yaml
 Type: String
@@ -45,8 +45,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-{{Fill PassThru Description}}
+### -Force
+{{Fill Force Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -60,16 +60,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Path
-{{Fill Path Description}}
+### -Initialize
+{{Fill Initialize Description}}
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

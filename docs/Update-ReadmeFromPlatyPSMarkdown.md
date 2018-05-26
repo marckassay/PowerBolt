@@ -1,11 +1,11 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md
 schema: 2.0.0
 ---
 
-# Set-LocationAndStore
+# Update-ReadmeFromPlatyPSMarkdown
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,9 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-LocationAndStore [[-Path] <String>] [-LiteralPath <String>] [-PassThru] [<CommonParameters>]
+Update-ReadmeFromPlatyPSMarkdown [[-Data] <MKPowerShellDocObject>] [[-Path] <String>]
+ [[-MarkdownFolder] <String>] [[-ReadMeBeginBoundary] <String>] [[-ReadMeEndBoundary] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,8 +32,23 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -LiteralPath
-{{Fill LiteralPath Description}}
+### -Data
+{{Fill Data Description}}
+
+```yaml
+Type: MKPowerShellDocObject
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -MarkdownFolder
+{{Fill MarkdownFolder Description}}
 
 ```yaml
 Type: String
@@ -39,22 +56,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-{{Fill PassThru Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -69,7 +71,37 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReadMeBeginBoundary
+{{Fill ReadMeBeginBoundary Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReadMeEndBoundary
+{{Fill ReadMeEndBoundary Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -80,7 +112,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### MKPowerShellDocObject
 
 ## OUTPUTS
 

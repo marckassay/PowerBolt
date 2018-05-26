@@ -1,14 +1,14 @@
 ---
-external help file: MKPowerShell-help.xml
-Module Name: MKPowerShell
-online version: https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSHAdmin.md
+external help file: MK.PowerShell.4PS-help.xml
+Module Name: MK.PowerShell.4PS
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md
 schema: 2.0.0
 ---
 
 # Restart-PWSHAdmin
 
 ## SYNOPSIS
-Restarts PowerShell with Administrator privileges
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -17,16 +17,16 @@ Restart-PWSHAdmin [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Terminates current PowerShell session and will start a new session with Administrator privileges.  The alias for this function is 'pwsha'
+{{Fill in the Description}}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-PS C:\> pwsha
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-Terminates current PowerShell session and will start a new session with Administrator privileges.
+{{ Add example description here }}
 
 ## PARAMETERS
 
@@ -39,10 +39,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### None
+### System.Object
 
 ## NOTES
 
 ## RELATED LINKS
-
-[Restart-PWSH](https://github.com/marckassay/MKPowerShell/blob/master/docs/Restart-PWSH.md)

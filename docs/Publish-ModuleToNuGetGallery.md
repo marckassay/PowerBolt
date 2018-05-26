@@ -1,14 +1,14 @@
 ---
-external help file: MKPowerShell-help.xml
-Module Name: MKPowerShell
-online version: https://github.com/marckassay/MKPowerShell/blob/master/docs/Publish-ModuleToNuGetGallery.md
+external help file: MK.PowerShell.4PS-help.xml
+Module Name: MK.PowerShell.4PS
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Publish-ModuleToNuGetGallery.md
 schema: 2.0.0
 ---
 
 # Publish-ModuleToNuGetGallery
 
 ## SYNOPSIS
-Streamlines publishing a module to PowerShellGet.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
@@ -18,21 +18,21 @@ Publish-ModuleToNuGetGallery [[-Path] <String>] [[-NuGetApiKey] <String>] [[-Exc
 ```
 
 ## DESCRIPTION
-Prior to calling you can store API key using Set-NuGetApiKey.  If not, you must assign it to the NuGetApiKey parameter.  When called this function will take the module's directory and will copy it to the first indexed PowerShell module directory from $PSModulePath where PowerShell will recongize it.  It will publish it to an online gallery and afterwards will delete the newly copied directory.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\EndOfLine> Publish-ModuleToNuGetGallery
+PS C:\> {{ Add example code here }}
 ```
 
-Call this function without value to the Path parameter only if PowerShell is located in the module's directory.
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Exclude
-Names of folders or files to exclude
+{{Fill Exclude Description}}
 
 ```yaml
 Type: String[]
@@ -47,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -NuGetApiKey
-The NuGet API key that will be used.  This can be stored prior using Set-NuGetApiKey.
+{{Fill NuGetApiKey Description}}
 
 ```yaml
 Type: String
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Path to the module directory.
+{{Fill Path Description}}
 
 ```yaml
 Type: String
@@ -77,7 +77,8 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs.  This will copy module's directory to the first directory indexed in $PSModulePath.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
 Type: SwitchParameter
@@ -105,5 +106,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-
-[Set-NuGetApiKey](https://github.com/marckassay/MKPowerShell/blob/master/docs/Set-NuGetApiKey.md)
