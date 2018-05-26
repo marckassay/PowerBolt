@@ -24,8 +24,6 @@ Describe "Test Export-History" {
         It "Should export current session and expected something greater than 1." {
 
             Mock Get-History {
-                # NOTE: this relative path sometimes causes an issue when running TestSuite.ps1
-                #$TestHistory = Import-Csv -Path .\test\history\TestHistory.csv | Add-History
                 $TestHistory = Import-Csv -Path $TestHistoryItemPath | Add-History
                 return $TestHistory
             }
@@ -34,6 +32,6 @@ Describe "Test Export-History" {
 
             $SessionHistories = Import-Csv -Path $SessionHistoriesPath
             $SessionHistories.Count | Should -BeGreaterThan 1
-        } -Skip
+        } 
     } 
 } 

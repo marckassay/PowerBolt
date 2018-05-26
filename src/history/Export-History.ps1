@@ -8,7 +8,9 @@ function Export-History {
     )
 
     # TODO: check $MaximumHistoryCount; we shouldnt disregard that var
-    $SessionHistory = Get-History
-    $SessionHistory[$Script:SessionHistories.Count..$SessionHistory.Count] | `
+    $SessionHistory = Get-History 
+    
+    # we only want the new entries since Export-Csv appends the file and not overwrite it
+    $SessionHistory[$script:SessionHistories.Count..$SessionHistory.Count] | `
         Export-Csv -Path $Path
 }

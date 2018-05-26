@@ -1,6 +1,8 @@
 using module .\..\module\manifest\Get-ManifestKey.ps1
 
-$script:ConfigFileParentPath 
+$script:ConfigFileParentPath
+$script:SessionHistories
+
 function Start-MKPowerShell {
     [CmdletBinding(PositionalBinding = $False)]
     Param(
@@ -15,6 +17,9 @@ function Start-MKPowerShell {
         }
 
         Copy-Item -Path "$PSScriptRoot\..\..\resources\MK.PowerShell-config.json" -Destination $script:ConfigFileParentPath -Verbose -PassThru
+    }
+    else {
+        $script:ConfigFileParentPath = (Split-Path $ConfigFilePath -Parent)
     }
 
     Restore-RememberLastLocation -Initialize
@@ -78,6 +83,7 @@ function Restore-QuickRestartSetting {
     }
 }
 
+# Export: Restore-History
 function Restore-History {
     [CmdletBinding()]
     Param(
@@ -104,6 +110,7 @@ function Restore-History {
     }
 }
 
+# Export: Restore-Formats
 function Restore-Formats {
     [CmdletBinding()]
     Param(

@@ -64,15 +64,4 @@
             </ScriptMethod>
         </Members>
     </Type>
-    <Type>
-        <Name>Microsoft.PowerShell.Commands.HistoryInfo</Name>
-        <Members>
-            <ScriptProperty>
-                <Name>Duration</Name>
-                <GetScriptBlock>
-                    $this.EndExecutionTime - $this.StartExecutionTime
-                </GetScriptBlock>
-            </ScriptProperty>
-        </Members>
-    </Type>
 </Types>

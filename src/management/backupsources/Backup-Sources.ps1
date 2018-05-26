@@ -200,6 +200,7 @@ function Backup-Sources {
     }
 }
 
+# Export: Write-SourceReport
 function Write-SourceReport {
     [CmdletBinding(PositionalBinding = $true)]
     Param(

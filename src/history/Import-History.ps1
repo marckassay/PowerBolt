@@ -6,7 +6,7 @@ function Import-History {
         [string]$Path = (Get-MKPowerShellSetting -Name 'HistoryLocation')
     )
 
-    $SessionHistories = Import-Csv -Path $Path
+    $script:SessionHistories = Import-Csv -Path $Path
 
-    Add-History -InputObject $SessionHistories
+    Add-History -InputObject $script:SessionHistories
 }

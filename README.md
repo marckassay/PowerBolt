@@ -7,7 +7,7 @@ Contain commands directly related for PowerShell operations, hence this module's
 
 ### [```Add-ModuleToProfile```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md)
 
-    {{Fill in the Synopsis}}
+    Appends `$PROFILE` with an `Import-Module` statement.
  
 ### [```Backup-Sources```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Backup-Sources.md)
 

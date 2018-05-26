@@ -13,15 +13,18 @@
             <TableControl>
                 <TableHeaders>
                     <TableColumnHeader>
+                        <Label>Time</Label>
                         <Alignment>Left</Alignment>
-                        <Width>20</Width>
+                        <Width>6</Width>
                     </TableColumnHeader>
                     <TableColumnHeader>
-                        <Alignment>Right</Alignment>
-                    </TableColumnHeader>
-                    <TableColumnHeader>
-                        <Alignment>Right</Alignment>
+                        <Label>Id</Label>
+                        <Alignment>Left</Alignment>
                         <Width>4</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>CommandLine</Label>
+                        <Alignment>Left</Alignment>
                     </TableColumnHeader>
                 </TableHeaders>
                 <TableRowEntries>
@@ -32,10 +35,10 @@
                                 <FormatString>{0:hh}:{0:mm}</FormatString>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>CommandLine</PropertyName>
+                                <PropertyName>Id</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>Id</PropertyName>
+                                <PropertyName>CommandLine</PropertyName>
                             </TableColumnItem>
                         </TableColumnItems>
                     </TableRowEntry>

@@ -44,6 +44,7 @@ function Get-MKPowerShellSetting {
     }
 }
 
+# Export: Get-DynamicParameterValues
 function Get-DynamicParameterValues {
     [CmdletBinding(PositionalBinding = $False)]
     Param(

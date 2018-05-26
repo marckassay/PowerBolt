@@ -6,7 +6,7 @@
       <command:verb>Add</command:verb>
       <command:noun>ModuleToProfile</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Appends `$PROFILE` with an `Import-Module` statement.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
