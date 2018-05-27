@@ -1,8 +1,9 @@
 using module .\..\module\manifest\Get-ManifestKey.ps1
 
 $script:ConfigFileParentPath
-$script:SessionHistories
+$script:ImportedSessionHistories
 
+# Export: Start-MKPowerShell
 function Start-MKPowerShell {
     [CmdletBinding(PositionalBinding = $False)]
     Param(

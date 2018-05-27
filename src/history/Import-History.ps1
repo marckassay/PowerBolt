@@ -6,7 +6,9 @@ function Import-History {
         [string]$Path = (Get-MKPowerShellSetting -Name 'HistoryLocation')
     )
 
-    $script:SessionHistories = Import-Csv -Path $Path
+    $CurrentHistoryCount = Get-History | Measure-Object | Select-Object -ExpandProperty Count
+    
+    $script:ImportedSessionHistories = Import-Csv -Path $Path | Select-Object -Last ($MaximumHistoryCount - $CurrentHistoryCount)
 
-    Add-History -InputObject $script:SessionHistories
+    Add-History -InputObject $script:ImportedSessionHistories
 }

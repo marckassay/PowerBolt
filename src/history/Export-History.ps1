@@ -6,11 +6,11 @@ function Export-History {
         [string]$Path = (Get-MKPowerShellSetting -Name 'HistoryLocation')
 
     )
-
-    # TODO: check $MaximumHistoryCount; we shouldnt disregard that var
-    $SessionHistory = Get-History 
     
-    # we only want the new entries since Export-Csv appends the file and not overwrite it
-    $SessionHistory[$script:SessionHistories.Count..$SessionHistory.Count] | `
+    # we only want the new entries since Export-Csv call appends the file
+    $CurrentHistory = Get-History
+
+    $CurrentHistory | `
+        Select-Object -Last ($CurrentHistory.Count - $script:ImportedSessionHistories.Count) | `
         Export-Csv -Path $Path -Append
 }
