@@ -12,5 +12,5 @@ function Export-History {
     
     # we only want the new entries since Export-Csv appends the file and not overwrite it
     $SessionHistory[$script:SessionHistories.Count..$SessionHistory.Count] | `
-        Export-Csv -Path $Path
+        Export-Csv -Path $Path -Append
 }

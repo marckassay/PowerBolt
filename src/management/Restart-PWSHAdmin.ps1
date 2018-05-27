@@ -3,5 +3,10 @@ function Restart-PWSHAdmin {
     Param() 
     
     Start-Process -FilePath "pwsh.exe" -Verb 'RunAs'
-    Stop-Process -Id $PID
+    
+    $IsHistoryRecordingEnabled = (Get-MKPowerShellSetting -Name 'TurnOnHistoryRecording') -eq $true
+    if ($IsHistoryRecordingEnabled) {
+        Export-History
+        Stop-Process -Id $PID
+    } 
 }
