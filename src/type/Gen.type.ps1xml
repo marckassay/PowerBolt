@@ -42,6 +42,12 @@
                     [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($this))
                 </Script>
             </ScriptMethod>
+            <ScriptMethod>
+                <Name>MatchCount</Name>
+                <Script>
+                    [regex]::Matches($this, $args[0]).Count
+                </Script>
+            </ScriptMethod>
         </Members>
     </Type>
     <Type>
