@@ -54,11 +54,11 @@ function Update-RootModuleUsingStatements {
         Get-Item -Include $Include -PipelineVariable File | `
         Get-Content -Raw | `
         ForEach-Object {
-        $NoExportMatches = [regex]::Matches($_, '(?<=NoExport: )[\w]*[-][\w]*')
+        $NoExportMatches = [regex]::Matches($_, '(?<=NoExport)(?:[:\s]*?)(?<sanitized>\w*-\w*)')
         $FunctionMatches = [regex]::Matches($_, '(?<=function )[\w]*[-][\w]*')
         for ($i = 0; $i -lt $FunctionMatches.Count; $i++) {
             $FunctionName = $FunctionMatches[$i].Value
-            if ($NoExportMatches.Value -notcontains $FunctionName) {
+            if (($NoExportMatches | ForEach-Object {$_.Groups['sanitized'].Value}) -notcontains $FunctionName) {
                 @{
                     FilePath     = $File
                     FunctionName = $FunctionName
@@ -70,9 +70,11 @@ function Update-RootModuleUsingStatements {
     if ($DotSourceLinesCount -gt 0) {
         Write-Verbose "Update-RootModuleDotSourceImports: A total of $DotSourceLinesCount was removed in $($Manifest.RootModule)."
     }
-    
+
     $DotSourcedFiles = $TargetFunctionsToExport.FilePath.FullName | `
         Sort-Object -Unique | `
+        Group-Object -Property {$_.Split('src\')[1]} | `
+        Select-Object -ExpandProperty Group | `
         ForEach-Object {
         if ($_ -ne $ModulePath) {
             @"
