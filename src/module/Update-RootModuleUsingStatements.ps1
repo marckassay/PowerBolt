@@ -39,15 +39,20 @@ function Update-RootModuleUsingStatements {
         $TargetDirectory = (Join-Path -Path $ModuleDirectory -ChildPath $SourceDirectory)
     }
 
+    $UsingStatements = 0
     # cleaned as in existing 'using' statements removed
     $ModuleContentsCleaned = Get-Content $ModulePath | `
-        ForEach-Object -Begin {$DotSourceLinesCount = 0} -Process {
+        ForEach-Object -Process {
         if ($_ -match '(?<=(using module \.\\)).*(?=(\.ps1))') {
-            $DotSourceLinesCount++
+            $UsingStatements++
         }
-        else {
-            "$_`r`n"
+        elseif ($_.Count -ge 1) {
+            "$_`n"
         }
+    }
+
+    if ($UsingStatements -gt 0) {
+        Write-Verbose "Update-RootModuleDotSourceImports: A total of $UsingStatements was removed in $($Manifest.RootModule)."
     }
 
     $TargetFunctionsToExport = Get-ChildItem -Path $TargetDirectory -Include $Include -Exclude $Exclude -Recurse | `
@@ -67,30 +72,24 @@ function Update-RootModuleUsingStatements {
         }
     }
 
-    if ($DotSourceLinesCount -gt 0) {
-        Write-Verbose "Update-RootModuleDotSourceImports: A total of $DotSourceLinesCount was removed in $($Manifest.RootModule)."
-    }
-
-    $DotSourcedFiles = $TargetFunctionsToExport.FilePath.FullName | `
+    $UniqueSourceFiles = $TargetFunctionsToExport.FilePath.FullName | `
         Sort-Object -Unique | `
         Group-Object -Property {$_.Split('src\')[1]} | `
         Select-Object -ExpandProperty Group | `
         ForEach-Object {
         if ($_ -ne $ModulePath) {
-            @"
-using module .$($_.Split($ModuleDirectory)[1])`r`n
-"@
+            Write-Output "using module .$($_.Split($ModuleDirectory)[1])`n"
         }
     }
     
     if ($ModuleContentsCleaned -eq $null) {
         $UpdatedModuleContent = @"
-$DotSourcedFiles
+$UniqueSourceFiles
 "@
     }
     elseif ($ModuleContentsCleaned -ne $null) {
         $UpdatedModuleContent = @"
-$DotSourcedFiles
+$UniqueSourceFiles
 $ModuleContentsCleaned
 "@
     }

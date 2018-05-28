@@ -1,4 +1,4 @@
-# Export: Get-ModuleInfo
+# NoExport: Get-ModuleInfo
 function Get-ModuleInfo {
     [CmdletBinding()]
     [OutputType([PSObject])]

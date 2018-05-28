@@ -1,3 +1,5 @@
+using module .\..\module\Get-ModuleInfo.ps1
+
 function Add-ModuleToProfile {
     [CmdletBinding(PositionalBinding = $True)]
     [OutputType([String])]

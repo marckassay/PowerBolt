@@ -1,5 +1,5 @@
 # TODO: this currently only works for 'FormatsToProcess'
-# Export: Get-ManifestKey
+# NoExport: Get-ManifestKey
 function Get-ManifestKey {
     [CmdletBinding(PositionalBinding = $False)]
     Param(

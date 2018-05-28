@@ -5,7 +5,7 @@ using module ..\.\TestFunctions.psm1
 Describe "Test Build-Documentation" {
     BeforeAll {
         $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
-        
+
         New-Item -Path "$TestDrive\TestModuleB\README.md" -ItemType File
 
         # this test file needs the .git repo but not the docs folder

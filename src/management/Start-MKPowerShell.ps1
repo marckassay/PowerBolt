@@ -3,14 +3,15 @@ using module .\..\module\manifest\Get-ManifestKey.ps1
 $script:ConfigFileParentPath
 $script:ImportedSessionHistories
 
-# Export: Start-MKPowerShell
+# NoExport: Start-MKPowerShell
 function Start-MKPowerShell {
     [CmdletBinding(PositionalBinding = $False)]
     Param(
         [Parameter(Mandatory = $False)]
         [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath
     )
-    
+    # Start-MKPowerShell may be called directly which may have a nothing value other then MKPowerShellConfigFilePath
+    $script:MKPowerShellConfigFilePath = $ConfigFilePath
     if ((Test-Path -Path $ConfigFilePath) -eq $false) {
         $script:ConfigFileParentPath = $(Split-Path $ConfigFilePath -Parent)
         if ((Test-Path -Path $script:ConfigFileParentPath) -eq $false) {
@@ -32,7 +33,7 @@ function Start-MKPowerShell {
     Register-Shutdown
 }
 
-# Export: Restore-RememberLastLocation
+# NoExport: Restore-RememberLastLocation
 function Restore-RememberLastLocation {
     [CmdletBinding()]
     Param(
@@ -59,7 +60,7 @@ function Restore-RememberLastLocation {
     }
 }
 
-# Export: Restore-QuickRestartSetting
+# NoExport: Restore-QuickRestartSetting
 function Restore-QuickRestartSetting {
     [CmdletBinding()]
     Param(
@@ -84,7 +85,7 @@ function Restore-QuickRestartSetting {
     }
 }
 
-# Export: Restore-History
+# NoExport: Restore-History
 function Restore-History {
     [CmdletBinding()]
     Param(
@@ -111,7 +112,7 @@ function Restore-History {
     }
 }
 
-# Export: Restore-Formats
+# NoExport: Restore-Formats
 function Restore-Formats {
     [CmdletBinding()]
     Param(
