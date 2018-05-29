@@ -1,3 +1,4 @@
+# NoExport: Register-Shutdown
 function Register-Shutdown {
     [CmdletBinding(PositionalBinding = $False)]
     Param()

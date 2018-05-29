@@ -83,7 +83,6 @@
         'New-ExternalHelpFromPlatyPSMarkdown',
         'New-MKPowerShellConfigFile',
         'Publish-ModuleToNuGetGallery',
-        'Register-Shutdown',
         'Restart-PWSH',
         'Restart-PWSHAdmin',
         'Search-Items',

@@ -4,7 +4,6 @@ using module .\src\documentation\Build-PlatyPSMarkdown.ps1
 using module .\src\documentation\New-ExternalHelpFromPlatyPSMarkdown.ps1
 using module .\src\documentation\Update-ReadmeFromPlatyPSMarkdown.ps1
 using module .\src\error\Get-LatestError.ps1
-using module .\src\events\Register-Shutdown.ps1
 using module .\src\history\Export-History.ps1
 using module .\src\history\Import-History.ps1
 using module .\src\management\backupsources\Backup-Sources.ps1
@@ -22,15 +21,14 @@ using module .\src\settings\Set-MKPowerShellSetting.ps1
 
 using module .\src\management\Start-MKPowerShell.ps1
 
- 
 Param(
     [Parameter(Mandatory = $False)]
     [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json"),
-      
+        
     [Parameter(Mandatory = $False)]
     [bool]$SUT = $False
 )
-      
+        
 $script:MKPowerShellConfigFilePath = $script:ConfigFilePath
 $script:MKPowerShellSUT = $script:SUT
 if ($script:SUT -eq $False) {

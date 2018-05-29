@@ -52,7 +52,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: TurnOnQuickRestart, LastLocation, TurnOnRememberLastLocation, TurnOnBetterFormats, HistoryLocation, BackupPolicy, NuGetApiKey, TurnOnHistoryRecording, TurnOnAvailableUpdates, TurnOnBackup, Backups
+Accepted values: TurnOnAvailableUpdates, TurnOnQuickRestart, TurnOnRememberLastLocation, TurnOnBackup, TurnOnBetterFormats, NuGetApiKey, TurnOnHistoryRecording, BackupPolicy, LastLocation, Backups, HistoryLocation
 
 Required: False
 Position: 0

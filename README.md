@@ -7,7 +7,7 @@ Contain commands directly related for PowerShell operations, hence this module's
 
 ### [```Add-ModuleToProfile```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md)
 
-    Appends `$PROFILE` with an `Import-Module` statement.
+    {{Fill in the Synopsis}}
  
 ### [```Backup-Sources```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Backup-Sources.md)
 
@@ -29,23 +29,11 @@ Contain commands directly related for PowerShell operations, hence this module's
 
     {{Fill in the Synopsis}}
  
-### [```Get-DynamicParameterValues```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-DynamicParameterValues.md)
-
-    {{Fill in the Synopsis}}
- 
 ### [```Get-LatestError```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-LatestError.md)
 
     {{Fill in the Synopsis}}
  
-### [```Get-ManifestKey```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-ManifestKey.md)
-
-    {{Fill in the Synopsis}}
- 
 ### [```Get-MKPowerShellSetting```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md)
-
-    {{Fill in the Synopsis}}
- 
-### [```Get-ModuleInfo```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-ModuleInfo.md)
 
     {{Fill in the Synopsis}}
  
@@ -65,31 +53,11 @@ Contain commands directly related for PowerShell operations, hence this module's
 
     {{Fill in the Synopsis}}
  
-### [```Register-Shutdown```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Register-Shutdown.md)
-
-    {{Fill in the Synopsis}}
- 
 ### [```Restart-PWSH```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md)
 
     {{Fill in the Synopsis}}
  
 ### [```Restart-PWSHAdmin```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md)
-
-    {{Fill in the Synopsis}}
- 
-### [```Restore-Formats```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restore-Formats.md)
-
-    {{Fill in the Synopsis}}
- 
-### [```Restore-History```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restore-History.md)
-
-    {{Fill in the Synopsis}}
- 
-### [```Restore-QuickRestartSetting```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restore-QuickRestartSetting.md)
-
-    {{Fill in the Synopsis}}
- 
-### [```Restore-RememberLastLocation```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restore-RememberLastLocation.md)
 
     {{Fill in the Synopsis}}
  
@@ -105,10 +73,6 @@ Contain commands directly related for PowerShell operations, hence this module's
 
     {{Fill in the Synopsis}}
  
-### [```Start-MKPowerShell```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Start-MKPowerShell.md)
-
-    {{Fill in the Synopsis}}
- 
 ### [```Update-ManifestFunctionsToExportField```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md)
 
     {{Fill in the Synopsis}}
@@ -118,10 +82,6 @@ Contain commands directly related for PowerShell operations, hence this module's
     {{Fill in the Synopsis}}
  
 ### [```Update-RootModuleUsingStatements```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md)
-
-    {{Fill in the Synopsis}}
- 
-### [```Write-SourceReport```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Write-SourceReport.md)
 
     {{Fill in the Synopsis}}
 

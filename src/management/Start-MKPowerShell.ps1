@@ -1,4 +1,5 @@
 using module .\..\module\manifest\Get-ManifestKey.ps1
+using module .\..\events\Register-Shutdown.ps1
 
 $script:ConfigFileParentPath
 $script:ImportedSessionHistories

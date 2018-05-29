@@ -79,9 +79,6 @@ function Build-PlatyPSMarkdown {
             $PredicateB = $False
         }
 
-        $PostErrorPreference = Get-Variable -Name ErrorActionPreference -ValueOnly
-        Set-Variable -Name ErrorActionPreference -Value SilentlyContinue
-
         if ($PredicateA -or $PredicateB) {
             New-Item -Path $Data.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
 
@@ -89,18 +86,30 @@ function Build-PlatyPSMarkdown {
                 Remove-Module -Name $Data.ModuleName
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
-            New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
+            New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder -ErrorAction SilentlyContinue | Out-Null
         }
         else {
             if ($Data.NoReImportModule -eq $False) {
                 Remove-Module -Name $Data.ModuleName
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
-            Update-MarkdownHelp $Data.ModuleMarkdownFolder | Out-Null
+
+            Get-ChildItem -Path "$($Data.Path)\src\" -Recurse -Include '*.ps1' | `
+                Get-Item | `
+                Get-Content -Raw | `
+                ForEach-Object {
+                $NoExportMatches = [regex]::Matches($_, '(?<=NoExport)(?:[:\s]*?)(?<sanitized>\w*-\w*)')
+                $NoExportMatches | `
+                    ForEach-Object {
+                    $MarkdownPath = "$($Data.ModuleMarkdownFolder)\$($_.Groups['sanitized'].Value).md"
+                    if ($(Test-Path $MarkdownPath -Verbose)) {
+                        Remove-Item -Path $MarkdownPath -Confirm
+                    }
+                }
+            }
+
+            Update-MarkdownHelp $Data.ModuleMarkdownFolder -ErrorAction SilentlyContinue | Out-Null
         }
-
-        Set-Variable -Name ErrorActionPreference -Value $PostErrorPreference
-
         $Data.MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($Data.ModuleMarkdownFolder, $Data.OnlineVersionUrl)
     }
 

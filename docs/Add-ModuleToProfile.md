@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-ModuleToProfile
 
 ## SYNOPSIS
-Appends `$PROFILE` with an `Import-Module` statement.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
