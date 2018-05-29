@@ -41,16 +41,12 @@ class TestFunctions {
         # ArgumentList: ConfigFilePath and switch for SUT var
         Get-Item '*.psd1' | Import-Module -ArgumentList @($ConfigFilePath, $true) -Global -Force
 
-        if ([TestFunctions]::AUTO_START -eq $true) {
-            Start-MKPowerShell -ConfigFilePath $ConfigFilePath
-        }
-
         if ($TestModuleName -ne '') {
             Copy-Item -Path ".\test\testresource\$TestModuleName" -Destination 'TestDrive:\' -Container -Recurse
 
             Get-Item "TestDrive:\$TestModuleName\$TestModuleName.psd1" | Import-Module -Global -Force
 
-            return @{
+            $__ = @{
                 ConfigFilePath          = $ConfigFilePath
                 TestModuleDirectoryPath = (Join-Path -Path 'TestDrive:\' -ChildPath $TestModuleName)
                 TestManifestPath        = (Join-Path -Path 'TestDrive:\' -ChildPath "\$TestModuleName\$TestModuleName.psd1")
@@ -58,15 +54,25 @@ class TestFunctions {
             }
         }
         else {
-            return @{
+            $__ = @{
                 ConfigFilePath = $ConfigFilePath
             }
         }
+
+        Set-Variable -Name __ -Value $__ -Scope global -Option AllScope
+
+        if ([TestFunctions]::AUTO_START -eq $true) {
+            InModuleScope MK.PowerShell.4PS {
+                Start-MKPowerShell -ConfigFilePath $__.ConfigFilePath
+            }
+        }
+
+        return $__
     }
     
     static [void]DescribeTeardown([string[]]$ModuleName) {
         Get-Module -Name $ModuleName | Remove-Module -Force -ErrorAction SilentlyContinue
-
+        Remove-Variable TestConfigFilePath -ErrorAction SilentlyContinue
         Set-Alias sl Set-Location -Scope Global -Force -ErrorAction SilentlyContinue
     }
 }

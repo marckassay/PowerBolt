@@ -24,11 +24,13 @@ Describe "Test Get-ManifestKey" {
                 '.\src\format\PSModuleInfo.format.ps1xml'
             ) 
 
-            $Results = Get-ManifestKey -Path $__.TestManifestPath -Key 'FormatsToProcess'
+            InModuleScope MK.PowerShell.4PS {
+                $Results = Get-ManifestKey -Path $__.TestManifestPath -Key 'FormatsToProcess'
 
-            $Results.Count | Should -Be 2
-            $Results[0] | Should -Be 'src\format\HistoryInfo.format.ps1xml'
-            $Results[1] | Should -Be 'src\format\PSModuleInfo.format.ps1xml'
+                $Results.Count | Should -Be 2
+                $Results[0] | Should -Be 'src\format\HistoryInfo.format.ps1xml'
+                $Results[1] | Should -Be 'src\format\PSModuleInfo.format.ps1xml'
+            }
         }
     }
 }

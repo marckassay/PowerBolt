@@ -21,8 +21,10 @@ Describe "Test Start-MKPowerShell" {
 
         Mock Update-FormatData -MockWith {return $PrependPath } -ModuleName MK.PowerShell.4PS 
 
-        Start-MKPowerShell
-
+        InModuleScope MK.PowerShell.4PS {
+            Start-MKPowerShell
+        }
+        
         It "Should set global 'FormatEnumerationLimit' variable to -1." {
             $global:FormatEnumerationLimit | Should -Be -1
         }
