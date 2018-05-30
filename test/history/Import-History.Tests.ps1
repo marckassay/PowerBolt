@@ -22,13 +22,11 @@ Describe "Test Import-History" {
             # to do nothing; for that it will not confilict with testing.  the real testing is calculating
             # how many entries are needed.
             Mock Add-History -ModuleName MK.PowerShell.4PS
-            $SessionHistories = Import-Csv -Path .\test\history\TestHistory.csv
+            # $SessionHistories = Import-Csv -Path .\test\history\TestHistory.csv
 
             Import-History -Path .\test\history\TestHistory.csv
 
-            Assert-MockCalled Add-History -ModuleName MK.PowerShell.4PS -Times 1 -ParameterFilter {
-                $InputObject -ne $null
-            }
+            Assert-MockCalled Add-History -ModuleName MK.PowerShell.4PS -Times 1
         }
     } 
 } 

@@ -60,7 +60,7 @@
     # ScriptsToProcess = @()
 
     # Type files (.ps1xml) to be loaded when importing this module
-    TypesToProcess    = 'src\type\Gen.type.ps1xml'
+    TypesToProcess    = 'src\type\Misc.type.ps1xml'
 
     # Format files (.ps1xml) to be loaded when importing this module
     FormatsToProcess  = 'src\format\HistoryInfo.format.ps1xml', 
@@ -149,6 +149,4 @@
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''
-
 }
-

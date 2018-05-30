@@ -15,7 +15,7 @@ function Set-MKPowerShellSetting {
         if (-not $ConfigFilePath) {
             $ConfigFilePath = $script:MKPowerShellConfigFilePath
         }
-        return Get-DynamicParameterValues -ConfigFilePath $ConfigFilePath
+        return Get-NameParameterSet -ConfigFilePath $ConfigFilePath
     }
 
     begin {

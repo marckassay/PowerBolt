@@ -30,6 +30,7 @@ function Start-MKPowerShell {
     Backup-Sources -Initialize
     Restore-History -Initialize
     Restore-Formats -Initialize
+    Restore-Types -Initialize
 
     Register-Shutdown
 }
@@ -122,7 +123,7 @@ function Restore-Formats {
     
     # TODO: can't seem to have manifest's 'FormatsToProcess' key  to load files listed in it.  So 
     # manually doing it for now.
-    if ((Get-MKPowerShellSetting -Name 'TurnOnBetterFormats') -eq $true) {
+    if ((Get-MKPowerShellSetting -Name 'TurnOnExtendedFormats') -eq $true) {
         # setting this to -1 to display/view all items for ListItems.  For instance, Get-Module's 
         # ExportedFunction
         $global:FormatEnumerationLimit = -1
@@ -132,5 +133,17 @@ function Restore-Formats {
             ForEach-Object {Join-Path -Path $ModuleHome -ChildPath $_}
         
         Update-FormatData -PrependPath $FormatFilePaths
+    }
+}
+
+# NoExport: Restore-Types
+function Restore-Types {
+    [CmdletBinding()]
+    Param(
+        [switch]$Initialize
+    )
+    
+    if ((Get-MKPowerShellSetting -Name 'TurnOnExtendedTypes') -eq $false) {
+        Remove-TypeData -Path $TypeFilePaths
     }
 }

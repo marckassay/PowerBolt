@@ -11,7 +11,7 @@ Describe "Test Start-MKPowerShell" {
         [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestFunctions'))
     }
 
-    Context "Test Restore-Formats when 'TurnOnBetterFormats' is set to true" {
+    Context "Test Restore-Formats when 'TurnOnExtendedFormats' is set to true" {
         Mock Restore-RememberLastLocation {} -ModuleName MK.PowerShell.4PS
         Mock Restore-QuickRestartSetting {} -ModuleName MK.PowerShell.4PS
         Mock Backup-Sources {} -ModuleName MK.PowerShell.4PS

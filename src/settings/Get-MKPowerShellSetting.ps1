@@ -12,7 +12,7 @@ function Get-MKPowerShellSetting {
         if (-not $ConfigFilePath) {
             $ConfigFilePath = $script:MKPowerShellConfigFilePath
         }
-        return Get-DynamicParameterValues -ConfigFilePath $ConfigFilePath
+        return Get-NameParameterSet -ConfigFilePath $ConfigFilePath
     }
 
     begin {
@@ -44,8 +44,8 @@ function Get-MKPowerShellSetting {
     }
 }
 
-# NoExport: Get-DynamicParameterValues
-function Get-DynamicParameterValues {
+# NoExport: Get-NameParameterSet
+function Get-NameParameterSet {
     [CmdletBinding(PositionalBinding = $False)]
     Param(
         [Parameter(Mandatory = $true)]

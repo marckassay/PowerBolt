@@ -37,6 +37,10 @@
                                 <ScriptBlock>$_.NestedModules.Name | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
                             </ListItem>
                             <ListItem>
+                                <Label>ExportedTypeFiles</Label>
+                                <ScriptBlock>$_.ExportedTypeFiles | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
+                            </ListItem>
+                            <ListItem>
                                 <Label>ExportedFormatFiles</Label>
                                 <ScriptBlock>$_.ExportedFormatFiles | Foreach-Object {"`n$_"} -End {"`n"}</ScriptBlock>
                             </ListItem>

@@ -10,7 +10,8 @@
   "NuGetApiKey": "",
   "TurnOnAvailableUpdates": "true",
   "TurnOnBackup": "false",
-  "TurnOnBetterFormats": "true",
+  "TurnOnExtendedFormats": "true",
+  "TurnOnExtendedTypes": "true",
   "TurnOnHistoryRecording": "true",
   "TurnOnQuickRestart": "true",
   "TurnOnRememberLastLocation": "true"
