@@ -20,15 +20,15 @@ using module .\src\settings\New-MKPowerShellConfigFile.ps1
 using module .\src\settings\Set-MKPowerShellSetting.ps1
 
 using module .\src\management\Start-MKPowerShell.ps1
-
+ 
 Param(
     [Parameter(Mandatory = $False)]
     [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json"),
-        
+         
     [Parameter(Mandatory = $False)]
     [bool]$SUT = $False
 )
-        
+         
 $script:MKPowerShellConfigFilePath = $script:ConfigFilePath
 $script:MKPowerShellSUT = $script:SUT
 if ($script:SUT -eq $False) {
