@@ -8,7 +8,6 @@ schema: 2.0.0
 # Import-History
 
 ## SYNOPSIS
-
 Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI.
 
 ## SYNTAX

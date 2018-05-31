@@ -8,8 +8,7 @@ schema: 2.0.0
 # ConvertTo-EnumFlag
 
 ## SYNOPSIS
-With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality 
-operator returns `true`.
+With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality operator returns `true`.
 
 ## SYNTAX
 

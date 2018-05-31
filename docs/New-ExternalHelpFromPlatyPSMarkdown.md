@@ -8,8 +8,7 @@ schema: 2.0.0
 # New-ExternalHelpFromPlatyPSMarkdown
 
 ## SYNOPSIS
-Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder 
-from `Build-PlatyPSMarkdown`.
+Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder from `Build-PlatyPSMarkdown`.
 
 ## SYNTAX
 

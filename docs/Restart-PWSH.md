@@ -8,8 +8,7 @@ schema: 2.0.0
 # Restart-PWSH
 
 ## SYNOPSIS
-Launches a new PowerShell window by immediately terminating that called this function.  Default 
-alias is `pwsh`.
+Launches a new PowerShell window by immediately terminating that called this function.  Default alias is `pwsh`.
 
 ## SYNTAX
 

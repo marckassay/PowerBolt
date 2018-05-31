@@ -8,14 +8,13 @@ schema: 2.0.0
 # Update-ReadmeFromPlatyPSMarkdown
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Adds or updates function's 'snippet' in README file from `PlatyPS` generated files.
 
 ## SYNTAX
 
 ```
 Update-ReadmeFromPlatyPSMarkdown [[-Data] <MKPowerShellDocObject>] [[-Path] <String>]
- [[-MarkdownFolder] <String>] [[-ReadMeBeginBoundary] <String>] [[-ReadMeEndBoundary] <String>]
- [<CommonParameters>]
+ [[-MarkdownFolder] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,36 +71,6 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReadMeBeginBoundary
-{{Fill ReadMeBeginBoundary Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReadMeEndBoundary
-{{Fill ReadMeEndBoundary Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

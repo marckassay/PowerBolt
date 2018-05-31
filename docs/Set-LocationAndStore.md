@@ -8,8 +8,7 @@ schema: 2.0.0
 # Set-LocationAndStore
 
 ## SYNOPSIS
-Records every time `sl` is called so that when new session launches, location will be the one last 
-record.  Default alias value for this function is `sl`.
+Records every time `sl` is called so that when new session launches, location will be the one last record.  Default alias value for this function is `sl`.
 
 ## SYNTAX
 

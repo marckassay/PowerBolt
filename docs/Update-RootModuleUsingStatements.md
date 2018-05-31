@@ -8,8 +8,7 @@ schema: 2.0.0
 # Update-RootModuleUsingStatements
 
 ## SYNOPSIS
-Prepends module found in `Path` with `using module ...` statements. Those statements are unique 
-PS1 file paths that contain functions.
+Prepends module found in `Path` with `using module ...` statements. Those statements are unique PS1 file paths that contain functions.
 
 ## SYNTAX
 

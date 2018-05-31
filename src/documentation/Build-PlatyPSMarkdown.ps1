@@ -27,12 +27,6 @@ function Build-PlatyPSMarkdown {
         [Parameter(Mandatory = $False)]
         [ValidateSet("Auto", "Omit")]
         [string]$OnlineVersionUrlPolicy = 'Auto',
-        
-        [Parameter(Mandatory = $False)]
-        [string]$ReadMeBeginBoundary = '## Functions',
-        
-        [Parameter(Mandatory = $False)]
-        [string]$ReadMeEndBoundary = '## Roadmap',
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownSnippetCollection,
@@ -50,8 +44,6 @@ function Build-PlatyPSMarkdown {
                 $Locale,
                 $OnlineVersionUrlTemplate,
                 $OnlineVersionUrlPolicy,
-                $ReadMeBeginBoundary,
-                $ReadMeEndBoundary,
                 $MarkdownSnippetCollection,
                 $NoReImportModule.IsPresent
             )
@@ -78,6 +70,7 @@ function Build-PlatyPSMarkdown {
                 Remove-Module -Name $Data.ModuleName
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
+            
             New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
         }
         else {
@@ -102,8 +95,6 @@ function Build-PlatyPSMarkdown {
         }
 
         Update-MarkdownHelpModule -Path $Data.ModuleMarkdownFolder | Out-Null
-
-        $Data.MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($Data.ModuleMarkdownFolder, $Data.OnlineVersionUrl)
     }
 
     end {

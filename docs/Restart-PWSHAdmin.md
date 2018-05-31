@@ -8,8 +8,7 @@ schema: 2.0.0
 # Restart-PWSHAdmin
 
 ## SYNOPSIS
-Launches a new PowerShell window with Admin privileges by immediately terminating that called this 
-function. Default alias is `pwsha`.
+Launches a new PowerShell window with Admin privileges by immediately terminating that called this function. Default alias is `pwsha`.
 
 ## SYNTAX
 

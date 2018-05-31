@@ -15,8 +15,8 @@ With required `PlatyPS` module, this function will generate Markdown files (such
 ```
 Build-Documentation [[-Data] <MKPowerShellDocObject>] [[-Name] <String>] [[-Path] <String>]
  [[-MarkdownFolder] <String>] [[-Locale] <String>] [[-OnlineVersionUrlTemplate] <String>]
- [[-OnlineVersionUrlPolicy] <String>] [[-ReadMeBeginBoundary] <String>] [[-ReadMeEndBoundary] <String>]
- [[-MarkdownSnippetCollection] <String>] [-NoReImportModule] [<CommonParameters>]
+ [[-OnlineVersionUrlPolicy] <String>] [[-MarkdownSnippetCollection] <String>] [-NoReImportModule]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -164,36 +164,6 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReadMeBeginBoundary
-{{Fill ReadMeBeginBoundary Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReadMeEndBoundary
-{{Fill ReadMeEndBoundary Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 8
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

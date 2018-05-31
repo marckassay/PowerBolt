@@ -364,30 +364,6 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>ReadMeBeginBoundary</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ReadMeBeginBoundary Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-          <maml:name>ReadMeEndBoundary</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ReadMeEndBoundary Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
           <maml:name>MarkdownSnippetCollection</maml:name>
           <maml:Description>
@@ -514,30 +490,6 @@
         <maml:name>Path</maml:name>
         <maml:Description>
           <maml:para>{{Fill Path Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-        <maml:name>ReadMeBeginBoundary</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ReadMeBeginBoundary Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
-        <maml:name>ReadMeEndBoundary</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ReadMeEndBoundary Description}}</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -726,30 +678,6 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ReadMeBeginBoundary</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ReadMeBeginBoundary Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ReadMeEndBoundary</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ReadMeEndBoundary Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -861,30 +789,6 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ReadMeBeginBoundary</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ReadMeBeginBoundary Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ReadMeEndBoundary</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ReadMeEndBoundary Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -945,7 +849,7 @@
       <command:verb>ConvertTo</command:verb>
       <command:noun>EnumFlag</command:noun>
       <maml:description>
-        <maml:para>With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality  operator returns `true`.</maml:para>
+        <maml:para>With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality operator returns `true`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1436,7 +1340,7 @@
       <command:verb>New</command:verb>
       <command:noun>ExternalHelpFromPlatyPSMarkdown</command:noun>
       <maml:description>
-        <maml:para>Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder  from `Build-PlatyPSMarkdown`.</maml:para>
+        <maml:para>Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder from `Build-PlatyPSMarkdown`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1912,7 +1816,7 @@
       <command:verb>Restart</command:verb>
       <command:noun>PWSH</command:noun>
       <maml:description>
-        <maml:para>Launches a new PowerShell window by immediately terminating that called this function.  Default  alias is `pwsh`.</maml:para>
+        <maml:para>Launches a new PowerShell window by immediately terminating that called this function.  Default alias is `pwsh`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1975,7 +1879,7 @@
       <command:verb>Restart</command:verb>
       <command:noun>PWSHAdmin</command:noun>
       <maml:description>
-        <maml:para>Launches a new PowerShell window with Admin privileges by immediately terminating that called this  function. Default alias is `pwsha`.</maml:para>
+        <maml:para>Launches a new PowerShell window with Admin privileges by immediately terminating that called this function. Default alias is `pwsha`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2227,7 +2131,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
       <command:verb>Set</command:verb>
       <command:noun>LocationAndStore</command:noun>
       <maml:description>
-        <maml:para>Records every time `sl` is called so that when new session launches, location will be the one last  record.  Default alias value for this function is `sl`.</maml:para>
+        <maml:para>Records every time `sl` is called so that when new session launches, location will be the one last record.  Default alias value for this function is `sl`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2641,7 +2545,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
       <command:verb>Update</command:verb>
       <command:noun>ReadmeFromPlatyPSMarkdown</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Adds or updates function's 'snippet' in README file from `PlatyPS` generated files.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2686,30 +2590,6 @@ MatchedLine                        # TODO: need to have this functions arity bet
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>ReadMeBeginBoundary</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ReadMeBeginBoundary Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>ReadMeEndBoundary</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ReadMeEndBoundary Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2741,30 +2621,6 @@ MatchedLine                        # TODO: need to have this functions arity bet
         <maml:name>Path</maml:name>
         <maml:Description>
           <maml:para>{{Fill Path Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>ReadMeBeginBoundary</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ReadMeBeginBoundary Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>ReadMeEndBoundary</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ReadMeEndBoundary Description}}</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2833,7 +2689,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
       <command:verb>Update</command:verb>
       <command:noun>RootModuleUsingStatements</command:noun>
       <maml:description>
-        <maml:para>Prepends module found in `Path` with `using module ...` statements. Those statements are unique  PS1 file paths that contain functions.</maml:para>
+        <maml:para>Prepends module found in `Path` with `using module ...` statements. Those statements are unique PS1 file paths that contain functions.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>

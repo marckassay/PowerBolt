@@ -8,8 +8,7 @@ schema: 2.0.0
 # Export-History
 
 ## SYNOPSIS
-Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so
-that a continuous history can be output to CLI.
+Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so that a continuous history can be output to CLI.
 
 ## SYNTAX
 

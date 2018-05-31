@@ -25,12 +25,6 @@ function Build-Documentation {
         [Parameter(Mandatory = $False)]
         [ValidateSet("Auto", "Omit")]
         [string]$OnlineVersionUrlPolicy = 'Auto',
-        
-        [Parameter(Mandatory = $False)]
-        [string]$ReadMeBeginBoundary = '## Functions',
-        
-        [Parameter(Mandatory = $False)]
-        [string]$ReadMeEndBoundary = '## Roadmap',
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownSnippetCollection = '',
@@ -48,8 +42,6 @@ function Build-Documentation {
                 $Locale,
                 $OnlineVersionUrlTemplate,
                 $OnlineVersionUrlPolicy,
-                $ReadMeBeginBoundary,
-                $ReadMeEndBoundary,
                 $MarkdownSnippetCollection,
                 $NoReImportModule.IsPresent
             )

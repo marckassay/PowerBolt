@@ -11,49 +11,63 @@ function Update-ReadmeFromPlatyPSMarkdown {
         [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
 
         [Parameter(Mandatory = $False)]
-        [string]$MarkdownFolder = 'docs',
-
-        [Parameter(Mandatory = $False)]
-        [string]$ReadMeBeginBoundary = '## Functions',
-
-        [Parameter(Mandatory = $False)]
-        [string]$ReadMeEndBoundary = '## RoadMap'
+        [string]$MarkdownFolder = 'docs'
     )
     
     begin {
         if (-not $Data) {
             $Data = [MKPowerShellDocObject]::new(
                 $Path,
-                $MarkdownFolder,
-                $ReadMeBeginBoundary,
-                $ReadMeEndBoundary
+                $MarkdownFolder
             )
         }
     }
 
     end {
         try {
+            $AppendageContent
             $ReadMePath = Join-Path -Path $Data.Path -ChildPath "\README*" -Resolve
-            [string]$ReadMeContents = Get-Content -Path $ReadMePath -Raw
+            $ReadMeContents = Get-Content -Path $ReadMePath
 
-            # check to see if ReadMeBeginBoundary exists, if not append it
-            if (-not $($ReadMeContents -match $Data.ReadMeBeginBoundary)) {
-                $ReadMeContents += @"
+            $MarkdownFolderItems = Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse
+            $MarkdownSnippetCollection = $Data.GetMarkdownSnippetCollection()
 
+            $MarkdownSnippetCollection | ForEach-Object -Process {
 
-$($Data.ReadMeBeginBoundary)
+                $FunctionName = $_.FunctionName
+                $NewTitleLine = $_.TitleLine
+                $NewBodyContent = $("    " + $_.BodyContent)
 
-"@
+                $TitlePattern = "^(?<title>### \[.*$FunctionName.*\]\(http.*\))"
+                $hasBeenUpdated = $False
+                for ($index = 0; $index -lt $ReadMeContents.Count; $index++) {
+                    if (($ReadMeContents[$index]) -Match $TitlePattern ) {
+                        $ReadMeContents[$index] = $NewTitleLine
+                        if (($index + 2) -le $ReadMeContents.Count) {
+                            $ReadMeContents[$index + 2] = $NewBodyContent
+                        }
+                        $hasBeenUpdated = $true
+                        break;
+                    }
+                }
+
+                if ($hasBeenUpdated -eq $False) {
+                    $AppendageContent += @(
+                        "",
+                        $NewTitleLine,
+                        "",
+                        $NewBodyContent
+                    )
+                }
             }
-            [regex]$InsertPointRegEx = "(?(?<=$($Data.ReadMeBeginBoundary))([\w\W]*?)|($))(?(?=$($Data.ReadMeEndBoundary))(?=$($Data.ReadMeEndBoundary))|($))"
-            $ModuleMarkdownPath = Join-Path -Path $Data.Path -ChildPath $Data.MarkdownFolder
-            $MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($ModuleMarkdownPath, $Data.OnlineVersionUrl)
-            $ReadMeContents = $InsertPointRegEx.Replace($ReadMeContents, @"
 
-$MarkdownSnippetCollection
-
-"@, 1)
-            Set-Content -Path $ReadMePath -Value $ReadMeContents | Out-Null
+            if ($AppendageContent.Count -gt 0) {
+                Add-Content -Path $ReadMePath -Value $AppendageContent | Out-Null
+            }
+            else {
+                Set-Content -Path $ReadMePath -Value $ReadMeContents | Out-Null
+            }
+            
         }
         catch {
             Write-Error "Unable to update README file."

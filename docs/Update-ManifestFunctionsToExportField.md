@@ -8,8 +8,7 @@ schema: 2.0.0
 # Update-ManifestFunctionsToExportField
 
 ## SYNOPSIS
-Ideally having `Update-RootModuleUsingStatements` piped into this function, it will popluate a string
-array of function names and set it to the `FunctionsToExport`.
+Ideally having `Update-RootModuleUsingStatements` piped into this function, it will popluate a string array of function names and set it to the `FunctionsToExport`.
 
 ## SYNTAX
 

@@ -6,8 +6,6 @@ class MKPowerShellDocObject {
     [string]$OnlineVersionUrl
     [string]$OnlineVersionUrlTemplate
     [string]$OnlineVersionUrlPolicy = 'Auto'
-    [string]$ReadMeBeginBoundary = '## Functions'
-    [string]$ReadMeEndBoundary = '## RoadMap'
     [string]$MarkdownSnippetCollection
     [bool]$NoReImportModule
     [object]$RootManifest
@@ -18,14 +16,10 @@ class MKPowerShellDocObject {
     # design for Update-ReadmeFromPlatyPSMarkdown
     MKPowerShellDocObject(
         [string]$Path,
-        [string]$MarkdownFolder,
-        [string]$ReadMeBeginBoundary,
-        [string]$ReadMeEndBoundary
+        [string]$MarkdownFolder
     ) {
         $this.Path = Resolve-Path $Path
         $this.MarkdownFolder = $MarkdownFolder
-        $this.ReadMeBeginBoundary = $ReadMeBeginBoundary
-        $this.ReadMeEndBoundary = $ReadMeEndBoundary
         
         $this.AssignRemainingFields()
     }
@@ -51,8 +45,6 @@ class MKPowerShellDocObject {
         [string]$Locale,
         [string]$OnlineVersionUrlTemplate,
         [string]$OnlineVersionUrlPolicy,
-        [string]$ReadMeBeginBoundary,
-        [string]$ReadMeEndBoundary,
         [object]$MarkdownSnippetCollection,
         [bool]$NoReImportModule
     ) {
@@ -62,8 +54,6 @@ class MKPowerShellDocObject {
         $this.Locale = $Locale
         $this.OnlineVersionUrlTemplate = $OnlineVersionUrlTemplate
         $this.OnlineVersionUrlPolicy = $OnlineVersionUrlPolicy
-        $this.ReadMeBeginBoundary = $ReadMeBeginBoundary
-        $this.ReadMeEndBoundary = $ReadMeEndBoundary
         $this.MarkdownSnippetCollection = $MarkdownSnippetCollection
         $this.NoReImportModule = $NoReImportModule
         
@@ -97,34 +87,36 @@ class MKPowerShellDocObject {
             $this.RootModule = Get-ChildItem -Path $this.Path -Filter '*.psm1' | `
                 Select-Object -ExpandProperty FullName
         }
+
+        $this.ModuleMarkdownFolder = Join-Path -Path ($this.ModuleFolder) -ChildPath ($this.MarkdownFolder)
     }
 
     # TODO: need to have this functions arity better fitted for options
-    static [string]CreateMarkdownSnippetCollection ([string]$Path, [string]$OnlineVersionUrlValue) {
+    # TODO: removed the following but may need to have OnlineVersionUrlValue back as param:
+    #       $OnlineVersionUrlValue -f $FunctionName
+    #       $MarkdownContent -replace '^(online version:)[\w\W]*$', "online version: $MarkdownURL" | Set-Content -Path $_.FullName
+    [object[]] GetMarkdownSnippetCollection () {
         
-        $_MarkdownSnippetCollection = Get-ChildItem -Path ($Path + "\*.md") | ForEach-Object {
-            $FileContents = Get-Content -Path $_.FullName
+        [object[]]$Collection = Get-ChildItem -Path ($this.ModuleMarkdownFolder + "\*.md") | `
+            ForEach-Object {
+            $MarkdownContent = Get-Content -Path $_.FullName
             $FunctionName = $_.BaseName
-            $MarkdownURL = $OnlineVersionUrlValue -f $FunctionName
 
-            # replace 'online version' value in markdown help file
-            $FileContents -replace '^(online version:)[\w\W]*$', "online version: $MarkdownURL" | Set-Content -Path $_.FullName
+            $MarkdownContent | Where-Object {$_ -match "(?<=online version: ).*"} | Out-Null
+            $MarkdownURL = $Matches.Values
 
             # building content for README...
-            $TitleLine = ("### [``````$FunctionName``````]($MarkdownURL)").Trim()
-            $SynopsisLine = $FileContents[$FileContents.IndexOf('## SYNOPSIS') + 1]
+            $TitleLine = "### [``$FunctionName``]($MarkdownURL)"
+            # get the line directly below the '## SYNOPSIS' line
+            $BodyContent = $MarkdownContent[$MarkdownContent.IndexOf('## SYNOPSIS') + 1]
 
-            # this here-string indents $SynopsisLine by four spaces so that it will be rendered in
-            # a rectanglar background shadow
-            @"
+            $(@{
+                    FunctionName = $FunctionName
+                    TitleLine    = $TitleLine
+                    BodyContent  = $BodyContent
+                })
+        } | Write-Output
 
-$TitleLine
-
-    $SynopsisLine
-
-"@
-        }
-
-        return $_MarkdownSnippetCollection
+        return $Collection
     }
 }
