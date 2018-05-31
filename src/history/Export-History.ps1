@@ -4,7 +4,6 @@ function Export-History {
     (
         [Parameter(Mandatory = $false)]
         [string]$Path = (Get-MKPowerShellSetting -Name 'HistoryLocation')
-
     )
     
     # we only want the new entries since Export-Csv call appends the file

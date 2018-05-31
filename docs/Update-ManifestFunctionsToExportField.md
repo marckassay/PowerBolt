@@ -76,4 +76,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-* [`Update-RootModuleUsingStatements`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md)
+[`Update-RootModuleUsingStatements`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md)

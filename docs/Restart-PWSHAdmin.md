@@ -46,4 +46,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-* [`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md)
+[`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md)

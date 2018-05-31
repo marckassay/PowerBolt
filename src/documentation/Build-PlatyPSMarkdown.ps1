@@ -70,15 +70,15 @@ function Build-PlatyPSMarkdown {
         }
 
         $Data.ModuleMarkdownFolder = Join-Path -Path $Data.ModuleFolder -ChildPath $Data.MarkdownFolder
-
-        if ((Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue).Count -eq 0) {
+        $MarkdownFolderItems = Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
+        if ($MarkdownFolderItems.Count -eq 0) {
             New-Item -Path $Data.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
 
             if ($Data.NoReImportModule -eq $False) {
                 Remove-Module -Name $Data.ModuleName
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
-            New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder -ErrorAction SilentlyContinue | Out-Null
+            New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
         }
         else {
             if ($Data.NoReImportModule -eq $False) {
@@ -86,22 +86,23 @@ function Build-PlatyPSMarkdown {
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
 
-            Get-ChildItem -Path "$($Data.Path)\src\" -Recurse -Include '*.ps1' | `
-                Get-Item | `
-                Get-Content -Raw | `
+            $ExportedFunctions = Get-Module -Name $Data.ModuleName | `
+                Select-Object -ExpandProperty ExportedFunctions | `
+                Select-Object -ExpandProperty Values | `
+                Select-Object -ExpandProperty Name
+
+            # remove obsolete .md files
+            $MarkdownFolderItems | `
+                Select-Object -ExpandProperty BaseName | `
                 ForEach-Object {
-                $NoExportMatches = [regex]::Matches($_, '(?<=NoExport)(?:[:\s]*?)(?<sanitized>\w*-\w*)')
-                $NoExportMatches | `
-                    ForEach-Object {
-                    $MarkdownPath = "$($Data.ModuleMarkdownFolder)\$($_.Groups['sanitized'].Value).md"
-                    if ($(Test-Path $MarkdownPath -Verbose)) {
-                        Remove-Item -Path $MarkdownPath -Confirm
-                    }
+                if ($ExportedFunctions -notcontains $_) {
+                    Remove-Item -Path ($Data.ModuleMarkdownFolder + "\$_.md") -Confirm
                 }
             }
-
-            Update-MarkdownHelp $Data.ModuleMarkdownFolder -ErrorAction SilentlyContinue | Out-Null
         }
+
+        Update-MarkdownHelpModule -Path $Data.ModuleMarkdownFolder | Out-Null
+
         $Data.MarkdownSnippetCollection = [MKPowerShellDocObject]::CreateMarkdownSnippetCollection($Data.ModuleMarkdownFolder, $Data.OnlineVersionUrl)
     }
 

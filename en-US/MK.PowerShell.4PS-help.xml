@@ -6,11 +6,11 @@
       <command:verb>Add</command:verb>
       <command:noun>ModuleToProfile</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Appends profile file with an `Import-Module` statement.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Appends `$PROFILE` (or `ProfilePath`) file with an `Import-Module` statement that imports the module found with `Path`.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -118,9 +118,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-ModuleToProfile -Path C:\Users\Alice\PowerSploit</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>The module found in PowerSploit folder will have an `Import-Module` statement added to the default profile ($PROFILE) item.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -137,11 +137,11 @@
       <command:verb>Backup</command:verb>
       <command:noun>Sources</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>The `Backups` object defined in `MK.PowerShell-config.json` will copy items to their destination location.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Typically this is called when `MK.PowerShell.4PS` is imported.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -267,7 +267,7 @@
       <command:verb>Build</command:verb>
       <command:noun>Documentation</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>With required `PlatyPS` module, this function will generate Markdown files (such as the file where you are reading this from), will generate PowerShell help doc file and update a README.md file with new functions.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -575,9 +575,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Build-Documentation -Path .</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>The `Path` value here points to a folder where a module resides.  A manifest file is needed</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -585,6 +585,18 @@
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -594,7 +606,7 @@
       <command:verb>Build</command:verb>
       <command:noun>PlatyPSMarkdown</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>With required `PlatyPS` module, will call `New-MarkdownHelp` or `Update-MarkdownHelp` just once.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -913,6 +925,18 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Build-Documentation`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -921,7 +945,7 @@
       <command:verb>ConvertTo</command:verb>
       <command:noun>EnumFlag</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality  operator returns `true`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1010,9 +1034,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; $LifeEvents += (Get-Date) -ge (Get-Date -Year 2061) | ConvertTo-EnumFlag -Value ([CosmicEvents]::WatchHalley)</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>The `-ge` assertation will pipe a bool value in `ConvertTo-EnumFlag` which will increment `$LifeEvents`  with `[CosmicEvents]::WatchHalley` if the assertation is `true`. If the piped value is `false`, `ConvertTo-EnumFlag` will   `Write-Output` with `0`.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1029,7 +1053,7 @@
       <command:verb>Export</command:verb>
       <command:noun>History</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so that a continuous history can be output to CLI.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1105,6 +1129,10 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Import-History`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1113,7 +1141,7 @@
       <command:verb>Get</command:verb>
       <command:noun>LatestError</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Throwaway function that may be reincarnated in a from of Format.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1172,7 +1200,7 @@
       <command:verb>Get</command:verb>
       <command:noun>MKPowerShellSetting</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1308,6 +1336,10 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1316,7 +1348,7 @@
       <command:verb>Import</command:verb>
       <command:noun>History</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1392,6 +1424,10 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Export-History`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1400,7 +1436,7 @@
       <command:verb>New</command:verb>
       <command:noun>ExternalHelpFromPlatyPSMarkdown</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder  from `Build-PlatyPSMarkdown`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1548,6 +1584,18 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Build-Documentation`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1556,7 +1604,7 @@
       <command:verb>New</command:verb>
       <command:noun>MKPowerShellConfigFile</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerShell.4PS`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1709,11 +1757,11 @@
       <command:verb>Publish</command:verb>
       <command:noun>ModuleToNuGetGallery</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Streamlines publishing a module using `Publish-Module`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>When `MK.PowerShell-config.json` has valid `NuGetApiKey`, it will deploy locally module to a  temp folder, removing specified items via `Exclude`, prompt user to confirm publishing and will  "teardown" setup items after confirming.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1864,7 +1912,7 @@
       <command:verb>Restart</command:verb>
       <command:noun>PWSH</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Launches a new PowerShell window by immediately terminating that called this function.  Default  alias is `pwsh`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1915,6 +1963,10 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Restart-PWSHAdmin`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1923,7 +1975,7 @@
       <command:verb>Restart</command:verb>
       <command:noun>PWSHAdmin</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Launches a new PowerShell window with Admin privileges by immediately terminating that called this  function. Default alias is `pwsha`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1974,6 +2026,10 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Restart-PWSH`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1982,7 +2038,7 @@
       <command:verb>Search</command:verb>
       <command:noun>Items</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Recurses thru folders to find files that its content matches `Pattern`.  Outputs object(s) to console.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2142,7 +2198,17 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Search-Items -Path C:\Users\Alice\MK.PowerShell.4PS -Pattern '.*TODO.*' -Recurse
+
+Name                           Value
+----                           -----
+Item                           ConvertTo-EnumFlag.ps1
+Match                          # TODO: look into EnumConverter to see if it can be used here
+MatchedLine                    # TODO: look into EnumConverter to see if it can be used here
+Item                           MKPowerShellDocObject.psm1
+Match                          # TODO: need to have this functions arity better fitted for options
+MatchedLine                        # TODO: need to have this functions arity better fitted for options
+...</dev:code>
         <dev:remarks>
           <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
@@ -2161,7 +2227,7 @@
       <command:verb>Set</command:verb>
       <command:noun>LocationAndStore</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Records every time `sl` is called so that when new session launches, location will be the one last  record.  Default alias value for this function is `sl`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2292,7 +2358,7 @@
       <command:verb>Set</command:verb>
       <command:noun>MKPowerShellSetting</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Sets value to JSON data in `MK.PowerShell-config.json`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2452,6 +2518,10 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -2460,7 +2530,7 @@
       <command:verb>Update</command:verb>
       <command:noun>ManifestFunctionsToExportField</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Ideally having `Update-RootModuleUsingStatements` piped into this function, it will popluate a string array of function names and set it to the `FunctionsToExport`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2558,6 +2628,10 @@
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Update-RootModuleUsingStatements`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2739,6 +2813,18 @@
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Build-Documentation`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -2747,7 +2833,7 @@
       <command:verb>Update</command:verb>
       <command:noun>RootModuleUsingStatements</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Prepends module found in `Path` with `using module ...` statements. Those statements are unique  PS1 file paths that contain functions.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2917,6 +3003,10 @@
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Update-ManifestFunctionsToExportField`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

@@ -46,75 +46,75 @@ If `TurnOnExtendedTypes` key in `MK.PowerShell.4PS` is set to `true` the followi
 
 ### [```Add-ModuleToProfile```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md)
 
-    {{Fill in the Synopsis}}
+    Appends profile file with an `Import-Module` statement.
  
 ### [```Backup-Sources```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Backup-Sources.md)
 
-    {{Fill in the Synopsis}}
+    The `Backups` object defined in `MK.PowerShell-config.json` will copy items to their destination location.
  
 ### [```Build-Documentation```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md)
 
-    {{Fill in the Synopsis}}
+    With required `PlatyPS` module, this function will generate Markdown files (such as the file where you are reading this from), will generate PowerShell help doc file and update a README.md file with new functions.
  
 ### [```Build-PlatyPSMarkdown```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md)
 
-    {{Fill in the Synopsis}}
+    With required `PlatyPS` module, will call `New-MarkdownHelp` or `Update-MarkdownHelp` just once.
  
 ### [```ConvertTo-EnumFlag```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/ConvertTo-EnumFlag.md)
 
-    {{Fill in the Synopsis}}
+    With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality 
  
 ### [```Export-History```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md)
 
-    {{Fill in the Synopsis}}
+    Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so
  
 ### [```Get-LatestError```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-LatestError.md)
 
-    {{Fill in the Synopsis}}
+    Throwaway function that may be reincarnated in a from of Format.
  
 ### [```Get-MKPowerShellSetting```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md)
 
-    {{Fill in the Synopsis}}
+    Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch.
  
 ### [```Import-History```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md)
 
-    {{Fill in the Synopsis}}
+    
  
 ### [```New-ExternalHelpFromPlatyPSMarkdown```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 
-    {{Fill in the Synopsis}}
+    Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder 
  
 ### [```New-MKPowerShellConfigFile```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-MKPowerShellConfigFile.md)
 
-    {{Fill in the Synopsis}}
+    Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerShell.4PS`.
  
 ### [```Publish-ModuleToNuGetGallery```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Publish-ModuleToNuGetGallery.md)
 
-    {{Fill in the Synopsis}}
+    Streamlines publishing a module using `Publish-Module`.
  
 ### [```Restart-PWSH```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md)
 
-    {{Fill in the Synopsis}}
+    Launches a new PowerShell window by immediately terminating that called this function.  Default 
  
 ### [```Restart-PWSHAdmin```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md)
 
-    {{Fill in the Synopsis}}
+    Launches a new PowerShell window with Admin privileges by immediately terminating that called this 
  
 ### [```Search-Items```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Search-Items.md)
 
-    {{Fill in the Synopsis}}
+    Recurses thru folders to find files that its content matches `Pattern`.  Outputs object(s) to console.
  
 ### [```Set-LocationAndStore```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md)
 
-    {{Fill in the Synopsis}}
+    Records every time `sl` is called so that when new session launches, location will be the one last 
  
 ### [```Set-MKPowerShellSetting```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md)
 
-    {{Fill in the Synopsis}}
+    Sets value to JSON data in `MK.PowerShell-config.json`.
  
 ### [```Update-ManifestFunctionsToExportField```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md)
 
-    {{Fill in the Synopsis}}
+    Ideally having `Update-RootModuleUsingStatements` piped into this function, it will popluate a string
  
 ### [```Update-ReadmeFromPlatyPSMarkdown```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md)
 
@@ -122,4 +122,7 @@ If `TurnOnExtendedTypes` key in `MK.PowerShell.4PS` is set to `true` the followi
  
 ### [```Update-RootModuleUsingStatements```](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md)
 
-    {{Fill in the Synopsis}}
+    Prepends module found in `Path` with `using module ...` statements. Those statements are unique 
+
+
+
