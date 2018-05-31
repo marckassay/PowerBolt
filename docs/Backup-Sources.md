@@ -8,7 +8,7 @@ schema: 2.0.0
 # Backup-Sources
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+The `Backups` object defined in `MK.PowerShell-config.json` will copy items to their destination location.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Backup-Sources [-ConfigFilePath <String>] [-Force] [-Initialize] [<CommonParamet
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Typically this is called when `MK.PowerShell.4PS` is imported.
 
 ## EXAMPLES
 

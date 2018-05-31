@@ -8,7 +8,8 @@ schema: 2.0.0
 # Update-RootModuleUsingStatements
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Prepends module found in `Path` with `using module ...` statements. Those statements are unique 
+PS1 file paths that contain functions.
 
 ## SYNTAX
 
@@ -120,3 +121,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+* [`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md)

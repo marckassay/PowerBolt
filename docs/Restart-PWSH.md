@@ -8,7 +8,8 @@ schema: 2.0.0
 # Restart-PWSH
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Launches a new PowerShell window by immediately terminating that called this function.  Default 
+alias is `pwsh`.
 
 ## SYNTAX
 
@@ -44,3 +45,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+* [`Restart-PWSHAdmin`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md)

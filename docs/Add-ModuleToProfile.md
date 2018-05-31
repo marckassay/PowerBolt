@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-ModuleToProfile
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Appends profile file with an `Import-Module` statement.
 
 ## SYNTAX
 
@@ -17,16 +17,16 @@ Add-ModuleToProfile [-Path] <String> [[-ProfilePath] <String>] [-NoNewline] [<Co
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Appends `$PROFILE` (or `ProfilePath`) file with an `Import-Module` statement that imports the module found with `Path`.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-ModuleToProfile -Path C:\Users\Alice\PowerSploit
 ```
 
-{{ Add example description here }}
+The module found in PowerSploit folder will have an `Import-Module` statement added to the default profile ($PROFILE) item.
 
 ## PARAMETERS
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-MKPowerShellSetting
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch.
 
 ## SYNTAX
 
@@ -90,3 +90,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+* [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md)

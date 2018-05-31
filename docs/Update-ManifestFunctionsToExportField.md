@@ -8,7 +8,8 @@ schema: 2.0.0
 # Update-ManifestFunctionsToExportField
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Ideally having `Update-RootModuleUsingStatements` piped into this function, it will popluate a string
+array of function names and set it to the `FunctionsToExport`.
 
 ## SYNTAX
 
@@ -74,3 +75,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+* [`Update-RootModuleUsingStatements`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md)

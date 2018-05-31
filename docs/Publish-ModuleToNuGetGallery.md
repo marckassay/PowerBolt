@@ -8,7 +8,7 @@ schema: 2.0.0
 # Publish-ModuleToNuGetGallery
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Streamlines publishing a module using `Publish-Module`.
 
 ## SYNTAX
 
@@ -18,7 +18,9 @@ Publish-ModuleToNuGetGallery [[-Path] <String>] [[-NuGetApiKey] <String>] [[-Exc
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+When `MK.PowerShell-config.json` has valid `NuGetApiKey`, it will deploy locally module to a 
+temp folder, removing specified items via `Exclude`, prompt user to confirm publishing and will 
+"teardown" setup items after confirming.
 
 ## EXAMPLES
 

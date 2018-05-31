@@ -8,7 +8,7 @@ schema: 2.0.0
 # Build-Documentation
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+With required `PlatyPS` module, this function will generate Markdown files (such as the file where you are reading this from), will generate PowerShell help doc file and update a README.md file with new functions.
 
 ## SYNTAX
 
@@ -26,10 +26,10 @@ Build-Documentation [[-Data] <MKPowerShellDocObject>] [[-Name] <String>] [[-Path
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Build-Documentation -Path .
 ```
 
-{{ Add example description here }}
+The `Path` value here points to a folder where a module resides.  A manifest file is needed 
 
 ## PARAMETERS
 
@@ -213,3 +213,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+* [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md)
+
+* [`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md)
+
+* [`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
+
+* [`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md)

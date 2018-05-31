@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-LatestError
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Throwaway function that may be reincarnated in a from of Format.
 
 ## SYNTAX
 

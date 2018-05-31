@@ -8,7 +8,7 @@ schema: 2.0.0
 # Search-Items
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Recurses thru folders to find files that its content matches `Pattern`.  Outputs object(s) to console.
 
 ## SYNTAX
 
@@ -24,7 +24,17 @@ Search-Items [-Path] <String> [-Pattern] <String[]> [[-Include] <String[]>] [[-E
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Search-Items -Path C:\Users\Alice\MK.PowerShell.4PS -Pattern '.*TODO.*' -Recurse
+
+Name                           Value
+----                           -----
+Item                           ConvertTo-EnumFlag.ps1
+Match                          # TODO: look into EnumConverter to see if it can be used here
+MatchedLine                    # TODO: look into EnumConverter to see if it can be used here
+Item                           MKPowerShellDocObject.psm1
+Match                          # TODO: need to have this functions arity better fitted for options
+MatchedLine                        # TODO: need to have this functions arity better fitted for options
+...
 ```
 
 {{ Add example description here }}

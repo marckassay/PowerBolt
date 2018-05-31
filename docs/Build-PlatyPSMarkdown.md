@@ -8,7 +8,7 @@ schema: 2.0.0
 # Build-PlatyPSMarkdown
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+With required `PlatyPS` module, will call `New-MarkdownHelp` or `Update-MarkdownHelp` just once.
 
 ## SYNTAX
 
@@ -213,3 +213,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+* [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md)
+
+* [`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
+
+* [`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md)

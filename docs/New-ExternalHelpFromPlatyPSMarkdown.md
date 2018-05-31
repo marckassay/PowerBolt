@@ -8,7 +8,8 @@ schema: 2.0.0
 # New-ExternalHelpFromPlatyPSMarkdown
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder 
+from `Build-PlatyPSMarkdown`.
 
 ## SYNTAX
 
@@ -105,3 +106,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+* [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md)
+
+* [`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md)
+
+* [`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md)

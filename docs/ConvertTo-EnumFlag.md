@@ -8,7 +8,8 @@ schema: 2.0.0
 # ConvertTo-EnumFlag
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality 
+operator returns `true`.
 
 ## SYNTAX
 
@@ -23,10 +24,12 @@ ConvertTo-EnumFlag -InputObject <PSObject> [-Value] <Enum> [<CommonParameters>]
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $LifeEvents += (Get-Date) -ge (Get-Date -Year 2061) | ConvertTo-EnumFlag -Value ([CosmicEvents]::WatchHalley)
 ```
 
-{{ Add example description here }}
+The `-ge` assertation will pipe a bool value in `ConvertTo-EnumFlag` which will increment `$LifeEvents`
+ with `[CosmicEvents]::WatchHalley` if the assertation is `true`. If the piped value is `false`, `ConvertTo-EnumFlag` will 
+ `Write-Output` with `0`.
 
 ## PARAMETERS
 

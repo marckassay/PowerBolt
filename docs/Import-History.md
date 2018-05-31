@@ -8,7 +8,8 @@ schema: 2.0.0
 # Import-History
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+
+Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI.
 
 ## SYNTAX
 
@@ -59,3 +60,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+* [`Export-History`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md)

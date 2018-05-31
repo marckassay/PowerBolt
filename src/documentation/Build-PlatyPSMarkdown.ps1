@@ -70,16 +70,8 @@ function Build-PlatyPSMarkdown {
         }
 
         $Data.ModuleMarkdownFolder = Join-Path -Path $Data.ModuleFolder -ChildPath $Data.MarkdownFolder
-    
-        $PredicateA = ((Test-Path -Path $Data.ModuleMarkdownFolder -PathType Container) -eq $False)
-        try {
-            $PredicateB = ((Get-Item $Data.ModuleMarkdownFolder -ErrorAction SilentlyContinue).GetFiles().Count -eq 0)
-        }
-        catch {
-            $PredicateB = $False
-        }
 
-        if ($PredicateA -or $PredicateB) {
+        if ((Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue).Count -eq 0) {
             New-Item -Path $Data.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
 
             if ($Data.NoReImportModule -eq $False) {

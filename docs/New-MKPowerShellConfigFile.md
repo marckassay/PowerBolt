@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-MKPowerShellConfigFile
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerShell.4PS`.
 
 ## SYNTAX
 
