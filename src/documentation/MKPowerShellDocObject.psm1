@@ -89,6 +89,16 @@ class MKPowerShellDocObject {
         }
 
         $this.ModuleMarkdownFolder = Join-Path -Path ($this.ModuleFolder) -ChildPath ($this.MarkdownFolder)
+
+        if ($this.OnlineVersionUrlPolicy -eq 'Auto') {
+            if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
+                $this.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/master/docs/{0}.md"
+            }
+            else {
+                Write-Error "The parameter 'OnlineVersionUrlPolicy' was set to 'Auto' but unable to retrieve Git repo config file.  Would you like to continue?" -ErrorAction Inquire
+                $this.OnlineVersionUrlPolicy = 'Omit'
+            }
+        }
     }
 
     # TODO: need to have this functions arity better fitted for options
@@ -110,13 +120,13 @@ class MKPowerShellDocObject {
             # get the line directly below the '## SYNOPSIS' line
             $BodyContent = $MarkdownContent[$MarkdownContent.IndexOf('## SYNOPSIS') + 1]
 
-$Snippet = @"
+            $Snippet = @"
 `n
 $TitleLine
 
     $BodyContent
 "@
-        $Snippet
+            $Snippet
         } | Write-Output
 
         return $SnippetCollectionString

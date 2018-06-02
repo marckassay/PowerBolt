@@ -28,23 +28,32 @@ function Update-ReadmeFromPlatyPSMarkdown {
             $MarkdownSnippetCollection = $Data.GetMarkdownSnippetCollectionString()
 
             $ReadMePath = Join-Path -Path $Data.Path -ChildPath "\README*" -Resolve
+            if ((Test-Path -Path $ReadMePath) -eq $false) {
+                New-Item -Path $ReadMePath -ItemType File
+            }
+
             $ReadMeContent = Get-Content -Path $ReadMePath -Raw
             $ExistingSnippetPattern = "^(### \[.*\w+-\w+.*\]\(http.*\))(\s*)(?<body>[\w\W]+?)(?(?=###)(?=###)|(\z))"
-            $FirstIndex = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -First 1 -ExpandProperty Index
-            if($FirstIndex){
+
+            if ($ReadMeContent) {
+                $FirstIndex = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -First 1 -ExpandProperty Index
+            }
+
+            if ($FirstIndex) {
                 $LastIndex = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -Last 1 -ExpandProperty Index
                 $LastLength = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -Last 1 -ExpandProperty Length
-                $ReadMeContent = $ReadMeContent.Remove($FirstIndex, (($LastIndex+$LastLength)-$FirstIndex))
+                $ReadMeContent = $ReadMeContent.Remove($FirstIndex, (($LastIndex + $LastLength) - $FirstIndex))
 
                 # TODO: may want to use StringBuilder here
                 $MarkdownSnippetCollection = $MarkdownSnippetCollection.Trim()
-            } else {
+            }
+            else {
                 $SubSectionTitle = @"
 
 ## API
 "@
                 # TODO: may want to use StringBuilder here
-                $MarkdownSnippetCollection = $MarkdownSnippetCollection.Insert(0,$SubSectionTitle)
+                $MarkdownSnippetCollection = $MarkdownSnippetCollection.Insert(0, $SubSectionTitle)
                 $FirstIndex = $ReadMeContent.Length
             }
 

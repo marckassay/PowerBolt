@@ -50,17 +50,7 @@ function Build-PlatyPSMarkdown {
         }
     }
 
-    process {
-        if ($Data.OnlineVersionUrlPolicy -eq 'Auto') {
-            if ((Get-Content ($Data.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
-                $Data.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/master/docs/{0}.md"
-            }
-            else {
-                Write-Error "The parameter 'OnlineVersionUrlPolicy' was set to 'Auto' but unable to retrieve Git repo config file.  Would you like to continue?" -ErrorAction Inquire
-                $Data.OnlineVersionUrlPolicy = 'Omit'
-            }
-        }
-
+    end {
         $Data.ModuleMarkdownFolder = Join-Path -Path $Data.ModuleFolder -ChildPath $Data.MarkdownFolder
         $MarkdownFolderItems = Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
         if ($MarkdownFolderItems.Count -eq 0) {
@@ -71,7 +61,19 @@ function Build-PlatyPSMarkdown {
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
             
+            Write-Host -Object ($Data.OnlineVersionUrl) -ForegroundColor Blue -BackgroundColor Red
+
             New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
+
+            # Since New-MarkdownHelp OnlineVersionUrl parameter is only available when free of param 
+            # constraint, below is to assign 'onlineverion' field.
+            Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse | `
+                ForEach-Object {
+                $FileUrl = $Data.OnlineVersionUrl -f $_.BaseName
+                $FileContent = Get-Content $_.FullName -Raw
+                $FileContent = $FileContent.Replace('online version:', "online version: $FileUrl")
+                Set-Content -Path $_.FullName -Value $FileContent
+            }
         }
         else {
             if ($Data.NoReImportModule -eq $False) {
@@ -92,12 +94,11 @@ function Build-PlatyPSMarkdown {
                     Remove-Item -Path ($Data.ModuleMarkdownFolder + "\$_.md") -Confirm
                 }
             }
+
+            Update-MarkdownHelpModule -Path $Data.ModuleMarkdownFolder | Out-Null
         }
+        
 
-        Update-MarkdownHelpModule -Path $Data.ModuleMarkdownFolder | Out-Null
-    }
-
-    end {
         Write-Output $Data
     }
 }
