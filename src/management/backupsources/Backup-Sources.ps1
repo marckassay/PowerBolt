@@ -1,5 +1,5 @@
 using module .\..\..\ConvertTo-EnumFlag.ps1
-using module .\.\BackupPredicates.ps1
+using module .\.\BackupPredicateEnum.ps1
 
 function Backup-Sources {
     [CmdletBinding(PositionalBinding = $False)]
@@ -18,10 +18,10 @@ function Backup-Sources {
     
     try {
         $ProbeBackups = Get-MKPowerShellSetting -Name 'Backups'
-        $Predicates = $ProbeBackups[0] -is [hashtable] | ConvertTo-EnumFlag ([BackupPredicates]::IsConfigFileValid)
+        $Predicates = $ProbeBackups[0] -is [hashtable] | ConvertTo-EnumFlag ([BackupPredicateEnum]::IsConfigFileValid)
 
         # doing deeper test against Backups
-        if ($Predicates -band [BackupPredicates]::IsConfigFileValid) {
+        if ($Predicates -band [BackupPredicateEnum]::IsConfigFileValid) {
             if (
                 ($ProbeBackups.Path[0] -eq "") -or 
                 ($ProbeBackups.Destination[0] -eq "") -or 
@@ -37,25 +37,25 @@ function Backup-Sources {
         $Predicates = 0
     }
     
-    if ($Predicates -band [BackupPredicates]::IsConfigFileValid) {
+    if ($Predicates -band [BackupPredicateEnum]::IsConfigFileValid) {
         if (-not $Force.IsPresent) { 
-            $Predicates += (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true | ConvertTo-EnumFlag ([BackupPredicates]::IsTurnOnBackupValid)
+            $Predicates += (Get-MKPowerShellSetting -Name 'TurnOnBackup') -eq $true | ConvertTo-EnumFlag ([BackupPredicateEnum]::IsTurnOnBackupValid)
 
             # during startup, when Backup-Sources is called the 'BackupPolicy' needs to be considered.
             if ($Initialize.IsPresent) {
-                $Predicates += (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto' | ConvertTo-EnumFlag ([BackupPredicates]::IsBackupPolicyValid)
+                $Predicates += (Get-MKPowerShellSetting -Name 'BackupPolicy') -eq 'Auto' | ConvertTo-EnumFlag ([BackupPredicateEnum]::IsBackupPolicyValid)
             }
             else {
-                $Predicates += [BackupPredicates]::IsBackupPolicyValid
+                $Predicates += [BackupPredicateEnum]::IsBackupPolicyValid
             }
         }
         elseif ($Force.IsPresent) {
-            $Predicates += [BackupPredicates]::IsTurnOnBackupValid
-            $Predicates += [BackupPredicates]::IsBackupPolicyValid
+            $Predicates += [BackupPredicateEnum]::IsTurnOnBackupValid
+            $Predicates += [BackupPredicateEnum]::IsBackupPolicyValid
         }
     }
 
-    if ($Predicates -band [BackupPredicates]::IsPrecheckValid) {
+    if ($Predicates -band [BackupPredicateEnum]::IsPrecheckValid) {
         Get-MKPowerShellSetting -Name 'Backups' | ForEach-Object {
             try {
                 $IsAFile = (Test-Path $_.Path -PathType Leaf) -eq $true
@@ -78,7 +78,7 @@ function Backup-Sources {
             }
 
             if ($SourceItemTick) {
-                $Predicates += [BackupPredicates]::IsPathValid
+                $Predicates += [BackupPredicateEnum]::IsPathValid
             }
 
             try {
@@ -104,17 +104,17 @@ function Backup-Sources {
             }
             
             if (($SourceItemTick -ne $DestinationItemTick) -or ((-not $SourceItemTick) -and (-not $DestinationItemTick))) {
-                $Predicates += [BackupPredicates]::IsItemDirty
+                $Predicates += [BackupPredicateEnum]::IsItemDirty
             }
             
-            if ($Predicates -band [BackupPredicates]::IsItemDirty) {
+            if ($Predicates -band [BackupPredicateEnum]::IsItemDirty) {
                 try {
                     if ($_.UpdatePolicy -eq "Overwrite") {
                         if ((Test-Path -Path $_.Destination) -eq $false) {
                             New-Item -Path $_.Destination -ItemType Directory
                         }
 
-                        $Predicates += [BackupPredicates]::IsDestinationValid
+                        $Predicates += [BackupPredicateEnum]::IsDestinationValid
                     }
                     elseif ($_.UpdatePolicy -eq "New") {
                         $LeafName = Split-Path -Path $_.Path -LeafBase
@@ -166,7 +166,7 @@ function Backup-Sources {
                         }
 
                         $_.Destination = $NewItem.FullName
-                        $Predicates += [BackupPredicates]::IsDestinationValid
+                        $Predicates += [BackupPredicateEnum]::IsDestinationValid
                     }
                 }
                 catch {
@@ -174,7 +174,7 @@ function Backup-Sources {
                 }
             }
             
-            if ($Predicates -band [BackupPredicates]::AreSourcesReady) {
+            if ($Predicates -band [BackupPredicateEnum]::AreSourcesReady) {
                 if ($_.UpdatePolicy -eq "Overwrite") {
                     Copy-Item -Path $_.Path -Destination $_.Destination -Force -Recurse
                 }
@@ -186,12 +186,12 @@ function Backup-Sources {
                         Copy-Item -Path $_.Path -Destination $NewItem.FullName -Recurse -Container -Force
                     }
                 }
-                $Predicates += [BackupPredicates]::HasUpdatedSuccessfully
+                $Predicates += [BackupPredicateEnum]::HasUpdatedSuccessfully
             }
 
             Write-SourceReport $Predicates $_
             # set $Predicates to value prior to entering into for-loop
-            $Predicates = [BackupPredicates]::IsPrecheckValid
+            $Predicates = [BackupPredicateEnum]::IsPrecheckValid
         }
     }
     else {
@@ -214,25 +214,25 @@ function Write-SourceReport {
         $ItemName = Split-Path -Path $SourceItem.Path -Leaf
     }
 
-    if (-not ([BackupPredicates]$Predicates -band [BackupPredicates]::IsTurnOnBackupValid)) {
+    if (-not ([BackupPredicateEnum]$Predicates -band [BackupPredicateEnum]::IsTurnOnBackupValid)) {
         Write-Host @"
 'TurnOnBackup' is currently disabled. To enable call with -Force switch or enable by calling: 
     Set-MKPowerShellSetting -Name TurnOnBackup -Value '$true'
 "@ -ForegroundColor Yellow
     }
-    elseif (-not ([BackupPredicates]$Predicates -band [BackupPredicates]::IsItemDirty)) {
+    elseif (-not ([BackupPredicateEnum]$Predicates -band [BackupPredicateEnum]::IsItemDirty)) {
         Write-Host "The following item for MKPowerShell's Backup module detected no changes: $ItemName" -ForegroundColor Green 
     }
-    elseif (-not ([BackupPredicates]$Predicates -band [BackupPredicates]::IsPathValid)) {
+    elseif (-not ([BackupPredicateEnum]$Predicates -band [BackupPredicateEnum]::IsPathValid)) {
         Write-Host "The following item for MKPowerShell's Backup module cannot be found or accessed: $ItemName" -ForegroundColor Red
     }
-    elseif (-not ([BackupPredicates]$Predicates -band [BackupPredicates]::IsDestinationValid)) {
+    elseif (-not ([BackupPredicateEnum]$Predicates -band [BackupPredicateEnum]::IsDestinationValid)) {
         Write-Host @"
 The following item's destination folder for MKPowerShell's Backup module cannot be found or accessed: $ItemName
 This may be due to initial Backup execution.
 "@ -ForegroundColor Yellow
     }
-    elseif ([BackupPredicates]$Predicates -band [BackupPredicates]::HasUpdatedSuccessfully) {
+    elseif ([BackupPredicateEnum]$Predicates -band [BackupPredicateEnum]::HasUpdatedSuccessfully) {
         if ($SourceItem.UpdatePolicy -eq "Overwrite") {
             Write-Host "The following item for MKPowerShell's Backup module has been updated: $ItemName" -ForegroundColor Green 
         }

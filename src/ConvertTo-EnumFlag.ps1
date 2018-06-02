@@ -2,7 +2,7 @@
 # https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.enumconverter?view=netframework-4.7.1
 
 # Must be called as the following (note the parentheses)
-# ConvertTo-EnumFlag ([BackupPredicates]::IsConfigFileValid)
+# ConvertTo-EnumFlag ([BackupPredicateEnum]::IsConfigFileValid)
 function ConvertTo-EnumFlag {
     [CmdletBinding()]
     [OutputType([int])]

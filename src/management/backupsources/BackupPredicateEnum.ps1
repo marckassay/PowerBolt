@@ -1,4 +1,4 @@
-[Flags()] enum BackupPredicates {
+[Flags()] enum BackupPredicateEnum {
     IsConfigFileValid = 1
     IsTurnOnBackupValid = 2
     IsBackupPolicyValid = 4
