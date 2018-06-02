@@ -6,11 +6,11 @@
       <command:verb>Add</command:verb>
       <command:noun>ModuleToProfile</command:noun>
       <maml:description>
-        <maml:para>Appends profile file with an `Import-Module` statement.</maml:para>
+        <maml:para>Appends content of PowerShell session's profile with an `Import-Module` statement.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Appends `$PROFILE` (or `ProfilePath`) file with an `Import-Module` statement that imports the module found with `Path`.</maml:para>
+      <maml:para>Appends content of `$PROFILE` file (or content of  `ProfilePath` parameter if is used) with an `Import-Module` statement that imports the module found with `Path`.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -18,7 +18,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Path</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Path Description}}</maml:para>
+            <maml:para>Path to module folder.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -30,45 +30,22 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ProfilePath</maml:name>
           <maml:Description>
-            <maml:para>{{Fill ProfilePath Description}}</maml:para>
+            <maml:para>`$PROFILE` is default profile value.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>NoNewline</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill NoNewline Description}}</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
+          <dev:defaultValue>$(Get-Variable Profile -ValueOnly)</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>NoNewline</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill NoNewline Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Path</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Path Description}}</maml:para>
+          <maml:para>Path to module folder.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -80,14 +57,14 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>ProfilePath</maml:name>
         <maml:Description>
-          <maml:para>{{Fill ProfilePath Description}}</maml:para>
+          <maml:para>`$PROFILE` is default profile value.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>$(Get-Variable Profile -ValueOnly)</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -118,7 +95,12 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-ModuleToProfile -Path C:\Users\Alice\PowerSploit</dev:code>
+        <dev:code>PS C:\&gt; Add-ModuleToProfile -Path C:\Users\Alice\PowerSploit
+PS C:\&gt; Get-Content $PROFILE
+Import-Module C:\Users\Marc\Documents\PowerShell\Modules\posh-git\0.7.1\posh-git.psd1
+Import-Module C:\Users\Alice\PowerSploit
+
+PS C:\&gt;</dev:code>
         <dev:remarks>
           <maml:para>The module found in PowerSploit folder will have an `Import-Module` statement added to the default profile ($PROFILE) item.</maml:para>
         </dev:remarks>
@@ -141,7 +123,8 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Typically this is called when `MK.PowerShell.4PS` is imported.</maml:para>
+      <maml:para>When called with the `Force` switch param, it will disregard `TurnOnBackup` and `BackupPolicy` object in `MK.PowerShell-config.json` and continue to attempt to backup sources that are define in `Backups` object.</maml:para>
+      <maml:para> `BackupPolicy` key is set to 'auto' by default and `TurnOnBackup` is set false. Ideally, when `TurnOnBackup` key is set to true prior to importing `MK.PowerShell.4PS`, this will be called and attempt to backup sources.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -149,14 +132,14 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ConfigFilePath</maml:name>
           <maml:Description>
-            <maml:para>{{Fill ConfigFilePath Description}}</maml:para>
+            <maml:para>The config file for `MK.PowerShell.4PS`.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>$([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
@@ -172,7 +155,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Initialize</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Initialize Description}}</maml:para>
+            <maml:para>For internal for `MK.PowerShell.4PS` module.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -186,14 +169,14 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ConfigFilePath</maml:name>
         <maml:Description>
-          <maml:para>{{Fill ConfigFilePath Description}}</maml:para>
+          <maml:para>The config file for `MK.PowerShell.4PS`.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>$([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
@@ -210,7 +193,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Initialize</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Initialize Description}}</maml:para>
+          <maml:para>For internal for `MK.PowerShell.4PS` module.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -248,9 +231,17 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Set-MKPowerShellSetting -Name TurnOnBackup -Value $true
+PS C:\&gt; $BackupObject = @(
+     @{
+      UpdatePolicy = "Overwrite",
+      Path = "C:\\Users\\Marc\\AppData\\Roaming\\Code\\User\\keybindings.json",
+      Destination = "D:\\Google Drive\\Documents\\PowerShell\\"
+    }
+PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
+)</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>This example enables `TurnOnBackup` and assigns one backup object to `Backups`.  When `MK.PowerShell.4PS` imported next, it will attempt to overwrite the keybindings.json file if its in the `$Destination` folder.  If there is no file in that folder it will simpily move it there.  If `UpdatePolicy` had a value of `New`, it will move the file and to add an intger to its basename.  For instance, for this example keybindings.json file will be keybindings(1).json.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -258,6 +249,18 @@
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Backup-Sources.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`New-MKPowerShellConfigFile`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-MKPowerShellConfigFile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

@@ -10,6 +10,8 @@ function Get-ModuleInfo {
     )
 
     $Path = Get-Item $Path | Select-Object -ExpandProperty FullName
+    # if backslash is at the end and this value is used with Import-Module, it will fail to import
+    $Path = $Path.TrimEnd('\')
 
     if ($(Test-Path $Path -PathType Leaf)) {
         $ModuleDirectory = Split-Path $Path -Parent

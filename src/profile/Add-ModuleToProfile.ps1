@@ -11,13 +11,10 @@ function Add-ModuleToProfile {
 
         [Parameter(Mandatory = $False, Position = 1)]
         [string]
-        $ProfilePath = $(Get-Variable Profile -ValueOnly),
-
-        [switch]
-        $NoNewline
+        $ProfilePath = $(Get-Variable Profile -ValueOnly)
     )
 
     $ModuleDirectory = (Get-ModuleInfo -Path $Path).Directory
 
-    Add-Content -Path $ProfilePath -Value "Import-Module $ModuleDirectory" -NoNewline:$NoNewline.IsPresent
+    Add-Content -Path $ProfilePath -Value "Import-Module $ModuleDirectory"
 }

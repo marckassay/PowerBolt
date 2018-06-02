@@ -8,45 +8,35 @@ schema: 2.0.0
 # Add-ModuleToProfile
 
 ## SYNOPSIS
-Appends profile file with an `Import-Module` statement.
+Appends content of PowerShell session's profile with an `Import-Module` statement.
 
 ## SYNTAX
 
 ```
-Add-ModuleToProfile [-Path] <String> [[-ProfilePath] <String>] [-NoNewline] [<CommonParameters>]
+Add-ModuleToProfile [-Path] <String> [[-ProfilePath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Appends `$PROFILE` (or `ProfilePath`) file with an `Import-Module` statement that imports the module found with `Path`.
+Appends content of `$PROFILE` file (or content of  `ProfilePath` parameter if is used) with an `Import-Module` statement that imports the module found with `Path`.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
 PS C:\> Add-ModuleToProfile -Path C:\Users\Alice\PowerSploit
+PS C:\> Get-Content $PROFILE
+Import-Module C:\Users\Marc\Documents\PowerShell\Modules\posh-git\0.7.1\posh-git.psd1
+Import-Module C:\Users\Alice\PowerSploit
+
+PS C:\>
 ```
 
 The module found in PowerSploit folder will have an `Import-Module` statement added to the default profile ($PROFILE) item.
 
 ## PARAMETERS
 
-### -NoNewline
-{{Fill NoNewline Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Path
-{{Fill Path Description}}
+Path to module folder.
 
 ```yaml
 Type: String
@@ -61,7 +51,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProfilePath
-{{Fill ProfilePath Description}}
+`$PROFILE` is default profile value.
 
 ```yaml
 Type: String
@@ -70,7 +60,7 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
+Default value: $(Get-Variable Profile -ValueOnly)
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

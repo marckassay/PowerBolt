@@ -17,21 +17,31 @@ Backup-Sources [-ConfigFilePath <String>] [-Force] [-Initialize] [<CommonParamet
 ```
 
 ## DESCRIPTION
-Typically this is called when `MK.PowerShell.4PS` is imported.
+When called with the `Force` switch param, it will disregard `TurnOnBackup` and `BackupPolicy` object in `MK.PowerShell-config.json` and continue to attempt to backup sources that are define in `Backups` object.
+
+ `BackupPolicy` key is set to 'auto' by default and `TurnOnBackup` is set false. Ideally, when `TurnOnBackup` key is set to true prior to importing `MK.PowerShell.4PS`, this will be called and attempt to backup sources.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Set-MKPowerShellSetting -Name TurnOnBackup -Value $true
+PS C:\> $BackupObject = @(
+     @{
+      UpdatePolicy = "Overwrite",
+      Path = "C:\\Users\\Marc\\AppData\\Roaming\\Code\\User\\keybindings.json",
+      Destination = "D:\\Google Drive\\Documents\\PowerShell\\"
+    }
+PS C:\> Set-MKPowerShellSetting -Name Backups -Value $BackupObject
+)
 ```
 
-{{ Add example description here }}
+This example enables `TurnOnBackup` and assigns one backup object to `Backups`.  When `MK.PowerShell.4PS` imported next, it will attempt to overwrite the keybindings.json file if its in the `$Destination` folder.  If there is no file in that folder it will simpily move it there.  If `UpdatePolicy` had a value of `New`, it will move the file and to add an intger to its basename.  For instance, for this example keybindings.json file will be keybindings(1).json.
 
 ## PARAMETERS
 
 ### -ConfigFilePath
-{{Fill ConfigFilePath Description}}
+The config file for `MK.PowerShell.4PS`.
 
 ```yaml
 Type: String
@@ -40,7 +50,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -61,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -Initialize
-{{Fill Initialize Description}}
+For internal for `MK.PowerShell.4PS` module.
 
 ```yaml
 Type: SwitchParameter
@@ -89,3 +99,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md)
+[`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md)
+[`New-MKPowerShellConfigFile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-MKPowerShellConfigFile.md)
