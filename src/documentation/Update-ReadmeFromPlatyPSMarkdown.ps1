@@ -33,7 +33,7 @@ function Update-ReadmeFromPlatyPSMarkdown {
             }
 
             $ReadMeContent = Get-Content -Path $ReadMePath -Raw
-            $ExistingSnippetPattern = "^(### \[.*\w+-\w+.*\]\(http.*\))(\s*)(?<body>[\w\W]+?)(?(?=###)(?=###)|(\z))"
+            $ExistingSnippetPattern = "^(#### \[.*\w+-\w+.*\]\(http.*\))(\s*)(?<body>[\w\W]+?)(?(?=####)(?=####)|(\z))"
 
             if ($ReadMeContent) {
                 $FirstIndex = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -First 1 -ExpandProperty Index

@@ -65,11 +65,11 @@ Describe "Test Build-Documentation" {
             @{ Index = 1; Expected = "" },
             @{ Index = 2; Expected = "## Functions" },
             @{ Index = 3; Expected = "" },
-            @{ Index = 4; Expected = "### [```Get-AFunction```]()" }
+            @{ Index = 4; Expected = "#### [```Get-AFunction```]()" }
             @{ Index = 5; Expected = "" }
             @{ Index = 6; Expected = "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam." }
             @{ Index = 7; Expected = " " }
-            @{ Index = 8; Expected = "### [```Get-BFunction```]()" }
+            @{ Index = 8; Expected = "#### [```Get-BFunction```]()" }
         ) {
             Param($Index, $Expected)
             $Actual = (Get-Content "$TestDrive\TestModuleB\README.md")[$Index]

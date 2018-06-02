@@ -116,7 +116,7 @@ class MKPowerShellDocObject {
             $MarkdownURL = $Matches.Values
 
             # building content for README...
-            $TitleLine = "### [``$FunctionName``]($MarkdownURL)"
+            $TitleLine = "#### [``$FunctionName``]($MarkdownURL)"
             # get the line directly below the '## SYNOPSIS' line
             $BodyContent = $MarkdownContent[$MarkdownContent.IndexOf('## SYNOPSIS') + 1]
 
@@ -124,7 +124,7 @@ class MKPowerShellDocObject {
 `n
 $TitleLine
 
-    $BodyContent
+$BodyContent
 "@
             $Snippet
         } | Write-Output

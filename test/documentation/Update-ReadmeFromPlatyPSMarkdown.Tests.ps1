@@ -21,11 +21,11 @@ Describe "Test Update-ReadmeFromPlatyPSMarkdown" {
             @{ Index = 0; Expected = "" },
             @{ Index = 1; Expected = "## API" },
             @{ Index = 2; Expected = "" },
-            @{ Index = 3; Expected = "### [``Get-AFunction``](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-AFunction.md)" }
+            @{ Index = 3; Expected = "#### [``Get-AFunction``](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-AFunction.md)" }
             @{ Index = 4; Expected = "" }
-            @{ Index = 5; Expected = "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. " }
+            @{ Index = 5; Expected = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. " }
             @{ Index = 6; Expected = "" }
-            @{ Index = 7; Expected = "### [``Get-BFunction``](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-BFunction.md)" }
+            @{ Index = 7; Expected = "#### [``Get-BFunction``](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-BFunction.md)" }
         ) {
             Param($Index, $Expected)
             $Actual = (Get-Content "$TestDrive\TestModuleB\README.md")[$Index]
@@ -42,7 +42,7 @@ Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
 
 ## API
 
-### [```Get-XFunction```](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-XFunction.md)
+#### [```Get-XFunction```](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-XFunction.md)
 
 um necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
 "@
@@ -55,11 +55,11 @@ um necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae n
             @{ Index = 3; Expected = "" },
             @{ Index = 4; Expected = "## API" },
             @{ Index = 5; Expected = "" },
-            @{ Index = 6; Expected = "### [``Get-AFunction``](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-AFunction.md)" }
+            @{ Index = 6; Expected = "#### [``Get-AFunction``](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-AFunction.md)" }
             @{ Index = 7; Expected = "" }
-            @{ Index = 8; Expected = "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. " }
+            @{ Index = 8; Expected = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. " }
             @{ Index = 9; Expected = "" }
-            @{ Index = 10; Expected = "### [``Get-BFunction``](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-BFunction.md)" }
+            @{ Index = 10; Expected = "#### [``Get-BFunction``](https://github.com/marckassay/TestModuleB/blob/master/docs/Get-BFunction.md)" }
         ) {
             Param($Index, $Expected)
             $Actual = (Get-Content "$TestDrive\TestModuleB\README.md")[$Index]

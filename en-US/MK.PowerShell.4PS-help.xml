@@ -144,7 +144,7 @@ PS C:\&gt;</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Force Description}}</maml:para>
+            <maml:para>Will disregard values for `TurnOnBackup` and `BackupPolicy`.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -181,7 +181,7 @@ PS C:\&gt;</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Force Description}}</maml:para>
+          <maml:para>Will disregard values for `TurnOnBackup` and `BackupPolicy`.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
