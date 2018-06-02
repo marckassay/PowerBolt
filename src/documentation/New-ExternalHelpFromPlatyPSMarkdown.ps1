@@ -27,7 +27,7 @@ function New-ExternalHelpFromPlatyPSMarkdown {
         }
     }
 
-    process {
+    end {
         $MarkdownFolder = Join-Path -Path $Data.Path -ChildPath $Data.MarkdownFolder
 
         $HelpLocaleFolder = Join-Path -Path $Data.Path -ChildPath $Data.Locale
@@ -38,9 +38,7 @@ function New-ExternalHelpFromPlatyPSMarkdown {
 
         New-ExternalHelp -Path $MarkdownFolder -OutputPath $HelpLocaleFolder -Force | `
             Out-Null
-    }
-
-    end {
+        
         Write-Output $Data
     }
 }

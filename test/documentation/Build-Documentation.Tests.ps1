@@ -6,8 +6,6 @@ Describe "Test Build-Documentation" {
     BeforeAll {
         $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
 
-        New-Item -Path "$TestDrive\TestModuleB\README.md" -ItemType File
-
         # this test file needs the .git repo but not the docs folder
         Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
     }
@@ -21,13 +19,9 @@ Describe "Test Build-Documentation" {
         $Files = "Get-AFunction.md", "Get-BFunction.md", "Get-CFunction.md", "Set-CFunction.md" | `
             Sort-Object
         
-        $BeforeReadMeContents = Get-Content "$TestDrive\TestModuleB\README.md" 
-
         # NOTE: if this functions re-imports, it will import into a different scope or session.  
         # Although it will still pass, it will write warnings and errors
         Build-Documentation -Path "$TestDrive\TestModuleB" -NoReImportModule
-
-        $AfterReadMeContents = Get-Content "$TestDrive\TestModuleB\README.md" 
 
         $FileNames = Get-ChildItem "$TestDrive\TestModuleB\docs" -Recurse | `
             ForEach-Object {$_.Name} | `
@@ -41,8 +35,8 @@ Describe "Test Build-Documentation" {
             $FileNames | Should -BeExactly $Files
         }
 
-        It "Should modified ReadMe file." {
-            $AfterReadMeContents | Should -Not -BeExactly $BeforeReadMeContents
+        It "Should have modified the new ReadMe file." {
+            (Get-Content "$TestDrive\TestModuleB\README.md" -Raw) -like "*API*" | Should -Be $true
         }
 
         It "Should modify Get-AFunction.md file at line number <Index> with: {<Expected>} " -TestCases @(

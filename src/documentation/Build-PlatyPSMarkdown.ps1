@@ -61,8 +61,6 @@ function Build-PlatyPSMarkdown {
                 Import-Module -Name $Data.RootManifest -Force -Scope Global
             }
             
-            Write-Host -Object ($Data.OnlineVersionUrl) -ForegroundColor Blue -BackgroundColor Red
-
             New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
 
             # Since New-MarkdownHelp OnlineVersionUrl parameter is only available when free of param 

@@ -27,7 +27,7 @@ function Update-ReadmeFromPlatyPSMarkdown {
         try {
             $MarkdownSnippetCollection = $Data.GetMarkdownSnippetCollectionString()
 
-            $ReadMePath = Join-Path -Path $Data.Path -ChildPath "\README*" -Resolve
+            $ReadMePath = $Data.Path + "\README.md"
             if ((Test-Path -Path $ReadMePath) -eq $false) {
                 New-Item -Path $ReadMePath -ItemType File
             }
@@ -56,9 +56,14 @@ function Update-ReadmeFromPlatyPSMarkdown {
                 $MarkdownSnippetCollection = $MarkdownSnippetCollection.Insert(0, $SubSectionTitle)
                 $FirstIndex = $ReadMeContent.Length
             }
-
             
-            $ReadMeContent.Insert($FirstIndex, $MarkdownSnippetCollection) | Set-Content -Path $ReadMePath | Out-Null
+            # if the file isnt new..., else just assign $MarkdownSnippetCollection
+            if ($FirstIndex) {
+                $ReadMeContent.Insert($FirstIndex, $MarkdownSnippetCollection) | Set-Content -Path $ReadMePath | Out-Null
+            }
+            else {
+                Set-Content -Path $ReadMePath -Value $MarkdownSnippetCollection | Out-Null
+            }
         }
         catch {
             Write-Error "Unable to update README file."
