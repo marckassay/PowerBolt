@@ -25,49 +25,31 @@ function Update-ReadmeFromPlatyPSMarkdown {
 
     end {
         try {
-            $AppendageContent
+            $MarkdownSnippetCollection = $Data.GetMarkdownSnippetCollectionString()
+
             $ReadMePath = Join-Path -Path $Data.Path -ChildPath "\README*" -Resolve
-            $ReadMeContents = Get-Content -Path $ReadMePath
+            $ReadMeContent = Get-Content -Path $ReadMePath -Raw
+            $ExistingSnippetPattern = "^(### \[.*\w+-\w+.*\]\(http.*\))(\s*)(?<body>[\w\W]+?)(?(?=###)(?=###)|(\z))"
+            $FirstIndex = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -First 1 -ExpandProperty Index
+            if($FirstIndex){
+                $LastIndex = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -Last 1 -ExpandProperty Index
+                $LastLength = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -Last 1 -ExpandProperty Length
+                $ReadMeContent = $ReadMeContent.Remove($FirstIndex, (($LastIndex+$LastLength)-$FirstIndex))
 
-            $MarkdownFolderItems = Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse
-            $MarkdownSnippetCollection = $Data.GetMarkdownSnippetCollection()
+                # TODO: may want to use StringBuilder here
+                $MarkdownSnippetCollection = $MarkdownSnippetCollection.Trim()
+            } else {
+                $SubSectionTitle = @"
 
-            $MarkdownSnippetCollection | ForEach-Object -Process {
-
-                $FunctionName = $_.FunctionName
-                $NewTitleLine = $_.TitleLine
-                $NewBodyContent = $("    " + $_.BodyContent)
-
-                $TitlePattern = "^(?<title>### \[.*$FunctionName.*\]\(http.*\))"
-                $hasBeenUpdated = $False
-                for ($index = 0; $index -lt $ReadMeContents.Count; $index++) {
-                    if (($ReadMeContents[$index]) -Match $TitlePattern ) {
-                        $ReadMeContents[$index] = $NewTitleLine
-                        if (($index + 2) -le $ReadMeContents.Count) {
-                            $ReadMeContents[$index + 2] = $NewBodyContent
-                        }
-                        $hasBeenUpdated = $true
-                        break;
-                    }
-                }
-
-                if ($hasBeenUpdated -eq $False) {
-                    $AppendageContent += @(
-                        "",
-                        $NewTitleLine,
-                        "",
-                        $NewBodyContent
-                    )
-                }
+## API
+"@
+                # TODO: may want to use StringBuilder here
+                $MarkdownSnippetCollection = $MarkdownSnippetCollection.Insert(0,$SubSectionTitle)
+                $FirstIndex = $ReadMeContent.Length
             }
 
-            if ($AppendageContent.Count -gt 0) {
-                Add-Content -Path $ReadMePath -Value $AppendageContent | Out-Null
-            }
-            else {
-                Set-Content -Path $ReadMePath -Value $ReadMeContents | Out-Null
-            }
             
+            $ReadMeContent.Insert($FirstIndex, $MarkdownSnippetCollection) | Set-Content -Path $ReadMePath | Out-Null
         }
         catch {
             Write-Error "Unable to update README file."

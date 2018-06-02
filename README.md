@@ -42,81 +42,83 @@ If `TurnOnExtendedTypes` key in `MK.PowerShell.4PS` is set to `true` the followi
 * `FromBase64()`
 * `MatchCount()`
 
+## API
+
 ### [`Add-ModuleToProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md)
 
-    Appends profile file with an `Import-Module` statement.
+    Appends profile file with an `Import-Module` statement. 
 
 ### [`Backup-Sources`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Backup-Sources.md)
 
-    The `Backups` object defined in `MK.PowerShell-config.json` will copy items to their destination location.
+    The `Backups` object defined in `MK.PowerShell-config.json` will copy items to their destination location. 
 
 ### [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md)
 
-    With required `PlatyPS` module, this function will generate Markdown files (such as the file where you are reading this from), will generate PowerShell help doc file and update a README.md file with new functions.
+    With required `PlatyPS` module, this function will generate Markdown files (such as the file where you are reading this from), will generate PowerShell help doc file and update a README.md file with new functions. 
 
 ### [`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md)
 
-    With required `PlatyPS` module, will call `New-MarkdownHelp` or `Update-MarkdownHelp` just once.
+    With required `PlatyPS` module, will call `New-MarkdownHelp` or `Update-MarkdownHelp` just once. 
 
 ### [`ConvertTo-EnumFlag`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/ConvertTo-EnumFlag.md)
 
-    With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality operator returns `true`.
+    With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` only when equality operator returns `true`. 
 
 ### [`Export-History`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md)
 
-    Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so that a continuous history can be output to CLI.
+    Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so that a continuous history can be output to CLI. 
 
 ### [`Get-LatestError`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-LatestError.md)
 
-    Throwaway function that may be reincarnated in a from of Format.
+    Throwaway function that may be reincarnated in a from of Format. 
 
 ### [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md)
 
-    Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch.
+    Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch. 
 
 ### [`Import-History`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md)
 
-    Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI.
+    Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI. 
 
 ### [`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 
-    Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder from `Build-PlatyPSMarkdown`.
+    Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder from `Build-PlatyPSMarkdown`. 
 
 ### [`New-MKPowerShellConfigFile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-MKPowerShellConfigFile.md)
 
-    Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerShell.4PS`.
+    Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerShell.4PS`. 
 
 ### [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Publish-ModuleToNuGetGallery.md)
 
-    Streamlines publishing a module using `Publish-Module`.
+    Streamlines publishing a module using `Publish-Module`. 
 
 ### [`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md)
 
-    Launches a new PowerShell window by immediately terminating that called this function.  Default alias is `pwsh`.
+    Launches a new PowerShell window by immediately terminating that called this function.  Default alias is `pwsh`. 
 
 ### [`Restart-PWSHAdmin`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md)
 
-    Launches a new PowerShell window with Admin privileges by immediately terminating that called this function. Default alias is `pwsha`.
+    Launches a new PowerShell window with Admin privileges by immediately terminating that called this function. Default alias is `pwsha`. 
 
 ### [`Search-Items`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Search-Items.md)
 
-    Recurses thru folders to find files that its content matches `Pattern`.  Outputs object(s) to console.
+    Recurses thru folders to find files that its content matches `Pattern`.  Outputs object(s) to console. 
 
 ### [`Set-LocationAndStore`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md)
 
-    Records every time `sl` is called so that when new session launches, location will be the one last record.  Default alias value for this function is `sl`.
+    Records every time `sl` is called so that when new session launches, location will be the one last record.  Default alias value for this function is `sl`. 
 
 ### [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md)
 
-    Sets value to JSON data in `MK.PowerShell-config.json`.
+    Sets value to JSON data in `MK.PowerShell-config.json`. 
 
 ### [`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md)
 
-    Ideally having `Update-RootModuleUsingStatements` piped into this function, it will popluate a string array of function names and set it to the `FunctionsToExport`.
+    Ideally having `Update-RootModuleUsingStatements` piped into this function, it will popluate a string array of function names and set it to the `FunctionsToExport`. 
 
 ### [`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md)
 
-    Adds or updates function's 'snippet' in README file from `PlatyPS` generated files.
+    Adds or updates function's 'snippet' in README file from `PlatyPS` generated files. 
 
 ### [`Update-RootModuleUsingStatements`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md)
 

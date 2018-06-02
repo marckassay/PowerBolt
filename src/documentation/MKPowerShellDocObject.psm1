@@ -94,10 +94,10 @@ class MKPowerShellDocObject {
     # TODO: need to have this functions arity better fitted for options
     # TODO: removed the following but may need to have OnlineVersionUrlValue back as param:
     #       $OnlineVersionUrlValue -f $FunctionName
-    #       $MarkdownContent -replace '^(online version:)[\w\W]*$', "online version: $MarkdownURL" | Set-Content -Path $_.FullName
-    [object[]] GetMarkdownSnippetCollection () {
+    # TODO: use StringBuilder here
+    [string] GetMarkdownSnippetCollectionString () {
         
-        [object[]]$Collection = Get-ChildItem -Path ($this.ModuleMarkdownFolder + "\*.md") | `
+        [string]$SnippetCollectionString += Get-ChildItem -Path ($this.ModuleMarkdownFolder + "\*.md") | `
             ForEach-Object {
             $MarkdownContent = Get-Content -Path $_.FullName
             $FunctionName = $_.BaseName
@@ -110,13 +110,15 @@ class MKPowerShellDocObject {
             # get the line directly below the '## SYNOPSIS' line
             $BodyContent = $MarkdownContent[$MarkdownContent.IndexOf('## SYNOPSIS') + 1]
 
-            $(@{
-                    FunctionName = $FunctionName
-                    TitleLine    = $TitleLine
-                    BodyContent  = $BodyContent
-                })
+$Snippet = @"
+`n
+$TitleLine
+
+    $BodyContent
+"@
+        $Snippet
         } | Write-Output
 
-        return $Collection
+        return $SnippetCollectionString
     }
 }
