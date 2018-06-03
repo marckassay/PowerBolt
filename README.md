@@ -54,7 +54,7 @@ The `Backups` object defined in `MK.PowerShell-config.json` will copy items to t
 
 #### [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md)
 
-With required `PlatyPS` module, this function will generate Markdown files (such as the file where you are reading this from), will generate PowerShell help doc file and update a README.md file with new functions. 
+Creates or updates help documentation files, including a README file. 
 
 #### [`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md)
 

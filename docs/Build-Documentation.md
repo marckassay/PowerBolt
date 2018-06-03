@@ -8,45 +8,39 @@ schema: 2.0.0
 # Build-Documentation
 
 ## SYNOPSIS
-With required `PlatyPS` module, this function will generate Markdown files (such as the file where you are reading this from), will generate PowerShell help doc file and update a README.md file with new functions.
+Creates or updates help documentation files and module's README file.  Also creates a XML based help documentation file for PowerShell.
 
 ## SYNTAX
 
+### ByName
 ```
-Build-Documentation [[-Data] <MKPowerShellDocObject>] [[-Name] <String>] [[-Path] <String>]
- [[-MarkdownFolder] <String>] [[-Locale] <String>] [[-OnlineVersionUrlTemplate] <String>]
- [[-OnlineVersionUrlPolicy] <String>] [[-MarkdownSnippetCollection] <String>] [-NoReImportModule]
+Build-Documentation [-Name] <String> [[-MarkdownFolder] <String>] [[-Locale] <String>]
+ [[-OnlineVersionUrlTemplate] <String>] [[-OnlineVersionUrlPolicy] <String>] [-NoReImportModule]
+ [<CommonParameters>]
+```
+
+### ByPath
+```
+Build-Documentation [-Path] <String> [[-MarkdownFolder] <String>] [[-Locale] <String>]
+ [[-OnlineVersionUrlTemplate] <String>] [[-OnlineVersionUrlPolicy] <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, this function will generate Markdown help documentation files (such as the file where you are reading this from) and update or create a README.md file with new functions from the help docs.  Also this generates a new PowerShell help doc file that is used in the CLI.
+
+This function simply takes the parameter values into an object and pipes it to the following:
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Build-Documentation -Path .
+PS C:\Users\Alice\PowerSploit> Build-Documentation
 ```
 
-The `Path` value here points to a folder where a module resides.  A manifest file is needed 
+Builds documentation for the PowerSploit module with default parameters.
 
 ## PARAMETERS
-
-### -Data
-{{Fill Data Description}}
-
-```yaml
-Type: MKPowerShellDocObject
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
 
 ### -Locale
 {{Fill Locale Description}}
@@ -78,30 +72,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MarkdownSnippetCollection
-{{Fill MarkdownSnippetCollection Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
-{{Fill Name Description}}
+If the module is already imported, the value is the name of the module.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByName
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -109,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoReImportModule
-{{Fill NoReImportModule Description}}
+By default this function will re-import module to get the latest changes to that modules source code.
 
 ```yaml
 Type: SwitchParameter
@@ -155,14 +134,14 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{Fill Path Description}}
+Folder that contains a module.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByPath
 Aliases:
 
-Required: False
+Required: True
 Position: 2
 Default value: None
 Accept pipeline input: False

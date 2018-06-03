@@ -4,13 +4,13 @@ function Build-Documentation {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $False, ValueFromPipeline = $True)]
-        [MKPowerShellDocObject]$Data,
-
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $True, 
+            ParameterSetName = "ByName")]
         [string]$Name = '',
         
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $True, 
+            Position = 0,
+            ParameterSetName = "ByPath")]
         [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
 
         [Parameter(Mandatory = $False)]
@@ -25,15 +25,14 @@ function Build-Documentation {
         [Parameter(Mandatory = $False)]
         [ValidateSet("Auto", "Omit")]
         [string]$OnlineVersionUrlPolicy = 'Auto',
-
-        [Parameter(Mandatory = $False)]
-        [string]$MarkdownSnippetCollection = '',
         
         [switch]
         $NoReImportModule
     )
 
     begin {
+        $Path = Resolve-Path $Path | Select-Object -ExpandProperty Path
+        
         if (-not $Data) {
             $Data = [MKPowerShellDocObject]::new(
                 $Name,

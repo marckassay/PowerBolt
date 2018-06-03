@@ -270,43 +270,20 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       <command:verb>Build</command:verb>
       <command:noun>Documentation</command:noun>
       <maml:description>
-        <maml:para>With required `PlatyPS` module, this function will generate Markdown files (such as the file where you are reading this from), will generate PowerShell help doc file and update a README.md file with new functions.</maml:para>
+        <maml:para>Creates or updates help documentation files, including a README file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>With required `PlatyPS` (https://github.com/PowerShell/platyPS) module, this function will generate Markdown help documentation files (such as the file where you are reading this from)and update or create a README.md file with new functions from the help docs.  Also this generates a new PowerShell help doc file that is used in the CLI.</maml:para>
+      <maml:para>This function simply takes the parameter values into an object and pipes it to the following:</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Build-Documentation</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
-          <maml:name>Data</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Data Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">MKPowerShellDocObject</command:parameterValue>
-          <dev:type>
-            <maml:name>MKPowerShellDocObject</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Name Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Path</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Path Description}}</maml:para>
+            <maml:para>If the module is already imported, the value is the name of the module.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -367,11 +344,77 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
-          <maml:name>MarkdownSnippetCollection</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>NoReImportModule</maml:name>
           <maml:Description>
-            <maml:para>{{Fill MarkdownSnippetCollection Description}}</maml:para>
+            <maml:para>By default this function will re-import module to get the latest changes to that modules source code.</maml:para>
           </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Build-Documentation</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:Description>
+            <maml:para>Folder that contains a module.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>MarkdownFolder</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill MarkdownFolder Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>Locale</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Locale Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>OnlineVersionUrlTemplate</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill OnlineVersionUrlTemplate Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>OnlineVersionUrlPolicy</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill OnlineVersionUrlPolicy Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Auto</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Omit</command:parameterValue>
+          </command:parameterValueGroup>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -382,7 +425,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoReImportModule</maml:name>
           <maml:Description>
-            <maml:para>{{Fill NoReImportModule Description}}</maml:para>
+            <maml:para>By default this function will re-import module to get the latest changes to that modules source code.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -393,18 +436,6 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
-        <maml:name>Data</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Data Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">MKPowerShellDocObject</command:parameterValue>
-        <dev:type>
-          <maml:name>MKPowerShellDocObject</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>Locale</maml:name>
         <maml:Description>
@@ -429,22 +460,10 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
-        <maml:name>MarkdownSnippetCollection</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill MarkdownSnippetCollection Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Name Description}}</maml:para>
+          <maml:para>If the module is already imported, the value is the name of the module.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -456,7 +475,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoReImportModule</maml:name>
         <maml:Description>
-          <maml:para>{{Fill NoReImportModule Description}}</maml:para>
+          <maml:para>By default this function will re-import module to get the latest changes to that modules source code.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -489,10 +508,10 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Path</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Path Description}}</maml:para>
+          <maml:para>Folder that contains a module.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -530,9 +549,9 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Build-Documentation -Path .</dev:code>
+        <dev:code>PS C:\Users\Alice\PowerSploit&gt; Build-Documentation</dev:code>
         <dev:remarks>
-          <maml:para>The `Path` value here points to a folder where a module resides.  A manifest file is needed</maml:para>
+          <maml:para>Builds documentation for the PowerSploit module with default parameters.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
