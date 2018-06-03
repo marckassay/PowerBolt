@@ -54,11 +54,11 @@ The `Backups` object defined in `MK.PowerShell-config.json` will copy items to t
 
 #### [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md)
 
-Creates or updates help documentation files, including a README file. 
+Creates or updates help documentation files and module's README file.  Also creates a XML based help documentation file for PowerShell. 
 
 #### [`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md)
 
-With required `PlatyPS` module, will call `New-MarkdownHelp` or `Update-MarkdownHelp` just once. 
+With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, calls [`New-MarkdownHelp`](https://github.com/PowerShell/platyPS/blob/master/docs/New-MarkdownHelp.md) or [`Update-MarkdownHelpModule`](https://github.com/PowerShell/platyPS/blob/master/docs/Update-MarkdownHelpModule.md). 
 
 #### [`ConvertTo-EnumFlag`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/ConvertTo-EnumFlag.md)
 

@@ -8,28 +8,42 @@ schema: 2.0.0
 # Build-PlatyPSMarkdown
 
 ## SYNOPSIS
-With required `PlatyPS` module, will call `New-MarkdownHelp` or `Update-MarkdownHelp` just once.
+With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, calls [`New-MarkdownHelp`](https://github.com/PowerShell/platyPS/blob/master/docs/New-MarkdownHelp.md) or [`Update-MarkdownHelpModule`](https://github.com/PowerShell/platyPS/blob/master/docs/Update-MarkdownHelpModule.md).
 
 ## SYNTAX
 
+### ByPipe
 ```
-Build-PlatyPSMarkdown [-Data <MKPowerShellDocObject>] [[-Name] <String>] [-Path <String>]
- [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersionUrlTemplate <String>]
- [-OnlineVersionUrlPolicy <String>] [-MarkdownSnippetCollection <String>] [-NoReImportModule]
+Build-PlatyPSMarkdown [-Data <MKPowerShellDocObject>] [-MarkdownFolder <String>] [-Locale <String>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
+ [<CommonParameters>]
+```
+
+### ByName
+```
+Build-PlatyPSMarkdown [[-Name] <String>] [-MarkdownFolder <String>] [-Locale <String>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
+ [<CommonParameters>]
+```
+
+### ByPath
+```
+Build-PlatyPSMarkdown [-Path <String>] [-MarkdownFolder <String>] [-Locale <String>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+If no Markdown files are in `MarkdownFolder`, this function will call `New-MarkdownHelp`. Else it will call `Update-MarkdownHelpModule`. After `New-MarkdownHelp` is executed it will iterate thru the newly Markdown files and add the online version url to file.  This value, by default, is retrieved from a .git directory (if there is one) of the module.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Build-PlatyPSMarkdown -Path C:\Users\Alice\PowerSploit -NoReImportModule
 ```
 
-{{ Add example description here }}
+With specified `Path` value and `NoReImportModule` switched, this will generate (new or update) files for PowerSploit module.  The `NoReImportModule` prevents re-importing PowerSploit so the current state of this imported module is used.  In otherwords, if changes to the source code of PowerSploit has been made it will not be available until it is imported again.  And because of that `NoReImportModule` is typically not switched.
 
 ## PARAMETERS
 
@@ -38,7 +52,7 @@ PS C:\> {{ Add example code here }}
 
 ```yaml
 Type: MKPowerShellDocObject
-Parameter Sets: (All)
+Parameter Sets: ByPipe
 Aliases:
 
 Required: False
@@ -49,7 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -Locale
-{{Fill Locale Description}}
+The name of the folder where PowerShell XML file will reside.
 
 ```yaml
 Type: String
@@ -58,13 +72,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: en-US
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -MarkdownFolder
-{{Fill MarkdownFolder Description}}
+A relative path of module's folder where the Markdown files reside or will reside.
 
 ```yaml
 Type: String
@@ -73,32 +87,17 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MarkdownSnippetCollection
-{{Fill MarkdownSnippetCollection Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
+Default value: docs
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Name
-{{Fill Name Description}}
+If the module is already imported, the value is the name of the module.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByName
 Aliases:
 
 Required: False
@@ -109,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoReImportModule
-{{Fill NoReImportModule Description}}
+Prevents re-importing module prior to executing PlatyPS's `New-MarkdownHelp` or `Update-MarkdownHelpModule`.
 
 ```yaml
 Type: SwitchParameter
@@ -155,11 +154,11 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{Fill Path Description}}
+Folder that contains a module.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByPath
 Aliases:
 
 Required: False

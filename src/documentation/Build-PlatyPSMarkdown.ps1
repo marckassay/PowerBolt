@@ -4,15 +4,18 @@ function Build-PlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $False, ValueFromPipeline = $True)]
+        [Parameter(Mandatory = $False, 
+            ValueFromPipeline = $True, 
+            ParameterSetName = "ByPipe")]
         [MKPowerShellDocObject]$Data,
 
-        [Parameter(Mandatory = $False, Position = 0)]
+        [Parameter(Mandatory = $False, 
+            ParameterSetName = "ByName")]
         [string]$Name,
 
-        [Parameter(Mandatory = $False)]
-        [AllowEmptyString()]
-        [AllowNull()]
+        [Parameter(Mandatory = $False,
+            Position = 0, 
+            ParameterSetName = "ByPath")]
         [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
 
         [Parameter(Mandatory = $False)]
@@ -27,15 +30,14 @@ function Build-PlatyPSMarkdown {
         [Parameter(Mandatory = $False)]
         [ValidateSet("Auto", "Omit")]
         [string]$OnlineVersionUrlPolicy = 'Auto',
-
-        [Parameter(Mandatory = $False)]
-        [string]$MarkdownSnippetCollection,
         
         [switch]
         $NoReImportModule
     ) 
     
     begin {
+        $Path = Resolve-Path $Path | Select-Object -ExpandProperty Path
+
         if (-not $Data) {
             $Data = [MKPowerShellDocObject]::new(
                 $Name,
@@ -95,7 +97,6 @@ function Build-PlatyPSMarkdown {
 
             Update-MarkdownHelpModule -Path $Data.ModuleMarkdownFolder | Out-Null
         }
-        
 
         Write-Output $Data
     }

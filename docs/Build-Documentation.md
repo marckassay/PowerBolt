@@ -43,7 +43,7 @@ Builds documentation for the PowerSploit module with default parameters.
 ## PARAMETERS
 
 ### -Locale
-{{Fill Locale Description}}
+The name of the folder where PowerShell XML file will reside.
 
 ```yaml
 Type: String
@@ -52,13 +52,13 @@ Aliases:
 
 Required: False
 Position: 4
-Default value: None
+Default value: en-US
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -MarkdownFolder
-{{Fill MarkdownFolder Description}}
+A relative path of module's folder where the Markdown files reside or will reside.
 
 ```yaml
 Type: String
@@ -67,7 +67,7 @@ Aliases:
 
 Required: False
 Position: 3
-Default value: None
+Default value: docs
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
