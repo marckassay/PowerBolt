@@ -17,7 +17,7 @@ function Update-RootModuleUsingStatements {
         [switch]
         $PassThru
     )
-    
+    # TODO: from this line to line 41, replace with Get-ModuleInfo
     $Path = Get-Item $Path | Select-Object -ExpandProperty FullName
 
     if ($(Test-Path $Path -PathType Leaf)) {
@@ -39,20 +39,25 @@ function Update-RootModuleUsingStatements {
         $TargetDirectory = (Join-Path -Path $ModuleDirectory -ChildPath $SourceDirectory)
     }
 
-    $UsingStatements = 0
     # cleaned as in existing 'using' statements removed
+    $UsingStatements = 0
+
+    # stop matching when there is a break of consecutive 'using module' statements.  a break with 
+    # additional statements means that developer manually added that line; so keep it.
+    $StopMatchingImportStatements = $false
+    
     $ModuleContentsCleaned = Get-Content $ModulePath | `
         ForEach-Object -Process {
-        if ($_ -match '(?<=(using module \.\\)).*(?=(\.ps1))') {
+        if ((-not $StopMatchingImportStatements) -and ($_ -match '(?<=(using module \.\\)).*(?=(\.ps1))')) {
             $UsingStatements++
         }
         elseif ($_.Count -ge 1) {
             "$_`n"
+            $StopMatchingImportStatements = $true
         }
-    }
-
-    if ($UsingStatements -gt 0) {
-        Write-Verbose "Update-RootModuleDotSourceImports: A total of $UsingStatements was removed in $($Manifest.RootModule)."
+        else {
+            $StopMatchingImportStatements = $true
+        }
     }
 
     $TargetFunctionsToExport = Get-ChildItem -Path $TargetDirectory -Include $Include -Exclude $Exclude -Recurse | `

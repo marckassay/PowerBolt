@@ -68,10 +68,6 @@ With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` on
 
 Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so that a continuous history can be output to CLI. 
 
-#### [`Get-ImportNameParameterSet`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md)
-
-{{Fill in the Synopsis}} 
-
 #### [`Get-LatestError`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-LatestError.md)
 
 Throwaway function that may be reincarnated in a from of Format. 
@@ -102,7 +98,7 @@ Streamlines publishing a module using `Publish-Module`.
 
 #### [`Reset-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Publish-ModuleToNuGetGallery.md)
 
-{{Fill in the Synopsis}} 
+Re-enables an `Import-Module` statement in `$PROFILE` to be executed. 
 
 #### [`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md)
 
@@ -126,7 +122,7 @@ Sets value to JSON data in `MK.PowerShell-config.json`.
 
 #### [`Skip-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md)
 
-{{Fill in the Synopsis}} 
+Prevents an `Import-Module` statement in `$PROFILE` from executing. 
 
 #### [`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md)
 

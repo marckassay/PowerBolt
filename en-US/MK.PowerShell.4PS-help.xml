@@ -111,6 +111,14 @@ PS C:\&gt;</dev:code>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Skip-ModuleInProfile.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Reset-ModuleInProfile`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Reset-ModuleInProfile.md</maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1171,85 +1179,6 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-ImportNameParameterSet</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>ImportNameParameterSet</command:noun>
-      <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-ImportNameParameterSet</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ProfilePath</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ProfilePath Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ProfilePath</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ProfilePath Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks />
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Get-LatestError</command:name>
       <command:verb>Get</command:verb>
       <command:noun>LatestError</command:noun>
@@ -1426,17 +1355,22 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Demonstration of using Get-MergedPath with truthly values</dev:code>
+        <dev:code>E:\Temp\AIT\&gt; Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\resources\android\AiT-Feature.jpg
+E:\Temp\AIT\resources\android\AiT-Feature.jpg
+
+E:\Temp\AIT\&gt; Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\resources\android\AiT-Feature.jpg -IsValid
+True</dev:code>
         <dev:remarks>
-          <maml:para>E:\Temp\AIT&gt; Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\resources\android\AiT-Feature.jpg E:\Temp\AIT\resources\android\AiT-Feature.jpg</maml:para>
-          <maml:para>E:\Temp\AIT&gt; Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\resources\android\AiT-Feature.jpg -IsValid True</maml:para>
+          <maml:para>Demonstration of using Get-MergedPath with truthly values</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Demonstration of using Get-MergedPath with falsely values</dev:code>
+        <dev:code>E:\Temp\AIT\&gt; Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\reWWWources\android\AiT-Feature.jpg
+E:\Temp\AIT\&gt; Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\reWWWources\android\AiT-Feature.jpg -IsValid
+False</dev:code>
         <dev:remarks>
-          <maml:para>E:\Temp\AIT&gt; Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\reWWWources\android\AiT-Feature.jpg E:\Temp\AIT&gt; Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\reWWWources\android\AiT-Feature.jpg -IsValid False</maml:para>
+          <maml:para>Demonstration of using Get-MergedPath with falsely values</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2165,11 +2099,11 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       <command:verb>Reset</command:verb>
       <command:noun>ModuleInProfile</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Reenables an `Import-Module` statement in `$PROFILE` to execute.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>With `Name` param being a dynamic valid set of module names in `$PROFILE`, when called with one of these names it will uncomment (remove the prefix `#`) from the Import-Module statement for that module.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2260,7 +2194,16 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Skip-ModuleInProfile.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -2886,11 +2829,11 @@ MatchedLine                        # TODO: need to have this functions arity bet
       <command:verb>Skip</command:verb>
       <command:noun>ModuleInProfile</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Prevents an `Import-Module` statement in `$PROFILE` from executing.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>With `Name` param being a dynamic valid set of module names in `$PROFILE`, when called with one of these names it will comment (`#`) the Import-Module statement for that module.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2981,7 +2924,16 @@ MatchedLine                        # TODO: need to have this functions arity bet
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Reset-ModuleInProfile`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Reset-ModuleInProfile.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>

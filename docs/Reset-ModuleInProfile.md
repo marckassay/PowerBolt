@@ -8,7 +8,7 @@ schema: 2.0.0
 # Reset-ModuleInProfile
 
 ## SYNOPSIS
-Reenables an `Import-Module` statement in `$PROFILE` to execute.
+Re-enables an `Import-Module` statement in `$PROFILE` to be executed. 
 
 ## SYNTAX
 
