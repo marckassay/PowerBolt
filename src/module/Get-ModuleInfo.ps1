@@ -4,35 +4,58 @@ function Get-ModuleInfo {
     [OutputType([PSObject])]
     Param
     (
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $False)]
         [string]
-        $Path
+        $Path = (Get-Location | Select-Object -ExpandProperty Path)
     )
 
-    $Path = Get-Item $Path | Select-Object -ExpandProperty FullName
     # if backslash is at the end and this value is used with Import-Module, it will fail to import
-    $Path = $Path.TrimEnd('\')
+    $Item = Get-Item ($Path.Trim().TrimEnd('\'))
 
-    if ($(Test-Path $Path -PathType Leaf)) {
-        $ModuleDirectory = Split-Path $Path -Parent
-        $ModuleName = Split-Path $Path -LeafBase
+    if ($(Test-Path $Item.FullName -PathType Leaf)) {
+        if ($Item.Extension -eq '.psd1') {
+            $ModuleInfo = Test-ModuleManifest $Item
+        }
+        elseif ($Item.Extension -eq '.psm1') {
+            $PredicatedManifestPath = Join-Path -Path $Item.Parent -ChildPath ($Item.BaseName + ".psd1")
+            if (Test-Path $PredicatedManifestPath) {
+                $ModuleInfo = Test-ModuleManifest $PredicatedManifestPath
+            }
+            else {
+                $RootModule = $Item
+                $ModuleBase = $Item.Directory.FullName
+                $Name = $Item.BaseName
+            }
+        }
     }
     else {
-        $ModuleDirectory = $Path
-        $ModuleName = Split-Path $Path -Leaf
+        $PredicatedManifestItem = Get-ChildItem -Path ($Item.FullName) -Include '*.psd1' -Recurse -Depth 0 | `
+            Select-Object -First 1 | `
+            Select-Object -ExpandProperty FullName  
+        
+        if ($PredicatedManifestItem) {
+            $ModuleInfo = Test-ModuleManifest $PredicatedManifestItem
+        }
+        else {
+            $PredicatedModuleItem = Get-ChildItem -Path ($Item.FullName) -Include '*.psm1' -Recurse -Depth 0 | `
+                Select-Object -First 1
+
+            $RootModule = $PredicatedModuleItem
+            $ModuleBase = $PredicatedModuleItem.FullName
+            $Name = $PredicatedModuleItem.BaseName
+        }
     }
 
-    $ManifestFilePath = Join-Path -Path $ModuleDirectory -ChildPath "$ModuleName.psd1"
-    $Manifest = Test-ModuleManifest $ManifestFilePath
-    $ModuleFilePath = $(Join-Path $ModuleDirectory -ChildPath $ModuleName'.psm1')
-
-    [psobject]$ModuleInfo = @{
-        Manifest         = $Manifest
-        ManifestFilePath = $ManifestFilePath
-        Name             = $ModuleName
-        Directory        = $ModuleDirectory
-        FilePath         = $ModuleFilePath
+    if ($ModuleInfo) {
+        $RootModule = $ModuleInfo.RootModule
+        $ModuleBase = $ModuleInfo.ModuleBase
+        $Name = $ModuleInfo.Name
     }
 
-    $ModuleInfo
-}
+    return [psobject]$ModuleInfo = @{
+        Info       = $ModuleInfo
+        RootModule = $RootModule
+        ModuleBase = $ModuleBase
+        Name       = $Name
+    }
+} 

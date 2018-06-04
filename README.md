@@ -46,7 +46,7 @@ If `TurnOnExtendedTypes` key in `MK.PowerShell.4PS` is set to `true` the followi
 
 #### [`Add-ModuleToProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md)
 
-Appends content of PowerShell session's profile with an `Import-Module` statement. 
+Appends content of the PowerShell session's profile with an `Import-Module` statement. 
 
 #### [`Backup-Sources`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Backup-Sources.md)
 
@@ -68,9 +68,17 @@ With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` on
 
 Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so that a continuous history can be output to CLI. 
 
+#### [`Get-ImportNameParameterSet`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md)
+
+{{Fill in the Synopsis}} 
+
 #### [`Get-LatestError`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-LatestError.md)
 
 Throwaway function that may be reincarnated in a from of Format. 
+
+#### [`Get-MergedPath`](https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c)
+
+Returns a valid path from a parent of one of its children which overlaps that parent's path. 
 
 #### [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md)
 
@@ -92,6 +100,10 @@ Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerS
 
 Streamlines publishing a module using `Publish-Module`. 
 
+#### [`Reset-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Publish-ModuleToNuGetGallery.md)
+
+{{Fill in the Synopsis}} 
+
 #### [`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md)
 
 Launches a new PowerShell window by immediately terminating that called this function.  Default alias is `pwsh`. 
@@ -111,6 +123,10 @@ Records every time `sl` is called so that when new session launches, location wi
 #### [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md)
 
 Sets value to JSON data in `MK.PowerShell-config.json`. 
+
+#### [`Skip-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md)
+
+{{Fill in the Synopsis}} 
 
 #### [`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md)
 

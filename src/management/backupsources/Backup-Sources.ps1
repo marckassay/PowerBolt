@@ -1,4 +1,3 @@
-using module .\..\..\ConvertTo-EnumFlag.ps1
 using module .\.\BackupPredicateEnum.ps1
 
 function Backup-Sources {

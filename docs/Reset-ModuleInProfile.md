@@ -1,42 +1,37 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md
+online version:
 schema: 2.0.0
 ---
 
-# Add-ModuleToProfile
+# Reset-ModuleInProfile
 
 ## SYNOPSIS
-Appends content of the PowerShell session's profile with an `Import-Module` statement.
+{{Fill in the Synopsis}}
 
 ## SYNTAX
 
 ```
-Add-ModuleToProfile [-Path] <String> [[-ProfilePath] <String>] [<CommonParameters>]
+Reset-ModuleInProfile [[-ProfilePath] <String>] [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Appends content of `$PROFILE` file (or content of  `ProfilePath` parameter if is used) with an `Import-Module` statement that imports the module found with `Path`.
+{{Fill in the Description}}
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Add-ModuleToProfile -Path C:\Users\Alice\PowerSploit
-PS C:\> Get-Content $PROFILE
-Import-Module C:\Users\Marc\Documents\PowerShell\Modules\posh-git\0.7.1\posh-git.psd1
-Import-Module C:\Users\Alice\PowerSploit
-
-PS C:\>
+PS C:\> {{ Add example code here }}
 ```
 
-The module found in PowerSploit folder will have an `Import-Module` statement added to the default profile ($PROFILE) item.
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -Path
-Path to module folder.
+### -Name
+{{Fill Name Description}}
 
 ```yaml
 Type: String
@@ -51,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProfilePath
-`$PROFILE` is default profile value.
+{{Fill ProfilePath Description}}
 
 ```yaml
 Type: String
@@ -60,7 +55,7 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: $(Get-Variable Profile -ValueOnly)
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -74,7 +69,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.String
+### System.Object
 
 ## NOTES
 
