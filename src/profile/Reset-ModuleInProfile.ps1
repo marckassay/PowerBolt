@@ -8,7 +8,14 @@ function Reset-ModuleInProfile {
     )
 
     DynamicParam {
-        return Get-ImportNameParameterSet -ProfilePath $ProfilePath
+        if (-not $ProfilePath) {
+            $ProfilePath = $(Get-Variable Profile -ValueOnly)
+        }
+        return Get-ImportNameParameterSet -LineStatus 'Comment' -ProfilePath $ProfilePath 
+    }
+
+    begin {
+        $Name = $PSBoundParameters['Name']
     }
 
     end {

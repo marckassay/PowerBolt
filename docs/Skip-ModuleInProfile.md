@@ -8,7 +8,7 @@ schema: 2.0.0
 # Skip-ModuleInProfile
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Prevents an `Import-Module` statement in `$PROFILE` from executing.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Skip-ModuleInProfile [[-ProfilePath] <String>] [-Name] <String> [<CommonParamete
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+With `Name` param being a dynamic valid set of module names in `$PROFILE`, when called with one of these names it will comment (`#`) the Import-Module statement for that module.
 
 ## EXAMPLES
 
@@ -74,3 +74,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[`Add-ModuleToProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md)
+[`Reset-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Reset-ModuleInProfile.md)

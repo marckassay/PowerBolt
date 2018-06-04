@@ -10,7 +10,14 @@ function Skip-ModuleInProfile {
     )
 
     DynamicParam {
-        return Get-ImportNameParameterSet -ProfilePath $ProfilePath
+        if (-not $ProfilePath) {
+            $ProfilePath = $(Get-Variable Profile -ValueOnly)
+        }
+        return Get-ImportNameParameterSet -LineStatus 'Uncomment' -ProfilePath $ProfilePath 
+    }
+    
+    begin {
+        $Name = $PSBoundParameters['Name']
     }
 
     end {
@@ -26,8 +33,13 @@ function Skip-ModuleInProfile {
 
 # NoExport: Get-ImportNameParameterSet
 function Get-ImportNameParameterSet {
-    [CmdletBinding(PositionalBinding = $False)]
+    [CmdletBinding(PositionalBinding = $True)]
     Param(
+        [Parameter(Mandatory = $True)]
+        [ValidateSet("Uncomment", "Comment")]
+        [String[]]
+        $LineStatus,
+
         [Parameter(Mandatory = $False)]
         [String]$ProfilePath = $(Get-Variable Profile -ValueOnly)
     )
@@ -37,11 +49,16 @@ function Get-ImportNameParameterSet {
     $ParamAttribute.Mandatory = $True
     $ParamAttribute.Position = 0
     $AttributeCollection.Add($ParamAttribute)
-        
+    
     if ($ProfilePath) {
         # regex below returns the last directory in Path value for Import-Module
         $ProfileRaw = Get-Content -Path $ProfilePath -Raw
-        $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
+        if ($LineStatus -eq "Uncomment") {
+            $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
+        }
+        else {
+            $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=\# Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
+        }
     }
     else {
         $ModuleBases = '<ModuleName>'

@@ -34,23 +34,23 @@ will be returned.
 
 ### EXAMPLE 1
 ```
-Demonstration of using Get-MergedPath with truthly values
-```
-
 E:\Temp\AIT\> Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\resources\android\AiT-Feature.jpg
 E:\Temp\AIT\resources\android\AiT-Feature.jpg
 
 E:\Temp\AIT\> Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\resources\android\AiT-Feature.jpg -IsValid
 True
+```
+
+Demonstration of using Get-MergedPath with truthly values
 
 ### EXAMPLE 2
 ```
-Demonstration of using Get-MergedPath with falsely values
-```
-
 E:\Temp\AIT\> Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\reWWWources\android\AiT-Feature.jpg
 E:\Temp\AIT\> Get-MergedPath E:\Temp\AIT\resources\ -ChildPath .\reWWWources\android\AiT-Feature.jpg -IsValid
 False
+```
+
+Demonstration of using Get-MergedPath with falsely values
 
 ## PARAMETERS
 
@@ -118,4 +118,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c](https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c)
-

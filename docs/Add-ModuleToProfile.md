@@ -79,3 +79,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[`Skip-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Skip-ModuleInProfile.md)
+[`Reset-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Reset-ModuleInProfile.md)
