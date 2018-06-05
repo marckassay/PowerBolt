@@ -69,10 +69,14 @@ class TestFunctions {
 
         return $__
     }
-    
+
+    static [void]DescribeTeardown() {
+        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestModuleB', 'TestFunctions'))
+    }
+
     static [void]DescribeTeardown([string[]]$ModuleName) {
         Get-Module -Name $ModuleName | Remove-Module -Force -ErrorAction SilentlyContinue
-        Remove-Variable TestConfigFilePath -ErrorAction SilentlyContinue
+        Remove-Variable __ -ErrorAction SilentlyContinue
         Set-Alias sl Set-Location -Scope Global -Force -ErrorAction SilentlyContinue
     }
 }

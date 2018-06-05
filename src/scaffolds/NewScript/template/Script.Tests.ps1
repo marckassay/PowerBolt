@@ -1,10 +1,20 @@
-$ModuleName = '<%=$PLASTER_PARAM_ScriptName%>'
-$ModuleManifestName = "$ModuleName.psd1"
-$ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
+using module ..\.\TestFunctions.psm1
+[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
+[TestFunctions]::AUTO_START = $true
 
-Describe 'Module Manifest Tests' {
-    It 'Passes Test-ModuleManifest' {
-        Test-ModuleManifest -Path $ModuleManifestPath | Should Not BeNullOrEmpty
-        $? | Should Be $true
+Describe "Test <%=$PLASTER_PARAM_ScriptName%>" {
+    BeforeAll {
+        [TestFunctions]::DescribeSetup()
+    }
+    
+    AfterAll {
+        [TestFunctions]::DescribeTeardown()
+    }
+
+    Context "Appending by importing module to profile" {
+        It "Should add to profile" {
+            $Results = Get-Command <%=$PLASTER_PARAM_ScriptName%> | Select-Object -ExpandProperty CommandType
+            $Results | Should -Be 'Function'
+        }
     }
 }

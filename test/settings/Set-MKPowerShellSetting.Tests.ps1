@@ -4,11 +4,11 @@ using module ..\.\TestFunctions.psm1
 
 Describe "Test Set-MKPowerShellSetting" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup()
+        [TestFunctions]::DescribeSetup()
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestFunctions'))
+        [TestFunctions]::DescribeTeardown()
     }
     
     Context "Setting TurnOnRememberLastLocation" {

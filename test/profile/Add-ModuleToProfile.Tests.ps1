@@ -10,7 +10,7 @@ Describe "Test Add-ModuleToProfile" {
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))
+        [TestFunctions]::DescribeTeardown()
     }
     
     Context "Appending by importing module to profile" {
