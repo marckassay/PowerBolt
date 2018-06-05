@@ -21,7 +21,7 @@ using module .\src\settings\Set-MKPowerShellSetting.ps1
 using module .\src\utility\ConvertTo-EnumFlag.ps1
 using module .\src\utility\Get-MergedPath.ps1
 using module .\src\utility\Search-Items.ps1
-using module .\src\scaffolds\NewScript\New-Script.ps1
+using module .\src\scaffolds\New-Script.ps1
 
 
 using module .\src\management\Start-MKPowerShell.ps1

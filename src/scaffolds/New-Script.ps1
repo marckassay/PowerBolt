@@ -18,7 +18,7 @@ function New-Script {
         [string]
         $Path = (Resolve-Path -Path $(Get-Location))
     )
-    $TemplatePath = Join-Path -Path $(GetTemplatePath) -ChildPath 'src\scaffolds\NewScript'
+    $TemplatePath = Join-Path -Path $(GetTemplatePath) -ChildPath 'resources\templates\NewScript'
 
     $Path = Resolve-Path -Path $Path
 
@@ -42,6 +42,6 @@ function New-Script {
 
 # this function is needed so that $MyInvocation has a value
 function GetTemplatePath {
-    $ModuleHome = $MyInvocation.ScriptName | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
+    $ModuleHome = $MyInvocation.ScriptName | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
     return $ModuleHome
 }
