@@ -21,7 +21,7 @@
     GUID              = '58323cd9-39e6-45b8-af3a-496c45bb81c6'
 
     # Author of this module
-    Author            = 'Marc'
+    Author            = 'Marc Kassay'
 
     # Company or vendor of this module
     CompanyName       = 'Unknown'
@@ -84,6 +84,7 @@
         'New-ExternalHelpFromPlatyPSMarkdown',
         'New-MKPowerShellConfigFile',
         'Publish-ModuleToNuGetGallery',
+        'New-Script',
         'Reset-ModuleInProfile',
         'Restart-PWSH',
         'Restart-PWSHAdmin',
