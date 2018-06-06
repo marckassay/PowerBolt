@@ -1,21 +1,21 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test Publish-ModuleToNuGetGallery" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleB', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
     }
     
     Context "Call Publish-ModuleToNuGetGallery with NuGetApiKey value from config file." {
 
         Mock Publish-Module {} -ModuleName MK.PowerShell.4PS
 
-        Publish-ModuleToNuGetGallery -Path $__.TestManifestPath -NuGetApiKey 'd2a2cea9-624f-451d-acd2-cdcd2110ab5e'
+        Publish-ModuleToNuGetGallery -Path $TestFunctions.TestManifestPath -NuGetApiKey 'd2a2cea9-624f-451d-acd2-cdcd2110ab5e'
 
         It "Should of called PowerShellGet's Publish-Module with expected params" {
             

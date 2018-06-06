@@ -40,7 +40,7 @@ function New-Script {
     Invoke-Plaster -TemplatePath $TemplatePath -DestinationPath $Path
 }
 
-# this function is needed so that $MyInvocation has a value
+# this function is needed so that $MyInvocation variable has a value
 function GetTemplatePath {
     $ModuleHome = $MyInvocation.ScriptName | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
     return $ModuleHome

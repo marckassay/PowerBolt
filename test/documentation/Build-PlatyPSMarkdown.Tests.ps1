@@ -1,6 +1,4 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 $script:Files
 $script:FileNames
@@ -8,7 +6,9 @@ $script:FileNames
 Describe "Test Build-PlatyPSMarkdown" {
 
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
         
         # this test file needs the .git repo but not the docs folder
         Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
@@ -18,7 +18,7 @@ Describe "Test Build-PlatyPSMarkdown" {
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleB', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
     }
 
     Context "As a non-piped call, with a given Path value to create files and then to update files 

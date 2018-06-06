@@ -1,14 +1,14 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test New-MKPowerShellConfigFile" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
     }
     
     Context "Call New-MKPowerShellConfigFile when no file exists" {

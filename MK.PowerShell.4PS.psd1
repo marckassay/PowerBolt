@@ -114,7 +114,9 @@
 
     # List of all files packaged with this module
     FileList          = 'resources\MK.PowerShell-config.json',
-    'src\scaffolds\NewScript\plasterManifest_en-US.xml'
+    'resources\templates\NewScript\plasterManifest_en-US.xml',
+    'resources\templates\NewScript\template\Script.ps1',
+    'resources\templates\NewScript\template\Script.Tests.ps1'
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
     PrivateData       = @{

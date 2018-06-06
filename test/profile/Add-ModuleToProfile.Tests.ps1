@@ -1,16 +1,16 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test Add-ModuleToProfile" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
 
         $TestProfilePath = New-Item -Path $TestDrive -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown()
+        $TestFunctions.DescribeTeardown()
     }
     
     Context "Appending by importing module to profile" {

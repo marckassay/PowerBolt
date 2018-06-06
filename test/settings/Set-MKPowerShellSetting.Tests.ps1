@@ -1,14 +1,14 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test Set-MKPowerShellSetting" {
     BeforeAll {
-        [TestFunctions]::DescribeSetup()
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetup()
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown()
+        $TestFunctions.DescribeTeardown()
     }
     
     Context "Setting TurnOnRememberLastLocation" {
@@ -23,7 +23,7 @@ Describe "Test Set-MKPowerShellSetting" {
 
             Set-MKPowerShellSetting -Name 'TurnOnRememberLastLocation' -Value $Value
             
-            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
+            $MKPowerShellConfig = Get-Content -Path $TestFunctions.ConfigFilePath | ConvertFrom-Json -AsHashtable
             $MKPowerShellConfig["TurnOnRememberLastLocation"] -eq $true | Should -Be $Value
 
             Assert-MockCalled Restore-RememberLastLocation -ModuleName MK.PowerShell.4PS -Times 1
@@ -40,7 +40,7 @@ Describe "Test Set-MKPowerShellSetting" {
 
             Set-MKPowerShellSetting -Name 'TurnOnQuickRestart' -Value $Value
 
-            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
+            $MKPowerShellConfig = Get-Content -Path $TestFunctions.ConfigFilePath | ConvertFrom-Json -AsHashtable
             $MKPowerShellConfig["TurnOnQuickRestart"] -eq $true | Should -Be $Value
 
             $PWSHSet = Get-Alias pwsh -Scope Global -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Definition
@@ -71,7 +71,7 @@ Describe "Test Set-MKPowerShellSetting" {
 
             Set-MKPowerShellSetting -Name 'Backups' -Value $Value
 
-            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
+            $MKPowerShellConfig = Get-Content -Path $TestFunctions.ConfigFilePath | ConvertFrom-Json -AsHashtable
             $MKPowerShellConfig.Backups.Path | Should -BeLike "'$PROFILE'"
             $MKPowerShellConfig.Backups.Destination | Should -Be $Value.Destination 
         }
@@ -83,7 +83,7 @@ Describe "Test Set-MKPowerShellSetting" {
 
             Set-MKPowerShellSetting -Name 'Backups' -Value $Value
 
-            $MKPowerShellConfig = Get-Content -Path $__.ConfigFilePath | ConvertFrom-Json -AsHashtable
+            $MKPowerShellConfig = Get-Content -Path $TestFunctions.ConfigFilePath | ConvertFrom-Json -AsHashtable
             $SingleQuotedPath = $MKPowerShellConfig.Backups.Path
             Test-Path $SingleQuotedPath | Should -Be $false
             $NoQuotedPath = $SingleQuotedPath -replace "\'", ""

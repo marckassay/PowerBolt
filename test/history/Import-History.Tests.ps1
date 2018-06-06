@@ -1,16 +1,16 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test Import-History" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup()
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetup()
 
         Push-Location -StackName History
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
 
         Pop-Location -StackName History
     }

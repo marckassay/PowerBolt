@@ -1,14 +1,14 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test Get-MKPowerShellSetting" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetup()
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetup()
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
     }
     
     Context "Call Get-MKPowerShellSetting" {

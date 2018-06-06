@@ -1,14 +1,13 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test Update-RootModuleUsingStatements" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions = [TestFunctions]::new()
+        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
     }
     
     Context "Recurse src directory for correct function files" {

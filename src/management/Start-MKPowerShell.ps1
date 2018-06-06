@@ -9,30 +9,41 @@ function Start-MKPowerShell {
     [CmdletBinding(PositionalBinding = $False)]
     Param(
         [Parameter(Mandatory = $False)]
-        [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath
+        [String]$ConfigFilePath
     )
-    # Start-MKPowerShell may be called directly which may have a nothing value other then MKPowerShellConfigFilePath
-    $script:MKPowerShellConfigFilePath = $ConfigFilePath
-    if ((Test-Path -Path $ConfigFilePath) -eq $false) {
-        $script:ConfigFileParentPath = $(Split-Path $ConfigFilePath -Parent)
-        if ((Test-Path -Path $script:ConfigFileParentPath) -eq $false) {
-            New-Item -Path $script:ConfigFileParentPath -ItemType Directory -Verbose
+
+    begin {
+        # Start-MKPowerShell may be called directly which may have a nothing value other then MKPowerShellConfigFilePath
+        if ($ConfigFilePath) {
+            $script:MKPowerShellConfigFilePath = $ConfigFilePath
+        }
+        else {
+            $ConfigFilePath = $script:MKPowerShellConfigFilePath
+        }
+    }
+
+    end {
+        if ((Test-Path -Path $ConfigFilePath) -eq $false) {
+            $script:ConfigFileParentPath = $(Split-Path $ConfigFilePath -Parent)
+            if ((Test-Path -Path $script:ConfigFileParentPath) -eq $false) {
+                New-Item -Path $script:ConfigFileParentPath -ItemType Directory -Verbose
+            }
+            
+            Copy-Item -Path "$PSScriptRoot\..\..\resources\MK.PowerShell-config.json" -Destination $script:ConfigFileParentPath -Verbose -PassThru
+        }
+        else {
+            $script:ConfigFileParentPath = (Split-Path $ConfigFilePath -Parent)
         }
 
-        Copy-Item -Path "$PSScriptRoot\..\..\resources\MK.PowerShell-config.json" -Destination $script:ConfigFileParentPath -Verbose -PassThru
-    }
-    else {
-        $script:ConfigFileParentPath = (Split-Path $ConfigFilePath -Parent)
-    }
+        Restore-RememberLastLocation -Initialize
+        Restore-QuickRestartSetting -Initialize
+        Backup-Sources -Initialize
+        Restore-History -Initialize
+        Restore-Formats -Initialize
+        Restore-Types -Initialize
 
-    Restore-RememberLastLocation -Initialize
-    Restore-QuickRestartSetting -Initialize
-    Backup-Sources -Initialize
-    Restore-History -Initialize
-    Restore-Formats -Initialize
-    Restore-Types -Initialize
-
-    Register-Shutdown
+        Register-Shutdown
+    }
 }
 
 # NoExport: Restore-RememberLastLocation

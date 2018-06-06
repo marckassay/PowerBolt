@@ -1,33 +1,29 @@
-# TODO: needs to execute when $MKPowerShellModuleName is not installed too.
 function Test-Suite {
     [CmdletBinding()]
     Param(
-        $MKPowerShellModuleName
+        $MKPowerShellModulePath
     )
 
     begin {
         Push-Location -StackName 'TestSuite'
-        $ModulePath = Get-Module $MKPowerShellModuleName -OutVariable Module | Select-Object -Property Path
-        $ModuleFolder = $ModulePath | `
-            Split-Path -Parent
-
-        if ($ModulePath) {
-            $Module | Remove-Module -ErrorAction SilentlyContinue
-            Remove-Module MKPowerShellDocObject -ErrorAction SilentlyContinue
-        }
+        Set-Location $MKPowerShellModulePath
+        Get-Item -Path "$MKPowerShellModulePath\*" -Include '*.psd1' -OutVariable ManifestItem | Test-ModuleManifest | Remove-Module
     }
 
     process {
-        Invoke-Pester -Script "$ModuleFolder\test"
+        Invoke-Pester -Script "$MKPowerShellModulePath\test"
     }
 
     end {
-        $ManifestPath = $ModuleFolder | `
-            Join-Path -ChildPath "$MKPowerShellModuleName.psd1" -Resolve
-        
-        Import-Module -Name $ManifestPath
-
+        Import-Module -Name $ManifestItem.Directory.FullName
         Pop-Location -StackName 'TestSuite'
     }
 }
-Test-Suite -MKPowerShellModuleName 'MK.PowerShell.4PS'
+
+function GetThisScriptPath {
+    return $MyInvocation.ScriptName 
+}
+function StartTestSuite {
+    Test-Suite -MKPowerShellModulePath (GetThisScriptPath | Split-Path -Parent | Split-Path -Parent)
+}
+StartTestSuite

@@ -1,17 +1,17 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test Build-Documentation" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
 
         # this test file needs the .git repo but not the docs folder
         Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleB', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
     }
 
     Context "Given a value for Path, this function internally contains the following pipeline: Build-PlatyPSMarkdown | New-ExternalHelpFromPlatyPSMarkdown | Update-ReadmeFromPlatyPSMarkdown" {

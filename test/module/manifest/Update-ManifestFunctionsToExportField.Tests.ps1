@@ -1,21 +1,21 @@
 using module ..\..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test Update-ManifestFunctionsToExportField" {
     
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions = [TestFunctions]::new()
+        $TestFunctions.AutoStart = $false
+        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
     }
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleA', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
     }
 
     Context "Call Update-RootModuleUsingStatements and pipe result" {
         It "Should overwrite the default value ('@()') for FunctionsToExport field with 'using' statements" {
-            Update-RootModuleUsingStatements -Path $__.TestModulePath | Update-ManifestFunctionsToExportField
+            Update-RootModuleUsingStatements -Path $TestFunctions.TestModulePath | Update-ManifestFunctionsToExportField
 
-            $FunctionNames = Test-ModuleManifest $__.TestManifestPath | `
+            $FunctionNames = Test-ModuleManifest $TestFunctions.TestManifestPath | `
                 Select-Object -ExpandProperty ExportedCommands | `
                 Select-Object -ExpandProperty Values | `
                 Select-Object -ExpandProperty Name
@@ -59,9 +59,9 @@ function Get-DFunction {
 "@ 
 
         It "Should overwrite the default value ('@()') for FunctionsToExport field with 'using' statements" {
-            Update-RootModuleUsingStatements -Path $__.TestModulePath | Update-ManifestFunctionsToExportField
+            Update-RootModuleUsingStatements -Path $TestFunctions.TestModulePath | Update-ManifestFunctionsToExportField
 
-            $FunctionNames = Test-ModuleManifest $__.TestManifestPath | `
+            $FunctionNames = Test-ModuleManifest $TestFunctions.TestManifestPath | `
                 Select-Object -ExpandProperty ExportedCommands | `
                 Select-Object -ExpandProperty Values | `
                 Select-Object -ExpandProperty Name

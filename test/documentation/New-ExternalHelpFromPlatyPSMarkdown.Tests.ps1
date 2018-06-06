@@ -1,14 +1,13 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::MODULE_FOLDER = 'E:\marckassay\MK.PowerShell\MK.PowerShell.4PS'
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test New-ExternalHelpFromPlatyPSMarkdown" {
     BeforeAll {
-        $__ = [TestFunctions]::DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions = [TestFunctions]::new()
+        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown(@('MK.PowerShell.4PS', 'MKPowerShellDocObject', 'TestModuleB', 'TestFunctions'))
+        $TestFunctions.DescribeTeardown()
     }
 
     Context "As a non-piped call, with a given Path generate files from MarkdownFolder to OutputFolder folder." {
