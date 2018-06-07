@@ -1,4 +1,3 @@
-# TODO: this currently only works for 'FormatsToProcess'
 # NoExport: Get-ManifestKey
 function Get-ManifestKey {
     [CmdletBinding(PositionalBinding = $False)]
@@ -7,6 +6,7 @@ function Get-ManifestKey {
         [String]$Path,
 
         [Parameter(Mandatory = $False)]
+        [ValidateSet("AliasesToExport", "FunctionsToExport", "RootModule", "TypesToProcess", "CmdletsToExport", "PrivateData", "FileList", "Author", "ModuleVersion", "CompanyName", "FormatsToProcess", "GUID", "Copyright")]
         [String]$Key
     )
 
@@ -23,13 +23,8 @@ function Get-ManifestKey {
 
     $ManifestPath = Join-Path -Path $ModuleDirectory -ChildPath "$FileName.psd1"
     
-    $ManifestContents = Get-Content -Path $ManifestPath -Raw
-
     try {
-        $FormatsToProcessRaw = [regex]::Match($ManifestContents, '(?<=FormatsToProcess)([\w\W]*?\))').Value
-        # TODO: eh, can't match without '=' at this time
-        $ResultsString = $FormatsToProcessRaw.Replace('=', '')
-        $Results = Invoke-Expression $ResultsString
+        $Results = (Import-PowerShellDataFile -Path $ManifestPath)[$Key]
     }
     catch {
         

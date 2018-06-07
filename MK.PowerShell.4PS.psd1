@@ -60,11 +60,11 @@
     # ScriptsToProcess = @()
 
     # Type files (.ps1xml) to be loaded when importing this module
-    TypesToProcess    = 'src\type\Misc.type.ps1xml'
+    TypesToProcess    = 'resources\types\Misc.type.ps1xml'
 
     # Format files (.ps1xml) to be loaded when importing this module
-    FormatsToProcess  = 'src\format\HistoryInfo.format.ps1xml', 
-    'src\format\PSModuleInfo.format.ps1xml'
+    FormatsToProcess  = 'resources\formats\HistoryInfo.format.ps1xml', 
+    'resources\formats\PSModuleInfo.format.ps1xml'
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()

@@ -47,7 +47,7 @@ class TestFunctions {
         Get-Item '*.psd1' | Import-Module -ArgumentList @($this.ConfigFilePath, $true) -Global -Force
 
         if ($TestModuleName -ne '') {
-            Copy-Item -Path ".\test\testresource\$TestModuleName" -Destination 'TestDrive:\' -Container -Recurse
+            Copy-Item -Path ".\test\testresource\$TestModuleName" -Destination 'TestDrive:\' -Container -Recurse -Force
 
             Get-Item "TestDrive:\$TestModuleName\$TestModuleName.psd1" | Import-Module -Global -Force
 
