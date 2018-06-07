@@ -7,7 +7,7 @@
 #
 
 @{
- 
+
     # Script module or binary module file associated with this manifest.
     RootModule        = 'MK.PowerShell.4PS.psm1'
 
@@ -94,7 +94,8 @@
         'Skip-ModuleInProfile',
         'Update-ManifestFunctionsToExportField',
         'Update-ReadmeFromPlatyPSMarkdown',
-        'Update-RootModuleUsingStatements'
+        'Update-RootModuleUsingStatements',
+        'Update-SemVer'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

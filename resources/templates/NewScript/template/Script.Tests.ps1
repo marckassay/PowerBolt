@@ -1,17 +1,18 @@
 using module ..\.\TestFunctions.psm1
-[TestFunctions]::AUTO_START = $true
 
 Describe "Test <%=$PLASTER_PARAM_ScriptName%>" {
     BeforeAll {
-        [TestFunctions]::DescribeSetup()
+        $TestFunctions = [TestFunctions]::new()
+
+        $TestFunctions.DescribeSetup()
     }
     
     AfterAll {
-        [TestFunctions]::DescribeTeardown()
+        $TestFunctions.DescribeTeardown()
     }
 
-    Context "Appending by importing module to profile" {
-        It "Should add to profile" {
+    Context "Post executing New-Script" {
+        It "Should have command accessable" {
             $Results = Get-Command <%=$PLASTER_PARAM_ScriptName%> | Select-Object -ExpandProperty CommandType
             $Results | Should -Be 'Function'
         }

@@ -138,4 +138,8 @@ Adds or updates function's 'snippet' in README file from `PlatyPS` generated fil
 
 #### [`Update-RootModuleUsingStatements`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md)
 
-Prepends module found in `Path` with `using module ...` statements. Those statements are unique PS1 file paths that contain functions.
+Prepends module found in `Path` with `using module ...` statements. Those statements are unique PS1 file paths that contain functions. 
+
+#### [`Update-SemVer`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md)
+
+{{Fill in the Synopsis}}
