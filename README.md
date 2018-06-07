@@ -92,13 +92,17 @@ Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the fi
 
 Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerShell.4PS`. 
 
+#### [`New-Script`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-MKPowerShellConfigFile.md)
+
+{{Fill in the Synopsis}} 
+
 #### [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Publish-ModuleToNuGetGallery.md)
 
 Streamlines publishing a module using `Publish-Module`. 
 
 #### [`Reset-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Publish-ModuleToNuGetGallery.md)
 
-Re-enables an `Import-Module` statement in `$PROFILE` to be executed. 
+Re-enables an `Import-Module` statement in `$PROFILE` to be executed.  
 
 #### [`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md)
 
