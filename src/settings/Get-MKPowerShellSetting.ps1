@@ -1,3 +1,4 @@
+using module .\..\dynamicparameter\GetSettingsNameSet.ps1
 function Get-MKPowerShellSetting {
     [CmdletBinding(PositionalBinding = $True)]
     Param(
@@ -12,7 +13,7 @@ function Get-MKPowerShellSetting {
         if (-not $ConfigFilePath) {
             $ConfigFilePath = $script:MKPowerShellConfigFilePath
         }
-        return Get-NameParameterSet -ConfigFilePath $ConfigFilePath
+        return GetSettingsNameSet -ConfigFilePath $ConfigFilePath
     }
 
     begin {
@@ -42,32 +43,4 @@ function Get-MKPowerShellSetting {
             Get-Content -Path $ConfigFilePath | Write-Output
         }
     }
-}
-
-# NoExport: Get-NameParameterSet
-function Get-NameParameterSet {
-    [CmdletBinding(PositionalBinding = $False)]
-    Param(
-        [Parameter(Mandatory = $true)]
-        [String]$ConfigFilePath
-    )
-
-    $Script:MKPowerShellConfig = Get-Content -Path $ConfigFilePath | ConvertFrom-Json -AsHashtable
-
-    $SettingNames = $Script:MKPowerShellConfig | ForEach-Object { $_.Keys }
-
-    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-    $ParamAttribute = New-Object Parameter
-    $ParamAttribute.Mandatory = $false
-    $ParamAttribute.Position = 0
-    $AttributeCollection.Add($ParamAttribute)
-
-    $ValidateSet = New-Object ValidateSet(@($SettingNames))
-    $AttributeCollection.Add($ValidateSet)
-
-    $RuntimeParam = New-Object System.Management.Automation.RuntimeDefinedParameter('Name', [string], $AttributeCollection)
-    $RuntimeParamDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
-    $RuntimeParamDictionary.Add('Name', $RuntimeParam)
-  
-    return $RuntimeParamDictionary
 }

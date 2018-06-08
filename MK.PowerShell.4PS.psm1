@@ -9,6 +9,7 @@ using module .\src\management\backupsources\Backup-Sources.ps1
 using module .\src\management\Restart-PWSH.ps1
 using module .\src\management\Restart-PWSHAdmin.ps1
 using module .\src\management\Set-LocationAndStore.ps1
+using module .\src\module\Get-ModuleInfo.ps1
 using module .\src\module\manifest\Update-ManifestFunctionsToExportField.ps1
 using module .\src\module\manifest\Update-SemVer.ps1
 using module .\src\module\Update-RootModuleUsingStatements.ps1

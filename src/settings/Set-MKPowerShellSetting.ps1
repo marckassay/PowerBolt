@@ -1,3 +1,5 @@
+using module .\..\dynamicparameter\GetSettingsNameSet.ps1
+
 function Set-MKPowerShellSetting {
     [CmdletBinding(PositionalBinding = $True)]
     Param(
@@ -15,7 +17,7 @@ function Set-MKPowerShellSetting {
         if (-not $ConfigFilePath) {
             $ConfigFilePath = $script:MKPowerShellConfigFilePath
         }
-        return Get-NameParameterSet -ConfigFilePath $ConfigFilePath
+        return GetSettingsNameSet -ConfigFilePath $ConfigFilePath
     }
 
     begin {
@@ -35,6 +37,7 @@ function Set-MKPowerShellSetting {
         switch ($Name) {
             TurnOnRememberLastLocation { Restore-RememberLastLocation }
             TurnOnQuickRestart { Restore-QuickRestartSetting }
+            # TODO: not sure if these are intended to be commented out
             #TurnOnHistoryRecording { Restore-TurnOnHistoryRecording }
             #TurnOnBackup
             Default {}
