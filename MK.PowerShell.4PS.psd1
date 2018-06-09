@@ -94,6 +94,7 @@
         'Set-MKPowerShellSetting',
         'Skip-ModuleInProfile',
         'Update-ManifestFunctionsToExportField',
+        'Update-ModuleExports',
         'Update-ReadmeFromPlatyPSMarkdown',
         'Update-RootModuleUsingStatements',
         'Update-SemVer'

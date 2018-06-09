@@ -11,6 +11,12 @@ function Update-ManifestFunctionsToExportField {
         [switch]
         $PassThru
     )
+    begin {
+        # Prevents single space for each item in an iteration:
+        # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-6#ofs
+        $OFS = ''
+    }
+    
     # TODO: have $ManifestUpdate be typed.
     end {
         $ManifestFile = Get-Item -Path $ManifestUpdate.ManifestPath
@@ -38,5 +44,7 @@ $FunctionNames
         if ($PassThru) {
             $ManifestFile
         }
+
+        $OFS = ' '
     }
 }

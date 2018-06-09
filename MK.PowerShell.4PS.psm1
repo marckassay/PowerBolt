@@ -12,6 +12,7 @@ using module .\src\management\Set-LocationAndStore.ps1
 using module .\src\module\Get-ModuleInfo.ps1
 using module .\src\module\manifest\Update-ManifestFunctionsToExportField.ps1
 using module .\src\module\manifest\Update-SemVer.ps1
+using module .\src\module\Update-ModuleExports.ps1
 using module .\src\module\Update-RootModuleUsingStatements.ps1
 using module .\src\profile\Add-ModuleToProfile.ps1
 using module .\src\profile\Reset-ModuleInProfile.ps1

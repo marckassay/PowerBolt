@@ -5,5 +5,5 @@ function GetModuleNameSet {
 
     $ModuleNames = Get-Module | Select-Object -ExpandProperty Name
 
-    New-DynamicParam -Name 'Name' -Mandatory -Position 0 -ValidateSet $ModuleNames
+    New-DynamicParam -Name 'Name' -ValidateSet $ModuleNames
 }
