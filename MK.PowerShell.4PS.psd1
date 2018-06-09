@@ -82,6 +82,7 @@
         'Get-MKPowerShellSetting',
         'Get-ModuleInfo',
         'Import-History',
+        'Invoke-TestSuiteRunner',
         'New-ExternalHelpFromPlatyPSMarkdown',
         'New-MKPowerShellConfigFile',
         'New-Script',

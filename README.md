@@ -88,6 +88,10 @@ Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAl
 
 Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI. 
 
+#### [`Invoke-TestSuiteRunner`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md)
+
+{{Fill in the Synopsis}} 
+
 #### [`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 
 Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the files in the folder from `Build-PlatyPSMarkdown`. 
