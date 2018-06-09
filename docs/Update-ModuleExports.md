@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Update-SemVer
+# Update-ModuleExports
 
 ## SYNOPSIS
 {{Fill in the Synopsis}}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Update-SemVer [-Path] <String> [-Value <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [<CommonParameters>]
+Update-ModuleExports [-Path] <String> [[-SourceDirectory] <String>] [[-Include] <String[]>]
+ [[-Exclude] <String[]>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,38 +31,38 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -BumpMajor
-{{Fill BumpMajor Description}}
+### -Exclude
+{{Fill Exclude Description}}
 
 ```yaml
-Type: SwitchParameter
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -BumpMinor
-{{Fill BumpMinor Description}}
+### -Include
+{{Fill Include Description}}
 
 ```yaml
-Type: SwitchParameter
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -BumpPatch
-{{Fill BumpPatch Description}}
+### -PassThru
+{{Fill PassThru Description}}
 
 ```yaml
 Type: SwitchParameter
@@ -90,8 +91,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Value
-{{Fill Value Description}}
+### -SourceDirectory
+{{Fill SourceDirectory Description}}
 
 ```yaml
 Type: String
@@ -99,18 +100,20 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
+
 
 ## OUTPUTS
 

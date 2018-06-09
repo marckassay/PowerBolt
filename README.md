@@ -33,16 +33,16 @@ If `TurnOnExtendedTypes` key in `MK.PowerShell.4PS` is set to `true` the followi
 
 ### System.Byte[]
 
-* `ToBinaryNotation()`
-* `ToUnicode()`
+* #### `ToBinaryNotation()`
+* #### `ToUnicode()`
 
 ### System.String
 
-* `ToBase64()`
-* `FromBase64()`
-* `MatchCount()`
+* #### `ToBase64()`
+* #### `FromBase64()`
+* #### `MatchCount()`
 
-## API
+## Commands
 
 #### [`Add-ModuleToProfile`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md)
 
@@ -79,6 +79,10 @@ Returns a valid path from a parent of one of its children which overlaps that pa
 #### [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md)
 
 Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch. 
+
+#### [`Get-ModuleInfo`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md)
+
+{{Fill in the Synopsis}} 
 
 #### [`Import-History`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md)
 
@@ -131,6 +135,10 @@ Prevents an `Import-Module` statement in `$PROFILE` from executing.
 #### [`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md)
 
 Ideally having `Update-RootModuleUsingStatements` piped into this function, it will popluate a string array of function names and set it to the `FunctionsToExport`. 
+
+#### [`Update-ModuleExports`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md)
+
+{{Fill in the Synopsis}} 
 
 #### [`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md)
 

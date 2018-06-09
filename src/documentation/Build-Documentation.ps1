@@ -31,6 +31,9 @@ function Build-Documentation {
     )
 
     begin {
+        # Output Field Separator - default is ' '
+        $OFS = ''
+
         $Path = Resolve-Path $Path | Select-Object -ExpandProperty Path
         
         if (-not $Data) {
@@ -52,5 +55,7 @@ function Build-Documentation {
             Build-PlatyPSMarkdown | `
             New-ExternalHelpFromPlatyPSMarkdown | `
             Update-ReadmeFromPlatyPSMarkdown
+
+        $OFS = ' '
     }
 }

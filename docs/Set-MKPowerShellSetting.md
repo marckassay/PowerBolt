@@ -13,7 +13,7 @@ Sets value to JSON data in `MK.PowerShell-config.json`.
 ## SYNTAX
 
 ```
-Set-MKPowerShellSetting [-Value] <Object> [[-ConfigFilePath] <String>] [-PassThru] [[-Name] <String>]
+Set-MKPowerShellSetting [-Value] <Object> [[-ConfigFilePath] <String>] [-PassThru] [-Name] <String>
  [<CommonParameters>]
 ```
 
@@ -55,7 +55,7 @@ Parameter Sets: (All)
 Aliases:
 Accepted values: TurnOnAvailableUpdates, TurnOnQuickRestart, TurnOnRememberLastLocation, TurnOnBackup, TurnOnBetterFormats, NuGetApiKey, TurnOnHistoryRecording, BackupPolicy, LastLocation, Backups, HistoryLocation
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
