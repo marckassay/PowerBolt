@@ -1,4 +1,4 @@
-using module ..\..\.\TestFunctions.psm1
+using module ..\..\.\TestRunnerSupportModule.psm1
 using module .\Deploy-TestFakes.psm1
 
 $script:PreTicks
@@ -6,14 +6,11 @@ $script:ConfigFileJson
 
 Describe "Test Backup-Sources" {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetup()
+        $TestSupportModule = [TestRunnerSupportModule]::new()
     }
 
     AfterAll {
-        $TestFunctions.DescribeTeardown()
-        Remove-Module Deploy-TestFakes -ErrorAction SilentlyContinue
+        $TestSupportModule.Teardown()
     }
 
     Context @"
@@ -34,12 +31,12 @@ Execute the following:
             Param($PathType, $DestinationType, $UpdatePolicy)
 
             # setup filesystem and config file
-            Deploy-TestFakes -ConfigFilePath $TestFunctions.ConfigFilePath `
+            Deploy-TestFakes -ConfigFilePath $TestSupportModule.FixtureConfigFilePath `
                 -PathType $PathType `
                 -DestinationType $DestinationType `
                 -UpdatePolicy $UpdatePolicy
 
-            $script:ConfigFileJson = Get-Content -Path $TestFunctions.ConfigFilePath -Raw | `
+            $script:ConfigFileJson = Get-Content -Path $TestSupportModule.FixtureConfigFilePath -Raw | `
                 ConvertFrom-Json -AsHashtable
             
             $script:ConfigFileJson.Backups.Count | Should -Be 4
@@ -55,9 +52,9 @@ Execute the following:
         }
 
         It "Continuing from previous 'It' block, call 'Backup-Sources' for the first time with test config path as a parameter.  It should increment and overwrite items as specified from previous 'It' block." {
-            Backup-Sources -ConfigFilePath $TestFunctions.ConfigFilePath
+            Backup-Sources -ConfigFilePath $TestSupportModule.FixtureConfigFilePath
 
-            $script:ConfigFileJson = Get-Content -Path $TestFunctions.ConfigFilePath -Raw | `
+            $script:ConfigFileJson = Get-Content -Path $TestSupportModule.FixtureConfigFilePath -Raw | `
                 ConvertFrom-Json -AsHashtable
 
             $TestItemName = Get-Item $script:ConfigFileJson.Backups[0].Path | Select-Object -ExpandProperty Name | Split-Path -LeafBase
@@ -84,7 +81,7 @@ Execute the following:
 
         It "Continuing from previous 'It' block, after modifying item with 'New' type and calling Backup-Sources, it should only detect a change of one item.  And by modifying only one of two items of 'Overwrite', it should detect and update just that one item too." {
             
-            $script:ConfigFileJson = Get-Content -Path $TestFunctions.ConfigFilePath -Raw | `
+            $script:ConfigFileJson = Get-Content -Path $TestSupportModule.FixtureConfigFilePath -Raw | `
                 ConvertFrom-Json -AsHashtable
 
             # modify file and folder contents to update the LastWriteTime property

@@ -1,14 +1,12 @@
-using module ..\.\TestFunctions.psm1
+using module ..\.\TestRunnerSupportModule.psm1
 
 Describe "Test Update-ReadmeFromPlatyPSMarkdown" {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
+        $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleB')
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
     }
     
     Context "As a non-piped call, with a given Path modify existing empty README.md file." {

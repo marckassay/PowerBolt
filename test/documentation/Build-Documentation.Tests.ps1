@@ -1,17 +1,15 @@
-using module ..\.\TestFunctions.psm1
+using module ..\.\TestRunnerSupportModule.psm1
 
 Describe "Test Build-Documentation" {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
+        $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleB')
 
         # this test file needs the .git repo but not the docs folder
         Remove-Item -Path "$TestDrive\MockModuleB\docs" -Recurse
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
     }
 
     Context "Given a value for Path, this function internally contains the following pipeline: Build-PlatyPSMarkdown | New-ExternalHelpFromPlatyPSMarkdown | Update-ReadmeFromPlatyPSMarkdown" {

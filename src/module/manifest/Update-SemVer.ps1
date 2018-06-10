@@ -13,6 +13,18 @@ function Update-SemVer {
         [ValidatePattern("^(?'MAJOR'0|(?:[1-9]\d*))\.(?'MINOR'0|(?:[1-9]\d*))\.(?'PATCH'0|(?:[1-9]\d*))(?:-(?'prerelease'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?(?:\+(?'build'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?$")]
         [String]$Value,
 
+        [Parameter(Mandatory = $false,
+            Position = 1)]
+        [int]$Major = -1,
+
+        [Parameter(Mandatory = $false,
+            Position = 2)]
+        [int]$Minor = -1,
+
+        [Parameter(Mandatory = $false,
+            Position = 3)]
+        [int]$Patch = -1,
+
         [switch]$BumpMajor,
 
         [switch]$BumpMinor,
@@ -25,9 +37,18 @@ function Update-SemVer {
 
     if (-not $Value) {
         $Version = ($ModuleInfo | Select-Object -ExpandProperty Values).Version
-        $Major = $Version.Major
-        $Minor = $Version.Minor
-        $Patch = $Version.Build
+
+        if ($Major -eq -1) {
+            $Major = $Version.Major
+        }
+
+        if ($Minor -eq -1) {
+            $Minor = $Version.Minor
+        }
+
+        if ($Patch -eq -1) {
+            $Patch = $Version.Build
+        }
 
         if ($BumpMajor.IsPresent) {
             $Major += 1

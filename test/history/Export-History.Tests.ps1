@@ -1,18 +1,16 @@
-using module ..\.\TestFunctions.psm1
+using module ..\.\TestRunnerSupportModule.psm1
 
 Describe "Test Export-History" {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetup()
+        $TestSupportModule = [TestRunnerSupportModule]::new()
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
     }
 
     Context "Lame testing here, ideally need to find out how to have Get-History return mock object since pester history interfers." {
-        $TestHistoryItemPath = Join-Path -Path $TestFunctions.ModulePath -ChildPath 'test\history\TestHistory.csv'
+        $TestHistoryItemPath = Join-Path -Path ($TestSupportModule.FixtureDirectoryPath) -ChildPath 'test\history\TestHistory.csv'
 
         $SessionHistoriesPath = New-Item -Path "TestDrive:\SessionHistories.csv" -ItemType File | `
             Select-Object -ExpandProperty FullName
@@ -30,6 +28,6 @@ Describe "Test Export-History" {
 
             $SessionHistories = Import-Csv -Path $SessionHistoriesPath
             $SessionHistories.Count | Should -BeGreaterThan 1
-        } -Skip
+        }
     } 
 } 

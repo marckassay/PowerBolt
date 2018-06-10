@@ -1,14 +1,12 @@
-using module ..\.\TestFunctions.psm1
+using module ..\.\TestRunnerSupportModule.psm1
 
 Describe "Test Start-MKPowerShell" {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetup()
+        $TestSupportModule = [TestRunnerSupportModule]::new()
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
     }
 
     Context "Test Restore-Formats when 'TurnOnExtendedFormats' is set to true" {

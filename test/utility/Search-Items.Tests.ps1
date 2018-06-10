@@ -1,29 +1,27 @@
-using module .\..\TestFunctions.psm1
+using module .\..\TestRunnerSupportModule.psm1
 
 Describe "Test Search-Items" {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
+        $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleA')
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
     }
     
     Context "Call Search-Items" {
 
-        Add-Content "$($TestFunctions.TestModuleDirectoryPath)\src\Get-AFunction.ps1" -Value @"
+        Add-Content "$($TestSupportModule.MockDirectoryPath)\src\Get-AFunction.ps1" -Value @"
 `n
 # NoExport: Get-AFunction
 "@
 
-        Add-Content "$($TestFunctions.TestModuleDirectoryPath)\src\Get-BFunction.ps1" -Value @"
+        Add-Content "$($TestSupportModule.MockDirectoryPath)\src\Get-BFunction.ps1" -Value @"
 `n
 # NoExport: Get-BFunction
 "@
         It "Should find 'NoExport' tag in src folder contents" {
-            $Results = Search-Items -Path $TestFunctions.TestModuleDirectoryPath  -Pattern "\#.?NoExport" -Recurse
+            $Results = Search-Items -Path $TestSupportModule.MockDirectoryPath  -Pattern "\#.?NoExport" -Recurse
             $Results.Count | Should -Be 2
 
             $Results[0].Match | Should -Be "# NoExport"
@@ -32,7 +30,7 @@ Describe "Test Search-Items" {
         }
 
         It "Should match 'Get-AFunction' tag in src folder contents" {
-            $Results = Search-Items -Path $TestFunctions.TestModuleDirectoryPath  -Pattern "(?<=NoExport:)\s*\w+-\w+" -Recurse
+            $Results = Search-Items -Path $TestSupportModule.MockDirectoryPath  -Pattern "(?<=NoExport:)\s*\w+-\w+" -Recurse
             $Results.Count | Should -Be 2
 
             $Results[0].Match | Should -Be "Get-AFunction"

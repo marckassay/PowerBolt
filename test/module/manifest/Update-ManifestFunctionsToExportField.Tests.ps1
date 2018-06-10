@@ -1,21 +1,19 @@
-using module ..\..\.\TestFunctions.psm1
+using module ..\..\.\TestRunnerSupportModule.psm1
 
 Describe "Test Update-ManifestFunctionsToExportField" {
     
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-        $TestFunctions.AutoStart = $false
-        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
+        $TestSupportModule = [TestRunnerSupportModule]::new($false, 'MockModuleA')
     }
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
     }
 
     Context "Call Update-RootModuleUsingStatements and pipe result" {
         It "Should overwrite the default value ('@()') for FunctionsToExport field with 'using' statements" {
-            Update-RootModuleUsingStatements -Path $TestFunctions.TestModulePath | Update-ManifestFunctionsToExportField
+            Update-RootModuleUsingStatements -Path $TestSupportModule.MockDirectoryPath | Update-ManifestFunctionsToExportField
 
-            $FunctionNames = Test-ModuleManifest $TestFunctions.TestManifestPath | `
+            $FunctionNames = Test-ModuleManifest $TestSupportModule.MockManifestPath | `
                 Select-Object -ExpandProperty ExportedCommands | `
                 Select-Object -ExpandProperty Values | `
                 Select-Object -ExpandProperty Name
@@ -59,9 +57,9 @@ function Get-DFunction {
 "@ 
 
         It "Should overwrite the default value ('@()') for FunctionsToExport field with 'using' statements" {
-            Update-RootModuleUsingStatements -Path $TestFunctions.TestModulePath | Update-ManifestFunctionsToExportField
+            Update-RootModuleUsingStatements -Path $TestSupportModule.MockDirectoryPath | Update-ManifestFunctionsToExportField
 
-            $FunctionNames = Test-ModuleManifest $TestFunctions.TestManifestPath | `
+            $FunctionNames = Test-ModuleManifest $TestSupportModule.MockManifestPath | `
                 Select-Object -ExpandProperty ExportedCommands | `
                 Select-Object -ExpandProperty Values | `
                 Select-Object -ExpandProperty Name

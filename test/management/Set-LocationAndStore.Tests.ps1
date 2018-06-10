@@ -1,15 +1,13 @@
-using module ..\.\TestFunctions.psm1
+using module ..\.\TestRunnerSupportModule.psm1
 Describe "Test Set-LocationAndStore" {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
+        $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleB')
 
         Push-Location -StackName LocationAndStoreTest
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
 
         Pop-Location -StackName LocationAndStoreTest
     }

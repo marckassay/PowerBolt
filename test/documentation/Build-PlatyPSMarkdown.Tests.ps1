@@ -1,4 +1,4 @@
-using module ..\.\TestFunctions.psm1
+using module ..\.\TestRunnerSupportModule.psm1
 
 $script:Files
 $script:FileNames
@@ -6,19 +6,17 @@ $script:FileNames
 Describe "Test Build-PlatyPSMarkdown" {
 
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
+        $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleB')
         
         # this test file needs the .git repo but not the docs folder
-        Remove-Item -Path "$TestDrive\MockModuleB\docs" -Recurse
+        Remove-Item -Path "$($TestSupportModule.MockDirectoryPath)\docs" -Recurse
 
         $script:Files = "Get-AFunction.md", "Get-BFunction.md", "Get-CFunction.md", "Set-CFunction.md" | `
             Sort-Object
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
     }
 
     Context "As a non-piped call, with a given Path value to create files and then to update files 
@@ -27,9 +25,9 @@ Describe "Test Build-PlatyPSMarkdown" {
         It "Should generate correct number of files." {
             # NOTE: if this functions re-imports, it will import into a different scope or session.  
             # Although it will still pass, it will write warnings and errors
-            Build-PlatyPSMarkdown -Path "$TestDrive\MockModuleB" -NoReImportModule
+            Build-PlatyPSMarkdown -Path ($TestSupportModule.MockDirectoryPath) -NoReImportModule
 
-            $script:FileNames = Get-ChildItem "$TestDrive\MockModuleB\docs" -Recurse | `
+            $script:FileNames = Get-ChildItem "$($TestSupportModule.MockDirectoryPath)\docs" -Recurse | `
                 ForEach-Object {$_.Name} | `
                 Sort-Object
             
@@ -54,7 +52,7 @@ Describe "Test Build-PlatyPSMarkdown" {
             @{ Index = 10; Expected = "{{Fill in the Synopsis}}" }
         ) {
             Param($Index, $Expected)
-            $Actual = (Get-Content "$TestDrive\MockModuleB\docs\Get-AFunction.md")[$Index]
+            $Actual = (Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md")[$Index]
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
         }
 
@@ -62,16 +60,16 @@ Describe "Test Build-PlatyPSMarkdown" {
             $NewSynopsisContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
 
             # modifiy Get-AFunction.md by adding a new parameter
-            $NewGetAFunctionMDContent = Get-Item -Path "$TestDrive\MockModuleB\docs\Get-AFunction.md" | `
+            $NewGetAFunctionMDContent = Get-Item -Path "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" | `
                 Get-Content -Raw 
 
             $NewGetAFunctionMDContent = $NewGetAFunctionMDContent.Replace("{{Fill in the Synopsis}}", $NewSynopsisContent)
 
-            Set-Content -Path "$TestDrive\MockModuleB\docs\Get-AFunction.md" -Value $NewGetAFunctionMDContent
+            Set-Content -Path "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" -Value $NewGetAFunctionMDContent
 
 
             # modifiy Get-AFunction.md by adding a synopsis
-            Clear-Content "$TestDrive\MockModuleB\src\Get-AFunction.ps1"
+            Clear-Content "$($TestSupportModule.MockDirectoryPath)\src\Get-AFunction.ps1"
 
             $NewGetAFunctionPS1Content = @"
 function Get-AFunction {
@@ -87,16 +85,16 @@ function Get-AFunction {
     Out-String -InputObject `$("Hello, from Get-AFunction!")
 }
 "@
-            Set-Content "$TestDrive\MockModuleB\src\Get-AFunction.ps1" -Value $NewGetAFunctionPS1Content
+            Set-Content "$($TestSupportModule.MockDirectoryPath)\src\Get-AFunction.ps1" -Value $NewGetAFunctionPS1Content
             
-            New-ExternalHelpFromPlatyPSMarkdown -Path "$TestDrive\MockModuleB"
+            New-ExternalHelpFromPlatyPSMarkdown -Path $($TestSupportModule.MockDirectoryPath)
 
-            Build-PlatyPSMarkdown -Path "$TestDrive\MockModuleB" 
+            Build-PlatyPSMarkdown -Path $($TestSupportModule.MockDirectoryPath)
 
-            $SynopsisContent = (Get-Content "$TestDrive\MockModuleB\docs\Get-AFunction.md")[10]
+            $SynopsisContent = (Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md")[10]
             $SynopsisContent | Should -Be $NewSynopsisContent
 
-            $GetAFunctionSyntax = (Get-Content "$TestDrive\MockModuleB\docs\Get-AFunction.md")[15]
+            $GetAFunctionSyntax = (Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md")[15]
             $GetAFunctionSyntax | Should -Be "Get-AFunction [-Path <String>] [-Key <String>] [<CommonParameters>]"
         }
     }

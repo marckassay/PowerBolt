@@ -1,33 +1,31 @@
-using module ..\.\TestFunctions.psm1
+using module ..\.\TestRunnerSupportModule.psm1
 
 Describe "Test Skip-ModuleInProfile" {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
-
-        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
-
-        $TestProfilePath = New-Item -Path $TestDrive -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName
+        $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleA')
+        $MockProfilePath = Join-Path -Path ($TestSupportModule.TestDrivePath) -ChildPath "\User\Bob\Documents\PowerShell\" -AdditionalChildPath "MK.PowerShell-profile.ps1"
+        New-Item -Path $MockProfilePath -ItemType File -Force | Select-Object -ExpandProperty FullName
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        $TestSupportModule.Teardown()
     }
     
     Context "Skipping import module in profile" {
 
         It "Should skip Import-Module statement in profile" {
 
-            $TestProfileContent = @"
-Import-Module C:\Users\Alice\Foo
-Import-Module C:\Users\Alice\Goo
-Import-Module C:\Users\Alice\Plaster
+            $MockProfileContent = @"
+Import-Module C:\Users\Bob\Foo
+Import-Module C:\Users\Bob\Goo
+Import-Module C:\Users\Bob\Plaster
 "@
-            Set-Content -Path $TestProfilePath -Value $TestProfileContent
+            Set-Content -Path $MockProfilePath -Value $MockProfileContent
 
-            Skip-ModuleInProfile -Name 'Plaster' -ProfilePath $TestProfilePath
+            Skip-ModuleInProfile -Name 'Plaster' -ProfilePath $MockProfilePath
 
-            $Results = Get-Content -Path $TestProfilePath
-            $Results[2] | Should -eq '# Import-Module C:\Users\Alice\Plaster'
+            $Results = Get-Content -Path $MockProfilePath
+            $Results[2] | Should -eq '# Import-Module C:\Users\Bob\Plaster'
         }
     }
 }
