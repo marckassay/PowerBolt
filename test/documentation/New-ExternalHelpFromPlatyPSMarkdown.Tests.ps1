@@ -3,7 +3,7 @@ using module ..\.\TestFunctions.psm1
 Describe "Test New-ExternalHelpFromPlatyPSMarkdown" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
     }
     
     AfterAll {
@@ -12,10 +12,10 @@ Describe "Test New-ExternalHelpFromPlatyPSMarkdown" {
 
     Context "As a non-piped call, with a given Path generate files from MarkdownFolder to OutputFolder folder." {
 
-        New-ExternalHelpFromPlatyPSMarkdown -Path "$TestDrive\TestModuleB"
+        New-ExternalHelpFromPlatyPSMarkdown -Path "$TestDrive\MockModuleB"
 
         It "Should generate a file in 'en-US' folder" {
-            $HelpDocFile = Get-Item "$TestDrive\TestModuleB\en-US\*xml"
+            $HelpDocFile = Get-Item "$TestDrive\MockModuleB\en-US\*xml"
             $HelpDocFile | Should -Exist
         }
     }

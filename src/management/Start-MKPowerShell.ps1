@@ -20,6 +20,9 @@ function Start-MKPowerShell {
         else {
             $ConfigFilePath = $script:MKPowerShellConfigFilePath
         }
+
+        Write-Host $($ConfigFilePath) -ForegroundColor Blue
+
     }
 
     end {

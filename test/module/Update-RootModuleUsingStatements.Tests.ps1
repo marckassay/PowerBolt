@@ -3,7 +3,7 @@ using module ..\.\TestFunctions.psm1
 Describe "Test Update-RootModuleUsingStatements" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
     }
     
     AfterAll {
@@ -13,8 +13,8 @@ Describe "Test Update-RootModuleUsingStatements" {
     Context "Recurse src directory for correct function files" {
 
         It "Should modify empty root module 'using' statments" {
-            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModuleA'
-            $Results = Get-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\MockModuleA'
+            $Results = Get-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1'
             $Results.Count | Should -Be 4
 
             $Assert = $Results[0] 
@@ -31,7 +31,7 @@ Describe "Test Update-RootModuleUsingStatements" {
         }
 
         It "Should modify root module which declares a function with 'using' statements" {
-            Set-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1' -Value @"
+            Set-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1' -Value @"
 function Remove-CFunction {
     [CmdletBinding()]
     param (
@@ -41,8 +41,8 @@ function Remove-CFunction {
 }
 "@
 
-            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModuleA'
-            $Results = Get-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\MockModuleA'
+            $Results = Get-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1'
             $Results.Count | Should -Be 12
 
             $Assert = $Results[0] 
@@ -62,7 +62,7 @@ function Remove-CFunction {
         }
 
         It "Should modify root module which declares a function and contains a 'using' statement with more statements" {
-            Set-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1' -Value @"
+            Set-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1' -Value @"
 using module .\src\C\New-CFunction.ps1'
 function Remove-CFunction {
     [CmdletBinding()]
@@ -73,8 +73,8 @@ function Remove-CFunction {
 }
 "@ 
 
-            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModuleA'
-            $Results = Get-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\MockModuleA'
+            $Results = Get-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1'
             $Results.Count | Should -Be 12
 
             $Assert = $Results[0] 
@@ -94,7 +94,7 @@ function Remove-CFunction {
         }
 
         It "Should modify root module which declares a function and contains a 'using' statement with more statements and one of the files it finds has a '# NoExport:' tag" {
-            Set-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1' -Value @"
+            Set-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1' -Value @"
 using module .\src\C\New-CFunction.ps1'
 function Remove-CFunction {
     [CmdletBinding()]
@@ -104,8 +104,8 @@ function Remove-CFunction {
     
 }
 "@
-            New-Item -Path 'TestDrive:\TestModuleA\src\D' -ItemType Directory
-            New-Item -Path 'TestDrive:\TestModuleA\src\D\Set-DFunction.ps1' -ItemType File -Value @"
+            New-Item -Path 'TestDrive:\MockModuleA\src\D' -ItemType Directory
+            New-Item -Path 'TestDrive:\MockModuleA\src\D\Set-DFunction.ps1' -ItemType File -Value @"
 using module ..\C\New-CFunction.ps1'
 
 function Set-DFunction {
@@ -134,11 +134,11 @@ function Get-DFunction {
 }
 "@ 
 
-            Update-RootModuleUsingStatements -Path 'TestDrive:\TestModuleA'
+            Update-RootModuleUsingStatements -Path 'TestDrive:\MockModuleA'
 
-            'TestDrive:\TestModuleA\TestModuleA.psm1' | Should -not -FileContentMatch ([regex]::Escape('Remove-DFunction')) 
+            'TestDrive:\MockModuleA\MockModuleA.psm1' | Should -not -FileContentMatch ([regex]::Escape('Remove-DFunction')) 
 
-            $Results = Get-Content -Path 'TestDrive:\TestModuleA\TestModuleA.psm1'
+            $Results = Get-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1'
             $Results.Count | Should -Be 13
 
             $Assert = $Results[0] 

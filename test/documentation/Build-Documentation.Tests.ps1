@@ -4,10 +4,10 @@ Describe "Test Build-Documentation" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
 
         # this test file needs the .git repo but not the docs folder
-        Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
+        Remove-Item -Path "$TestDrive\MockModuleB\docs" -Recurse
     }
     
     AfterAll {
@@ -21,9 +21,9 @@ Describe "Test Build-Documentation" {
         
         # NOTE: if this functions re-imports, it will import into a different scope or session.  
         # Although it will still pass, it will write warnings and errors
-        Build-Documentation -Path "$TestDrive\TestModuleB" -NoReImportModule
+        Build-Documentation -Path "$TestDrive\MockModuleB" -NoReImportModule
 
-        $FileNames = Get-ChildItem "$TestDrive\TestModuleB\docs" -Recurse | `
+        $FileNames = Get-ChildItem "$TestDrive\MockModuleB\docs" -Recurse | `
             ForEach-Object {$_.Name} | `
             Sort-Object
 
@@ -36,14 +36,14 @@ Describe "Test Build-Documentation" {
         }
 
         It "Should have modified the new ReadMe file." {
-            (Get-Content "$TestDrive\TestModuleB\README.md" -Raw) -like "*API*" | Should -Be $true
+            (Get-Content "$TestDrive\MockModuleB\README.md" -Raw) -like "*API*" | Should -Be $true
         }
 
         It "Should modify Get-AFunction.md file at line number <Index> with: {<Expected>} " -TestCases @(
             @{ Index = 0; Expected = "---" },
-            @{ Index = 1; Expected = "external help file: TestModuleB-help.xml" },
-            @{ Index = 2; Expected = "Module Name: TestModuleB" },
-            @{ Index = 3; Expected = "online version: https://github.com/marckassay/TestModuleB/blob/master/docs/Get-AFunction.md"},
+            @{ Index = 1; Expected = "external help file: MockModuleB-help.xml" },
+            @{ Index = 2; Expected = "Module Name: MockModuleB" },
+            @{ Index = 3; Expected = "online version: https://github.com/marckassay/MockModuleB/blob/master/docs/Get-AFunction.md"},
             @{ Index = 4; Expected = "schema: 2.0.0" }
             @{ Index = 5; Expected = "---" }
             @{ Index = 6; Expected = "" }
@@ -53,7 +53,7 @@ Describe "Test Build-Documentation" {
             @{ Index = 10; Expected = "{{Fill in the Synopsis}}" }
         ) {
             Param($Index, $Expected)
-            $Actual = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md")[$Index]
+            $Actual = (Get-Content "$TestDrive\MockModuleB\docs\Get-AFunction.md")[$Index]
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
         }
 
@@ -72,7 +72,7 @@ Describe "Test Build-Documentation" {
             @{ Index = 8; Expected = "#### [```Get-BFunction```]()" }
         ) {
             Param($Index, $Expected)
-            $Actual = (Get-Content "$TestDrive\TestModuleB\README.md")[$Index]
+            $Actual = (Get-Content "$TestDrive\MockModuleB\README.md")[$Index]
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
         } #>
     }

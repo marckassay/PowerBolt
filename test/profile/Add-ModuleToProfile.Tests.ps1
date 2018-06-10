@@ -4,7 +4,7 @@ Describe "Test Add-ModuleToProfile" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
 
         $TestProfilePath = New-Item -Path $TestDrive -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName
     }
@@ -20,10 +20,10 @@ Describe "Test Add-ModuleToProfile" {
             $Before = Get-Content -Path $TestProfilePath
             $Before.Count | Should -BeExactly 0
 
-            Add-ModuleToProfile -Path 'TestDrive:\TestModuleA' -ProfilePath $TestProfilePath
+            Add-ModuleToProfile -Path 'TestDrive:\MockModuleA' -ProfilePath $TestProfilePath
 
             [string]$After = Get-Content -Path $TestProfilePath -Raw
-            $After | Should -Match 'Import-Module.*TestModuleA'
+            $After | Should -Match 'Import-Module.*MockModuleA'
         }
         
         It "Should append to profile" {
@@ -32,10 +32,10 @@ Describe "Test Add-ModuleToProfile" {
             [string]$Before = Get-Content -Path $TestProfilePath -Raw
             $Before | Should -Match '^Import-Module C\:\\temp\\non\\existing\\NoModule$'
 
-            Add-ModuleToProfile -Path 'TestDrive:\TestModuleA' -ProfilePath $TestProfilePath
+            Add-ModuleToProfile -Path 'TestDrive:\MockModuleA' -ProfilePath $TestProfilePath
 
             [string]$After = Get-Content -Path $TestProfilePath -Raw
-            $After | Should -Match 'Import-Module.*TestModuleA'
+            $After | Should -Match 'Import-Module.*MockModuleA'
         }
     }
 }

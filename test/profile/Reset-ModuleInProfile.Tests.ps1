@@ -4,7 +4,7 @@ Describe "Test Reset-ModuleInProfile" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
 
         $TestProfilePath = New-Item -Path $TestDrive -Name 'MK.PowerShell-profile.ps1' -ItemType File -Force | Select-Object -ExpandProperty FullName
     }

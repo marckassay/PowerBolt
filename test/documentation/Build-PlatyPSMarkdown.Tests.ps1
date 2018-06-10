@@ -8,10 +8,10 @@ Describe "Test Build-PlatyPSMarkdown" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
         
         # this test file needs the .git repo but not the docs folder
-        Remove-Item -Path "$TestDrive\TestModuleB\docs" -Recurse
+        Remove-Item -Path "$TestDrive\MockModuleB\docs" -Recurse
 
         $script:Files = "Get-AFunction.md", "Get-BFunction.md", "Get-CFunction.md", "Set-CFunction.md" | `
             Sort-Object
@@ -27,9 +27,9 @@ Describe "Test Build-PlatyPSMarkdown" {
         It "Should generate correct number of files." {
             # NOTE: if this functions re-imports, it will import into a different scope or session.  
             # Although it will still pass, it will write warnings and errors
-            Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB" -NoReImportModule
+            Build-PlatyPSMarkdown -Path "$TestDrive\MockModuleB" -NoReImportModule
 
-            $script:FileNames = Get-ChildItem "$TestDrive\TestModuleB\docs" -Recurse | `
+            $script:FileNames = Get-ChildItem "$TestDrive\MockModuleB\docs" -Recurse | `
                 ForEach-Object {$_.Name} | `
                 Sort-Object
             
@@ -42,9 +42,9 @@ Describe "Test Build-PlatyPSMarkdown" {
 
         It "Should *create* Get-AFunction.md file at line number <Index> with: {<Expected>}" -TestCases @(
             @{ Index = 0; Expected = "---" },
-            @{ Index = 1; Expected = "external help file: TestModuleB-help.xml" },
-            @{ Index = 2; Expected = "Module Name: TestModuleB" },
-            @{ Index = 3; Expected = "online version: https://github.com/marckassay/TestModuleB/blob/master/docs/Get-AFunction.md"},
+            @{ Index = 1; Expected = "external help file: MockModuleB-help.xml" },
+            @{ Index = 2; Expected = "Module Name: MockModuleB" },
+            @{ Index = 3; Expected = "online version: https://github.com/marckassay/MockModuleB/blob/master/docs/Get-AFunction.md"},
             @{ Index = 4; Expected = "schema: 2.0.0" }
             @{ Index = 5; Expected = "---" }
             @{ Index = 6; Expected = "" }
@@ -54,7 +54,7 @@ Describe "Test Build-PlatyPSMarkdown" {
             @{ Index = 10; Expected = "{{Fill in the Synopsis}}" }
         ) {
             Param($Index, $Expected)
-            $Actual = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md")[$Index]
+            $Actual = (Get-Content "$TestDrive\MockModuleB\docs\Get-AFunction.md")[$Index]
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
         }
 
@@ -62,16 +62,16 @@ Describe "Test Build-PlatyPSMarkdown" {
             $NewSynopsisContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
 
             # modifiy Get-AFunction.md by adding a new parameter
-            $NewGetAFunctionMDContent = Get-Item -Path "$TestDrive\TestModuleB\docs\Get-AFunction.md" | `
+            $NewGetAFunctionMDContent = Get-Item -Path "$TestDrive\MockModuleB\docs\Get-AFunction.md" | `
                 Get-Content -Raw 
 
             $NewGetAFunctionMDContent = $NewGetAFunctionMDContent.Replace("{{Fill in the Synopsis}}", $NewSynopsisContent)
 
-            Set-Content -Path "$TestDrive\TestModuleB\docs\Get-AFunction.md" -Value $NewGetAFunctionMDContent
+            Set-Content -Path "$TestDrive\MockModuleB\docs\Get-AFunction.md" -Value $NewGetAFunctionMDContent
 
 
             # modifiy Get-AFunction.md by adding a synopsis
-            Clear-Content "$TestDrive\TestModuleB\src\Get-AFunction.ps1"
+            Clear-Content "$TestDrive\MockModuleB\src\Get-AFunction.ps1"
 
             $NewGetAFunctionPS1Content = @"
 function Get-AFunction {
@@ -87,16 +87,16 @@ function Get-AFunction {
     Out-String -InputObject `$("Hello, from Get-AFunction!")
 }
 "@
-            Set-Content "$TestDrive\TestModuleB\src\Get-AFunction.ps1" -Value $NewGetAFunctionPS1Content
+            Set-Content "$TestDrive\MockModuleB\src\Get-AFunction.ps1" -Value $NewGetAFunctionPS1Content
             
-            New-ExternalHelpFromPlatyPSMarkdown -Path "$TestDrive\TestModuleB"
+            New-ExternalHelpFromPlatyPSMarkdown -Path "$TestDrive\MockModuleB"
 
-            Build-PlatyPSMarkdown -Path "$TestDrive\TestModuleB" 
+            Build-PlatyPSMarkdown -Path "$TestDrive\MockModuleB" 
 
-            $SynopsisContent = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md")[10]
+            $SynopsisContent = (Get-Content "$TestDrive\MockModuleB\docs\Get-AFunction.md")[10]
             $SynopsisContent | Should -Be $NewSynopsisContent
 
-            $GetAFunctionSyntax = (Get-Content "$TestDrive\TestModuleB\docs\Get-AFunction.md")[15]
+            $GetAFunctionSyntax = (Get-Content "$TestDrive\MockModuleB\docs\Get-AFunction.md")[15]
             $GetAFunctionSyntax | Should -Be "Get-AFunction [-Path <String>] [-Key <String>] [<CommonParameters>]"
         }
     }

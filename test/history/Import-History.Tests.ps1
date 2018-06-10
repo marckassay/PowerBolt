@@ -2,11 +2,11 @@ using module ..\.\TestFunctions.psm1
 
 Describe "Test Import-History" {
     BeforeAll {
+        Push-Location -StackName History
+
         $TestFunctions = [TestFunctions]::new()
 
         $TestFunctions.DescribeSetup()
-
-        Push-Location -StackName History
     }
     
     AfterAll {

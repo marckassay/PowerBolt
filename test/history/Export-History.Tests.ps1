@@ -5,14 +5,10 @@ Describe "Test Export-History" {
         $TestFunctions = [TestFunctions]::new()
 
         $TestFunctions.DescribeSetup()
-
-        Push-Location -StackName History
     }
     
     AfterAll {
         $TestFunctions.DescribeTeardown()
-
-        Pop-Location -StackName History
     }
 
     Context "Lame testing here, ideally need to find out how to have Get-History return mock object since pester history interfers." {

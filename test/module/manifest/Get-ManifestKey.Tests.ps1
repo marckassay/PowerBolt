@@ -5,16 +5,16 @@ Describe "Test Get-ManifestKey" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        # need to copy files over to import TestModuleA with them listed in the manifest
+        # need to copy files over to import MockModuleA with them listed in the manifest
         Set-Location -Path $TestFunctions.ModulePath
 
-        $FormatDirectory = New-Item -Path "TestDrive:\TestModuleA\resources\formats\" -ItemType Directory
+        $FormatDirectory = New-Item -Path "TestDrive:\MockModuleA\resources\formats\" -ItemType Directory
         $HistoryInfoformatps1xml = Join-Path -Path $TestFunctions.ModulePath -ChildPath "resources\formats\HistoryInfo.format.ps1xml"
         $PSModuleInfoformatps1xml = Join-Path -Path $TestFunctions.ModulePath -ChildPath "resources\formats\PSModuleInfo.format.ps1xml"
 
         Copy-Item -Path $HistoryInfoformatps1xml, $PSModuleInfoformatps1xml -Destination $FormatDirectory -Force
         
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
     }
     AfterAll {
         $TestFunctions.DescribeTeardown()
@@ -28,7 +28,7 @@ Describe "Test Get-ManifestKey" {
             ) 
 
             InModuleScope -ModuleName MK.PowerShell.4PS {
-                $Results = Get-ManifestKey -Path 'TestDrive:\TestModuleA' -Key 'FormatsToProcess'
+                $Results = Get-ManifestKey -Path 'TestDrive:\MockModuleA' -Key 'FormatsToProcess'
                 $Results.Count | Should -Be 2
                 $Results[0] | Should -Be 'resources\formats\HistoryInfo.format.ps1xml'
                 $Results[1] | Should -Be 'resources\formats\PSModuleInfo.format.ps1xml'

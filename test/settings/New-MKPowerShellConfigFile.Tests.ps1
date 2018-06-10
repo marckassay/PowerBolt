@@ -4,7 +4,7 @@ Describe "Test New-MKPowerShellConfigFile" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
     }
     
     AfterAll {

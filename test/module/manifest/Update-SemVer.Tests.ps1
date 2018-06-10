@@ -4,7 +4,7 @@ Describe "Test Update-SemVer" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
     }
     
     AfterAll {

@@ -3,7 +3,7 @@ Describe "Test Set-LocationAndStore" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
 
         Push-Location -StackName LocationAndStoreTest
     }

@@ -1,23 +1,23 @@
 ---
-external help file: TestModuleB-help.xml
-Module Name: TestModuleB
-online version: https://github.com/marckassay/TestModuleB/blob/master/docs/Get-CFunction.md
+external help file: MockModuleB-help.xml
+Module Name: MockModuleB
+online version: https://github.com/marckassay/MockModuleB/blob/master/docs/Get-AFunction.md
 schema: 2.0.0
 ---
 
-# Get-CFunction
+# Get-AFunction
 
 ## SYNOPSIS
-Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
 
 ## SYNTAX
 
 ```
-Get-CFunction [<CommonParameters>]
+Get-AFunction [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
 ## EXAMPLES
 

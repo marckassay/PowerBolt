@@ -1,23 +1,23 @@
 ---
-external help file: TestModuleB-help.xml
-Module Name: TestModuleB
-online version: https://github.com/marckassay/TestModuleB/blob/master/docs/Get-BFunction.md
+external help file: MockModuleB-help.xml
+Module Name: MockModuleB
+online version: https://github.com/marckassay/MockModuleB/blob/master/docs/Set-CFunction.md
 schema: 2.0.0
 ---
 
-# Get-BFunction
+# Set-CFunction
 
 ## SYNOPSIS
-At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati.
+Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
 
 ## SYNTAX
 
 ```
-Get-BFunction [<CommonParameters>]
+Set-CFunction [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+Libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.
 
 ## EXAMPLES
 

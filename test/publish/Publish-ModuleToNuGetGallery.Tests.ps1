@@ -4,7 +4,7 @@ Describe "Test Publish-ModuleToNuGetGallery" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
 
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleB')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleB')
     }
     
     AfterAll {
@@ -22,7 +22,7 @@ Describe "Test Publish-ModuleToNuGetGallery" {
             # TODO: test against $Path using regex so that this can be ran on someone elses computer
             Assert-MockCalled Publish-Module -ModuleName MK.PowerShell.4PS -Times 1 -ParameterFilter {
                 $NuGetApiKey -eq 'd2a2cea9-624f-451d-acd2-cdcd2110ab5e' -and `
-                    $Path -eq 'C:\Users\Marc\Documents\PowerShell\Modules\TestModuleB'
+                    $Path -eq 'C:\Users\Marc\Documents\PowerShell\Modules\MockModuleB'
             }
         }
     }

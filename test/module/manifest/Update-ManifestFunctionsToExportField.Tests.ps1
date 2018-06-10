@@ -5,7 +5,7 @@ Describe "Test Update-ManifestFunctionsToExportField" {
     BeforeAll {
         $TestFunctions = [TestFunctions]::new()
         $TestFunctions.AutoStart = $false
-        $TestFunctions.DescribeSetupUsingTestModule('TestModuleA')
+        $TestFunctions.DescribeSetupUsingTestModule('MockModuleA')
     }
     AfterAll {
         $TestFunctions.DescribeTeardown()
@@ -28,8 +28,8 @@ Describe "Test Update-ManifestFunctionsToExportField" {
     }
 
     Context "Call Update-RootModuleUsingStatements and pipe result that contains a 'NoExport' tag in one of the files" {
-        New-Item -Path 'TestDrive:\TestModuleA\src\D' -ItemType Directory
-        New-Item -Path 'TestDrive:\TestModuleA\src\D\Set-DFunction.ps1' -ItemType File -Value @"
+        New-Item -Path 'TestDrive:\MockModuleA\src\D' -ItemType Directory
+        New-Item -Path 'TestDrive:\MockModuleA\src\D\Set-DFunction.ps1' -ItemType File -Value @"
 using module ..\C\New-CFunction.ps1'
 
 function Set-DFunction {
