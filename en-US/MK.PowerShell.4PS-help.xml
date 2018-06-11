@@ -113,11 +113,11 @@ PS C:\&gt;</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Skip-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Skip-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Reset-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Reset-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Reset-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -260,15 +260,15 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-MKPowerShellConfigFile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-MKPowerShellConfigFile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-MKPowerShellConfigFile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -570,15 +570,15 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -969,15 +969,15 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1173,7 +1173,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Import-History`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Import-History.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1530,7 +1530,7 @@ False</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1771,7 +1771,7 @@ False</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Export-History`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Export-History.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2084,15 +2084,15 @@ False</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2647,11 +2647,11 @@ False</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Skip-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Skip-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2714,7 +2714,7 @@ False</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Restart-PWSHAdmin`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Restart-PWSHAdmin.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2777,7 +2777,7 @@ False</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Restart-PWSH`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Restart-PWSH.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3270,7 +3270,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3388,11 +3388,11 @@ MatchedLine                        # TODO: need to have this functions arity bet
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Reset-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Reset-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Reset-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3503,7 +3503,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-RootModuleUsingStatements`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-RootModuleUsingStatements.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3818,15 +3818,15 @@ MatchedLine                        # TODO: need to have this functions arity bet
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4009,7 +4009,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ManifestFunctionsToExportField`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

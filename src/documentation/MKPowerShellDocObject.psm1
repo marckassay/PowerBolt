@@ -12,7 +12,7 @@ class MKPowerShellDocObject {
     [object]$RootModule
     [string]$ModuleFolder
     [string]$ModuleMarkdownFolder
-    static [string]$SemVerRegExPattern = "^(?'MAJOR'0|(?:[1-9]\d*))\.(?'MINOR'0|(?:[1-9]\d*))\.(?'PATCH'0|(?:[1-9]\d*))(?:-(?'prerelease'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?(?:\+(?'build'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?$"
+    static [string]$SemVerRegExPattern = "(?'MAJOR'0|(?:[1-9]\d*))\.(?'MINOR'0|(?:[1-9]\d*))\.(?'PATCH'0|(?:[1-9]\d*))(?:-(?'prerelease'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?(?:\+(?'build'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?"
 
     # design for Update-ReadmeFromPlatyPSMarkdown
     MKPowerShellDocObject(
@@ -96,6 +96,7 @@ class MKPowerShellDocObject {
             $BranchName = Get-GitBranch -gitDir ($this.ModuleFolder + "\.git").Trim('(', ')')
             if ($BranchName -match [MKPowerShellDocObject]::SemVerRegExPattern) {
                 if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
+                    # TODO: this most likely will only work with Github file structure
                     $this.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/$BranchName/docs/{0}.md"
                 }
             }
@@ -135,5 +136,30 @@ $BodyContent
         } | Write-Output
 
         return $SnippetCollectionString
+    }
+
+    [void] UpdateOnlineVersionUrl () {
+        # Since New-MarkdownHelp OnlineVersionUrl parameter is only available in a specific parameter
+        # set that is not used here; below is to assign 'onlineverion' field.
+        Get-ChildItem -Path $this.ModuleMarkdownFolder -Include '*.md' -Recurse | `
+            ForEach-Object {
+            $FileContent = Get-Content $_.FullName -Raw
+        
+            # replace any value after 'online version:' with OnlineVersionUrl 
+            $FileUrl = $this.OnlineVersionUrl -f $_.BaseName
+            $FileContent = [regex]::Replace($FileContent, "(?<=online version:).*", " $FileUrl")
+
+            # update any other exisiting urls that similiarly matches OnlineVersionUrl without
+            # overwriting filename
+            $UrlSegmentPriorToGitBranchName = $FileUrl.Split('blob')[0] + 'blob'
+            $SemVerMatched = [regex]::Match($FileUrl, [MKPowerShellDocObject]::SemVerRegExPattern)
+     
+            if ($SemVerMatched.Success) {
+                $MDFolder = $this.MarkdownFolder
+                $FileContent = [regex]::Replace($FileContent, "(?<=$UrlSegmentPriorToGitBranchName[\\|\/]).*?(?=[\\|\/]$MDFolder)", $SemVerMatched.Value)
+            }
+        
+            Set-Content -Path $_.FullName -Value $FileContent -NoNewline
+        }
     }
 }

@@ -209,6 +209,7 @@ function Write-SourceReport {
         [Parameter(Mandatory = $false)]
         [psobject]$SourceItem
     )
+    
     if ($SourceItem) {
         $ItemName = Split-Path -Path $SourceItem.Path -Leaf
     }

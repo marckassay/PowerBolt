@@ -1,19 +1,5 @@
 using module .\.\MKPowerShellDocObject.psm1
 
-function UpdateOnlineVersionUrl($DocObject) {
-    # Since New-MarkdownHelp OnlineVersionUrl parameter is only available in a specific parameter
-    # set that is not used here; below is to assign 'onlineverion' field.
-    Get-ChildItem -Path $DocObject.ModuleMarkdownFolder -Include '*.md' -Recurse | `
-        ForEach-Object {
-        $FileUrl = $DocObject.OnlineVersionUrl -f $_.BaseName
-        $FileContent = Get-Content $_.FullName -Raw
-        $FileContent = [regex]::Replace($FileContent , "(?<=online version:).*", " $FileUrl")
-
-        #$SemVer = $FileUrl
-        Set-Content -Path $_.FullName -Value $FileContent
-    }
-}
-
 function Build-PlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
@@ -79,18 +65,7 @@ function Build-PlatyPSMarkdown {
             
             New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
 
-            #UpdateOnlineVersionUrl -DocObject $Data
-            # Since New-MarkdownHelp OnlineVersionUrl parameter is only available in a specific parameter
-            # set that is not used here; below is to assign 'onlineverion' field.
-            Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse | `
-                ForEach-Object {
-                $FileUrl = $Data.OnlineVersionUrl -f $_.BaseName
-                $FileContent = Get-Content $_.FullName -Raw
-                $FileContent = [regex]::Replace($FileContent , "(?<=online version:).*", " $FileUrl")
-
-                #$SemVer = $FileUrl
-                Set-Content -Path $_.FullName -Value $FileContent -NoNewline
-            }
+            $Data.UpdateOnlineVersionUrl()
         }
         else {
             if ($Data.NoReImportModule -eq $False) {
@@ -114,18 +89,7 @@ function Build-PlatyPSMarkdown {
 
             Update-MarkdownHelpModule -Path $Data.ModuleMarkdownFolder | Out-Null
 
-            #UpdateOnlineVersionUrl -DocObject $Data
-            # Since New-MarkdownHelp OnlineVersionUrl parameter is only available in a specific parameter
-            # set that is not used here; below is to assign 'onlineverion' field.
-            Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse | `
-                ForEach-Object {
-                $FileUrl = $Data.OnlineVersionUrl -f $_.BaseName
-                $FileContent = Get-Content $_.FullName -Raw
-                $FileContent = [regex]::Replace($FileContent , "(?<=online version:).*", " $FileUrl")
-
-                #$SemVer = $FileUrl
-                Set-Content -Path $_.FullName -Value $FileContent -NoNewline
-            }
+            $Data.UpdateOnlineVersionUrl()
         }
 
         Write-Output $Data
