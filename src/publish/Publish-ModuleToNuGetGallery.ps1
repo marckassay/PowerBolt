@@ -28,13 +28,12 @@ function Publish-ModuleToNuGetGallery {
         Remove-Item $DestinationDirectory -Recurse -Force -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
     }
     
-    # setup deploy directory
+    # create deploy directory
     New-Item $DestinationDirectory -ItemType Directory -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent) | `
         Out-Null
     
-    # setup deploy directory
-    Get-ChildItem -Path $Path -Exclude $Exclude | `
-        Copy-Item -Destination $DestinationDirectory -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
+    # copy items to deploy directory
+    Copy-Item -Path $Path -Exclude $Exclude -Destination $DestinationDirectory -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
     
     # Mask all but the last 8 chracters for Write-Information
     $RedactedNuGetApiKey = $NuGetApiKey.Remove(0, 23).Insert(0, 'XXXXXXXX-XXXX-XXXX-XXXX')
@@ -43,5 +42,5 @@ function Publish-ModuleToNuGetGallery {
     Publish-Module -Path $DestinationDirectory -NuGetApiKey $NuGetApiKey -Confirm:$Confirm -WhatIf:$WhatIf -Verbose
     
     # teardown
-    Remove-Item $DestinationDirectory -Recurse -Force -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
+    # Remove-Item $DestinationDirectory -Recurse -Force -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
 }
