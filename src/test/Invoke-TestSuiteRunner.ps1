@@ -27,6 +27,7 @@ function Invoke-TestSuiteRunner {
 
     end {
         Import-Module -Name ($MI.ModuleBase)
+        
         Pop-Location -StackName 'TestSuite'
     }
 }

@@ -44,7 +44,7 @@ class TestRunnerSupportModule {
     [void]Setup() {
         $this.Setup('', '')
     }
-
+    
     [void]Setup([string]$MockModuleName) {
         $this.Setup($MockModuleName, '')
     } 

@@ -13,7 +13,7 @@ Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAl
 ## SYNTAX
 
 ```
-Get-MKPowerShellSetting [[-ConfigFilePath] <String>] [-ShowAll] [-Name] <String> [<CommonParameters>]
+Get-MKPowerShellSetting [[-ConfigFilePath] <String>] [-ShowAll] [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -54,7 +54,7 @@ Parameter Sets: (All)
 Aliases:
 Accepted values: TurnOnAvailableUpdates, TurnOnQuickRestart, TurnOnRememberLastLocation, TurnOnBackup, TurnOnBetterFormats, NuGetApiKey, TurnOnHistoryRecording, BackupPolicy, LastLocation, Backups, HistoryLocation
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
