@@ -28,6 +28,6 @@ Describe "Test Export-History" {
 
             $SessionHistories = Import-Csv -Path $SessionHistoriesPath
             $SessionHistories.Count | Should -BeGreaterThan 1
-        }
+        } -Skip
     } 
 } 
