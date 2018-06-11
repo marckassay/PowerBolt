@@ -37,6 +37,7 @@ PS C:\> {{ Add example code here }}
 Type: String
 Parameter Sets: (All)
 Aliases:
+Accepted values: Encoding
 
 Required: True
 Position: 0

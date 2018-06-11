@@ -21,14 +21,14 @@ Build-PlatyPSMarkdown [-Data <MKPowerShellDocObject>] [-MarkdownFolder <String>]
 
 ### ByName
 ```
-Build-PlatyPSMarkdown [[-Name] <String>] [-MarkdownFolder <String>] [-Locale <String>]
+Build-PlatyPSMarkdown [-Name <String>] [-MarkdownFolder <String>] [-Locale <String>]
  [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
 
 ### ByPath
 ```
-Build-PlatyPSMarkdown [-Path <String>] [-MarkdownFolder <String>] [-Locale <String>]
+Build-PlatyPSMarkdown [[-Path] <String>] [-MarkdownFolder <String>] [-Locale <String>]
  [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
@@ -101,7 +101,7 @@ Parameter Sets: ByName
 Aliases:
 
 Required: False
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -162,7 +162,7 @@ Parameter Sets: ByPath
 Aliases:
 
 Required: False
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

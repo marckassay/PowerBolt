@@ -66,8 +66,10 @@ function Update-SemVer {
     }
 
     Update-ModuleManifest -Path $Path -ModuleVersion $Value | Out-Null
-    # TODO: this should be in this file; if needed make switch param to enable it
-    Update-RootModuleUsingStatements -Path $Path -SourceDirectory '.\src\' | Update-ManifestFunctionsToExportField
+
+    # TODO: this should not be in this file; if its still needed make switch param to enable it
+    Update-RootModuleUsingStatements -Path $Path -SourceDirectory '.\src\' | `
+        Update-ManifestFunctionsToExportField
 
     $Value
 }

@@ -42,7 +42,7 @@ Describe "Test Build-PlatyPSMarkdown" {
             @{ Index = 0; Expected = "---" },
             @{ Index = 1; Expected = "external help file: MockModuleB-help.xml" },
             @{ Index = 2; Expected = "Module Name: MockModuleB" },
-            @{ Index = 3; Expected = "online version: https://github.com/marckassay/MockModuleB/blob/master/docs/Get-AFunction.md"},
+            @{ Index = 3; Expected = "online version: https://github.com/marckassay/MockModuleB/blob/0.0.1/docs/Get-AFunction.md"},
             @{ Index = 4; Expected = "schema: 2.0.0" }
             @{ Index = 5; Expected = "---" }
             @{ Index = 6; Expected = "" }

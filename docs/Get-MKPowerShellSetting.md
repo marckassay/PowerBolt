@@ -39,7 +39,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -52,7 +52,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: TurnOnAvailableUpdates, TurnOnQuickRestart, TurnOnRememberLastLocation, TurnOnBackup, TurnOnBetterFormats, NuGetApiKey, TurnOnHistoryRecording, BackupPolicy, LastLocation, Backups, HistoryLocation
+Accepted values: HistoryLocation, TurnOnRememberLastLocation, TurnOnQuickRestart, TurnOnBackup, TurnOnExtendedTypes, Backups, TurnOnExtendedFormats, NuGetApiKey, LastLocation, TurnOnHistoryRecording, BackupPolicy, TurnOnAvailableUpdates
 
 Required: False
 Position: 0

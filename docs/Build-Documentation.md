@@ -14,15 +14,15 @@ Creates or updates help documentation files and module's README file.  Also crea
 
 ### ByName
 ```
-Build-Documentation [-Name] <String> [[-MarkdownFolder] <String>] [[-Locale] <String>]
- [[-OnlineVersionUrlTemplate] <String>] [[-OnlineVersionUrlPolicy] <String>] [-NoReImportModule]
+Build-Documentation -Name <String> [-MarkdownFolder <String>] [-Locale <String>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
 
 ### ByPath
 ```
-Build-Documentation [-Path] <String> [[-MarkdownFolder] <String>] [[-Locale] <String>]
- [[-OnlineVersionUrlTemplate] <String>] [[-OnlineVersionUrlPolicy] <String>] [-NoReImportModule]
+Build-Documentation [-Path] <String> [-MarkdownFolder <String>] [-Locale <String>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
 
@@ -51,7 +51,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: Named
 Default value: en-US
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -66,7 +66,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: docs
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -81,7 +81,7 @@ Parameter Sets: ByName
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -112,7 +112,7 @@ Aliases:
 Accepted values: Auto, Omit
 
 Required: False
-Position: 6
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -127,7 +127,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -142,7 +142,7 @@ Parameter Sets: ByPath
 Aliases:
 
 Required: True
-Position: 2
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

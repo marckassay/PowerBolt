@@ -12,6 +12,7 @@ class MKPowerShellDocObject {
     [object]$RootModule
     [string]$ModuleFolder
     [string]$ModuleMarkdownFolder
+    static [string]$SemVerRegExPattern = "^(?'MAJOR'0|(?:[1-9]\d*))\.(?'MINOR'0|(?:[1-9]\d*))\.(?'PATCH'0|(?:[1-9]\d*))(?:-(?'prerelease'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?(?:\+(?'build'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?$"
 
     # design for Update-ReadmeFromPlatyPSMarkdown
     MKPowerShellDocObject(
@@ -91,8 +92,12 @@ class MKPowerShellDocObject {
         $this.ModuleMarkdownFolder = Join-Path -Path ($this.ModuleFolder) -ChildPath ($this.MarkdownFolder)
 
         if ($this.OnlineVersionUrlPolicy -eq 'Auto') {
-            if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
-                $this.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/master/docs/{0}.md"
+            
+            $BranchName = Get-GitBranch -gitDir ($this.ModuleFolder + "\.git").Trim('(', ')')
+            if ($BranchName -match [MKPowerShellDocObject]::SemVerRegExPattern) {
+                if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
+                    $this.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/$BranchName/docs/{0}.md"
+                }
             }
             else {
                 Write-Error "The parameter 'OnlineVersionUrlPolicy' was set to 'Auto' but unable to retrieve Git repo config file.  Would you like to continue?" -ErrorAction Inquire

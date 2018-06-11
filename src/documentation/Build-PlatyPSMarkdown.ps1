@@ -65,13 +65,13 @@ function Build-PlatyPSMarkdown {
             
             New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
 
-            # Since New-MarkdownHelp OnlineVersionUrl parameter is only available when free of param 
-            # constraint, below is to assign 'onlineverion' field.
+            # Since New-MarkdownHelp OnlineVersionUrl parameter is only available in a specific parameter
+            # set that is not used here; below is to assign 'onlineverion' field.
             Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse | `
                 ForEach-Object {
                 $FileUrl = $Data.OnlineVersionUrl -f $_.BaseName
                 $FileContent = Get-Content $_.FullName -Raw
-                $FileContent = $FileContent.Replace('online version:', "online version: $FileUrl")
+                $FileContent = [regex]::Replace($FileContent , "(?<=online version: )[\w\W]*?", $FileUrl)
                 Set-Content -Path $_.FullName -Value $FileContent
             }
         }

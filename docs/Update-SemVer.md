@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Update-SemVer [-Path] <String> [-Value <String>] [-Major <Int32>] [-Minor <Int32>] [-Patch <Int32>]
+Update-SemVer [-Path] <String> [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>]
  [-BumpMajor] [-BumpMinor] [-BumpPatch] [<CommonParameters>]
 ```
 
@@ -76,6 +76,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Major
+{{Fill Major Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Minor
+{{Fill Minor Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Patch
+{{Fill Patch Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Path
 {{Fill Path Description}}
 
@@ -96,51 +141,6 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Major
-{{Fill Major Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Minor
-{{Fill Minor Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Patch
-{{Fill Patch Description}}
-
-```yaml
-Type: Int32
 Parameter Sets: (All)
 Aliases:
 
