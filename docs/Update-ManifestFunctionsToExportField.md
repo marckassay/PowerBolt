@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ManifestFunctionsToExportField.md
 schema: 2.0.0
 ---
 

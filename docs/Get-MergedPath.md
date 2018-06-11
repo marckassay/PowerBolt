@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.4PS-help.xml
 Module Name: MK.PowerShell.4PS
-online version: https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c
+online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MergedPath.md
 schema: 2.0.0
 ---
 

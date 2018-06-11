@@ -109,7 +109,7 @@ PS C:\&gt;</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
@@ -256,7 +256,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Backup-Sources.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Backup-Sources.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
@@ -566,7 +566,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
@@ -965,7 +965,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
@@ -1085,7 +1085,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/ConvertTo-EnumFlag.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/ConvertTo-EnumFlag.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1169,7 +1169,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Export-History.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Export-History.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Import-History`</maml:linkText>
@@ -1232,7 +1232,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-LatestError.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-LatestError.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1375,6 +1375,10 @@ False</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MergedPath.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c</maml:linkText>
         <maml:uri>https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c</maml:uri>
@@ -1522,7 +1526,7 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
@@ -1676,7 +1680,12 @@ False</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-ModuleInfo.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -1758,7 +1767,7 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Import-History.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Import-History.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Export-History`</maml:linkText>
@@ -1912,7 +1921,12 @@ False</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Invoke-TestSuiteRunner.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -2066,7 +2080,7 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
@@ -2231,7 +2245,7 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/New-MKPowerShellConfigFile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-MKPowerShellConfigFile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2360,7 +2374,12 @@ False</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-Script.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -2513,7 +2532,7 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Publish-ModuleToNuGetGallery.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2623,6 +2642,10 @@ False</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Reset-ModuleInProfile.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
@@ -2687,7 +2710,7 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSH.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Restart-PWSH.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Restart-PWSHAdmin`</maml:linkText>
@@ -2750,7 +2773,7 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Restart-PWSHAdmin.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Restart-PWSHAdmin.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Restart-PWSH`</maml:linkText>
@@ -2943,7 +2966,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Search-Items.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Search-Items.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3074,7 +3097,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-LocationAndStore.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-LocationAndStore.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3243,7 +3266,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Set-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
@@ -3360,6 +3383,10 @@ MatchedLine                        # TODO: need to have this functions arity bet
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Skip-ModuleInProfile.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
@@ -3472,7 +3499,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-RootModuleUsingStatements`</maml:linkText>
@@ -3652,7 +3679,12 @@ MatchedLine                        # TODO: need to have this functions arity bet
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ModuleExports.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -3782,7 +3814,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
@@ -3973,7 +4005,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/master/docs/Update-RootModuleUsingStatements.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-RootModuleUsingStatements.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ManifestFunctionsToExportField`</maml:linkText>
@@ -4223,6 +4255,11 @@ MatchedLine                        # TODO: need to have this functions arity bet
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-SemVer.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
 </helpItems>
