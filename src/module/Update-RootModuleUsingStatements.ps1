@@ -35,13 +35,16 @@ function Update-RootModuleUsingStatements {
 
         # $StopMatchingImportStatements: stop matching when there is a break of consecutive 
         # 'using module' statements.  a break with additional statements means that developer 
-        # manually added that line; so keep it.    
-        [string[]]$ModuleContentsCleaned = Get-Content .\MK.PowerShell.4PS.psm1 | `
+        # manually added that line; so keep it.
+        [string[]]$ModuleContentsCleaned = Get-Content $RootModulePath | `
             ForEach-Object -Begin {$StopMatchingImportStatements = $false} -Process {
             if ($StopMatchingImportStatements) {
                 $($_ + "`n")
             }
             elseif (-not ($_ -match '(?<=(using module \.\\)).*(?=(\.ps1))')) {
+                if ($_ -match '\S+') {
+                    $($_ + "`n")
+                }
                 $StopMatchingImportStatements = $true
             }
         }

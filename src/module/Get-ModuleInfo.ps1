@@ -1,4 +1,4 @@
-using module .\..\dynamicparameter\GetModuleNameSet.ps1
+using module .\..\dynamicparams\GetModuleNameSet.ps1
 
 function Get-ModuleInfo {
     [CmdletBinding()]
@@ -13,9 +13,13 @@ function Get-ModuleInfo {
     DynamicParam {
         return GetModuleNameSet
     }
+    
+    begin {
+        $Name = $PSBoundParameters['Name']
+    }
 
     end {
-        if ($Path) {
+        if (-not $Name) {
             # if backslash is at the end and this value is used with Import-Module, it will fail to import
             $Item = Get-Item ($Path.Trim().TrimEnd('\'))
 

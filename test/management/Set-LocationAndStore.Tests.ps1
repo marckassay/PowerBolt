@@ -19,7 +19,7 @@ Describe "Test Set-LocationAndStore" {
         Mock Set-MKPowerShellSetting -ModuleName MK.PowerShell.4PS
 
         It "Should change and store this location: '<Val>'" -TestCases @(
-            @{ Path = "C:\"; Val = "C:\"},
+            @{ Path = "C:\"; Val = "C:\"}
             @{ Path = "C:\Temp"; Val = "C:\Temp"}
             @{ Path = "..\"; Val = "C:\"}
         ) {

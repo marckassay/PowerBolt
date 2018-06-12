@@ -30,7 +30,7 @@
     Copyright         = '(c) Marc. All rights reserved.'
 
     # Description of the functionality provided by this module
-    # Description = ''
+    Description       = 'Kio'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''
@@ -66,8 +66,11 @@
     FormatsToProcess  = 'resources\formats\HistoryInfo.format.ps1xml', 
     'resources\formats\PSModuleInfo.format.ps1xml'
 
-    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-    # NestedModules = @()
+    # Modules to import as nested modules of the module specified in RootModule
+    <#     NestedModules = @(@{ModuleName = 'posh-git';
+            ModuleVersion = '0.7.1'; 
+            GUID = '74c9fd30-734b-4c89-a8ae-7727ad21d1d5';
+        }) #>
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     FunctionsToExport = @(
@@ -122,7 +125,7 @@
     'resources\templates\NewScript\template\Script.ps1', 
     'resources\templates\NewScript\template\Script.Tests.ps1'
 
-    # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
+    # Private data to pass to the module specified in RootModule. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
     PrivateData       = @{
 
         PSData = @{

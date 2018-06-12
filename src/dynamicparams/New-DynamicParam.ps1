@@ -150,35 +150,43 @@ Function New-DynamicParam {
         PowerShell Language
 
 #>
+    [CmdletBinding(PositionalBinding = $true)]
     param(
-    
+        [Parameter(Mandatory = $true)]
         [string]
         $Name,
     
+        [Parameter(Mandatory = $false)]
         [System.Type]
         $Type = [string],
 
+        [Parameter(Mandatory = $false)]
         [string[]]
         $Alias = @(),
 
+        [Parameter(Mandatory = $false)]
         [string[]]
         $ValidateSet,
     
         [switch]
         $Mandatory,
-    
+
+        [Parameter(Mandatory = $false)]
         [string]
         $ParameterSetName = "__AllParameterSets",
     
+        [Parameter(Mandatory = $false)]
         [int]
         $Position,
     
         [switch]
         $ValueFromPipelineByPropertyName,
     
+        [Parameter(Mandatory = $false)]
         [string]
         $HelpMessage,
 
+        [Parameter(Mandatory = $false)]
         [validatescript( {
                 if (-not ( $_ -is [System.Management.Automation.RuntimeDefinedParameterDictionary] -or -not $_) ) {
                     Throw "DPDictionary must be a System.Management.Automation.RuntimeDefinedParameterDictionary object, or not exist"

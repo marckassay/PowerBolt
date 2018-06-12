@@ -1,4 +1,4 @@
-using module .\..\dynamicparameter\GetSettingsNameSet.ps1
+using module .\..\dynamicparams\GetSettingsNameSet.ps1
 
 function Set-MKPowerShellSetting {
     [CmdletBinding(PositionalBinding = $True)]

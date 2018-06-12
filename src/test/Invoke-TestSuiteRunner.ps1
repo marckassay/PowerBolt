@@ -2,19 +2,27 @@ function Invoke-TestSuiteRunner {
     [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory = $False)]
-        [string]
+        [Parameter(Mandatory = $True,
+            Position = 1,
+            ParameterSetName = "ByPath")]
         $Path = (Get-Location | Select-Object -ExpandProperty Path)
     )
 
     DynamicParam {
-        return GetModuleNameSet
+        return GetModuleNameSet -Position 0 -ParameterSetName 'ByName' -Mandatory
     }
 
     begin {
+        $Name = $PSBoundParameters['Name']
+
         Push-Location -StackName 'TestSuite'
 
-        $MI = Get-ModuleInfo @PSBoundParameters
+        if ($Name) {
+            $MI = Get-ModuleInfo -Name $Name
+        }
+        else {
+            $MI = Get-ModuleInfo -Path $Path
+        }
 
         Set-Location ($MI.ModuleBase)
         
