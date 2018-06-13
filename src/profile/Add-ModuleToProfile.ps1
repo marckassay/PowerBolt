@@ -1,4 +1,4 @@
-using module .\..\module\Get-ModuleInfo.ps1
+using module .\..\module\Get-MKModuleInfo.ps1
 
 function Add-ModuleToProfile {
     [CmdletBinding(PositionalBinding = $True)]
@@ -14,7 +14,7 @@ function Add-ModuleToProfile {
         $ProfilePath = $(Get-Variable Profile -ValueOnly)
     )
 
-    $ModuleDirectory = (Get-ModuleInfo -Path $Path).ModuleBase
+    $ModuleDirectory = (Get-MKModuleInfo -Path $Path).ModuleBase
 
     Add-Content -Path $ProfilePath -Value "Import-Module $ModuleDirectory"
 }

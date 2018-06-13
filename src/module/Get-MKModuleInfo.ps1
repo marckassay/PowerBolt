@@ -1,6 +1,6 @@
 using module .\..\dynamicparams\GetModuleNameSet.ps1
 
-function Get-ModuleInfo {
+function Get-MKModuleInfo {
     [CmdletBinding()]
     [OutputType([PSObject])]
     Param
@@ -67,11 +67,13 @@ function Get-ModuleInfo {
             $Name = $ModuleInfo.Name
         }
 
+        $ManifestPath = "$ModuleBase\$Name.psd1"
         return [psobject]$ModuleInfo = @{
-            Info       = $ModuleInfo
-            RootModule = $RootModule
-            ModuleBase = $ModuleBase
-            Name       = $Name
+            Info         = $ModuleInfo
+            ManifestPath = $ManifestPath
+            RootModule   = $RootModule
+            ModuleBase   = $ModuleBase
+            Name         = $Name
         }
     }
 }

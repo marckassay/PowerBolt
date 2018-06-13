@@ -8,10 +8,10 @@ function GetModuleNameSet {
         [string]$Name = 'Name',
 
         [Parameter(Mandatory = $false)]
-        [int]$Position,
+        [int]$Position = 0,
 
         [Parameter(Mandatory = $false)]
-        [string]$ParameterSetName,
+        [string]$ParameterSetName = 'ByName',
 
         [switch]$Mandatory
     )

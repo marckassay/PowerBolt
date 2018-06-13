@@ -1,4 +1,4 @@
-using module .\..\Get-ModuleInfo.ps1
+using module .\..\Get-MKModuleInfo.ps1
 
 # RegEx pattern is from here: https://regex101.com/r/gG8cK7/1
 function Update-SemVer {
@@ -32,7 +32,7 @@ function Update-SemVer {
         [switch]$BumpPatch
     )
 
-    $ModuleInfo = Get-ModuleInfo -Path $Path
+    $ModuleInfo = Get-MKModuleInfo -Path $Path
     $Path = ($ModuleInfo | Select-Object -ExpandProperty Values).Path
 
     if (-not $Value) {

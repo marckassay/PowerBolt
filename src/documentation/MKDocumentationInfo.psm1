@@ -1,6 +1,6 @@
-class MKPowerShellDocObject {
+class MKDocumentationInfo {
     [string]$ModuleName
-    [string]$Path = (Get-Location | Select-Object -ExpandProperty Path)
+    [string]$Path
     [string]$MarkdownFolder = 'docs'
     [string]$Locale = 'en-US'
     [string]$OnlineVersionUrl
@@ -15,7 +15,8 @@ class MKPowerShellDocObject {
     static [string]$SemVerRegExPattern = "(?'MAJOR'0|(?:[1-9]\d*))\.(?'MINOR'0|(?:[1-9]\d*))\.(?'PATCH'0|(?:[1-9]\d*))(?:-(?'prerelease'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?(?:\+(?'build'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?"
 
     # design for Update-ReadmeFromPlatyPSMarkdown
-    MKPowerShellDocObject(
+    MKDocumentationInfo(
+        [string]$Name,
         [string]$Path,
         [string]$MarkdownFolder
     ) {
@@ -26,7 +27,8 @@ class MKPowerShellDocObject {
     }
 
     # design for New-ExternalHelpFromPlatyPSMarkdown
-    MKPowerShellDocObject(
+    MKDocumentationInfo(
+        [string]$Name,
         [string]$Path,
         [string]$MarkdownFolder,
         [string]$Locale
@@ -39,7 +41,7 @@ class MKPowerShellDocObject {
     }
 
     # design for Build-Documentation and Build-PlatyPSMarkdown
-    MKPowerShellDocObject(
+    MKDocumentationInfo(
         [string]$Name,
         [string]$Path,
         [string]$MarkdownFolder,
@@ -94,7 +96,7 @@ class MKPowerShellDocObject {
         if ($this.OnlineVersionUrlPolicy -eq 'Auto') {
             
             $BranchName = Get-GitBranch -gitDir ($this.ModuleFolder + "\.git").Trim('(', ')')
-            if ($BranchName -match [MKPowerShellDocObject]::SemVerRegExPattern) {
+            if ($BranchName -match [MKDocumentationInfo]::SemVerRegExPattern) {
                 if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
                     # TODO: this most likely will only work with Github file structure
                     $this.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/$BranchName/docs/{0}.md"
@@ -152,7 +154,7 @@ $BodyContent
             # update any other exisiting urls that similiarly matches OnlineVersionUrl without
             # overwriting filename
             $UrlSegmentPriorToGitBranchName = $FileUrl.Split('blob')[0] + 'blob'
-            $SemVerMatched = [regex]::Match($FileUrl, [MKPowerShellDocObject]::SemVerRegExPattern)
+            $SemVerMatched = [regex]::Match($FileUrl, [MKDocumentationInfo]::SemVerRegExPattern)
      
             if ($SemVerMatched.Success) {
                 $MDFolder = $this.MarkdownFolder

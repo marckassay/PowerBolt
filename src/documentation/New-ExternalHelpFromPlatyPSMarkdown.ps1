@@ -1,14 +1,18 @@
-using module .\.\MKPowerShellDocObject.psm1
+using module .\.\MKDocumentationInfo.psm1
 
 function New-ExternalHelpFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $False, ValueFromPipeline = $True)]
-        [MKPowerShellDocObject]$Data,
+        [Parameter(Mandatory = $True, 
+            ValueFromPipeline = $True, 
+            ParameterSetName = "ByPipe")]
+        [MKDocumentationInfo]$DocInfo,
 
-        [Parameter(Mandatory = $False)]
-        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
+        [Parameter(Mandatory = $True,
+            Position = 1,
+            ParameterSetName = "ByPath")]
+        [string]$Path,
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownFolder = 'docs',
@@ -17,9 +21,24 @@ function New-ExternalHelpFromPlatyPSMarkdown {
         [string]$OutputFolder = 'en-US'
     )
 
+    DynamicParam {
+        return GetModuleNameSet -Mandatory -Position 0
+    }
+    
     begin {
-        if (-not $Data) {
-            $Data = [MKPowerShellDocObject]::new(
+        $Name = $PSBoundParameters['Name']
+
+        if (-not $Name) {
+            if (-not $Path) {
+                $Path = '.'
+            }
+
+            $Path = Resolve-Path $Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
+        }
+        
+        if (-not $DocInfo) {
+            $DocInfo = [MKDocumentationInfo]::new(
+                $Name,
                 $Path,
                 $MarkdownFolder,
                 $OutputFolder
@@ -28,9 +47,9 @@ function New-ExternalHelpFromPlatyPSMarkdown {
     }
 
     end {
-        $MarkdownFolder = Join-Path -Path $Data.Path -ChildPath $Data.MarkdownFolder
+        $MarkdownFolder = Join-Path -Path $DocInfo.Path -ChildPath $DocInfo.MarkdownFolder
 
-        $HelpLocaleFolder = Join-Path -Path $Data.Path -ChildPath $Data.Locale
+        $HelpLocaleFolder = Join-Path -Path $DocInfo.Path -ChildPath $DocInfo.Locale
 
         if ((Test-Path -Path $HelpLocaleFolder -PathType Container) -eq $False) {
             New-Item -Path $HelpLocaleFolder -ItemType Container | Out-Null
@@ -39,6 +58,6 @@ function New-ExternalHelpFromPlatyPSMarkdown {
         New-ExternalHelp -Path $MarkdownFolder -OutputPath $HelpLocaleFolder -Force | `
             Out-Null
         
-        Write-Output $Data
+        Write-Output $DocInfo
     }
 }

@@ -1,17 +1,13 @@
-using module .\.\MKPowerShellDocObject.psm1
+using module .\.\MKDocumentationInfo.psm1
 
 function Build-Documentation {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $True, 
-            ParameterSetName = "ByName")]
-        [string]$Name = '',
-        
-        [Parameter(Mandatory = $True, 
-            Position = 0,
+        [Parameter(Mandatory = $True,
+            Position = 1,
             ParameterSetName = "ByPath")]
-        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
+        [string]$Path,
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownFolder = 'docs',
@@ -30,14 +26,26 @@ function Build-Documentation {
         $NoReImportModule
     )
 
+    DynamicParam {
+        return GetModuleNameSet -Mandatory -Position 0
+    }
+    
     begin {
+        $Name = $PSBoundParameters['Name']
+
+        if (-not $Name) {
+            if (-not $Path) {
+                $Path = '.'
+            }
+
+            $Path = Resolve-Path $Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
+        }
+
         # Output Field Separator - default is ' '
         $OFS = ''
-
-        $Path = Resolve-Path $Path | Select-Object -ExpandProperty Path
         
-        if (-not $Data) {
-            $Data = [MKPowerShellDocObject]::new(
+        if (-not $DocInfo) {
+            $DocInfo = [MKDocumentationInfo]::new(
                 $Name,
                 $Path,
                 $MarkdownFolder,
@@ -51,7 +59,7 @@ function Build-Documentation {
     }
 
     end {
-        Write-Output $Data | `
+        Write-Output $DocInfo | `
             Build-PlatyPSMarkdown | `
             New-ExternalHelpFromPlatyPSMarkdown | `
             Update-ReadmeFromPlatyPSMarkdown

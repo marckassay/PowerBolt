@@ -9,7 +9,7 @@ using module .\src\management\backupsources\Backup-Sources.ps1
 using module .\src\management\Restart-PWSH.ps1
 using module .\src\management\Restart-PWSHAdmin.ps1
 using module .\src\management\Set-LocationAndStore.ps1
-using module .\src\module\Get-ModuleInfo.ps1
+using module .\src\module\Get-MKModuleInfo.ps1
 using module .\src\module\manifest\Update-ManifestFunctionsToExportField.ps1
 using module .\src\module\manifest\Update-SemVer.ps1
 using module .\src\module\Update-ModuleExports.ps1
@@ -22,7 +22,6 @@ using module .\src\scaffolds\New-Script.ps1
 using module .\src\settings\Get-MKPowerShellSetting.ps1
 using module .\src\settings\New-MKPowerShellConfigFile.ps1
 using module .\src\settings\Set-MKPowerShellSetting.ps1
-using module .\src\test\Invoke-TestSuiteRunner.ps1
 using module .\src\utility\ConvertTo-EnumFlag.ps1
 using module .\src\utility\Get-MergedPath.ps1
 using module .\src\utility\Search-Items.ps1

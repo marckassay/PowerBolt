@@ -1,3 +1,4 @@
+# NoExport: Invoke-TestSuiteRunner
 function Invoke-TestSuiteRunner {
     [CmdletBinding()]
     Param
@@ -15,27 +16,23 @@ function Invoke-TestSuiteRunner {
     begin {
         $Name = $PSBoundParameters['Name']
 
-        Push-Location -StackName 'TestSuite'
-
         if ($Name) {
-            $MI = Get-ModuleInfo -Name $Name
+            $MI = Get-MKModuleInfo -Name $Name
         }
         else {
-            $MI = Get-ModuleInfo -Path $Path
+            $MI = Get-MKModuleInfo -Path $Path
         }
 
         Set-Location ($MI.ModuleBase)
         
-        Get-Item -Path . -Include '*.psd1' -OutVariable ManifestItem | Test-ModuleManifest | Remove-Module
+        # Test-ModuleManifest $MI.ManifestPath | Remove-Module
     }
 
     process {
-        Invoke-Pester -Script "$($MI.ModuleBase)\test"
+       Invoke-Command {Invoke-Pester -Script "$($MI.ModuleBase)\test"}
     }
 
     end {
-        Import-Module -Name ($MI.ModuleBase)
-        
-        Pop-Location -StackName 'TestSuite'
+        # Import-Module -Name ($MI.ModuleBase)
     }
 }

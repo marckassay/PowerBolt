@@ -1,22 +1,18 @@
-using module .\.\MKPowerShellDocObject.psm1
+using module .\.\MKDocumentationInfo.psm1
 
 function Build-PlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $False, 
+        [Parameter(Mandatory = $True, 
             ValueFromPipeline = $True, 
             ParameterSetName = "ByPipe")]
-        [MKPowerShellDocObject]$Data,
+        [MKDocumentationInfo]$DocInfo,
 
-        [Parameter(Mandatory = $False, 
-            ParameterSetName = "ByName")]
-        [string]$Name,
-
-        [Parameter(Mandatory = $False,
-            Position = 0, 
+        [Parameter(Mandatory = $True,
+            Position = 1,
             ParameterSetName = "ByPath")]
-        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
+        [string]$Path,
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownFolder = 'docs',
@@ -35,11 +31,23 @@ function Build-PlatyPSMarkdown {
         $NoReImportModule
     ) 
     
+    DynamicParam {
+        return GetModuleNameSet -Mandatory -Position 0
+    }
+    
     begin {
-        $Path = Resolve-Path $Path | Select-Object -ExpandProperty Path
+        $Name = $PSBoundParameters['Name']
 
-        if (-not $Data) {
-            $Data = [MKPowerShellDocObject]::new(
+        if (-not $Name) {
+            if (-not $Path) {
+                $Path = '.'
+            }
+
+            $Path = Resolve-Path $Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
+        }
+
+        if (-not $DocInfo) {
+            $DocInfo = [MKDocumentationInfo]::new(
                 $Name,
                 $Path,
                 $MarkdownFolder,
@@ -53,27 +61,27 @@ function Build-PlatyPSMarkdown {
     }
 
     end {
-        $Data.ModuleMarkdownFolder = Join-Path -Path $Data.ModuleFolder -ChildPath $Data.MarkdownFolder
-        $MarkdownFolderItems = Get-ChildItem -Path $Data.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
+        $DocInfo.ModuleMarkdownFolder = Join-Path -Path $DocInfo.ModuleFolder -ChildPath $DocInfo.MarkdownFolder
+        $MarkdownFolderItems = Get-ChildItem -Path $DocInfo.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
         if ($MarkdownFolderItems.Count -eq 0) {
-            New-Item -Path $Data.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
+            New-Item -Path $DocInfo.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
 
-            if ($Data.NoReImportModule -eq $False) {
-                Remove-Module -Name $Data.ModuleName
-                Import-Module -Name $Data.RootManifest -Force -Scope Global
+            if ($DocInfo.NoReImportModule -eq $False) {
+                Remove-Module -Name $DocInfo.ModuleName
+                Import-Module -Name $DocInfo.RootManifest -Force -Scope Global
             }
             
-            New-MarkdownHelp -Module $Data.ModuleName -OutputFolder $Data.ModuleMarkdownFolder | Out-Null
+            New-MarkdownHelp -Module $DocInfo.ModuleName -OutputFolder $DocInfo.ModuleMarkdownFolder | Out-Null
 
-            $Data.UpdateOnlineVersionUrl()
+            $DocInfo.UpdateOnlineVersionUrl()
         }
         else {
-            if ($Data.NoReImportModule -eq $False) {
-                Remove-Module -Name $Data.ModuleName
-                Import-Module -Name $Data.RootManifest -Force -Scope Global
+            if ($DocInfo.NoReImportModule -eq $False) {
+                Remove-Module -Name $DocInfo.ModuleName
+                Import-Module -Name $DocInfo.RootManifest -Force -Scope Global
             }
 
-            $ExportedFunctions = Get-Module -Name $Data.ModuleName | `
+            $ExportedFunctions = Get-Module -Name $DocInfo.ModuleName | `
                 Select-Object -ExpandProperty ExportedFunctions | `
                 Select-Object -ExpandProperty Values | `
                 Select-Object -ExpandProperty Name
@@ -83,15 +91,15 @@ function Build-PlatyPSMarkdown {
                 Select-Object -ExpandProperty BaseName | `
                 ForEach-Object {
                 if ($ExportedFunctions -notcontains $_) {
-                    Remove-Item -Path ($Data.ModuleMarkdownFolder + "\$_.md") -Confirm
+                    Remove-Item -Path ($DocInfo.ModuleMarkdownFolder + "\$_.md") -Confirm
                 }
             }
 
-            Update-MarkdownHelpModule -Path $Data.ModuleMarkdownFolder | Out-Null
+            Update-MarkdownHelpModule -Path $DocInfo.ModuleMarkdownFolder | Out-Null
 
-            $Data.UpdateOnlineVersionUrl()
+            $DocInfo.UpdateOnlineVersionUrl()
         }
 
-        Write-Output $Data
+        Write-Output $DocInfo
     }
 }

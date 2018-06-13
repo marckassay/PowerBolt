@@ -7,6 +7,7 @@ function Restart-PWSH {
     $IsHistoryRecordingEnabled = (Get-MKPowerShellSetting -Name 'TurnOnHistoryRecording') -eq $true
     if ($IsHistoryRecordingEnabled) {
         Export-History
-        Stop-Process -Id $PID
     } 
+
+    Stop-Process -Id $PID
 }

@@ -1536,7 +1536,7 @@ False</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-ModuleInfo</command:name>
+      <command:name>Get-MKModuleInfo</command:name>
       <command:verb>Get</command:verb>
       <command:noun>ModuleInfo</command:noun>
       <maml:description>
@@ -1548,7 +1548,7 @@ False</dev:code>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-ModuleInfo</maml:name>
+        <maml:name>Get-MKModuleInfo</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
@@ -1566,7 +1566,7 @@ False</dev:code>
             <command:parameterValue required="false" command:variableLength="false">Get-ManifestKey</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Get-MergedPath</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Get-MKPowerShellSetting</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Get-ModuleInfo</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Get-MKModuleInfo</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">GetModuleNameSet</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">GetSettingsNameSet</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Import-History</command:parameterValue>
@@ -1683,7 +1683,7 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-ModuleInfo.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKModuleInfo.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1807,7 +1807,7 @@ False</dev:code>
             <command:parameterValue required="false" command:variableLength="false">Get-ManifestKey</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Get-MergedPath</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Get-MKPowerShellSetting</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Get-ModuleInfo</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Get-MKModuleInfo</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">GetModuleNameSet</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">GetSettingsNameSet</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Import-History</command:parameterValue>

@@ -1,22 +1,41 @@
-using module .\.\MKPowerShellDocObject.psm1
+using module .\.\MKDocumentationInfo.psm1
 
 function Update-ReadmeFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $False, ValueFromPipeline = $True)]
-        [MKPowerShellDocObject]$Data,
+        [Parameter(Mandatory = $True, 
+            ValueFromPipeline = $True, 
+            ParameterSetName = "ByPipe")]
+        [MKDocumentationInfo]$DocInfo,
 
-        [Parameter(Mandatory = $False)]
-        [string]$Path = (Get-Location | Select-Object -ExpandProperty Path),
+        [Parameter(Mandatory = $True,
+            Position = 1,
+            ParameterSetName = "ByPath")]
+        [string]$Path,
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownFolder = 'docs'
     )
     
+    DynamicParam {
+        return GetModuleNameSet -Mandatory -Position 0
+    }
+    
     begin {
-        if (-not $Data) {
-            $Data = [MKPowerShellDocObject]::new(
+        $Name = $PSBoundParameters['Name']
+
+        if (-not $Name) {
+            if (-not $Path) {
+                $Path = '.'
+            }
+
+            $Path = Resolve-Path $Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
+        }
+
+        if (-not $DocInfo) {
+            $DocInfo = [MKDocumentationInfo]::new(
+                $Name,
                 $Path,
                 $MarkdownFolder
             )
@@ -25,9 +44,9 @@ function Update-ReadmeFromPlatyPSMarkdown {
 
     end {
         try {
-            $MarkdownSnippetCollection = $Data.GetMarkdownSnippetCollectionString()
+            $MarkdownSnippetCollection = $DocInfo.GetMarkdownSnippetCollectionString()
 
-            $ReadMePath = $Data.Path + "\README.md"
+            $ReadMePath = $DocInfo.Path + "\README.md"
             if ((Test-Path -Path $ReadMePath) -eq $false) {
                 New-Item -Path $ReadMePath -ItemType File
             }

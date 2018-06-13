@@ -1,4 +1,4 @@
-using module .\..\module\Get-ModuleInfo.ps1
+using module .\..\module\Get-MKModuleInfo.ps1
 
 function Skip-ModuleInProfile {
     [CmdletBinding(PositionalBinding = $True)]

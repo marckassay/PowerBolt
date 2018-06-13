@@ -25,7 +25,7 @@ function Update-RootModuleUsingStatements {
     }
 
     end {
-        $MI = Get-ModuleInfo -Path $Path
+        $MI = Get-MKModuleInfo -Path $Path
 
         $ManifestPath = $MI.Info.Path
         $ModulePath = $MI.ModuleBase
