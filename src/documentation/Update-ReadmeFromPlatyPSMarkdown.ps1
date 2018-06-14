@@ -1,23 +1,27 @@
 using module .\.\MKDocumentationInfo.psm1
 
 function Update-ReadmeFromPlatyPSMarkdown {
-    [CmdletBinding(PositionalBinding = $True)]
+    [CmdletBinding(PositionalBinding = $True, 
+        DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $True,
+        [Parameter(Mandatory = $False,
             Position = 0,
+            ValueFromPipeline = $False, 
+            ParameterSetName = "ByPath")]
+        [string]$Path = '.',
+
+        [Parameter(Mandatory = $True,
+            Position = 1,
             ValueFromPipeline = $True, 
             ParameterSetName = "ByPipe")]
         [MKDocumentationInfo]$DocInfo,
 
-        [Parameter(Mandatory = $True,
-            Position = 0,
-            ValueFromPipeline = $False, 
-            ParameterSetName = "ByPath")]
-        [string]$Path,
+        [Parameter(Mandatory = $False)]
+        [string]$MarkdownFolder = 'docs',
 
         [Parameter(Mandatory = $False)]
-        [string]$MarkdownFolder = 'docs'
+        [string]$FileName = 'README.md'
     )
     
     DynamicParam {
@@ -40,7 +44,7 @@ function Update-ReadmeFromPlatyPSMarkdown {
         try {
             $MarkdownSnippetCollection = $DocInfo.GetMarkdownSnippetCollectionString()
 
-            $ReadMePath = $DocInfo.Path + "\README.md"
+            $ReadMePath = Join-Path -Path $DocInfo.ModuleFolder -ChildPath $FileName
             if ((Test-Path -Path $ReadMePath) -eq $false) {
                 New-Item -Path $ReadMePath -ItemType File
             }

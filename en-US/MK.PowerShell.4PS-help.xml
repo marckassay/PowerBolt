@@ -366,7 +366,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Build-Documentation</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Path</maml:name>
           <maml:Description>
             <maml:para>Folder that contains a module.</maml:para>
@@ -516,7 +516,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Path</maml:name>
         <maml:Description>
           <maml:para>Folder that contains a module.</maml:para>
@@ -597,18 +597,6 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Build-PlatyPSMarkdown</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
-          <maml:name>Data</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Data Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">MKPowerShellDocObject</command:parameterValue>
-          <dev:type>
-            <maml:name>MKPowerShellDocObject</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Locale</maml:name>
           <maml:Description>
@@ -633,73 +621,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
           </dev:type>
           <dev:defaultValue>docs</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>NoReImportModule</maml:name>
-          <maml:Description>
-            <maml:para>Prevents re-importing module prior to executing PlatyPS's `New-MarkdownHelp` or `Update-MarkdownHelpModule`.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>OnlineVersionUrlPolicy</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill OnlineVersionUrlPolicy Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Auto</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Omit</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>OnlineVersionUrlTemplate</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill OnlineVersionUrlTemplate Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Build-PlatyPSMarkdown</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Locale</maml:name>
-          <maml:Description>
-            <maml:para>The name of the folder where PowerShell XML file will reside.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>en-US</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MarkdownFolder</maml:name>
-          <maml:Description>
-            <maml:para>A relative path of module's folder where the Markdown files reside or will reside.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>docs</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>If the module is already imported, the value is the name of the module.</maml:para>
@@ -829,20 +751,86 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Build-PlatyPSMarkdown</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Locale</maml:name>
+          <maml:Description>
+            <maml:para>The name of the folder where PowerShell XML file will reside.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>en-US</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>MarkdownFolder</maml:name>
+          <maml:Description>
+            <maml:para>A relative path of module's folder where the Markdown files reside or will reside.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>docs</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>NoReImportModule</maml:name>
+          <maml:Description>
+            <maml:para>Prevents re-importing module prior to executing PlatyPS's `New-MarkdownHelp` or `Update-MarkdownHelpModule`.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OnlineVersionUrlPolicy</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill OnlineVersionUrlPolicy Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Auto</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Omit</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OnlineVersionUrlTemplate</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill OnlineVersionUrlTemplate Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+          <maml:name>DocInfo</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill DocInfo Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">MKDocumentationInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>MKDocumentationInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
-        <maml:name>Data</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Data Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">MKPowerShellDocObject</command:parameterValue>
-        <dev:type>
-          <maml:name>MKPowerShellDocObject</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Locale</maml:name>
         <maml:Description>
@@ -867,7 +855,7 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
         </dev:type>
         <dev:defaultValue>docs</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>If the module is already imported, the value is the name of the module.</maml:para>
@@ -923,6 +911,18 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+        <maml:name>DocInfo</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill DocInfo Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">MKDocumentationInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>MKDocumentationInfo</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1387,158 +1387,9 @@ False</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-MKPowerShellSetting</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>MKPowerShellSetting</command:noun>
-      <maml:description>
-        <maml:para>Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-MKPowerShellSetting</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Name</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Name Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">HistoryLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnRememberLastLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnQuickRestart</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnBackup</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnExtendedTypes</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Backups</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnExtendedFormats</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">NuGetApiKey</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">LastLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnHistoryRecording</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">BackupPolicy</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnAvailableUpdates</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>ConfigFilePath</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ConfigFilePath Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ShowAll</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill ShowAll Description}}</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>ConfigFilePath</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ConfigFilePath Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Name</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Name Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ShowAll</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill ShowAll Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-MKPowerShellSetting.md</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Get-MKModuleInfo</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>ModuleInfo</command:noun>
+      <command:noun>MKModuleInfo</command:noun>
       <maml:description>
         <maml:para>{{Fill in the Synopsis}}</maml:para>
       </maml:description>
@@ -1689,6 +1540,155 @@ False</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-MKPowerShellSetting</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>MKPowerShellSetting</command:noun>
+      <maml:description>
+        <maml:para>Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{Fill in the Description}}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-MKPowerShellSetting</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Name Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">HistoryLocation</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnRememberLastLocation</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnQuickRestart</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnBackup</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnExtendedTypes</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Backups</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnExtendedFormats</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">NuGetApiKey</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">LastLocation</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnHistoryRecording</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">BackupPolicy</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnAvailableUpdates</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>ConfigFilePath</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill ConfigFilePath Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ShowAll</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill ShowAll Description}}</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>ConfigFilePath</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill ConfigFilePath Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Name Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ShowAll</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill ShowAll Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-MKPowerShellSetting.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Import-History</command:name>
       <command:verb>Import</command:verb>
       <command:noun>History</command:noun>
@@ -1777,159 +1777,6 @@ False</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Invoke-TestSuiteRunner</command:name>
-      <command:verb>Invoke</command:verb>
-      <command:noun>TestSuiteRunner</command:noun>
-      <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Invoke-TestSuiteRunner</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Name</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Name Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Add-ModuleToProfile</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">BackupPredicateEnum</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Backup-Sources</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Build-Documentation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Build-PlatyPSMarkdown</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">ConvertTo-EnumFlag</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Export-History</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Get-LatestError</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Get-ManifestKey</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Get-MergedPath</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Get-MKPowerShellSetting</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Get-MKModuleInfo</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">GetModuleNameSet</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">GetSettingsNameSet</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Import-History</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Invoke-TestSuiteRunner</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">MK.PowerShell.4PS</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">MKPowerShellDocObject</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">New-DynamicParam</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">New-ExternalHelpFromPlatyPSMarkdown</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">New-MKPowerShellConfigFile</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">New-Script</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">platyPS</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">posh-git</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PSReadLine</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Publish-ModuleToNuGetGallery</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Register-Shutdown</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Reset-ModuleInProfile</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Restart-PWSH</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Restart-PWSHAdmin</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Search-Items</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Set-LocationAndStore</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Set-MKPowerShellSetting</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Skip-ModuleInProfile</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Start-MKPowerShell</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Update-ManifestFunctionsToExportField</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Update-ModuleExports</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Update-ReadmeFromPlatyPSMarkdown</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Update-RootModuleUsingStatements</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Update-SemVer</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Path</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Path Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Name</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Name Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Path</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Path Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Invoke-TestSuiteRunner.md</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>New-ExternalHelpFromPlatyPSMarkdown</command:name>
       <command:verb>New</command:verb>
       <command:noun>ExternalHelpFromPlatyPSMarkdown</command:noun>
@@ -1943,18 +1790,6 @@ False</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>New-ExternalHelpFromPlatyPSMarkdown</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
-          <maml:name>Data</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Data Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">MKPowerShellDocObject</command:parameterValue>
-          <dev:type>
-            <maml:name>MKPowerShellDocObject</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Path</maml:name>
           <maml:Description>
@@ -1992,20 +1827,86 @@ False</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-ExternalHelpFromPlatyPSMarkdown</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>MarkdownFolder</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill MarkdownFolder Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>OutputFolder</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill OutputFolder Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+          <maml:name>DocInfo</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill DocInfo Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">MKDocumentationInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>MKDocumentationInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-ExternalHelpFromPlatyPSMarkdown</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>MarkdownFolder</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill MarkdownFolder Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>OutputFolder</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill OutputFolder Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Name Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
-        <maml:name>Data</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Data Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">MKPowerShellDocObject</command:parameterValue>
-        <dev:type>
-          <maml:name>MKPowerShellDocObject</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>MarkdownFolder</maml:name>
         <maml:Description>
@@ -2034,6 +1935,30 @@ False</dev:code>
         <maml:name>Path</maml:name>
         <maml:Description>
           <maml:para>{{Fill Path Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+        <maml:name>DocInfo</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill DocInfo Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">MKDocumentationInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>MKDocumentationInfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Name Description}}</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2443,6 +2368,17 @@ False</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DoNotConfirm</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill DoNotConfirm Description}}</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2486,6 +2422,18 @@ False</dev:code>
         <maml:name>WhatIf</maml:name>
         <maml:Description>
           <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DoNotConfirm</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill DoNotConfirm Description}}</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -3701,18 +3649,6 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Update-ReadmeFromPlatyPSMarkdown</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
-          <maml:name>Data</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Data Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">MKPowerShellDocObject</command:parameterValue>
-          <dev:type>
-            <maml:name>MKPowerShellDocObject</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Path</maml:name>
           <maml:Description>
@@ -3737,21 +3673,99 @@ MatchedLine                        # TODO: need to have this functions arity bet
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FileName</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill FileName Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-ReadmeFromPlatyPSMarkdown</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>MarkdownFolder</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill MarkdownFolder Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+          <maml:name>DocInfo</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill DocInfo Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">MKDocumentationInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>MKDocumentationInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FileName</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill FileName Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-ReadmeFromPlatyPSMarkdown</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>MarkdownFolder</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill MarkdownFolder Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Name Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>FileName</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill FileName Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
-        <maml:name>Data</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Data Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">MKPowerShellDocObject</command:parameterValue>
-        <dev:type>
-          <maml:name>MKPowerShellDocObject</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>MarkdownFolder</maml:name>
         <maml:Description>
@@ -3768,6 +3782,42 @@ MatchedLine                        # TODO: need to have this functions arity bet
         <maml:name>Path</maml:name>
         <maml:Description>
           <maml:para>{{Fill Path Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+        <maml:name>DocInfo</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill DocInfo Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">MKDocumentationInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>MKDocumentationInfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Name Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>FileName</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill FileName Description}}</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

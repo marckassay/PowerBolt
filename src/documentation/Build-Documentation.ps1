@@ -1,14 +1,15 @@
 using module .\.\MKDocumentationInfo.psm1
 
 function Build-Documentation {
-    [CmdletBinding(PositionalBinding = $True)]
+    [CmdletBinding(PositionalBinding = $True, 
+        DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $True,
+        [Parameter(Mandatory = $False,
             Position = 0,
-            ValueFromPipeline = $False,
+            ValueFromPipeline = $False, 
             ParameterSetName = "ByPath")]
-        [string]$Path,
+        [string]$Path = '.',
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownFolder = 'docs',

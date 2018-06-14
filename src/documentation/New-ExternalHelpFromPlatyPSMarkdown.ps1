@@ -1,20 +1,21 @@
 using module .\.\MKDocumentationInfo.psm1
 
 function New-ExternalHelpFromPlatyPSMarkdown {
-    [CmdletBinding(PositionalBinding = $True)]
+    [CmdletBinding(PositionalBinding = $True, 
+        DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $True,
-            Position = 0,
-            ValueFromPipeline = $True, 
-            ParameterSetName = "ByPipe")]
-        [MKDocumentationInfo]$DocInfo,
-
-        [Parameter(Mandatory = $True,
+        [Parameter(Mandatory = $False,
             Position = 0,
             ValueFromPipeline = $False, 
             ParameterSetName = "ByPath")]
-        [string]$Path,
+        [string]$Path = '.',
+
+        [Parameter(Mandatory = $True,
+            Position = 1,
+            ValueFromPipeline = $True, 
+            ParameterSetName = "ByPipe")]
+        [MKDocumentationInfo]$DocInfo,
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownFolder = 'docs',
@@ -41,9 +42,9 @@ function New-ExternalHelpFromPlatyPSMarkdown {
     }
 
     end {
-        $MarkdownFolder = Join-Path -Path $DocInfo.Path -ChildPath $DocInfo.MarkdownFolder
+        $MarkdownFolder = Join-Path -Path $DocInfo.ModuleFolder -ChildPath $DocInfo.MarkdownFolder
 
-        $HelpLocaleFolder = Join-Path -Path $DocInfo.Path -ChildPath $DocInfo.Locale
+        $HelpLocaleFolder = Join-Path -Path $DocInfo.ModuleFolder -ChildPath $DocInfo.Locale
 
         if ((Test-Path -Path $HelpLocaleFolder -PathType Container) -eq $False) {
             New-Item -Path $HelpLocaleFolder -ItemType Container | Out-Null

@@ -12,9 +12,9 @@ With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, calls [
 
 ## SYNTAX
 
-### ByPath
+### ByPath (Default)
 ```
-Build-PlatyPSMarkdown [-Path] <String> [-MarkdownFolder <String>] [-Locale <String>]
+Build-PlatyPSMarkdown [[-Path] <String>] [-MarkdownFolder <String>] [-Locale <String>]
  [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
@@ -145,7 +145,7 @@ Type: String
 Parameter Sets: ByPath
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False

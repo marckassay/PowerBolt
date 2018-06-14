@@ -12,16 +12,16 @@ Calls `New-ExternalHelp` from `PlatyPS` module.  This functions will read the fi
 
 ## SYNTAX
 
+### ByPath (Default)
+```
+New-ExternalHelpFromPlatyPSMarkdown [[-Path] <String>] [[-MarkdownFolder] <String>] [[-OutputFolder] <String>]
+ [<CommonParameters>]
+```
+
 ### ByPipe
 ```
 New-ExternalHelpFromPlatyPSMarkdown -DocInfo <MKDocumentationInfo> [[-MarkdownFolder] <String>]
  [[-OutputFolder] <String>] [<CommonParameters>]
-```
-
-### ByPath
-```
-New-ExternalHelpFromPlatyPSMarkdown [-Path] <String> [[-MarkdownFolder] <String>] [[-OutputFolder] <String>]
- [<CommonParameters>]
 ```
 
 ### ByName
@@ -82,7 +82,7 @@ Type: String
 Parameter Sets: ByPath
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False

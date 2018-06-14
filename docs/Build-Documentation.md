@@ -12,9 +12,9 @@ Creates or updates help documentation files and module's README file.  Also crea
 
 ## SYNTAX
 
-### ByPath
+### ByPath (Default)
 ```
-Build-Documentation [-Path] <String> [-MarkdownFolder <String>] [-Locale <String>]
+Build-Documentation [[-Path] <String>] [-MarkdownFolder <String>] [-Locale <String>]
  [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
@@ -140,7 +140,7 @@ Type: String
 Parameter Sets: ByPath
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False

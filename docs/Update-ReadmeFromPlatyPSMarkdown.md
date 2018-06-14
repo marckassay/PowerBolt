@@ -12,20 +12,22 @@ Adds or updates function's 'snippet' in README file from `PlatyPS` generated fil
 
 ## SYNTAX
 
-### ByPipe
+### ByPath (Default)
 ```
-Update-ReadmeFromPlatyPSMarkdown -DocInfo <MKDocumentationInfo> [[-MarkdownFolder] <String>]
+Update-ReadmeFromPlatyPSMarkdown [[-Path] <String>] [[-MarkdownFolder] <String>] [-FileName <String>]
  [<CommonParameters>]
 ```
 
-### ByPath
+### ByPipe
 ```
-Update-ReadmeFromPlatyPSMarkdown [-Path] <String> [[-MarkdownFolder] <String>] [<CommonParameters>]
+Update-ReadmeFromPlatyPSMarkdown -DocInfo <MKDocumentationInfo> [[-MarkdownFolder] <String>]
+ [-FileName <String>] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Update-ReadmeFromPlatyPSMarkdown [[-MarkdownFolder] <String>] -Name <String> [<CommonParameters>]
+Update-ReadmeFromPlatyPSMarkdown [[-MarkdownFolder] <String>] [-FileName <String>] -Name <String>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -65,7 +67,7 @@ Type: String
 Parameter Sets: ByPath
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -96,6 +98,21 @@ Parameter Sets: ByName
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FileName
+{{Fill FileName Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

@@ -76,21 +76,17 @@ Throwaway function that may be reincarnated in a from of Format.
 
 Returns a valid path from a parent of one of its children which overlaps that parent's path. 
 
+#### [`Get-MKModuleInfo`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKModuleInfo.md)
+
+{{Fill in the Synopsis}} 
+
 #### [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md)
 
 Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch. 
 
-#### [`Get-ModuleInfo`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-ModuleInfo.md)
-
-{{Fill in the Synopsis}} 
-
 #### [`Import-History`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Import-History.md)
 
 Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI. 
-
-#### [`Invoke-TestSuiteRunner`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Invoke-TestSuiteRunner.md)
-
-{{Fill in the Synopsis}} 
 
 #### [`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 
