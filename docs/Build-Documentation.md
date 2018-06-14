@@ -12,18 +12,17 @@ Creates or updates help documentation files and module's README file.  Also crea
 
 ## SYNTAX
 
-### ByName
-```
-Build-Documentation -Name <String> [-MarkdownFolder <String>] [-Locale <String>]
- [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
- [<CommonParameters>]
-```
-
 ### ByPath
 ```
 Build-Documentation [-Path] <String> [-MarkdownFolder <String>] [-Locale <String>]
  [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
+```
+
+### ByName
+```
+Build-Documentation [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersionUrlTemplate <String>]
+ [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION

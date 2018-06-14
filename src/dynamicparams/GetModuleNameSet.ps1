@@ -13,17 +13,35 @@ function GetModuleNameSet {
         [Parameter(Mandatory = $false)]
         [string]$ParameterSetName = 'ByName',
 
-        [switch]$Mandatory
+        [switch]$Mandatory,
+
+        [switch]$ValueFromPipeline
     )
 
     [string[]]$ModuleNames = Get-Module -All | `
         Where-Object {$_.Guid -ne '00000000-0000-0000-0000-000000000000'} | `
         Select-Object -ExpandProperty Name
-
-    # TODO: not sure why PSBoundParameters doesn't "see" $Name; forcing this parameter to be in
-    # PSBoundParameters
-    $PSBoundParameters.Add('Name', $Name)
     $PSBoundParameters.Add('ValidateSet', $ModuleNames)
+    
+    if ($PSBoundParameters.ContainsKey('Name') -eq $false) {
+        $PSBoundParameters.Add('Name', $Name)
+    }
+        
+    if ($PSBoundParameters.ContainsKey('Position') -eq $false) {
+        $PSBoundParameters.Add('Position', $Position)
+    }
+        
+    if ($PSBoundParameters.ContainsKey('ParameterSetName') -eq $false) {
+        $PSBoundParameters.Add('ParameterSetName', $ParameterSetName)
+    }
+        
+    if ($PSBoundParameters.ContainsKey('Mandatory') -eq $false) {
+        $PSBoundParameters.Add('Mandatory', $False)
+    }
+        
+    if ($PSBoundParameters.ContainsKey('ValueFromPipeline') -eq $false) {
+        $PSBoundParameters.Add('ValueFromPipeline', $False)
+    }
 
     $DynamicParam = New-DynamicParam @PSBoundParameters
     $DynamicParam

@@ -12,9 +12,20 @@ Adds or updates function's 'snippet' in README file from `PlatyPS` generated fil
 
 ## SYNTAX
 
+### ByPipe
 ```
-Update-ReadmeFromPlatyPSMarkdown [[-Data] <MKPowerShellDocObject>] [[-Path] <String>]
- [[-MarkdownFolder] <String>] [<CommonParameters>]
+Update-ReadmeFromPlatyPSMarkdown -DocInfo <MKDocumentationInfo> [[-MarkdownFolder] <String>]
+ [<CommonParameters>]
+```
+
+### ByPath
+```
+Update-ReadmeFromPlatyPSMarkdown [-Path] <String> [[-MarkdownFolder] <String>] [<CommonParameters>]
+```
+
+### ByName
+```
+Update-ReadmeFromPlatyPSMarkdown [[-MarkdownFolder] <String>] -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +41,6 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
-
-### -Data
-{{Fill Data Description}}
-
-```yaml
-Type: MKPowerShellDocObject
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
 
 ### -MarkdownFolder
 {{Fill MarkdownFolder Description}}
@@ -66,11 +62,41 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByPath
 Aliases:
 
-Required: False
+Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DocInfo
+{{Fill DocInfo Description}}
+
+```yaml
+Type: MKDocumentationInfo
+Parameter Sets: ByPipe
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByName
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

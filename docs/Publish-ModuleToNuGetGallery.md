@@ -13,8 +13,8 @@ Streamlines publishing a module using `Publish-Module`.
 ## SYNTAX
 
 ```
-Publish-ModuleToNuGetGallery [[-Path] <String>] [[-NuGetApiKey] <String>] [[-Exclude] <String[]>] [-WhatIf]
- [<CommonParameters>]
+Publish-ModuleToNuGetGallery [[-Path] <String>] [[-NuGetApiKey] <String>] [[-Exclude] <String[]>]
+ [-DoNotConfirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,6 +81,21 @@ Accept wildcard characters: False
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DoNotConfirm
+{{Fill DoNotConfirm Description}}
 
 ```yaml
 Type: SwitchParameter

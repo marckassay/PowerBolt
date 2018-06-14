@@ -180,6 +180,9 @@ Function New-DynamicParam {
         $Position,
     
         [switch]
+        $ValueFromPipeline,
+
+        [switch]
         $ValueFromPipelineByPropertyName,
     
         [Parameter(Mandatory = $false)]
@@ -199,13 +202,16 @@ Function New-DynamicParam {
     #Create attribute object, add attributes, add to collection   
     $ParamAttr = New-Object System.Management.Automation.ParameterAttribute
     $ParamAttr.ParameterSetName = $ParameterSetName
-    if ($mandatory) {
+    if ($mandatory.IsPresent) {
         $ParamAttr.Mandatory = $True
     }
     if ($Position -ne $null) {
         $ParamAttr.Position = $Position
     }
-    if ($ValueFromPipelineByPropertyName) {
+    if ($ValueFromPipeline.IsPresent) {
+        $ParamAttr.ValueFromPipelineByPropertyName = $True
+    }
+    elseif ($ValueFromPipelineByPropertyName.IsPresent) {
         $ParamAttr.ValueFromPipelineByPropertyName = $True
     }
     if ($HelpMessage) {

@@ -4,15 +4,17 @@ function Build-PlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $True, 
-            ValueFromPipeline = $True, 
-            ParameterSetName = "ByPipe")]
-        [MKDocumentationInfo]$DocInfo,
+        [Parameter(Mandatory = $True,
+            Position = 0,
+            ValueFromPipeline = $False,
+            ParameterSetName = "ByPath")]
+        [string]$Path,
 
         [Parameter(Mandatory = $True,
             Position = 1,
-            ParameterSetName = "ByPath")]
-        [string]$Path,
+            ValueFromPipeline = $True, 
+            ParameterSetName = "ByPipe")]
+        [MKDocumentationInfo]$DocInfo,
 
         [Parameter(Mandatory = $False)]
         [string]$MarkdownFolder = 'docs',
@@ -32,19 +34,11 @@ function Build-PlatyPSMarkdown {
     ) 
     
     DynamicParam {
-        return GetModuleNameSet -Mandatory -Position 0
+        return GetModuleNameSet -Position 0 -Mandatory 
     }
     
     begin {
         $Name = $PSBoundParameters['Name']
-
-        if (-not $Name) {
-            if (-not $Path) {
-                $Path = '.'
-            }
-
-            $Path = Resolve-Path $Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
-        }
 
         if (-not $DocInfo) {
             $DocInfo = [MKDocumentationInfo]::new(

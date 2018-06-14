@@ -20,7 +20,8 @@ class MKDocumentationInfo {
         [string]$Path,
         [string]$MarkdownFolder
     ) {
-        $this.Path = Resolve-Path $Path
+        $this.ModuleName = $Name
+        $this.Path = $Path
         $this.MarkdownFolder = $MarkdownFolder
         
         $this.AssignRemainingFields()
@@ -33,7 +34,8 @@ class MKDocumentationInfo {
         [string]$MarkdownFolder,
         [string]$Locale
     ) {
-        $this.Path = Resolve-Path $Path
+        $this.ModuleName = $Name
+        $this.Path = $Path
         $this.MarkdownFolder = $MarkdownFolder
         $this.Locale = $Locale
         
@@ -52,7 +54,7 @@ class MKDocumentationInfo {
         [bool]$NoReImportModule
     ) {
         $this.ModuleName = $Name
-        $this.Path = Resolve-Path $Path
+        $this.Path = $Path
         $this.MarkdownFolder = $MarkdownFolder
         $this.Locale = $Locale
         $this.OnlineVersionUrlTemplate = $OnlineVersionUrlTemplate
@@ -64,12 +66,17 @@ class MKDocumentationInfo {
     }
 
     [void]AssignRemainingFields() {
-        if ($this.Name) {
-            $this.ModuleFolder = Get-Module $this.Name | `
+        if ($this.ModuleName) {
+            $this.ModuleFolder = Get-Module $this.ModuleName | `
                 Select-Object -ExpandProperty Path | `
                 Split-Path -Parent
         } 
-        elseif ($this.Path) {
+        else {
+            if (-not $this.Path) {
+                $this.Path = '.'
+            }
+            $this.Path = Resolve-Path $this.Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
+
             # if Path was provided (hopefully .ps1, .psm1 or .psd1) ...
             if ((Test-Path -Path $this.Path -PathType Leaf) -eq $True) {
                 $this.ModuleFolder = Split-Path -Path $this.Path -Parent 

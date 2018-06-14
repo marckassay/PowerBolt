@@ -4,13 +4,15 @@ function New-ExternalHelpFromPlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True)]
     Param
     (
-        [Parameter(Mandatory = $True, 
+        [Parameter(Mandatory = $True,
+            Position = 0,
             ValueFromPipeline = $True, 
             ParameterSetName = "ByPipe")]
         [MKDocumentationInfo]$DocInfo,
 
         [Parameter(Mandatory = $True,
-            Position = 1,
+            Position = 0,
+            ValueFromPipeline = $False, 
             ParameterSetName = "ByPath")]
         [string]$Path,
 
@@ -27,14 +29,6 @@ function New-ExternalHelpFromPlatyPSMarkdown {
     
     begin {
         $Name = $PSBoundParameters['Name']
-
-        if (-not $Name) {
-            if (-not $Path) {
-                $Path = '.'
-            }
-
-            $Path = Resolve-Path $Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
-        }
         
         if (-not $DocInfo) {
             $DocInfo = [MKDocumentationInfo]::new(

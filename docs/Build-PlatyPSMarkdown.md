@@ -12,25 +12,24 @@ With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, calls [
 
 ## SYNTAX
 
+### ByPath
+```
+Build-PlatyPSMarkdown [-Path] <String> [-MarkdownFolder <String>] [-Locale <String>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
+ [<CommonParameters>]
+```
+
 ### ByPipe
 ```
-Build-PlatyPSMarkdown [-Data <MKPowerShellDocObject>] [-MarkdownFolder <String>] [-Locale <String>]
+Build-PlatyPSMarkdown -DocInfo <MKDocumentationInfo> [-MarkdownFolder <String>] [-Locale <String>]
  [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
  [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Build-PlatyPSMarkdown [-Name <String>] [-MarkdownFolder <String>] [-Locale <String>]
- [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
- [<CommonParameters>]
-```
-
-### ByPath
-```
-Build-PlatyPSMarkdown [[-Path] <String>] [-MarkdownFolder <String>] [-Locale <String>]
- [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
- [<CommonParameters>]
+Build-PlatyPSMarkdown [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersionUrlTemplate <String>]
+ [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -46,21 +45,6 @@ PS C:\> Build-PlatyPSMarkdown -Path C:\Users\Alice\PowerSploit -NoReImportModule
 With specified `Path` value and `NoReImportModule` switched, this will generate (new or update) files for PowerSploit module.  The `NoReImportModule` prevents re-importing PowerSploit so the current state of this imported module is used.  In otherwords, if changes to the source code of PowerSploit has been made it will not be available until it is imported again.  And because of that `NoReImportModule` is typically not switched.
 
 ## PARAMETERS
-
-### -Data
-{{Fill Data Description}}
-
-```yaml
-Type: MKPowerShellDocObject
-Parameter Sets: ByPipe
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
 
 ### -Locale
 The name of the folder where PowerShell XML file will reside.
@@ -100,7 +84,7 @@ Type: String
 Parameter Sets: ByName
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -161,10 +145,25 @@ Type: String
 Parameter Sets: ByPath
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DocInfo
+{{Fill DocInfo Description}}
+
+```yaml
+Type: MKDocumentationInfo
+Parameter Sets: ByPipe
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 

@@ -34,7 +34,7 @@ Describe "Test Build-PlatyPSMarkdown" {
             $script:FileNames.Count | Should -Be 4
         }
 
-        It "Should generate exactly filenames." {
+        It "Should generate exact filenames." {
             $FileNames | Should -BeExactly $script:Files
         }
 
@@ -87,8 +87,6 @@ function Get-AFunction {
 "@
             Set-Content "$($TestSupportModule.MockDirectoryPath)\src\Get-AFunction.ps1" -Value $NewGetAFunctionPS1Content
             
-            New-ExternalHelpFromPlatyPSMarkdown -Path $($TestSupportModule.MockDirectoryPath)
-
             Build-PlatyPSMarkdown -Path $($TestSupportModule.MockDirectoryPath)
 
             $SynopsisContent = (Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md")[10]
@@ -96,6 +94,28 @@ function Get-AFunction {
 
             $GetAFunctionSyntax = (Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md")[15]
             $GetAFunctionSyntax | Should -Be "Get-AFunction [-Path <String>] [-Key <String>] [<CommonParameters>]"
+        }
+    }
+
+    Context "As a non-piped call, with a given Name value to create files." {
+
+        # removing FileNames from previous Context block.  this context block is to test command 
+        # using the 'Name' param (vs 'Path').
+        $script:FileNames = $null
+        
+        It "Should generate correct number of files." {
+
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -NoReImportModule
+
+            $script:FileNames = Get-ChildItem "$($TestSupportModule.MockDirectoryPath)\docs" -Recurse | `
+                ForEach-Object {$_.Name} | `
+                Sort-Object
+            
+            $script:FileNames.Count | Should -Be 4
+        }
+
+        It "Should generate exact filenames." {
+            $script:FileNames | Should -BeExactly $script:Files
         }
     }
 }

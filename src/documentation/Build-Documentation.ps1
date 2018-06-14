@@ -5,7 +5,8 @@ function Build-Documentation {
     Param
     (
         [Parameter(Mandatory = $True,
-            Position = 1,
+            Position = 0,
+            ValueFromPipeline = $False,
             ParameterSetName = "ByPath")]
         [string]$Path,
 
@@ -27,20 +28,12 @@ function Build-Documentation {
     )
 
     DynamicParam {
-        return GetModuleNameSet -Mandatory -Position 0
+        return GetModuleNameSet -Position 0 -Mandatory 
     }
     
     begin {
         $Name = $PSBoundParameters['Name']
-
-        if (-not $Name) {
-            if (-not $Path) {
-                $Path = '.'
-            }
-
-            $Path = Resolve-Path $Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
-        }
-
+        
         # Output Field Separator - default is ' '
         $OFS = ''
         

@@ -16,5 +16,5 @@ function GetSettingsNameSet {
     $Script:MKPowerShellConfig = Get-Content -Path $ConfigFilePath | ConvertFrom-Json -AsHashtable
     $SettingNames = $Script:MKPowerShellConfig | ForEach-Object { $_.Keys }
 
-    New-DynamicParam -Name 'Name' -Mandatory:$Mandatory.IsPresent -Position $Position -ValidateSet $SettingNames
+    New-DynamicParam -Name 'Name' -Position $Position -ValidateSet $SettingNames -Mandatory:$Mandatory.IsPresent
 }
