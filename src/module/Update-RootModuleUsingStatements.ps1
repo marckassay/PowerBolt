@@ -1,9 +1,13 @@
 function Update-RootModuleUsingStatements {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $True, 
+        DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $True)]
-        [string]$Path,
+        [Parameter(Mandatory = $False,
+            Position = 0,
+            ValueFromPipeline = $False, 
+            ParameterSetName = "ByPath")]
+        [string]$Path = '.',
 
         [Parameter(Mandatory = $false)]
         [string]$SourceDirectory,
@@ -17,26 +21,33 @@ function Update-RootModuleUsingStatements {
         [switch]
         $PassThru
     )
+    
+    DynamicParam {
+        return GetModuleNameSet -Position 0 -Mandatory 
+    }
 
     begin {
+        $Name = $PSBoundParameters['Name']
+
         # Prevents single space for each item in an iteration:
         # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-6#ofs
         $OFS = ''
     }
 
     end {
-        $MI = Get-MKModuleInfo -Path $Path
+        if (-not $Name) {
+            $ModInfo = Get-MKModuleInfo -Path $Path
+        }
+        else {
+            $ModInfo = Get-MKModuleInfo -Name $Name
+        }
 
-        $ManifestPath = $MI.Info.Path
-        $ModulePath = $MI.ModuleBase
-        $RootModulePath = Join-Path -Path $ModulePath -ChildPath ($MI.RootModule)
-
-        $TargetDirectory = Join-Path -Path $ModulePath -ChildPath $SourceDirectory -Resolve
+        $TargetDirectory = Join-Path -Path $ModInfo.Path -ChildPath $SourceDirectory -Resolve
 
         # $StopMatchingImportStatements: stop matching when there is a break of consecutive 
         # 'using module' statements.  a break with additional statements means that developer 
         # manually added that line; so keep it.
-        [string[]]$ModuleContentsCleaned = Get-Content $RootModulePath | `
+        [string[]]$ModuleContentsCleaned = Get-Content $ModInfo.RootModuleFilePath | `
             ForEach-Object -Begin {$StopMatchingImportStatements = $false} -Process {
             if ($StopMatchingImportStatements) {
                 $($_ + "`n")
@@ -71,8 +82,8 @@ function Update-RootModuleUsingStatements {
             Group-Object -Property {$_.Split("$SourceDirectory\")[1]} | `
             Select-Object -ExpandProperty Group | `
             ForEach-Object {
-            if ($_ -ne $RootModulePath) {
-                Write-Output "using module .$($_.Split($ModulePath)[1])`n"
+            if ($_ -ne $ModInfo.RootModuleFilePath) {
+                Write-Output "using module .$($_.Split($ModInfo.Path)[1])`n"
             }
         }
     
@@ -87,14 +98,14 @@ $UniqueSourceFiles
 $ModuleContentsCleaned
 "@
         }
-
+    
         @{
-            ManifestPath            = $ManifestPath
+            ManifestPath            = $ModInfo.ManifestFilePath
             TargetFunctionsToExport = $TargetFunctionsToExport
         }
-    
-        Set-Content -Path $RootModulePath -Value $UpdatedModuleContent -PassThru:$PassThru.IsPresent -Encoding UTF8 -NoNewline
-        
+
+        Set-Content -Path $ModInfo.RootModuleFilePath -Value $UpdatedModuleContent -PassThru:$PassThru.IsPresent -Encoding UTF8 -NoNewline
+
         $OFS = ' '
     }
 }

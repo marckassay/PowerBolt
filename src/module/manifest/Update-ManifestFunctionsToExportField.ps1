@@ -11,6 +11,7 @@ function Update-ManifestFunctionsToExportField {
         [switch]
         $PassThru
     )
+    
     begin {
         # Prevents single space for each item in an iteration:
         # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-6#ofs
@@ -25,7 +26,7 @@ function Update-ManifestFunctionsToExportField {
         Update-ModuleManifest -Path $ManifestFile -FunctionsToExport $FunctionNames
 
         # HACK: Perhaps its not possible to have Update-ModuleManifest -FunctionsToExport to be 
-        # assigned an array.  So here manually edit it to have just that.
+        # formatted in an array listed vertically.  So here manually edit it to have just that.
         $FunctionNames = $FunctionNames | ForEach-Object -Process {"'$_',`r`n"} | Sort-Object
         $Tail = $FunctionNames.Count - 1
         $FunctionNames[$Tail] = $FunctionNames[$Tail].Replace(",`r`n", "")

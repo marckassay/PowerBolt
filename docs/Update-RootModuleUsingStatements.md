@@ -12,9 +12,16 @@ Prepends module found in `Path` with `using module ...` statements. Those statem
 
 ## SYNTAX
 
+### ByPath (Default)
 ```
-Update-RootModuleUsingStatements [-Path] <String> [[-SourceDirectory] <String>] [[-Include] <String[]>]
+Update-RootModuleUsingStatements [[-Path] <String>] [[-SourceDirectory] <String>] [[-Include] <String[]>]
  [[-Exclude] <String[]>] [-PassThru] [<CommonParameters>]
+```
+
+### ByName
+```
+Update-RootModuleUsingStatements [[-SourceDirectory] <String>] [[-Include] <String[]>] [[-Exclude] <String[]>]
+ [-PassThru] -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,10 +88,10 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByPath
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
@@ -101,6 +108,21 @@ Aliases:
 
 Required: False
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByName
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

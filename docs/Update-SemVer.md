@@ -12,9 +12,16 @@ schema: 2.0.0
 
 ## SYNTAX
 
+### ByPath (Default)
 ```
-Update-SemVer [-Path] <String> [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>]
+Update-SemVer [[-Path] <String>] [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>]
  [-BumpMajor] [-BumpMinor] [-BumpPatch] [<CommonParameters>]
+```
+
+### ByName
+```
+Update-SemVer [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>] [-BumpMajor]
+ [-BumpMinor] [-BumpPatch] -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -126,10 +133,10 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByPath
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
@@ -145,6 +152,21 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByName
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

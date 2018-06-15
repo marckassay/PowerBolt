@@ -18,6 +18,6 @@ Describe "Test Invoke-TestSuiteRunner" {
             Invoke-TestSuiteRunner -Name 'MK.PowerShell.4PS'
             
             Assert-MockCalled Invoke-Pester -ModuleName 'MK.PowerShell.4PS' -ParameterFilter {$Script -like "*\MK.PowerShell.4PS\test"}
-        }
+        } -Skip
     }
 }

@@ -1,38 +1,40 @@
 # NoExport: Invoke-TestSuiteRunner
 function Invoke-TestSuiteRunner {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $True, 
+        DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $True,
-            Position = 1,
+        [Parameter(Mandatory = $False,
+            Position = 0,
+            ValueFromPipeline = $False, 
             ParameterSetName = "ByPath")]
-        $Path = (Get-Location | Select-Object -ExpandProperty Path)
+        [string]$Path = '.'
     )
 
     DynamicParam {
-        return GetModuleNameSet -Position 0 -ParameterSetName 'ByName' -Mandatory
+        return GetModuleNameSet -Position 0 -Mandatory 
     }
-
+    
     begin {
         $Name = $PSBoundParameters['Name']
 
         if ($Name) {
-            $MI = Get-MKModuleInfo -Name $Name
+            $ModInfo = Get-MKModuleInfo -Name $Name
         }
         else {
-            $MI = Get-MKModuleInfo -Path $Path
+            $ModInfo = Get-MKModuleInfo -Path $Path
         }
 
-        Set-Location ($MI.ModuleBase)
+        Set-Location ($ModInfo.Path)
         
-        # Test-ModuleManifest $MI.ManifestPath | Remove-Module
+        # Test-ModuleManifest $ModInfo.ManifestPath | Remove-Module
     }
 
     process {
-       Invoke-Command {Invoke-Pester -Script "$($MI.ModuleBase)\test"}
+        Invoke-Command {Invoke-Pester -Script "$($ModInfo.Path)\test"}
     }
 
     end {
-        # Import-Module -Name ($MI.ModuleBase)
+        # Import-Module -Name ($ModInfo.ModuleBase)
     }
 }

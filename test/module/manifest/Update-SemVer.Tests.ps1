@@ -13,7 +13,7 @@ Describe "Test Update-SemVer" {
         #$CurrentVersion = $(Import-PowerShellDataFile -Path ($TestSupportModule.MockManifestPath))['ModuleVersion']
         #$Results = Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -BumpMajor
 
-        It "Should currently have the expected version number" {
+        It "Should start off with the expected version number" {
             $CurrentVersion = $(Import-PowerShellDataFile -Path ($TestSupportModule.MockManifestPath))['ModuleVersion']
             $CurrentVersion | Should -Be '0.0.1'
         }

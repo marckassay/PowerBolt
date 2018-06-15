@@ -2,17 +2,16 @@ using module ..\.\TestRunnerSupportModule.psm1
 
 Describe "Test Update-ModuleExports" {
     BeforeAll {
-        $TestSupportModule = [TestRunnerSupportModule]::new()
+        $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleB')
     }
     
     AfterAll {
         $TestSupportModule.Teardown()
     }
 
-    Context "Post executing New-Script" {
-        It "Should have command accessable" {
-            $Results = Get-Command Update-ModuleExports | Select-Object -ExpandProperty CommandType
-            $Results | Should -Be 'Function'
-        }
+    Context "Call with given Path value" {
+        It "Should have same results as if its 2 internal functions are piped" {
+
+        } -Skip
     }
 }

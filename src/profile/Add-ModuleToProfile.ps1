@@ -14,7 +14,7 @@ function Add-ModuleToProfile {
         $ProfilePath = $(Get-Variable Profile -ValueOnly)
     )
 
-    $ModuleDirectory = (Get-MKModuleInfo -Path $Path).ModuleBase
+    $ModuleDirectory = (Get-MKModuleInfo -Path $Path).Path
 
     Add-Content -Path $ProfilePath -Value "Import-Module $ModuleDirectory"
 }
