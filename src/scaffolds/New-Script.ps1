@@ -1,47 +1,37 @@
+using module .\..\dynamicparams\GetPlasterTemplateVarSet.ps1
 function New-Script {
-    Param (
+    [CmdletBinding(PositionalBinding = $True, 
+        DefaultParameterSetName = "ByTemplate")]
+    Param
+    (
         [Parameter(Mandatory = $true,
-            Position = 0)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $Name,
-
-        [Parameter(Mandatory = $true,
-            Position = 1)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $SrcChildPath,
-
-        [Parameter(Mandatory = $false,
-            Position = 2)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $Path = (Resolve-Path -Path $(Get-Location))
+            Position = 0,
+            ValueFromPipeline = $False, 
+            ParameterSetName = "ByTemplate")]
+        [string]$PlasterTemplatePath = 'resources\templates\NewScript\plasterManifest_en-US.xml'
     )
-    $TemplatePath = Join-Path -Path $(GetTemplatePath) -ChildPath 'resources\templates\NewScript'
-
-    $Path = Resolve-Path -Path $Path
-
-    $NewScriptFolderPath = Join-Path -Path $Path -ChildPath $SrcChildPath
-    if ((Test-Path $NewScriptFolderPath) -eq $false) {
-        New-Item $NewScriptFolderPath -ItemType Directory | Out-Null
-    }
-
-    $CongruentPath = $SrcChildPath.Split('src')[1].TrimStart('\/')
-
-    $NewScriptTestFolderPath = Join-Path -Path $Path -ChildPath 'test' -AdditionalChildPath $CongruentPath
-    if ((Test-Path $NewScriptTestFolderPath) -eq $false) {
-        New-Item $NewScriptTestFolderPath -ItemType Directory | Out-Null
-    }
-
-    Set-Variable -Name 'PLASTER_PARAM_ScriptName' -Value $Name -Scope Global
-    Set-Variable -Name 'PLASTER_PARAM_ScriptCongruentPath' -Value $CongruentPath -Scope Global
     
-    Invoke-Plaster -TemplatePath $TemplatePath -DestinationPath $Path
-}
+    DynamicParam {
+        $TemplateVarDictionary = GetPlasterTemplateVarSet -Path $PlasterTemplatePath
+        return $TemplateVarDictionary
+    }
 
-# this function is needed so that $MyInvocation variable has a value
-function GetTemplatePath {
-    $ModuleHome = $MyInvocation.ScriptName | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
-    return $ModuleHome
+    end {
+        $TemplateVarDictionary.GetEnumerator() | ForEach-Object {
+            $Name = "PLASTER_PARAM_" + ($_.Key)
+            $Value = $(($_.Value).Value)
+            Set-Variable -Name $Name -Value $Value -Scope Global
+            if ($Name.EndsWith('Path') -eq $true) {
+                New-Item $_ -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
+            }
+        }
+        
+        $PlasterTemplateFolderPath = Split-Path -Path $PlasterTemplatePath -Parent
+        Invoke-Plaster -TemplatePath $PlasterTemplateFolderPath -DestinationPath '.'
+
+        $TemplateVarDictionary.GetEnumerator() | ForEach-Object {
+            $Name = "PLASTER_PARAM_" + ($_.Key)
+            Remove-Variable -Name $Name -Scope Global
+        }
+    }
 }
