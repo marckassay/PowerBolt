@@ -25,7 +25,7 @@ function Invoke-TestSuiteRunner {
             $ModInfo = Get-MKModuleInfo -Path $Path
         }
 
-        Set-Location ($ModInfo.Path)
+        Push-Location -StackName 'PriorTestLocation'
         
         # Test-ModuleManifest $ModInfo.ManifestPath | Remove-Module
     }
@@ -35,6 +35,8 @@ function Invoke-TestSuiteRunner {
     }
 
     end {
+        Pop-Location -StackName 'PriorTestLocation'
+
         # Import-Module -Name ($ModInfo.ModuleBase)
     }
 }

@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-Script
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Plaster) template.
 
 ## SYNTAX
 
@@ -17,21 +17,23 @@ New-Script -PlasterTemplatePath <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+When `PlasterTemplatePath` is set to a Plaster template, this script will inspect the template for variables that will become additional parameters.  Those variables must be in the form of the Plaster style variables.  For an example: 'PLASTER_PARAM_CongruentPath', where 'CongruentPath' is the variable that will appear as an additional parameter.
+
+If calling this method by script and not thru the CLI, positional binding is enabled so that can be done.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> New-Script -PlasterTemplatePath 'C:\Users\Alice\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'
 ```
 
-{{ Add example description here }}
+One can deduce that the variable 'PLASTER_PARAM_AppName' is in the template file, which is used in this example to assign a name value to the app being scaffold.
 
 ## PARAMETERS
 
 ### -PlasterTemplatePath
-{{Fill PlasterTemplatePath Description}}
+A path value to a Plaster template (manifest) file.
 
 ```yaml
 Type: String
@@ -59,3 +61,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Plaster - Creating A Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md)

@@ -97,7 +97,7 @@
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-ModuleToProfile -Path C:\Users\Alice\PowerSploit
 PS C:\&gt; Get-Content $PROFILE
-Import-Module C:\Users\Marc\Documents\PowerShell\Modules\posh-git\0.7.1\posh-git.psd1
+Import-Module C:\Users\Alice\Documents\PowerShell\Modules\posh-git\0.7.1\posh-git.psd1
 Import-Module C:\Users\Alice\PowerSploit
 
 PS C:\&gt;</dev:code>
@@ -1391,11 +1391,11 @@ False</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>MKModuleInfo</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Outputs information about a module with given name or path.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Valid `Path` parameter values are to a manifest (.psd1) file, module (.psm1) file and root module directory.  And valid `Name` parameter values are constricted to modules installed locally.  With those possible values information about the module with be returned.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1403,7 +1403,7 @@ False</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Name Description}}</maml:para>
+            <maml:para>A dynamic parameter with its valid set being confined to locally installed modules.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Add-ModuleToProfile</command:parameterValue>
@@ -1463,7 +1463,7 @@ False</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Path</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Path Description}}</maml:para>
+            <maml:para>Valid values are to a manifest (.psd1) file, module (.psm1) file and root module directory.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1478,7 +1478,7 @@ False</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Name Description}}</maml:para>
+          <maml:para>A dynamic parameter with its valid set being confined to locally installed modules.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1490,7 +1490,7 @@ False</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Path</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Path Description}}</maml:para>
+          <maml:para>Valid values are to a manifest (.psd1) file, module (.psm1) file and root module directory.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1528,9 +1528,16 @@ False</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-MKModuleInfo -Name Plaster
+
+Name               : Plaster
+Path               : E:\Plaster\Release\Plaster
+PathFolderName     : Plaster
+ManifestFilePath   : E:\Plaster\Release\Plaster\Plaster.psd1
+RootModuleFilePath : E:\Plaster\Release\Plaster\Plaster.psm1
+Version            : 1.1.4</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>With Plaster being installed locally, it is valid value in the parameter set.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2183,11 +2190,12 @@ False</dev:code>
       <command:verb>New</command:verb>
       <command:noun>Script</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Scaffolds files based on the required Plaster (https://github.com/PowerShell/Plaster)template.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>When `PlasterTemplatePath` is set to a Plaster template, this script will inspect the template for variables that will become additional parameters.  Those variables must be in the form of the Plaster style variables.  For an example: 'PLASTER_PARAM_CongruentPath', where 'CongruentPath' is the variable that will appear as an additional parameter.</maml:para>
+      <maml:para>If calling this method by script and not thru the CLI, positional binding is enabled so that can be done.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2195,7 +2203,7 @@ False</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PlasterTemplatePath</maml:name>
           <maml:Description>
-            <maml:para>{{Fill PlasterTemplatePath Description}}</maml:para>
+            <maml:para>A path value to a Plaster template (manifest) file.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2210,7 +2218,7 @@ False</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PlasterTemplatePath</maml:name>
         <maml:Description>
-          <maml:para>{{Fill PlasterTemplatePath Description}}</maml:para>
+          <maml:para>A path value to a Plaster template (manifest) file.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2248,9 +2256,9 @@ False</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; New-Script -PlasterTemplatePath 'C:\Users\Alice\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>One can deduce that the variable 'PLASTER_PARAM_AppName' is in the template file, which is used in this example to assign a name value to the app being scaffold.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2258,6 +2266,10 @@ False</dev:code>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-Script.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Plaster - Creating A Manifest</maml:linkText>
+        <maml:uri>https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3489,11 +3501,11 @@ MatchedLine                        # TODO: need to have this functions arity bet
       <command:verb>Update</command:verb>
       <command:noun>ModuleExports</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Updates root-module and manifest file with commands to be exported.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>When called, it will search for .ps1 files in the `SourceDirectory` and update the root module with `using module` statements with the files it has found.  If anywhere in the file a `# NoExport: &lt;Command&gt;` comment is found, it will omit that command from being listed in the manifest file.  Also all commands that are intended to be exported must follow the PowerShell convention of `&lt;verb&gt;-&lt;noun&gt;`.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4245,11 +4257,11 @@ MatchedLine                        # TODO: need to have this functions arity bet
       <command:verb>Update</command:verb>
       <command:noun>SemVer</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Updates the module's semantic version value in the manifest file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>With given values by Path or Name, it will change the ModuleVersion key in the module's manifest file.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>

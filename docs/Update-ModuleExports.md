@@ -8,7 +8,7 @@ schema: 2.0.0
 # Update-ModuleExports
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Updates root-module and manifest file with commands to be exported.
 
 ## SYNTAX
 
@@ -25,7 +25,7 @@ Update-ModuleExports [[-SourceDirectory] <String>] [[-Include] <String[]>] [[-Ex
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+When called, it will search for .ps1 files in the `SourceDirectory` and update the root module with `using module` statements with the files it has found.  If anywhere in the file a `# NoExport: <Command>` comment is found, it will omit that command from being listed in the manifest file.  Also all commands that are intended to be exported must follow the PowerShell convention of `<verb>-<noun>`.
 
 ## EXAMPLES
 

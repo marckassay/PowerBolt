@@ -8,7 +8,7 @@ schema: 2.0.0
 # Update-SemVer
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Updates the module's semantic version value in the manifest file.
 
 ## SYNTAX
 
@@ -25,7 +25,7 @@ Update-SemVer [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] 
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+With given values by Path or Name, it will change the ModuleVersion key in the module's manifest file.
 
 ## EXAMPLES
 

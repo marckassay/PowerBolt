@@ -25,7 +25,7 @@ Appends content of `$PROFILE` file (or content of  `ProfilePath` parameter if is
 ```powershell
 PS C:\> Add-ModuleToProfile -Path C:\Users\Alice\PowerSploit
 PS C:\> Get-Content $PROFILE
-Import-Module C:\Users\Marc\Documents\PowerShell\Modules\posh-git\0.7.1\posh-git.psd1
+Import-Module C:\Users\Alice\Documents\PowerShell\Modules\posh-git\0.7.1\posh-git.psd1
 Import-Module C:\Users\Alice\PowerSploit
 
 PS C:\>

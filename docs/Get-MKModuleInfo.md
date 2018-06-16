@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-MKModuleInfo
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Outputs information about a module with given name or path.
 
 ## SYNTAX
 
@@ -23,21 +23,28 @@ Get-MKModuleInfo [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Valid `Path` parameter values are to a manifest (.psd1) file, module (.psm1) file and root module directory.  And valid `Name` parameter values are constricted to modules installed locally.  With those possible values information about the module with be returned.
 
 ## EXAMPLES
 
 ### Example 1
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Get-MKModuleInfo -Name Plaster
+
+Name               : Plaster
+Path               : E:\Plaster\Release\Plaster
+PathFolderName     : Plaster
+ManifestFilePath   : E:\Plaster\Release\Plaster\Plaster.psd1
+RootModuleFilePath : E:\Plaster\Release\Plaster\Plaster.psm1
+Version            : 1.1.4
 ```
 
-{{ Add example description here }}
+With Plaster being installed locally, it is valid value in the parameter set.
 
 ## PARAMETERS
 
 ### -Name
-{{Fill Name Description}}
+A dynamic parameter with its valid set being confined to locally installed modules.
 
 ```yaml
 Type: String
@@ -53,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{Fill Path Description}}
+Valid values are to a manifest (.psd1) file, module (.psm1) file and root module directory.
 
 ```yaml
 Type: String

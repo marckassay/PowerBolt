@@ -78,7 +78,7 @@ Returns a valid path from a parent of one of its children which overlaps that pa
 
 #### [`Get-MKModuleInfo`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKModuleInfo.md)
 
-{{Fill in the Synopsis}} 
+Outputs information about a module with given name or path. 
 
 #### [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md)
 
@@ -98,7 +98,7 @@ Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerS
 
 #### [`New-Script`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-Script.md)
 
-{{Fill in the Synopsis}} 
+Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Plaster) template. 
 
 #### [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md)
 
@@ -138,7 +138,7 @@ Ideally having `Update-RootModuleUsingStatements` piped into this function, it w
 
 #### [`Update-ModuleExports`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ModuleExports.md)
 
-{{Fill in the Synopsis}} 
+Updates root-module and manifest file with commands to be exported. 
 
 #### [`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ReadmeFromPlatyPSMarkdown.md)
 
@@ -150,4 +150,4 @@ Prepends module found in `Path` with `using module ...` statements. Those statem
 
 #### [`Update-SemVer`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-SemVer.md)
 
-{{Fill in the Synopsis}}
+Updates the module's semantic version value in the manifest file.
