@@ -68,18 +68,6 @@ With `InputObject` tested for equality via `-eq`, will `Write-Output` `Value` on
 
 Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so that a continuous history can be output to CLI. 
 
-#### [`Get-AFunction`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-AFunction.md)
-
-{{Fill in the Synopsis}} 
-
-#### [`Get-BFunction`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-BFunction.md)
-
-{{Fill in the Synopsis}} 
-
-#### [`Get-CFunction`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-CFunction.md)
-
-{{Fill in the Synopsis}} 
-
 #### [`Get-LatestError`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-LatestError.md)
 
 Throwaway function that may be reincarnated in a from of Format. 
@@ -131,10 +119,6 @@ Launches a new PowerShell window with Admin privileges by immediately terminatin
 #### [`Search-Items`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Search-Items.md)
 
 Recurses thru folders to find files that its content matches `Pattern`.  Outputs object(s) to console. 
-
-#### [`Set-CFunction`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-CFunction.md)
-
-{{Fill in the Synopsis}} 
 
 #### [`Set-LocationAndStore`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-LocationAndStore.md)
 

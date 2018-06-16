@@ -13,7 +13,7 @@ Appends content of the PowerShell session's profile with an `Import-Module` stat
 ## SYNTAX
 
 ```
-Add-ModuleToProfile [-Path] <String> [[-ProfilePath] <String>] [<CommonParameters>]
+Add-ModuleToProfile [[-Path] <String>] [[-ProfilePath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,7 +43,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False

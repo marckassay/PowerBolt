@@ -12,9 +12,16 @@ Streamlines publishing a module using `Publish-Module`.
 
 ## SYNTAX
 
+### ByPath (Default)
 ```
 Publish-ModuleToNuGetGallery [[-Path] <String>] [[-NuGetApiKey] <String>] [[-Exclude] <String[]>]
  [-DoNotConfirm] [-WhatIf] [<CommonParameters>]
+```
+
+### ByName
+```
+Publish-ModuleToNuGetGallery [[-NuGetApiKey] <String>] [[-Exclude] <String[]>] [-DoNotConfirm] [-WhatIf]
+ -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,7 +75,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByPath
 Aliases:
 
 Required: False
@@ -103,6 +110,21 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByName
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
