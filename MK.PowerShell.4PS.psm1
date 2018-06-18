@@ -26,16 +26,6 @@ using module .\src\utility\ConvertTo-EnumFlag.ps1
 using module .\src\utility\Get-MergedPath.ps1
 using module .\src\utility\Search-Items.ps1
 
-using module .\test\management\backupsources\Deploy-TestFakes.psm1
-using module .\test\mocks\MockModuleA\src\C\Get-CFunction.ps1
-using module .\test\mocks\MockModuleA\src\C\Set-CFunction.ps1
-using module .\test\mocks\MockModuleA\src\Get-AFunction.ps1
-using module .\test\mocks\MockModuleA\src\Get-BFunction.ps1
-using module .\test\mocks\MockModuleB\src\C\Get-CFunction.ps1
-using module .\test\mocks\MockModuleB\src\C\Set-CFunction.ps1
-using module .\test\mocks\MockModuleB\src\Get-AFunction.ps1
-using module .\test\mocks\MockModuleB\src\Get-BFunction.ps1
-
 using module .\src\management\Start-MKPowerShell.ps1
 
 Param(

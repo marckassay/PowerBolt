@@ -1,8 +1,10 @@
 # MK.PowerShell.4PS
 
-Created to streamline coding by primarily completeing one objective; from having a [PowerShell](https://github.com/PowerShell/PowerShell) idea that is published to the world in minutes.
+Created to streamline coding by primarily completeing an objective of: from having a [PowerShell](https://github.com/PowerShell/PowerShell) idea that is published to the world in minutes.
 
-You have a PowerShell idea, you may have gone thru the process of having this idea to be available to the public.  And in doing so, you might of created tests, documentation and published it to a repository such as [PowerShell Gallery](https://www.powershellgallery.com/).  Doing so can be cumbersome especially when completing other objectives.  4PS attempts to curb this process for you.
+You have a PowerShell idea, you may have gone thru the process of having this idea to be available to the public.  And in doing so, you might of created tests, documentation and published it to a repository such as [PowerShell Gallery](https://www.powershellgallery.com/).  Doing so can be cumbersome especially when completing other objectives. 4PS attempts to curb this process for you.  
+
+Another objective of 4PS is to encourage publishing small (monad) scripts instead of a monolithic module in hopes to have it adapted in other modules. Hence the rationale of 4PS is to have several script files (.ps1) and one root module (.psm1).
 
 ## 4PS 101
 
@@ -44,11 +46,11 @@ This file will have an API section added or updated, with each exported command'
 
 I assume developers organize their projects, repos and or modules in some location on their machine and resist conforming to have these assets elsewhere.  If so, [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) may help by deploying your module directory in a PowerShell module directory and publish from there.  Afterwards it will remove that directory.
 
-To explain further on the reason for this command is that I have individual PowerShell modules listed in my PowerShell profile.  These modules are listed that point to my development directory where they reside on my file system.  So when I had to publish a module I would have to copy and the folder to a PowerShell module directory.  Somewhat of a lame process, so I created this command to remove that cumbersome.
+To explain further on the reason for this command is that I currently have individual PowerShell modules listed in my PowerShell profile.  These modules that are listed point to my development directory where they reside on my file system.  So when I had to publish a module I would have to copy and the folder to a PowerShell module directory.  A cumbersome process indeed, so this command to speed up that process.
 
 ## 4PS 102
 
-What conformity does 4PS expect in a module?
+What conformity does 4PS expect in a module? 
 
 ## Formats
 
