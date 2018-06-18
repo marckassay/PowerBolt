@@ -104,3 +104,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+- [New-MKPowerShellConfigFile.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/settings/New-MKPowerShellConfigFile.ps1)
+- [New-MKPowerShellConfigFile.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/settings/New-MKPowerShellConfigFile.Tests.ps1)

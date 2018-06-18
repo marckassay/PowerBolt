@@ -68,7 +68,7 @@ function Build-PlatyPSMarkdown {
             
             New-MarkdownHelp -Module $DocInfo.ModuleName -OutputFolder $DocInfo.ModuleMarkdownFolder | Out-Null
 
-            $DocInfo.UpdateOnlineVersionUrl()
+            $DocInfo.UpdateOnlineVersionUrl($True)
         }
         else {
             if ($DocInfo.NoReImportModule -eq $False) {
@@ -92,7 +92,10 @@ function Build-PlatyPSMarkdown {
 
             Update-MarkdownHelpModule -Path $DocInfo.ModuleMarkdownFolder | Out-Null
 
-            $DocInfo.UpdateOnlineVersionUrl()
+            # TODO: adding a parameter to Build-PlatyPSMarkdown for this line below wouldnt require 
+            # much work. should remove source-and-test links when and if setting to False when they
+            # exist.
+            $DocInfo.UpdateOnlineVersionUrl($True)
         }
 
         Write-Output $DocInfo

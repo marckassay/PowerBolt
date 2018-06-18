@@ -45,4 +45,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[`Restart-PWSHAdmin`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Restart-PWSHAdmin.md)
+- [Restart-PWSH.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/management/Restart-PWSH.ps1)
+- [Restart-PWSH.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/management/Restart-PWSH.Tests.ps1)
+- [`Restart-PWSHAdmin`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Restart-PWSHAdmin.md)

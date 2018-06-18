@@ -130,3 +130,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+- [Search-Items.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/utility/Search-Items.ps1)
+- [Search-Items.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/utility/Search-Items.Tests.ps1)

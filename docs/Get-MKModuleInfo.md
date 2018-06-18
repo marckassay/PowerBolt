@@ -88,3 +88,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+- [Get-MKModuleInfo.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/module/Get-MKModuleInfo.ps1)
+- [Get-MKModuleInfo.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/module/Get-MKModuleInfo.Tests.ps1)

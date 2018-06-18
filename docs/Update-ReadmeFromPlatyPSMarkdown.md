@@ -134,8 +134,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-Documentation.md)
-
-[`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-PlatyPSMarkdown.md)
-
-[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
+- [Update-ReadmeFromPlatyPSMarkdown.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/documentation/Update-ReadmeFromPlatyPSMarkdown.ps1)
+- [Update-ReadmeFromPlatyPSMarkdown.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/documentation/Update-ReadmeFromPlatyPSMarkdown.Tests.ps1)
+- [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-Documentation.md)
+- [`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-PlatyPSMarkdown.md)
+- [`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md)

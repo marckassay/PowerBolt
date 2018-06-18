@@ -147,7 +147,7 @@ $BodyContent
         return $SnippetCollectionString
     }
 
-    [void] UpdateOnlineVersionUrl () {
+    [void] UpdateOnlineVersionUrl ([bool]$AddSourceAndTestFileLinks) {
         # Since New-MarkdownHelp OnlineVersionUrl parameter is only available in a specific parameter
         # set that is not used here; below is to assign 'onlineverion' field.
         Get-ChildItem -Path $this.ModuleMarkdownFolder -Include '*.md' -Recurse | `
@@ -167,7 +167,36 @@ $BodyContent
                 $MDFolder = $this.MarkdownFolder
                 $FileContent = [regex]::Replace($FileContent, "(?<=$UrlSegmentPriorToGitBranchName[\\|\/]).*?(?=[\\|\/]$MDFolder)", $SemVerMatched.Value)
             }
-        
+            
+            if ($AddSourceAndTestFileLinks -eq $True) {
+                $ModuleName = $this.ModuleName
+                $GitBranchName = [regex]::Match($FileUrl, '(?<=blob[\\|\/])[^\/|\\]*').Value
+                $RelatedLinksContent = [regex]::Match($FileContent, '(?<=## RELATED LINKS)[\w\W]*$').Value
+                $RelatedLinksContent = $RelatedLinksContent.TrimStart()
+
+                $FileName = $_.BaseName
+                $SourceFilePath = Get-ChildItem ($this.Path) -Recurse | Where-Object {$_ -like "$FileName.ps1"} | Select-Object -ExpandProperty FullName
+                $SourceFilePath = [regex]::Match($SourceFilePath, "(?<=$ModuleName[\\|\/]).*") | Select-Object -ExpandProperty Value
+                $SourceUrl = $FileUrl.Split($GitBranchName)[0] + ("$GitBranchName/$SourceFilePath").Replace('\', '/')
+                $SourceLink = "- [$FileName.ps1](" + $SourceUrl + ")"
+                $SourceAndTestFileLinks = ($SourceLink + "`n")
+
+                $TestFilePath = Get-ChildItem ($this.Path) -Recurse | Where-Object {$_ -like "$FileName.Tests.ps1"} | Select-Object -ExpandProperty FullName
+                if ($TestFilePath) {
+                    $TestFilePath = [regex]::Match($TestFilePath, "(?<=$ModuleName[\\|\/]).*") | Select-Object -ExpandProperty Value
+                    $TestUrl = $FileUrl.Split($GitBranchName)[0] + ("$GitBranchName/$TestFilePath").Replace('\', '/')
+                    $TestLink = "- [$FileName.Tests.ps1](" + $TestUrl + ")"
+                    $SourceAndTestFileLinks += $TestLink
+                }
+
+                $NuRelatedLinksContent = @"
+`n
+$SourceAndTestFileLinks
+$RelatedLinksContent
+"@
+                $FileContent = [regex]::Replace($FileContent, '(?<=## RELATED LINKS)[\w\W]*$', $NuRelatedLinksContent)
+            }
+
             Set-Content -Path $_.FullName -Value $FileContent -NoNewline
         }
     }

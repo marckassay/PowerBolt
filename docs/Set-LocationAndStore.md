@@ -89,3 +89,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+- [Set-LocationAndStore.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/management/Set-LocationAndStore.ps1)
+- [Set-LocationAndStore.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/management/Set-LocationAndStore.Tests.ps1)

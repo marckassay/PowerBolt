@@ -143,4 +143,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ManifestFunctionsToExportField.md)
+- [Update-RootModuleUsingStatements.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/module/Update-RootModuleUsingStatements.ps1)
+- [Update-RootModuleUsingStatements.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/module/Update-RootModuleUsingStatements.Tests.ps1)
+- [`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-ManifestFunctionsToExportField.md)

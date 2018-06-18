@@ -145,3 +145,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+- [Publish-ModuleToNuGetGallery.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/publish/Publish-ModuleToNuGetGallery.ps1)
+- [Publish-ModuleToNuGetGallery.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1)

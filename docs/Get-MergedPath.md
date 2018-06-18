@@ -117,4 +117,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c](https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c)
+- [Get-MergedPath.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/utility/Get-MergedPath.ps1)
+- [https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c](https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c)
