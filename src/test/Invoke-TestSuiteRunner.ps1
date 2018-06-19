@@ -1,4 +1,3 @@
-# NoExport: Invoke-TestSuiteRunner
 function Invoke-TestSuiteRunner {
     [CmdletBinding(PositionalBinding = $True, 
         DefaultParameterSetName = "ByPath")]
@@ -31,7 +30,11 @@ function Invoke-TestSuiteRunner {
     }
 
     process {
-        Invoke-Command {Invoke-Pester -Script "$($ModInfo.Path)\test"}
+        $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath 'test' -Resolve
+        
+        Start-Job -Name "JobPester" -ScriptBlock {
+            param($P) Invoke-Pester -Script $P -PassThru
+        } -ArgumentList $ScriptPath | Wait-Job
     }
 
     end {

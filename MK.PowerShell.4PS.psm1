@@ -22,6 +22,7 @@ using module .\src\scaffolds\New-Script.ps1
 using module .\src\settings\Get-MKPowerShellSetting.ps1
 using module .\src\settings\New-MKPowerShellConfigFile.ps1
 using module .\src\settings\Set-MKPowerShellSetting.ps1
+using module .\src\test\Invoke-TestSuiteRunner.ps1
 using module .\src\utility\ConvertTo-EnumFlag.ps1
 using module .\src\utility\Get-MergedPath.ps1
 using module .\src\utility\Search-Items.ps1

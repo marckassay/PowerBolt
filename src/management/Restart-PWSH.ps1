@@ -1,3 +1,4 @@
+# TODO: look into PSReadline to add keychord command - https://docs.microsoft.com/en-us/powershell/module/psreadline/Set-PSReadlineKeyHandler?view=powershell-6
 function Restart-PWSH {
     [CmdletBinding(PositionalBinding = $False)]
     Param() 

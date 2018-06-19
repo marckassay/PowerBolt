@@ -32,7 +32,7 @@ function Update-ManifestFunctionsToExportField {
         $FunctionNames[$Tail] = $FunctionNames[$Tail].Replace(",`r`n", "")
 
         [regex]$InsertPointRegEx = "(?(?<=(FunctionsToExport))([\w\W]*?)|($))(?(?=\#)(?=\#)|(CmdletsToExport))"
-        $ManifestContents = Get-Content -Path $ManifestUpdate.ManifestPath -Raw -ReadCount 0
+        $ManifestContents = Get-Content -Path $ManifestUpdate.ManifestPath -Raw 
         $ManifestContents = $InsertPointRegEx.Replace($ManifestContents, @"
  = @(
 $FunctionNames
@@ -40,7 +40,7 @@ $FunctionNames
 `r`n
 "@, 1)
 
-        $ManifestContents | Set-Content -Path $ManifestUpdate.ManifestPath -NoNewline
+        Set-Content -Path $ManifestUpdate.ManifestPath -Value $ManifestContents -NoNewline
 
         if ($PassThru) {
             $ManifestFile

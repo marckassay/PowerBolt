@@ -6,7 +6,7 @@ class ScriptPath {
 
 class TestRunnerSupportModule {
     # TODO: have these elements pushed into this array instead of hard-coded; make it accessible for when Deploy-TestFakes is created.
-    [string[]]$MODULE_NAMES = @('MK.PowerShell.4PS', 'MKDocumentationInfo', 'MockModuleA', 'MockModuleB', 'TestRunnerSupportModule', 'Deploy-TestFakes')
+    [string[]]$MODULE_NAMES = @('MK.PowerShell.4PS', 'MKDocumentationInfo', 'MockModuleA', 'MockModuleB', 'Deploy-TestFakes', 'TestRunnerSupportModule')
     [string]$AutoStart = $true
     [string]$TestDrivePath
     [string]$FixtureDirectoryPath
