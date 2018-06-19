@@ -1,10 +1,10 @@
 # MK.PowerShell.4PS
 
-Created to streamline coding by primarily completing an objective of: from having a [PowerShell](https://github.com/PowerShell/PowerShell) idea that is published to the world in minutes without compromising quality of module
+Created to streamline coding by primarily completing an objective of, having a [PowerShell](https://github.com/PowerShell/PowerShell) idea that is published to the world in minutes without compromising quality of module
 
-You have a PowerShell idea, you may have gone thru the process of preparing this module idea to be available to the public.  And in doing so you might of created tests, documentation and published it to a repository such as [PowerShell Gallery](https://www.powershellgallery.com/).  Doing so can be cumbersome especially when completing other objectives. 4PS attempts to curb this process for you. 
+You have a PowerShell idea, you may have gone thru the process of preparing this idea into a module and to be available to the public.  And in doing so you might of created tests, documentation and published it to a repository such as [PowerShell Gallery](https://www.powershellgallery.com/).  Doing so can be cumbersome especially when completing other objectives. 4PS attempts to remove this hinderance for you. 
 
-Another objective of 4PS is to encourage publishing small (monad) scripts instead of a monolithic module in hopes to have it adapted in other modules. Hence the rationale of 4PS is to have several script files (.ps1) and one root module (.psm1).  Where as individual script files may be published along with being exported in the root module which can be published too.
+Another objective of 4PS is to encourage publishing small, monad (how apropos!) scripts instead of a monolithic module in hopes to have it adapted in other modules. Hence the rationale of 4PS is to have several script files (.ps1) and one root module (.psm1).  Where as individual script files can be published and can be exported when publishing the root module.
 
 ## 4PS 101
 
@@ -22,10 +22,12 @@ First step is to scaffold files from a custom [Plaster](https://github.com/Power
 For an example, the following:
 
 ```powershell
-PS C:\Users\Alice\Apps> New-Script -PlasterTemplatePath 'C:\Users\Alice\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'
+PS C:\Users\Alice\Apps> New-Script -PlasterTemplatePath '..\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'
 ```
 
-Although the Plaster manifest file is not shown, you be assured that a variable of 'PLASTER_PARAM_AppName' resides in its contents.  And with Plaster you can scaffold files with variables (or tokens) inside them that can be replaced with values such as the one given to AppName, for this instance.
+Although the Plaster manifest file is not shown, you can be assured that a variable of `PLASTER_PARAM_AppName` resides in its contents. And with Plaster you can scaffold files with variables (tokens) inside them that can be replaced with values such as the one given to AppName, for this instance.
+
+If your GitHub repository branch is named with a valid Semantic Version value ([regex pattern](https://regex101.com/library/gG8cK7)), this value will be transposed to the `ModuleVersion` field in the manifest file automatically.  At this step or the next ('Develop and Test') you may manually change the module version using [`Update-SemVer`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Update-SemVer.md).
 
 ### Develop and Test
 
@@ -45,9 +47,13 @@ This file will have an API section added or updated, with each exported command'
 
 ### Publish
 
+```powershell
+PS C:\Users\Alice\Apps\CoffeeApp> Publish-ModuleToNuGetGallery
+```
+
 I assume most developers organize their projects or repos in some location on their machine and resist conforming to have these assets elsewhere.  If so, [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) may help by deploying your module directory in a PowerShell module directory and publish from there.  Afterwards it will remove the directory and keep the original untouched.
 
-To explain further on the reason for this command by giving an example, I currently have individual PowerShell modules listed in my PowerShell profile.  These modules that are listed point to my development directory where they reside on my file system.  So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory.  A cumbersome process indeed, so this command to speed up that process.  In an addition 4PS can store your API key on your file system using [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-MKPowerShellSetting.md). [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md)
+To explain further on the reason for this command by giving an example, I currently have individual PowerShell modules listed in my PowerShell profile.  These modules that are listed point to my development directory where they reside on my file system.  So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory.  A cumbersome process indeed, so this command to speed up that process.  In an addition 4PS can store your API key on your file system using [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-MKPowerShellSetting.md) which will be retrieved automatically when [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) is called if its `NuGetApiKey` parameter value is not set.
 
 ## 4PS 102
 

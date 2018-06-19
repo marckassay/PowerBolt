@@ -178,14 +178,14 @@ $BodyContent
                 $SourceFilePath = Get-ChildItem ($this.Path) -Recurse | Where-Object {$_ -like "$FileName.ps1"} | Select-Object -ExpandProperty FullName
                 $SourceFilePath = [regex]::Match($SourceFilePath, "(?<=$ModuleName[\\|\/]).*") | Select-Object -ExpandProperty Value
                 $SourceUrl = $FileUrl.Split($GitBranchName)[0] + ("$GitBranchName/$SourceFilePath").Replace('\', '/')
-                $SourceLink = "- [$FileName.ps1](" + $SourceUrl + ")"
-                $SourceAndTestFileLinks = ($SourceLink + "`n")
+                $SourceLink = "[$FileName.ps1](" + $SourceUrl + ")`n`n"
+                $SourceAndTestFileLinks = $SourceLink
 
                 $TestFilePath = Get-ChildItem ($this.Path) -Recurse | Where-Object {$_ -like "$FileName.Tests.ps1"} | Select-Object -ExpandProperty FullName
                 if ($TestFilePath) {
                     $TestFilePath = [regex]::Match($TestFilePath, "(?<=$ModuleName[\\|\/]).*") | Select-Object -ExpandProperty Value
                     $TestUrl = $FileUrl.Split($GitBranchName)[0] + ("$GitBranchName/$TestFilePath").Replace('\', '/')
-                    $TestLink = "- [$FileName.Tests.ps1](" + $TestUrl + ")"
+                    $TestLink = "[$FileName.Tests.ps1](" + $TestUrl + ")`n`n"
                     $SourceAndTestFileLinks += $TestLink
                 }
 
