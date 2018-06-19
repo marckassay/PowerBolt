@@ -45,4 +45,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-- [Get-LatestError.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/error/Get-LatestError.ps1)
+[Get-LatestError.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/error/Get-LatestError.ps1)

@@ -95,7 +95,7 @@ function Build-PlatyPSMarkdown {
             # TODO: adding a parameter to Build-PlatyPSMarkdown for this line below wouldnt require 
             # much work. should remove source-and-test links when and if setting to False when they
             # exist.
-            $DocInfo.UpdateOnlineVersionUrl($True)
+            $DocInfo.UpdateOnlineVersionUrl($False)
         }
 
         Write-Output $DocInfo

@@ -77,4 +77,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-- [ConvertTo-EnumFlag.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/utility/ConvertTo-EnumFlag.ps1)
+[ConvertTo-EnumFlag.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/utility/ConvertTo-EnumFlag.ps1)

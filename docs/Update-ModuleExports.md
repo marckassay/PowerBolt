@@ -143,5 +143,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-- [Update-ModuleExports.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/module/Update-ModuleExports.ps1)
-- [Update-ModuleExports.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/module/Update-ModuleExports.Tests.ps1)
+[Update-ModuleExports.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/module/Update-ModuleExports.ps1)
+
+[Update-ModuleExports.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/module/Update-ModuleExports.Tests.ps1)

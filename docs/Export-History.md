@@ -60,6 +60,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-- [Export-History.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/history/Export-History.ps1)
-- [Export-History.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/history/Export-History.Tests.ps1)
-- [`Import-History`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Import-History.md)
+[Export-History.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/history/Export-History.ps1)
+
+[Export-History.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/history/Export-History.Tests.ps1)
+
+[`Import-History`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Import-History.md)

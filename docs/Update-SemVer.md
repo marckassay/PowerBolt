@@ -188,5 +188,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-- [Update-SemVer.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/module/manifest/Update-SemVer.ps1)
-- [Update-SemVer.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/module/manifest/Update-SemVer.Tests.ps1)
+[Update-SemVer.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/module/manifest/Update-SemVer.ps1)
+
+[Update-SemVer.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/module/manifest/Update-SemVer.Tests.ps1)

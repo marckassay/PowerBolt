@@ -1,20 +1,21 @@
 # MK.PowerShell.4PS
 
-Created to streamline coding by primarily completeing an objective of: from having a [PowerShell](https://github.com/PowerShell/PowerShell) idea that is published to the world in minutes.
+Created to streamline coding by primarily completing an objective of: from having a [PowerShell](https://github.com/PowerShell/PowerShell) idea that is published to the world in minutes without compromising quality of module
 
-You have a PowerShell idea, you may have gone thru the process of having this idea to be available to the public.  And in doing so, you might of created tests, documentation and published it to a repository such as [PowerShell Gallery](https://www.powershellgallery.com/).  Doing so can be cumbersome especially when completing other objectives. 4PS attempts to curb this process for you.  
+You have a PowerShell idea, you may have gone thru the process of preparing this module idea to be available to the public.  And in doing so you might of created tests, documentation and published it to a repository such as [PowerShell Gallery](https://www.powershellgallery.com/).  Doing so can be cumbersome especially when completing other objectives. 4PS attempts to curb this process for you. 
 
-Another objective of 4PS is to encourage publishing small (monad) scripts instead of a monolithic module in hopes to have it adapted in other modules. Hence the rationale of 4PS is to have several script files (.ps1) and one root module (.psm1).
+Another objective of 4PS is to encourage publishing small (monad) scripts instead of a monolithic module in hopes to have it adapted in other modules. Hence the rationale of 4PS is to have several script files (.ps1) and one root module (.psm1).  Where as individual script files may be published along with being exported in the root module which can be published too.
 
 ## 4PS 101
 
 The heuristic:
+
 - Create
 - Develop and Test
 - Document
 - Publish
 
-#### Create
+### Create
 
 First step is to scaffold files from a custom [Plaster](https://github.com/PowerShell/Plaster) template. For information on templates (plaster manifests) [Creating a Plaster Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md).  Using 4PS, the [`New-Script`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-Script.md) command guides you after choosing a template for its first parameter followed with dynamic contraints for its remaining arity.
 
@@ -24,13 +25,13 @@ For an example, the following:
 PS C:\Users\Alice\Apps> New-Script -PlasterTemplatePath 'C:\Users\Alice\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'
 ```
 
-Although the Plaster manifest file is not shown, you be assured that a variable of 'PLASTER_PARAM_AppName' resides in its contents.  And with Plaster you can scaffold files with variables (or tokens) inside them that can be replaces with values such as the one given to AppName, for this instance.
+Although the Plaster manifest file is not shown, you be assured that a variable of 'PLASTER_PARAM_AppName' resides in its contents.  And with Plaster you can scaffold files with variables (or tokens) inside them that can be replaced with values such as the one given to AppName, for this instance.
 
-#### Develop and Test
+### Develop and Test
 
-With scaffolding in place, develop source file and test against that file using [Pester](https://github.com/pester/Pester). In this step I find TDD practices are benefical especially the way Pester intergrates with [VSCode](https://github.com/Microsoft/vscode) and using CLI with PowerShell.
+With scaffolding in place, develop source file and test against that file using [Pester](https://github.com/pester/Pester). In this step I find TDD practices are beneficial especially the way Pester integrates with [VSCode](https://github.com/Microsoft/vscode) and using CLI with PowerShell.
 
-#### Document
+### Document
 
 When development passes testing, generate documentation files powered by [platyPS](https://github.com/PowerShell/platyPS).  Using the following command:
 
@@ -38,19 +39,19 @@ When development passes testing, generate documentation files powered by [platyP
 PS C:\Users\Alice\Apps\CoffeeApp> Build-Documentation
 ```
 
-Used in its most simpliest form, calling [Build-Documentation](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-Documentation.md) with no parameters is intented to be called inside the root directory of a PowerShell module.  And when executed, it will call platyPS commands that will generate or update markdown files for all commands listed in the module's manifest exported function array.  It will also execute 4PS code that will update a README.md file in the root directory.  
+Used in its most simpliest form, calling [Build-Documentation](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Build-Documentation.md) with no parameters is intented to be called inside the root directory of a PowerShell module.  And when executed, it will call platyPS commands that will generate or update markdown files for all commands listed in the module's manifest exported function array.  It will also execute 4PS code that will update a README.md file in the root directory. 
 
 This file will have an API section added or updated, with each exported command's markdown link and synopsis of the command.  Such an example can be seen on this every file below, see the API section of this file.
 
-#### Publish
+### Publish
 
-I assume developers organize their projects, repos and or modules in some location on their machine and resist conforming to have these assets elsewhere.  If so, [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) may help by deploying your module directory in a PowerShell module directory and publish from there.  Afterwards it will remove that directory.
+I assume most developers organize their projects or repos in some location on their machine and resist conforming to have these assets elsewhere.  If so, [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) may help by deploying your module directory in a PowerShell module directory and publish from there.  Afterwards it will remove the directory and keep the original untouched.
 
-To explain further on the reason for this command is that I currently have individual PowerShell modules listed in my PowerShell profile.  These modules that are listed point to my development directory where they reside on my file system.  So when I had to publish a module I would have to copy and the folder to a PowerShell module directory.  A cumbersome process indeed, so this command to speed up that process.
+To explain further on the reason for this command by giving an example, I currently have individual PowerShell modules listed in my PowerShell profile.  These modules that are listed point to my development directory where they reside on my file system.  So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory.  A cumbersome process indeed, so this command to speed up that process.  In an addition 4PS can store your API key on your file system using [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Set-MKPowerShellSetting.md). [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md)
 
 ## 4PS 102
 
-What conformity does 4PS expect in a module? 
+What conformity does 4PS expect in your module?
 
 ## Formats
 
@@ -70,14 +71,14 @@ If `TurnOnExtendedTypes` key in `MK.PowerShell.4PS` is set to `true` the followi
 
 ### System.Byte[]
 
-* #### `ToBinaryNotation()`
-* #### `ToUnicode()`
+- `ToBinaryNotation()`
+- `ToUnicode()`
 
 ### System.String
 
-* #### `ToBase64()`
-* #### `FromBase64()`
-* #### `MatchCount()`
+- `ToBase64()`
+- `FromBase64()`
+- `MatchCount()`
 
 ## Commands
 

@@ -107,6 +107,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-- [Set-MKPowerShellSetting.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/settings/Set-MKPowerShellSetting.ps1)
-- [Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/settings/Set-MKPowerShellSetting.Tests.ps1)
-- [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md)
+[Set-MKPowerShellSetting.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/settings/Set-MKPowerShellSetting.ps1)
+
+[Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/settings/Set-MKPowerShellSetting.Tests.ps1)
+
+[`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKPowerShellSetting.md)
