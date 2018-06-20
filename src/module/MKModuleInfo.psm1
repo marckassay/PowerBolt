@@ -1,7 +1,7 @@
 class MKModuleInfo {
     [string]$Name
     [string]$Path
-    [string]$PathFolderName
+    [string]$ModuleFolderName
     [string]$ManifestFilePath
     [string]$RootModuleFilePath
     [object]$Version
@@ -61,7 +61,7 @@ class MKModuleInfo {
         if ($PSModuleInfo) {
             $this.Name = $PSModuleInfo.Name
             $this.Path = $PSModuleInfo.ModuleBase
-            $this.PathFolderName = Split-Path $PSModuleInfo.ModuleBase -Leaf
+            $this.ModuleFolderName = Split-Path $PSModuleInfo.ModuleBase -Leaf
             $this.ManifestFilePath = $this.PredicatedManifestPath($this.Path)
             $this.RootModuleFilePath = Join-Path -Path ($this.Path) -ChildPath ($PSModuleInfo.RootModule)
             $this.Version = $PSModuleInfo.Version

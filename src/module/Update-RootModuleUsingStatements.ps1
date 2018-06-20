@@ -9,12 +9,18 @@ function Update-RootModuleUsingStatements {
             ParameterSetName = "ByPath")]
         [string]$Path = '.',
 
+        [Parameter(Mandatory = $false,
+            Position = 1,
+            ValueFromPipeline = $True, 
+            ParameterSetName = "ByPipe")]
+        [MKModuleInfo]$ModInfo,
+
         [Parameter(Mandatory = $false)]
-        [string]$SourceDirectory,
+        [string]$SourceFolderPath = 'src',
 
         [Parameter(Mandatory = $false)]
         [string[]]$Include = @('*.ps1', '*.psm1'),
- 
+
         [Parameter(Mandatory = $false)]
         [string[]]$Exclude = '*.Tests.ps1',
 
@@ -35,14 +41,15 @@ function Update-RootModuleUsingStatements {
     }
 
     end {
-        if (-not $Name) {
+
+        if ((-not $ModInfo) -and (-not $Name)) {
             $ModInfo = Get-MKModuleInfo -Path $Path
         }
-        else {
+        elseif (-not $ModInfo) {
             $ModInfo = Get-MKModuleInfo -Name $Name
         }
 
-        $TargetDirectory = Join-Path -Path $ModInfo.Path -ChildPath $SourceDirectory -Resolve
+        $TargetDirectory = Join-Path -Path $ModInfo.Path -ChildPath $SourceFolderPath -Resolve
 
         # $StopMatchingImportStatements: stop matching when there is a break of consecutive 
         # 'using module' statements.  a break with additional statements means that developer 
@@ -79,7 +86,7 @@ function Update-RootModuleUsingStatements {
 
         $UniqueSourceFiles = $TargetFunctionsToExport.FilePath.FullName | `
             Sort-Object -Unique | `
-            Group-Object -Property {$_.Split("$SourceDirectory\")[1]} | `
+            Group-Object -Property {$_.Split("$SourceFolderPath\")[1]} | `
             Select-Object -ExpandProperty Group | `
             ForEach-Object {
             if ($_ -ne $ModInfo.RootModuleFilePath) {

@@ -11,7 +11,8 @@ Describe "Test Update-ModuleExports" {
 
     Context "Call with given Path value" {
         It "Should have same results as if its 2 internal functions are piped" {
-
-        } -Skip
+            Update-ModuleExports -Name MK.PowerShell.4PS
+            $true | Should -Be $true
+        }
     }
 }

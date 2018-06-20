@@ -38,7 +38,7 @@ function Publish-ModuleToNuGetGallery {
 
         $Confirm = ($DoNotConfirm.IsPresent -eq $False)
 
-        $DestinationDirectory = Join-Path -Path ($Env:PSModulePath.Split(';')[0]) -ChildPath $ModInfo.PathFolderName
+        $DestinationDirectory = Join-Path -Path ($Env:PSModulePath.Split(';')[0]) -ChildPath $ModInfo.ModuleFolderName
 
         # if it exists in $Env:PSModulePath[0], remove it
         if ((Test-Path -Path $DestinationDirectory -PathType Container) -eq $True) {

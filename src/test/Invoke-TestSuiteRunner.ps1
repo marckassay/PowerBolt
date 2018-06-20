@@ -7,7 +7,12 @@ function Invoke-TestSuiteRunner {
             Position = 0,
             ValueFromPipeline = $False, 
             ParameterSetName = "ByPath")]
-        [string]$Path = '.'
+        [string]$Path = '.',
+
+        [Parameter(Mandatory = $False,
+            Position = 1,
+            ValueFromPipeline = $False)]
+        [string]$TestFolderPath = 'test'
     )
 
     DynamicParam {
@@ -26,11 +31,11 @@ function Invoke-TestSuiteRunner {
 
         Push-Location -StackName 'PriorTestLocation'
         
-        # Test-ModuleManifest $ModInfo.ManifestPath | Remove-Module
+        Test-ModuleManifest -Path $ModInfo.ManifestFilePath | Remove-Module
     }
 
     process {
-        $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath 'test' -Resolve
+        $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath $TestFolderPath -Resolve
         
         Start-Job -Name "JobPester" -ScriptBlock {
             param($P) Invoke-Pester -Script $P -PassThru
@@ -38,8 +43,8 @@ function Invoke-TestSuiteRunner {
     }
 
     end {
+        Import-Module -Name ($ModInfo.Path)
+        
         Pop-Location -StackName 'PriorTestLocation'
-
-        # Import-Module -Name ($ModInfo.ModuleBase)
     }
 }

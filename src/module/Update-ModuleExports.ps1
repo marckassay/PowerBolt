@@ -10,7 +10,7 @@ function Update-ModuleExports {
         [string]$Path = '.',
 
         [Parameter(Mandatory = $false)]
-        [string]$SourceDirectory = 'src',
+        [string]$SourceFolderPath = 'src',
 
         [Parameter(Mandatory = $false)]
         [string[]]$Include = @('*.ps1', '*.psm1'),
@@ -31,6 +31,13 @@ function Update-ModuleExports {
     }
 
     end {
-        Update-RootModuleUsingStatements @PSBoundParameters | Update-ManifestFunctionsToExportField
+        if ($PSBoundParameters.Name) {
+            $ModInfo = Get-MKModuleInfo -Name $Name
+        }
+        else {
+            $ModInfo = Get-MKModuleInfo -Path $Path
+        }
+
+        $ModInfo | Update-RootModuleUsingStatements | Update-ManifestFunctionsToExportField
     }
 }
