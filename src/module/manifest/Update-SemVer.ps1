@@ -28,6 +28,10 @@ function Update-SemVer {
             Position = 3)]
         [int]$Patch = -1,
 
+        [Parameter(Mandatory = $False,
+            Position = 4)]
+        [string]$SourceFolderPath = 'src',
+
         [switch]$BumpMajor,
 
         [switch]$BumpMinor,
@@ -85,7 +89,7 @@ function Update-SemVer {
         Update-ModuleManifest -Path ($ModInfo.ManifestFilePath) -ModuleVersion $Value | Out-Null
 
         # TODO: this should not be in this file; if its still needed make switch param to enable it
-        Update-RootModuleUsingStatements -Path ($ModInfo.Path) -SourceDirectory '.\src\' | `
+        Update-RootModuleUsingStatements -Path ($ModInfo.Path) -SourceFolderPath $SourceFolderPath | `
             Update-ManifestFunctionsToExportField
 
         $Value

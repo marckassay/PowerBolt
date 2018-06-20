@@ -35,6 +35,12 @@ With scaffolding in place, develop source file and test against that file using 
 
 When you believe you are ready to document and publish, call [`Invoke-TestSuiteRunner`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Invoke-TestSuiteRunner.md) to ensure that all test cases that are expected to pass, do indeed pass.
 
+```powershell
+PS C:\Users\Alice\Apps\CoffeeApp> Invoke-TestSuiteRunner
+```
+
+Since `Invoke-TestSuiteRunner` has been executed without an argument, therefore, the location of 'CoffeeApp' must be a PowerShell module.  Alternatively Invoke-TestSuiteRunner can be called with a path value to a module via `Path` parameter, or name value to a module via `Name`.  Those 2 parameters belong to a validateset which most of 4PS commands when applicable has these sets.
+
 ### Document
 
 When development passes testing, generate documentation files powered by [platyPS](https://github.com/PowerShell/platyPS).  Using the following command:
@@ -60,6 +66,18 @@ To explain further on the reason for this command by giving an example, I curren
 ## 4PS 102
 
 What conformity does 4PS expect in your module?
+
+Although it's early in development, I've only recalled testing this module uder the following conditions that may have issues:
+
++ GitHub:  I'm obviously using this as SCM and in code some Regular Expressions validate URLs expecting it to be the way GitHub has choosen. 
+
++ module folder name: Is expected to be the same name as the manifest and root module file.
+
++ src:  This is where source code resides inside the module folder
+
++ test: This is where test code resides inside the module folder
+
++ git branch name: Git development braches are expected to be in SemVer format.  Otherwise it should simply not update module's version automatically.
 
 ## Formats
 

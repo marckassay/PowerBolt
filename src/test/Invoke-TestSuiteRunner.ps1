@@ -31,15 +31,16 @@ function Invoke-TestSuiteRunner {
 
         Push-Location -StackName 'PriorTestLocation'
         
-        Test-ModuleManifest -Path $ModInfo.ManifestFilePath | Remove-Module
+        $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath $TestFolderPath -Resolve
+        $ArgList = @{ Script = $ScriptPath; PassThru = $true }
+        
+        Remove-Module -Name $ModInfo.Name
     }
 
     process {
-        $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath $TestFolderPath -Resolve
-        
         Start-Job -Name "JobPester" -ScriptBlock {
-            param($P) Invoke-Pester -Script $P -PassThru
-        } -ArgumentList $ScriptPath | Wait-Job
+            param($P)  Invoke-Pester @P
+        } -ArgumentList $ArgList | Wait-Job
     }
 
     end {
