@@ -33,23 +33,21 @@ function Build-Documentation {
     }
     
     begin {
-        $Name = $PSBoundParameters['Name']
-        
         # Output Field Separator - default is ' '
         $OFS = ''
         
-        if (-not $DocInfo) {
-            $DocInfo = [MKDocumentationInfo]::new(
-                $Name,
-                $Path,
-                $MarkdownFolder,
-                $Locale,
-                $OnlineVersionUrlTemplate,
-                $OnlineVersionUrlPolicy,
-                $MarkdownSnippetCollection,
-                $NoReImportModule.IsPresent
-            )
-        }
+        $Name = $PSBoundParameters['Name']
+
+        $DocInfo = [MKDocumentationInfo]::new(
+            $Name,
+            $Path,
+            $MarkdownFolder,
+            $Locale,
+            $OnlineVersionUrlTemplate,
+            $OnlineVersionUrlPolicy,
+            $MarkdownSnippetCollection,
+            $NoReImportModule.IsPresent
+        )
     }
 
     end {

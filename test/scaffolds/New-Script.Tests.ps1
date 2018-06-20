@@ -16,7 +16,8 @@ Describe "Test New-Script" {
     
     Context "Call New-Script" {
 
-        New-Script -PlasterTemplatePath $PlasterTemplatePath 'io' 'Get-FileExtension'
+        New-Script
+        # New-Script -PlasterTemplatePath $PlasterTemplatePath 'io' 'Get-FileExtension'
 
         $GetFileExtensionSrcPath = Join-Path -Path $TestSupportModule.MockDirectoryPath -ChildPath 'src/io/Get-FileExtension.ps1'
         $GetFileExtensionTestPath = Join-Path -Path $TestSupportModule.MockDirectoryPath -ChildPath 'test/io/Get-FileExtension.Tests.ps1'

@@ -14,13 +14,19 @@ Prepends module found in `Path` with `using module ...` statements. Those statem
 
 ### ByPath (Default)
 ```
-Update-RootModuleUsingStatements [[-Path] <String>] [[-SourceDirectory] <String>] [[-Include] <String[]>]
- [[-Exclude] <String[]>] [-PassThru] [<CommonParameters>]
+Update-RootModuleUsingStatements [-Path <String>] [-SourceFolderPath <String>] [-Include <String[]>]
+ [-Exclude <String[]>] [-PassThru] [<CommonParameters>]
+```
+
+### ByPipe
+```
+Update-RootModuleUsingStatements [-ModInfo <MKModuleInfo>] [-SourceFolderPath <String>] [-Include <String[]>]
+ [-Exclude <String[]>] [-PassThru] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Update-RootModuleUsingStatements [[-SourceDirectory] <String>] [[-Include] <String[]>] [[-Exclude] <String[]>]
+Update-RootModuleUsingStatements [-SourceFolderPath <String>] [-Include <String[]>] [-Exclude <String[]>]
  [-PassThru] -Name <String> [<CommonParameters>]
 ```
 
@@ -47,7 +53,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,7 +68,37 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ModInfo
+{{Fill ModInfo Description}}
+
+```yaml
+Type: MKModuleInfo
+Parameter Sets: ByPipe
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByName
+Aliases:
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -92,14 +128,14 @@ Parameter Sets: ByPath
 Aliases:
 
 Required: False
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SourceDirectory
-{{Fill SourceDirectory Description}}
+### -SourceFolderPath
+{{Fill SourceFolderPath Description}}
 
 ```yaml
 Type: String
@@ -107,21 +143,6 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Name
-{{Fill Name Description}}
-
-```yaml
-Type: String
-Parameter Sets: ByName
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

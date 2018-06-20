@@ -14,13 +14,13 @@ Updates root-module and manifest file with commands to be exported.
 
 ### ByPath (Default)
 ```
-Update-ModuleExports [[-Path] <String>] [[-SourceDirectory] <String>] [[-Include] <String[]>]
+Update-ModuleExports [[-Path] <String>] [-SourceFolderPath <String>] [[-Include] <String[]>]
  [[-Exclude] <String[]>] [-PassThru] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Update-ModuleExports [[-SourceDirectory] <String>] [[-Include] <String[]>] [[-Exclude] <String[]>] [-PassThru]
+Update-ModuleExports [-SourceFolderPath <String>] [[-Include] <String[]>] [[-Exclude] <String[]>] [-PassThru]
  -Name <String> [<CommonParameters>]
 ```
 
@@ -98,21 +98,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SourceDirectory
-{{Fill SourceDirectory Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 {{Fill Name Description}}
 
@@ -122,6 +107,21 @@ Parameter Sets: ByName
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SourceFolderPath
+{{Fill SourceFolderPath Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

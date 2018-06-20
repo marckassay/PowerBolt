@@ -1,3 +1,5 @@
+using module .\.\MKModuleInfo.psm1
+
 function Update-ModuleExports {
     [CmdletBinding(PositionalBinding = $True, 
         DefaultParameterSetName = "ByPath")]

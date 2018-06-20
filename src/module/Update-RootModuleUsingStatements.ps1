@@ -1,3 +1,5 @@
+using module .\.\MKModuleInfo.psm1
+
 function Update-RootModuleUsingStatements {
     [CmdletBinding(PositionalBinding = $True, 
         DefaultParameterSetName = "ByPath")]

@@ -13,7 +13,8 @@ Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Pl
 ## SYNTAX
 
 ```
-New-Script -PlasterTemplatePath <String> [<CommonParameters>]
+New-Script -PlasterTemplatePath <String> -ScriptCongruentPath <String> -ScriptName <String>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,6 +35,36 @@ One can deduce that the variable 'PLASTER_PARAM_AppName' is in the template file
 
 ### -PlasterTemplatePath
 A path value to a Plaster template (manifest) file.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ScriptCongruentPath
+{{Fill ScriptCongruentPath Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ScriptName
+{{Fill ScriptName Description}}
 
 ```yaml
 Type: String

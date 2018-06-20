@@ -4,14 +4,21 @@ function New-Script {
         DefaultParameterSetName = "ByTemplate")]
     Param
     (
-        [Parameter(Mandatory = $true,
+        [Parameter(Mandatory = $True,
             Position = 0,
             ValueFromPipeline = $False, 
             ParameterSetName = "ByTemplate")]
-        [string]$PlasterTemplatePath = 'resources\templates\NewScript\plasterManifest_en-US.xml'
+        [string]$PlasterTemplatePath
     )
     
     DynamicParam {
+        # when platyPS calls New-Script need to manually give it a value.  This value cannot be  
+        # assigned to the param within Parma parentheses since it has an undetermined count of 
+        # parameters.
+        if (-not $PlasterTemplatePath) {
+            $PlasterTemplatePath = 'resources\templates\NewScript\plasterManifest_en-US.xml'
+        }
+
         $TemplateVarDictionary = GetPlasterTemplateVarSet -Path $PlasterTemplatePath
         return $TemplateVarDictionary
     }

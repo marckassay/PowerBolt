@@ -33,6 +33,8 @@ If your GitHub repository branch is named with a valid Semantic Version value ([
 
 With scaffolding in place, develop source file and test against that file using [Pester](https://github.com/pester/Pester). In this step I find TDD practices are beneficial especially the way Pester integrates with [VSCode](https://github.com/Microsoft/vscode) and using CLI with PowerShell.
 
+When you believe you are ready to document and publish, call [`Invoke-TestSuiteRunner`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Invoke-TestSuiteRunner.md) to ensure that all test cases that are expected to pass, do indeed pass.
+
 ### Document
 
 When development passes testing, generate documentation files powered by [platyPS](https://github.com/PowerShell/platyPS).  Using the following command:
@@ -131,6 +133,10 @@ Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAl
 #### [`Import-History`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Import-History.md)
 
 Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI. 
+
+#### [`Invoke-TestSuiteRunner`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Invoke-TestSuiteRunner.md)
+
+Creates a PowerShell background job that calls [`Invoke-Pester`](https://github.com/pester/Pester/wiki/Invoke-Pester) 
 
 #### [`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 

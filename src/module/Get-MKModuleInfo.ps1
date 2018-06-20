@@ -1,5 +1,5 @@
 using module .\..\dynamicparams\GetModuleNameSet.ps1
-using module .\MKModuleInfo.psm1
+using module .\.\MKModuleInfo.psm1
 
 function Get-MKModuleInfo {
     [CmdletBinding(PositionalBinding = $True, 
