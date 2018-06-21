@@ -57,24 +57,39 @@ Describe "Test Update-SemVer" {
 
             Invoke-Expression -Command 'git checkout -b 3.0.1'
             
-            $Results = Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate
-            $Results | Should -Be '3.0.1'
+            Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate
+            $Results = Test-ModuleManifest $TestSupportModule.MockManifestPath | `
+                Select-Object -ExpandProperty Version 
+         
+            $Results.Major | Should -Be 3
+            $Results.Minor | Should -Be 0
+            $Results.Build | Should -Be 1
         }
 
         It "Should change version to Git branch name - 3.1.1" {
  
             Invoke-Expression -Command 'git checkout -b 3.1.1'
             
-            $Results = Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate
-            $Results | Should -Be '3.1.1'
+            Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate 
+            $Results = Test-ModuleManifest $TestSupportModule.MockManifestPath | `
+                Select-Object -ExpandProperty Version 
+        
+            $Results.Major | Should -Be 3
+            $Results.Minor | Should -Be 1
+            $Results.Build | Should -Be 1
         }
 
         It "Should change version to Git branch name - 4.0.0" {
  
             Invoke-Expression -Command 'git checkout -b 4.0.0'
             
-            $Results = Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate
-            $Results | Should -Be '4.0.0'
+            Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate
+            $Results = Test-ModuleManifest $TestSupportModule.MockManifestPath | `
+                Select-Object -ExpandProperty Version 
+        
+            $Results.Major | Should -Be 4
+            $Results.Minor | Should -Be 0
+            $Results.Build | Should -Be 0
         }
 
         Pop-Location

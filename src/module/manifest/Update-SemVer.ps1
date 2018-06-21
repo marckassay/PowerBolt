@@ -145,7 +145,12 @@ function Update-SemVer {
             Update-RootModuleUsingStatements -Path ($ModInfo.Path) -SourceFolderPath $SourceFolderPath | `
                 Update-ManifestFunctionsToExportField
 
-            Write-Host "Module version has been changed to '$Value'" -ForegroundColor Green
+            if ($AutoUpdate.IsPresent) {
+                Write-Host "Module version has been changed to '$Value'" -ForegroundColor Green
+            }
+            else {
+                $Value
+            }
         }
     }
 }

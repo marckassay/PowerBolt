@@ -3,7 +3,7 @@ using module ..\..\.\TestRunnerSupportModule.psm1
 Describe "Test Update-ManifestFunctionsToExportField" {
     
     BeforeAll {
-        $TestSupportModule = [TestRunnerSupportModule]::new($false, 'MockModuleA')
+        $TestSupportModule = [TestRunnerSupportModule]::new($true, 'MockModuleA')
     }
     AfterAll {
         $TestSupportModule.Teardown()
@@ -26,8 +26,8 @@ Describe "Test Update-ManifestFunctionsToExportField" {
     }
 
     Context "Call Update-RootModuleUsingStatements and pipe result that contains a 'NoExport' tag in one of the files" {
-        New-Item -Path 'TestDrive:\MockModuleA\src\D' -ItemType Directory
-        New-Item -Path 'TestDrive:\MockModuleA\src\D\Set-DFunction.ps1' -ItemType File -Value @"
+        New-Item -Path ($TestSupportModule.MockDirectoryPath + "\src\D") -ItemType Directory
+        New-Item -Path ($TestSupportModule.MockDirectoryPath + "\src\D\Set-DFunction.ps1") -ItemType File -Value @"
 using module ..\C\New-CFunction.ps1'
 
 function Set-DFunction {
@@ -56,7 +56,7 @@ function Get-DFunction {
 }
 "@ 
 
-        It "Should overwrite the default value ('@()') for FunctionsToExport field with 'using' statements" {
+        It "Should overwrite the default value ('@()') for FunctionsToExport field with 'using' statements in ro" {
             Update-RootModuleUsingStatements -Path $TestSupportModule.MockDirectoryPath | Update-ManifestFunctionsToExportField
 
             $FunctionNames = Test-ModuleManifest $TestSupportModule.MockManifestPath | `

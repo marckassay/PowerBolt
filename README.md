@@ -17,7 +17,7 @@ The development flow:
 
 ### Create
 
-First step is to scaffold files from a custom [Plaster](https://github.com/PowerShell/Plaster) template. For information on templates (plaster manifests) [Creating a Plaster Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md). Using Flow, the [`New-Script`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-Script.md) command guides you after choosing a template for its first parameter followed with dynamic contraints for its remaining arity.
+First step is to scaffold files from a custom [Plaster](https://github.com/PowerShell/Plaster) template. For information on templates (plaster manifests) [Creating a Plaster Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md). Using Flow, the [`New-Script`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-Script.md) command guides you after choosing a template for its first parameter followed with dynamic constraints for its remaining arity.
 
 For an example, the following:
 
@@ -49,7 +49,7 @@ When development passes testing, generate documentation files powered by [platyP
 PS C:\Users\Alice\Apps\CoffeeApp> Build-Documentation
 ```
 
-Used in the most simpliest form, calling [Build-Documentation](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Build-Documentation.md) with no parameters is intented to be called inside the root directory of a PowerShell module. And when executed, it will call platyPS commands that will generate or update markdown files for all commands listed in the manifest's `FunctionsToExport` key. It will also execute Flow code that will update a README.md file in the root directory. 
+Used in the most simplest form, calling [Build-Documentation](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Build-Documentation.md) with no parameters is intended to be called inside the root directory of a PowerShell module. And when executed, it will call platyPS commands that will generate or update markdown files for all commands listed in the manifest's `FunctionsToExport` key. It will also execute Flow code that will update a README.md file in the root directory. 
 
 This file will have an API section added or updated, with each exported command's markdown link and synopsis of the command. Such an example can be seen on this every file below, see the API section of this file.
 
@@ -69,7 +69,7 @@ What conformity does Flow expect in your module?
 
 Although it's early in development, I can only recall the following conditions that may have issues:
 
-+ GitHub:  I'm obviously using this as SCM and some Regular Expressions validate URLs expecting it to be the way GitHub has choosen. 
++ GitHub:  I'm obviously using this as SCM and some Regular Expressions validate URLs expecting it to be formatted the way GitHub has them. 
 
 + module folder name: Is expected to be the same name as the manifest and root module file.
 
@@ -77,7 +77,7 @@ Although it's early in development, I can only recall the following conditions t
 
 + test: This is where test code is expected to reside inside the module folder
 
-+ git branch name: Git development braches are expected to be in SemVer format (simple variant only currently). Otherwise it will not update module's version automatically.
++ git branch name: Git development branches are expected to be in SemVer format (simple variant only currently). Otherwise it will not update module's version automatically.
 
 ## Flow 103
 
@@ -100,7 +100,7 @@ Ideal for moving setting files to perhaps a cloud drive such as Google Drive or 
 "HistoryLocation": "",
 ```
 
-Stores histories and imports them into current session so that you can view histroy spaning perhaps days instead of just the current session.
+Stores histories and imports them into current session so that you can view history spanning perhaps days instead of just the current session.
 
 ```json
 "TurnOnRememberLastLocation": "true"

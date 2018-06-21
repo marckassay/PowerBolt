@@ -1,3 +1,6 @@
+using module .\..\module\manifest\Get-GitBranchName.ps1
+using module .\..\dynamicparams\GetModuleNameSet.ps1
+
 class MKDocumentationInfo {
     [string]$ModuleName
     [string]$Path
@@ -102,12 +105,12 @@ class MKDocumentationInfo {
 
         if ($this.OnlineVersionUrlPolicy -eq 'Auto') {
             
-            $BranchName = Get-GitBranch -gitDir ($this.ModuleFolder + "\.git").Trim('(', ')')
-            if ($BranchName -match [MKDocumentationInfo]::SemVerRegExPattern) {
-                if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
-                    # TODO: this most likely will only work with Github file structure
-                    $this.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/$BranchName/docs/{0}.md"
-                }
+            $BranchName = Get-GitBranchName -Path ($this.ModuleFolder)
+            
+            if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
+                # TODO: this most likely will only work with Github file structure
+                # TODO: docs folders needs to be a variable
+                $this.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/$BranchName/docs/{0}.md"
             }
             else {
                 Write-Error "The parameter 'OnlineVersionUrlPolicy' was set to 'Auto' but unable to retrieve Git repo config file. Would you like to continue?" -ErrorAction Inquire
