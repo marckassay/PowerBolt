@@ -28,8 +28,6 @@ Build-Documentation [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersio
 ## DESCRIPTION
 With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, this function will generate Markdown help documentation files (such as the file where you are reading this from) and update or create a README.md file with new functions from the help docs. Also this generates a new PowerShell help doc file that is used in the CLI.
 
-This function simply takes the parameter values into an object and pipes it to the following:
-
 ## EXAMPLES
 
 ### Example 1
