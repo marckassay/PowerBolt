@@ -51,7 +51,7 @@ Execute the following:
             $script:ConfigFileJson.Backups[0].Destination | Should -Exist
         }
 
-        It "Continuing from previous 'It' block, call 'Backup-Sources' for the first time with test config path as a parameter.  It should increment and overwrite items as specified from previous 'It' block." {
+        It "Continuing from previous 'It' block, call 'Backup-Sources' for the first time with test config path as a parameter. It should increment and overwrite items as specified from previous 'It' block." {
             Backup-Sources -ConfigFilePath $TestSupportModule.FixtureConfigFilePath
 
             $script:ConfigFileJson = Get-Content -Path $TestSupportModule.FixtureConfigFilePath -Raw | `
@@ -79,7 +79,7 @@ Execute the following:
                 Where-Object -Property Name -Match $TestItemName | Should -BeOfType System.IO.DirectoryInfo 
         }
 
-        It "Continuing from previous 'It' block, after modifying item with 'New' type and calling Backup-Sources, it should only detect a change of one item.  And by modifying only one of two items of 'Overwrite', it should detect and update just that one item too." {
+        It "Continuing from previous 'It' block, after modifying item with 'New' type and calling Backup-Sources, it should only detect a change of one item. And by modifying only one of two items of 'Overwrite', it should detect and update just that one item too." {
             
             $script:ConfigFileJson = Get-Content -Path $TestSupportModule.FixtureConfigFilePath -Raw | `
                 ConvertFrom-Json -AsHashtable

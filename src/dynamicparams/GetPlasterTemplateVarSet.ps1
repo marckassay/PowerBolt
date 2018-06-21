@@ -18,7 +18,7 @@ function GetPlasterTemplateVarSet {
 
     # start position at 1; since there New-Script has a param already at that index
     $PlasterParams | ForEach-Object -Begin {$Position = 1} -Process {
-        # the PLASTER_PARAM_Name variable is required, but not used here.  its in place to bypass 
+        # the PLASTER_PARAM_Name variable is required, but not used here. its in place to bypass 
         # being prompt in the CLI
         if ($_ -ne 'Name') {
             $Position++ 

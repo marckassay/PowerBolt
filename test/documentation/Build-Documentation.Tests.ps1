@@ -55,7 +55,7 @@ Describe "Test Build-Documentation" {
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
         }
 
-        # TODO: comment this out, since this will need to be in a different context.  context of updating
+        # TODO: comment this out, since this will need to be in a different context. context of updating
         # existing files
         <# 
         It "Should modify README.md file at line number <Index> with: {<Expected>} " -TestCases @(

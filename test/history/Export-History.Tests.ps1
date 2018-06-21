@@ -17,7 +17,7 @@ Describe "Test Export-History" {
 
         It "Should export current session and expected something greater than 1." {
             # TODO: it would better to Mock Get-History to return entries and Mock Add-History to
-            # to do nothing; for that it will not confilict with testing.  the real testing is calculating
+            # to do nothing; for that it will not confilict with testing. the real testing is calculating
             # how many entries are needed.
             Mock Get-History {
                 $TestHistory = Import-Csv -Path $TestHistoryItemPath | Add-History

@@ -110,7 +110,7 @@ class MKDocumentationInfo {
                 }
             }
             else {
-                Write-Error "The parameter 'OnlineVersionUrlPolicy' was set to 'Auto' but unable to retrieve Git repo config file.  Would you like to continue?" -ErrorAction Inquire
+                Write-Error "The parameter 'OnlineVersionUrlPolicy' was set to 'Auto' but unable to retrieve Git repo config file. Would you like to continue?" -ErrorAction Inquire
                 $this.OnlineVersionUrlPolicy = 'Omit'
             }
         }

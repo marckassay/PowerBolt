@@ -23,7 +23,7 @@ Get-MKModuleInfo [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Valid `Path` parameter values are to a manifest (.psd1) file, module (.psm1) file and root module directory.  And valid `Name` parameter values are constricted to modules installed locally.  With those possible values information about the module with be returned.
+Valid `Path` parameter values are to a manifest (.psd1) file, module (.psm1) file and root module directory. And valid `Name` parameter values are constricted to modules installed locally. With those possible values information about the module with be returned.
 
 ## EXAMPLES
 

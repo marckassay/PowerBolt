@@ -3,7 +3,7 @@
 Returns a valid path from a parent of one of its children which overlaps that parent's path.
 
 .DESCRIPTION
-In set-theory this will be considered a relative complement.  That is the directories
+In set-theory this will be considered a relative complement. That is the directories
 in ChildPath that are not in Path.
 
 A diagram to illustrate what is mentioned above:
@@ -16,13 +16,13 @@ The path 'R' is what will be returned if -IsValid is not switched otherwise $tru
 will be returned.
 
 .PARAMETER Path
-Parent path of $ChildPath.  This can be relative.
+Parent path of $ChildPath. This can be relative.
 
 .PARAMETER ChildPath
 Child path of $Path.
 
 .PARAMETER IsValid
-Returns true if function found a complement folder.  False is returned if no complement was
+Returns true if function found a complement folder. False is returned if no complement was
 found.
 
 .EXAMPLE

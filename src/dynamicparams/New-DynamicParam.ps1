@@ -30,7 +30,7 @@ Function New-DynamicParam {
         Name of the dynamic parameter
 
     .PARAMETER Type
-        Type for the dynamic parameter.  Default is string
+        Type for the dynamic parameter. Default is string
 
     .PARAMETER Alias
         If specified, one or more aliases to assign to the dynamic parameter

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Build-Documentation
 
 ## SYNOPSIS
-Creates or updates help documentation files and module's README file.  Also creates a XML based help documentation file for PowerShell.
+Creates or updates help documentation files and module's README file. Also creates a XML based help documentation file for PowerShell.
 
 ## SYNTAX
 
@@ -26,7 +26,7 @@ Build-Documentation [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersio
 ```
 
 ## DESCRIPTION
-With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, this function will generate Markdown help documentation files (such as the file where you are reading this from) and update or create a README.md file with new functions from the help docs.  Also this generates a new PowerShell help doc file that is used in the CLI.
+With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, this function will generate Markdown help documentation files (such as the file where you are reading this from) and update or create a README.md file with new functions from the help docs. Also this generates a new PowerShell help doc file that is used in the CLI.
 
 This function simply takes the parameter values into an object and pipes it to the following:
 

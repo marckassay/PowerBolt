@@ -57,7 +57,7 @@ function Update-RootModuleUsingStatements {
         $TargetDirectory = Join-Path -Path $ModInfo.Path -ChildPath $SourceFolderPath -Resolve
 
         # $StopMatchingImportStatements: stop matching when there is a break of consecutive 
-        # 'using module' statements.  a break with additional statements means that developer 
+        # 'using module' statements. a break with additional statements means that developer 
         # manually added that line; so keep it.
         [string[]]$ModuleContentsCleaned = Get-Content $ModInfo.RootModuleFilePath | `
             ForEach-Object -Begin {$StopMatchingImportStatements = $false} -Process {

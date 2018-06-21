@@ -8,7 +8,7 @@ schema: 2.0.0
 # Search-Items
 
 ## SYNOPSIS
-Recurses thru folders to find files that its content matches `Pattern`.  Outputs object(s) to console.
+Recurses thru folders to find files that its content matches `Pattern`. Outputs object(s) to console.
 
 ## SYNTAX
 

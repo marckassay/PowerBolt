@@ -36,7 +36,7 @@ PS C:\> Set-MKPowerShellSetting -Name Backups -Value $BackupObject
 )
 ```
 
-This example enables `TurnOnBackup` and assigns one backup object to `Backups`.  When `MK.PowerShell.4PS` imported next, it will attempt to overwrite the keybindings.json file if its in the `$Destination` folder.  If there is no file in that folder it will simpily move it there.  If `UpdatePolicy` had a value of `New`, it will move the file and to add an intger to its basename.  For instance, for this example keybindings.json file will be keybindings(1).json.
+This example enables `TurnOnBackup` and assigns one backup object to `Backups`. When `MK.PowerShell.4PS` imported next, it will attempt to overwrite the keybindings.json file if its in the `$Destination` folder. If there is no file in that folder it will simpily move it there. If `UpdatePolicy` had a value of `New`, it will move the file and to add an intger to its basename. For instance, for this example keybindings.json file will be keybindings(1).json.
 
 ## PARAMETERS
 

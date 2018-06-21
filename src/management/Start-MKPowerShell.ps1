@@ -132,10 +132,10 @@ function Restore-Formats {
         [switch]$Initialize
     )
     
-    # TODO: can't seem to have manifest's 'FormatsToProcess' key  to load files listed in it.  So 
+    # TODO: can't seem to have manifest's 'FormatsToProcess' key  to load files listed in it. So 
     # manually doing it for now.
     if ((Get-MKPowerShellSetting -Name 'TurnOnExtendedFormats') -eq $true) {
-        # setting this to -1 to display/view all items for ListItems.  For instance, Get-Module's 
+        # setting this to -1 to display/view all items for ListItems. For instance, Get-Module's 
         # ExportedFunction
         $global:FormatEnumerationLimit = -1
         

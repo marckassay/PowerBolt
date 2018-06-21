@@ -99,7 +99,7 @@ function Get-AFunction {
 
     Context "As a non-piped call, with a given Name value to create files." {
 
-        # removing FileNames from previous Context block.  this context block is to test command 
+        # removing FileNames from previous Context block. this context block is to test command 
         # using the 'Name' param (vs 'Path').
         $script:FileNames = $null
         

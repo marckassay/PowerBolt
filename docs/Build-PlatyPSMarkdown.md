@@ -33,7 +33,7 @@ Build-PlatyPSMarkdown [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVers
 ```
 
 ## DESCRIPTION
-If no Markdown files are in `MarkdownFolder`, this function will call `New-MarkdownHelp`. Else it will call `Update-MarkdownHelpModule`. After `New-MarkdownHelp` is executed it will iterate thru the newly Markdown files and add the online version url to file.  This value, by default, is retrieved from a .git directory (if there is one) of the module.
+If no Markdown files are in `MarkdownFolder`, this function will call `New-MarkdownHelp`. Else it will call `Update-MarkdownHelpModule`. After `New-MarkdownHelp` is executed it will iterate thru the newly Markdown files and add the online version url to file. This value, by default, is retrieved from a .git directory (if there is one) of the module.
 
 ## EXAMPLES
 
@@ -42,7 +42,7 @@ If no Markdown files are in `MarkdownFolder`, this function will call `New-Markd
 PS C:\> Build-PlatyPSMarkdown -Path C:\Users\Alice\PowerSploit -NoReImportModule
 ```
 
-With specified `Path` value and `NoReImportModule` switched, this will generate (new or update) files for PowerSploit module.  The `NoReImportModule` prevents re-importing PowerSploit so the current state of this imported module is used.  In otherwords, if changes to the source code of PowerSploit has been made it will not be available until it is imported again.  And because of that `NoReImportModule` is typically not switched.
+With specified `Path` value and `NoReImportModule` switched, this will generate (new or update) files for PowerSploit module. The `NoReImportModule` prevents re-importing PowerSploit so the current state of this imported module is used. In otherwords, if changes to the source code of PowerSploit has been made it will not be available until it is imported again. And because of that `NoReImportModule` is typically not switched.
 
 ## PARAMETERS
 

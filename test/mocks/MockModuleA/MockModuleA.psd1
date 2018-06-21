@@ -30,7 +30,7 @@
     Copyright         = '(c) Marc. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description       = 'Its for MK.PowerShell tests.  Not intended to be a package.'
+    Description       = 'Its for MK.PowerShell tests. Not intended to be a package.'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''

@@ -14,7 +14,7 @@ function New-Script {
     )
     
     DynamicParam {
-        # when platyPS calls New-Script need to manually give it a value.  This value cannot be  
+        # when platyPS calls New-Script need to manually give it a value. This value cannot be  
         # assigned to the param within Parma parentheses since it has an undetermined count of 
         # parameters.
         if (-not $PlasterTemplatePath) {

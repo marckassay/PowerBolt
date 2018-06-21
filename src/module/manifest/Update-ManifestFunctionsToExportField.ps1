@@ -26,7 +26,7 @@ function Update-ManifestFunctionsToExportField {
         Update-ModuleManifest -Path $ManifestFile -FunctionsToExport $FunctionNames
 
         # HACK: Perhaps its not possible to have Update-ModuleManifest -FunctionsToExport to be 
-        # formatted in an array listed vertically.  So here manually edit it to have just that.
+        # formatted in an array listed vertically. So here manually edit it to have just that.
         $FunctionNames = $FunctionNames | ForEach-Object -Process {"'$_',`r`n"} | Sort-Object
         $Tail = $FunctionNames.Count - 1
         $FunctionNames[$Tail] = $FunctionNames[$Tail].Replace(",`r`n", "")

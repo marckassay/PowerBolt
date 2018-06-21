@@ -18,7 +18,7 @@ New-Script -PlasterTemplatePath <String> -ScriptCongruentPath <String> -ScriptNa
 ```
 
 ## DESCRIPTION
-When `PlasterTemplatePath` is set to a Plaster template, this script will inspect the template for variables that will become additional parameters.  Those variables must be in the form of the Plaster style variables.  For an example: 'PLASTER_PARAM_CongruentPath', where 'CongruentPath' is the variable that will appear as an additional parameter.
+When `PlasterTemplatePath` is set to a Plaster template, this script will inspect the template for variables that will become additional parameters. Those variables must be in the form of the Plaster style variables. For an example: 'PLASTER_PARAM_CongruentPath', where 'CongruentPath' is the variable that will appear as an additional parameter.
 
 If calling this method by script and not thru the CLI, positional binding is enabled so that can be done.
 

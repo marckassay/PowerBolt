@@ -74,7 +74,7 @@ function Update-ReadmeFromPlatyPSMarkdown {
                 $FirstIndex = $ReadMeContent.Length
             }
             
-            # if the file isnt new..., else just assign $MarkdownSnippetCollection
+            # if the file isn't new..., else just assign $MarkdownSnippetCollection
             if ($FirstIndex) {
                 $ReadMeContent.Insert($FirstIndex, $MarkdownSnippetCollection) | Set-Content -Path $ReadMePath | Out-Null
             }
