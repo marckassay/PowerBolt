@@ -101,8 +101,10 @@ function Update-SemVer {
 
             if ($CurrentBranchName -match $script:SemVerRegEx) {
                 $Version = $ModInfo.Version
+                # using '-gt' comparison because developer may have bumped or explictly set semver to something greater than what 
+                # Git branch they are on. although it they explictly set a lower value it will be overwritten.
                 if (($Matches.MAJOR -gt $Version.Major) -or ($Matches.MINOR -gt $Version.Minor) -or ($Matches.PATCH -gt $Version.Build)) {
-                    $Value = $CurrentBranchName
+                    $Value = $CurrentBranchName 
                 }
             }
         }
@@ -143,7 +145,7 @@ function Update-SemVer {
             Update-RootModuleUsingStatements -Path ($ModInfo.Path) -SourceFolderPath $SourceFolderPath | `
                 Update-ManifestFunctionsToExportField
 
-            $Value
+            Write-Host "Module version has been changed to '$Value'" -ForegroundColor Green
         }
     }
 }

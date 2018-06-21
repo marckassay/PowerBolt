@@ -1,4 +1,5 @@
 using module .\.\MKDocumentationInfo.psm1
+using module .\..\module\manifest\AutoUpdateSemVerDelegate.ps1
 
 function Build-PlatyPSMarkdown {
     [CmdletBinding(PositionalBinding = $True, 
@@ -56,6 +57,8 @@ function Build-PlatyPSMarkdown {
     }
 
     end {
+        AutoUpdateSemVerDelegate($DocInfo.Path)
+
         $DocInfo.ModuleMarkdownFolder = Join-Path -Path $DocInfo.ModuleFolder -ChildPath $DocInfo.MarkdownFolder
         $MarkdownFolderItems = Get-ChildItem -Path $DocInfo.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
         if ($MarkdownFolderItems.Count -eq 0) {

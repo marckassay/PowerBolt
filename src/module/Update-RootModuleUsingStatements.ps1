@@ -1,4 +1,5 @@
 using module .\.\MKModuleInfo.psm1
+using module .\manifest\AutoUpdateSemVerDelegate.ps1
 
 function Update-RootModuleUsingStatements {
     [CmdletBinding(PositionalBinding = $True, 
@@ -50,6 +51,8 @@ function Update-RootModuleUsingStatements {
         elseif (-not $ModInfo) {
             $ModInfo = Get-MKModuleInfo -Name $Name
         }
+        
+        AutoUpdateSemVerDelegate($ModInfo.Path)
 
         $TargetDirectory = Join-Path -Path $ModInfo.Path -ChildPath $SourceFolderPath -Resolve
 

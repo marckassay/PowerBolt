@@ -1,3 +1,5 @@
+using module .\..\module\manifest\AutoUpdateSemVerDelegate.ps1
+
 function Invoke-TestSuiteRunner {
     [CmdletBinding(PositionalBinding = $True, 
         DefaultParameterSetName = "ByPath")]
@@ -28,6 +30,8 @@ function Invoke-TestSuiteRunner {
         else {
             $ModInfo = Get-MKModuleInfo -Path $Path
         }
+
+        AutoUpdateSemVerDelegate($ModInfo.Path)
 
         Push-Location -StackName 'PriorTestLocation'
         
