@@ -1,7 +1,7 @@
 ---
-external help file: MK.PowerShell.4PS-help.xml
-Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Get-MKModuleInfo.md
+external help file: MK.PowerShell.Flow-help.xml
+Module Name: MK.PowerShell.Flow
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Get-MKModuleInfo.md
 schema: 2.0.0
 ---
 
@@ -50,7 +50,7 @@ A dynamic parameter with its valid set being confined to locally installed modul
 Type: String
 Parameter Sets: ByName
 Aliases:
-Accepted values: Add-ModuleToProfile, BackupPredicateEnum, Backup-Sources, Build-Documentation, Build-PlatyPSMarkdown, ConvertTo-EnumFlag, Export-History, Get-LatestError, Get-ManifestKey, Get-MergedPath, Get-MKPowerShellSetting, Get-MKModuleInfo, GetModuleNameSet, GetSettingsNameSet, Import-History, Invoke-TestSuiteRunner, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.4PS, MKPowerShellDocObject, New-DynamicParam, New-ExternalHelpFromPlatyPSMarkdown, New-MKPowerShellConfigFile, New-Script, Plaster, platyPS, posh-git, PSReadLine, Publish-ModuleToNuGetGallery, Register-Shutdown, Reset-ModuleInProfile, Restart-PWSH, Restart-PWSHAdmin, Search-Items, Set-LocationAndStore, Set-MKPowerShellSetting, Skip-ModuleInProfile, Start-MKPowerShell, Update-ManifestFunctionsToExportField, Update-ModuleExports, Update-ReadmeFromPlatyPSMarkdown, Update-RootModuleUsingStatements, Update-SemVer
+Accepted values: Add-ModuleToProfile, BackupPredicateEnum, Backup-Sources, Build-Documentation, Build-PlatyPSMarkdown, ConvertTo-EnumFlag, Export-History, Get-LatestError, Get-ManifestKey, Get-MergedPath, Get-MKPowerShellSetting, Get-MKModuleInfo, GetModuleNameSet, GetSettingsNameSet, Import-History, Invoke-TestSuiteRunner, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.Flow, MKPowerShellDocObject, New-DynamicParam, New-ExternalHelpFromPlatyPSMarkdown, New-MKPowerShellConfigFile, New-Script, Plaster, platyPS, posh-git, PSReadLine, Publish-ModuleToNuGetGallery, Register-Shutdown, Reset-ModuleInProfile, Restart-PWSH, Restart-PWSHAdmin, Search-Items, Set-LocationAndStore, Set-MKPowerShellSetting, Skip-ModuleInProfile, Start-MKPowerShell, Update-ManifestFunctionsToExportField, Update-ModuleExports, Update-ReadmeFromPlatyPSMarkdown, Update-RootModuleUsingStatements, Update-SemVer
 
 Required: True
 Position: 0
@@ -89,6 +89,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Get-MKModuleInfo.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/module/Get-MKModuleInfo.ps1)
+[Get-MKModuleInfo.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/module/Get-MKModuleInfo.ps1)
 
-[Get-MKModuleInfo.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/module/Get-MKModuleInfo.Tests.ps1)
+[Get-MKModuleInfo.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/module/Get-MKModuleInfo.Tests.ps1)

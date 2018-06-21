@@ -17,7 +17,7 @@ Describe "Test Publish-ModuleToNuGetGallery" {
     
     Context "Call Publish-ModuleToNuGetGallery with NuGetApiKey value from config file." {
 
-        Mock Publish-Module -ModuleName MK.PowerShell.4PS
+        Mock Publish-Module -ModuleName MK.PowerShell.Flow
         
         Publish-ModuleToNuGetGallery -Path ($TestSupportModule.MockManifestPath) -NuGetApiKey 'd2a2cea9-624f-451d-acd2-cdcd2110ab5e' -DoNotConfirm
 
@@ -27,7 +27,7 @@ Describe "Test Publish-ModuleToNuGetGallery" {
             Assert-MockCalled Publish-Module -ParameterFilter {
                 $NuGetApiKey -eq 'd2a2cea9-624f-451d-acd2-cdcd2110ab5e' -and `
                     $Path -like '*TestModules*'
-            } -ModuleName MK.PowerShell.4PS
+            } -ModuleName MK.PowerShell.Flow
         }
     }
 }

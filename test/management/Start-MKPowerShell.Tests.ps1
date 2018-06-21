@@ -10,16 +10,16 @@ Describe "Test Start-MKPowerShell" {
     }
 
     Context "Test Restore-Formats when 'TurnOnExtendedFormats' is set to true" {
-        Mock Restore-RememberLastLocation {} -ModuleName MK.PowerShell.4PS
-        Mock Restore-QuickRestartSetting {} -ModuleName MK.PowerShell.4PS
-        Mock Backup-Sources {} -ModuleName MK.PowerShell.4PS
-        Mock Restore-History {} -ModuleName MK.PowerShell.4PS
-        # Mock Restore-Formats {} -ModuleName MK.PowerShell.4PS
-        Mock Register-Shutdown {} -ModuleName MK.PowerShell.4PS
+        Mock Restore-RememberLastLocation {} -ModuleName MK.PowerShell.Flow
+        Mock Restore-QuickRestartSetting {} -ModuleName MK.PowerShell.Flow
+        Mock Backup-Sources {} -ModuleName MK.PowerShell.Flow
+        Mock Restore-History {} -ModuleName MK.PowerShell.Flow
+        # Mock Restore-Formats {} -ModuleName MK.PowerShell.Flow
+        Mock Register-Shutdown {} -ModuleName MK.PowerShell.Flow
 
-        Mock Update-FormatData -MockWith {return $PrependPath } -ModuleName MK.PowerShell.4PS 
+        Mock Update-FormatData -MockWith {return $PrependPath } -ModuleName MK.PowerShell.Flow 
 
-        InModuleScope MK.PowerShell.4PS {
+        InModuleScope MK.PowerShell.Flow {
             Start-MKPowerShell
         }
         
@@ -28,7 +28,7 @@ Describe "Test Start-MKPowerShell" {
         }
 
         It "Should call 'Update-FormatData' with expected files." {
-            Assert-MockCalled Update-FormatData -ParameterFilter { $PrependPath.Count -eq 2 } -ModuleName MK.PowerShell.4PS 
+            Assert-MockCalled Update-FormatData -ParameterFilter { $PrependPath.Count -eq 2 } -ModuleName MK.PowerShell.Flow 
         } 
     } 
 } 

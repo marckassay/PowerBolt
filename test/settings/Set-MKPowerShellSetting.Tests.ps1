@@ -11,7 +11,7 @@ Describe "Test Set-MKPowerShellSetting" {
     
     Context "Setting TurnOnRememberLastLocation" {
 
-        Mock Restore-RememberLastLocation {} -ModuleName MK.PowerShell.4PS
+        Mock Restore-RememberLastLocation {} -ModuleName MK.PowerShell.Flow
 
         It "Should set TurnOnRememberLastLocation to '<Value>' in config file" -TestCases @(
             @{ Value = $false}
@@ -24,7 +24,7 @@ Describe "Test Set-MKPowerShellSetting" {
             $MKPowerShellConfig = Get-Content -Path $TestSupportModule.FixtureConfigFilePath | ConvertFrom-Json -AsHashtable
             $MKPowerShellConfig["TurnOnRememberLastLocation"] -eq $true | Should -Be $Value
 
-            Assert-MockCalled Restore-RememberLastLocation -ModuleName MK.PowerShell.4PS -Times 1
+            Assert-MockCalled Restore-RememberLastLocation -ModuleName MK.PowerShell.Flow -Times 1
         }
     } 
     

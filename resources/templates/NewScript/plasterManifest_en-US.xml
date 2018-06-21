@@ -5,7 +5,7 @@
         <name>NewScript</name>
         <id>a3d7e258-828b-4508-a3ae-467ed9955815</id>
         <version>1.0.0</version>
-        <title>New script for MK.PowerShell.4PS project</title>
+        <title>New script for MK.PowerShell.Flow project</title>
         <description>Designed to have verb-noun as the name of script.  A .ps1 and .Tests.ps1 will be created.</description>
         <author>Marc Kassay</author>
         <tags>Module, ScriptModule</tags>

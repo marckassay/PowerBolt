@@ -26,12 +26,12 @@ Describe "Test New-MKPowerShellConfigFile" {
 
     Context "Call New-MKPowerShellConfigFile when file exists" {
         It "Should prompt user about exisiting file" {
-            InModuleScope MK.PowerShell.4PS {
+            InModuleScope MK.PowerShell.Flow {
                 ### HACK: Before and After block is inside here since Pester seems to not like 
                 # nested Before and After
                 ### Before
                 $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'MK.PowerShell-config.json'
-                Get-Module MK.PowerShell.4PS | `
+                Get-Module MK.PowerShell.Flow | `
                     Select-Object -ExpandProperty FileList | `
                     ForEach-Object {if ($_ -like '*MK.PowerShell-config.json') {$_}} -OutVariable ModuleConfigFile
                 New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
@@ -54,13 +54,13 @@ Describe "Test New-MKPowerShellConfigFile" {
         }
 
         It "Should not prompt user about exisiting file" {
-            InModuleScope MK.PowerShell.4PS {
+            InModuleScope MK.PowerShell.Flow {
                 ### HACK: Before and After block is inside here since Pester seems to not like 
                 # nested Before and After
 
                 ### Before
                 $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'MK.PowerShell-config.json'
-                Get-Module MK.PowerShell.4PS | `
+                Get-Module MK.PowerShell.Flow | `
                     Select-Object -ExpandProperty FileList | `
                     ForEach-Object {if ($_ -like '*MK.PowerShell-config.json') {$_}} -OutVariable ModuleConfigFile
                 New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder

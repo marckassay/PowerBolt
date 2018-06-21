@@ -2,7 +2,7 @@
 <Configuration>
     <ViewDefinitions>
         <View>
-            <Name>MKPowerShell4PS.Format.PSModuleInfo.List</Name>
+            <Name>MKPowerShellFlow.Format.PSModuleInfo.List</Name>
             <ViewSelectedBy>
                 <TypeName>System.Management.Automation.PSModuleInfo</TypeName>
             </ViewSelectedBy>
@@ -11,7 +11,7 @@
                     <ListEntry>
                         <!-- TODO: trying to limit this view only when PSModuleInfo has single element for its Name property -->
                         <!-- https://msdn.microsoft.com/en-us/library/gg580904(v=vs.85).aspx -->
-                        <!--                         <EntrySelectedBy><SelectionCondition><TypeName>MKPowerShell4PS.Format.PSModuleInfo.List</TypeName><ScriptBlock>$_.Name.GetType() -is [System.String]</ScriptBlock></SelectionCondition></EntrySelectedBy> -->
+                        <!--                         <EntrySelectedBy><SelectionCondition><TypeName>MKPowerShellFlow.Format.PSModuleInfo.List</TypeName><ScriptBlock>$_.Name.GetType() -is [System.String]</ScriptBlock></SelectionCondition></EntrySelectedBy> -->
                         <ListItems>
                             <ListItem>
                                 <PropertyName>Name</PropertyName>

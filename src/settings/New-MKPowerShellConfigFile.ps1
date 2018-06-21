@@ -32,7 +32,7 @@ function New-MKPowerShellConfigFile {
             New-Item -Path $LeafBase -ItemType Directory -OutVariable ModuleConfigFolder
         }
 
-        Get-Module MK.PowerShell.4PS | `
+        Get-Module MK.PowerShell.Flow | `
             Select-Object -ExpandProperty FileList | `
             ForEach-Object {if ($_ -like '*MK.PowerShell-config.json') {$_}} -OutVariable ModuleConfigFile
 

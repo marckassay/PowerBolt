@@ -19,12 +19,12 @@ Describe "Test Import-History" {
             # TODO: it would better to Mock Get-History to return entries and Mock Add-History to
             # to do nothing; for that it will not confilict with testing.  the real testing is calculating
             # how many entries are needed.
-            Mock Add-History -ModuleName MK.PowerShell.4PS
+            Mock Add-History -ModuleName MK.PowerShell.Flow
             # $SessionHistories = Import-Csv -Path .\test\history\TestHistory.csv
 
             Import-History -Path .\test\history\TestHistory.csv
 
-            Assert-MockCalled Add-History -ModuleName MK.PowerShell.4PS -Times 1
+            Assert-MockCalled Add-History -ModuleName MK.PowerShell.Flow -Times 1
         }
     } 
 } 

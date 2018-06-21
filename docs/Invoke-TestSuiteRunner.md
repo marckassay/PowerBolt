@@ -1,7 +1,7 @@
 ---
-external help file: MK.PowerShell.4PS-help.xml
-Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Invoke-TestSuiteRunner.md
+external help file: MK.PowerShell.Flow-help.xml
+Module Name: MK.PowerShell.Flow
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Invoke-TestSuiteRunner.md
 schema: 2.0.0
 ---
 
@@ -43,7 +43,7 @@ Using the `ByName` validation parameter set and since no `TestFolderPath` value 
 Type: String
 Parameter Sets: ByName
 Aliases:
-Accepted values: Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.4PS, PackageManagement, Plaster, platyPS, posh-git, PowerShellGet, PSReadLine
+Accepted values: Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.Flow, PackageManagement, Plaster, platyPS, posh-git, PowerShellGet, PSReadLine
 
 Required: True
 Position: 0
@@ -97,6 +97,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Invoke-TestSuiteRunner.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/test/Invoke-TestSuiteRunner.ps1)
+[Invoke-TestSuiteRunner.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/test/Invoke-TestSuiteRunner.ps1)
 
-[Invoke-TestSuiteRunner.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/test/Invoke-TestSuiteRunner.Tests.ps1)
+[Invoke-TestSuiteRunner.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/test/Invoke-TestSuiteRunner.Tests.ps1)

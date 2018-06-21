@@ -1,7 +1,7 @@
 ---
-external help file: MK.PowerShell.4PS-help.xml
-Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/New-Script.md
+external help file: MK.PowerShell.Flow-help.xml
+Module Name: MK.PowerShell.Flow
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-Script.md
 schema: 2.0.0
 ---
 
@@ -93,8 +93,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[New-Script.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/scaffolds/New-Script.ps1)
+[New-Script.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/scaffolds/New-Script.ps1)
 
-[New-Script.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/scaffolds/New-Script.Tests.ps1)
+[New-Script.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/scaffolds/New-Script.Tests.ps1)
 
 [Plaster - Creating A Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md)

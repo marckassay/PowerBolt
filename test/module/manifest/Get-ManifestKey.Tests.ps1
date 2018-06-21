@@ -23,7 +23,7 @@ Describe "Test Get-ManifestKey" {
                 '.\resources\formats\PSModuleInfo.format.ps1xml'
             ) 
 
-            InModuleScope -ModuleName MK.PowerShell.4PS {
+            InModuleScope -ModuleName MK.PowerShell.Flow {
                 $Results = Get-ManifestKey -Path 'TestDrive:\MockModuleA' -Key 'FormatsToProcess'
                 $Results.Count | Should -Be 2
                 $Results[0] | Should -Be 'resources\formats\HistoryInfo.format.ps1xml'

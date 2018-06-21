@@ -1,7 +1,7 @@
 ---
-external help file: MK.PowerShell.4PS-help.xml
-Module Name: MK.PowerShell.4PS
-online version: https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/docs/Search-Items.md
+external help file: MK.PowerShell.Flow-help.xml
+Module Name: MK.PowerShell.Flow
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Search-Items.md
 schema: 2.0.0
 ---
 
@@ -24,7 +24,7 @@ Search-Items [-Path] <String> [-Pattern] <String[]> [[-Include] <String[]>] [[-E
 
 ### Example 1
 ```powershell
-PS C:\> Search-Items -Path C:\Users\Alice\MK.PowerShell.4PS -Pattern '.*TODO.*' -Recurse
+PS C:\> Search-Items -Path C:\Users\Alice\MK.PowerShell.Flow -Pattern '.*TODO.*' -Recurse
 
 Name                           Value
 ----                           -----
@@ -131,6 +131,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Search-Items.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/src/utility/Search-Items.ps1)
+[Search-Items.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/utility/Search-Items.ps1)
 
-[Search-Items.Tests.ps1](https://github.com/marckassay/MK.PowerShell.4PS/blob/0.0.1/test/utility/Search-Items.Tests.ps1)
+[Search-Items.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/utility/Search-Items.Tests.ps1)
