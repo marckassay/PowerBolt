@@ -15,13 +15,35 @@ Updates the module's semantic version value in the manifest file.
 ### ByPath (Default)
 ```
 Update-SemVer [[-Path] <String>] [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>]
- [-BumpMajor] [-BumpMinor] [-BumpPatch] [<CommonParameters>]
+ [-SourceFolderPath <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [-AutoUpdate] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Update-SemVer [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>] [-BumpMajor]
- [-BumpMinor] [-BumpPatch] -Name <String> [<CommonParameters>]
+Update-SemVer [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>]
+ [-SourceFolderPath <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [-AutoUpdate] -Name <String>
+ [<CommonParameters>]
+```
+
+### ByValue
+```
+Update-SemVer [-Value <String>] [-SourceFolderPath <String>] [<CommonParameters>]
+```
+
+### ByNumbers
+```
+Update-SemVer [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>] [-SourceFolderPath <String>]
+ [<CommonParameters>]
+```
+
+### ByBumping
+```
+Update-SemVer [-SourceFolderPath <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [<CommonParameters>]
+```
+
+### ByAutoUpdateSemVer
+```
+Update-SemVer [-SourceFolderPath <String>] [-AutoUpdate] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,7 +65,7 @@ PS C:\> {{ Add example code here }}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: ByPath, ByName, ByBumping
 Aliases:
 
 Required: False
@@ -58,7 +80,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: ByPath, ByName, ByBumping
 Aliases:
 
 Required: False
@@ -73,7 +95,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: ByPath, ByName, ByBumping
 Aliases:
 
 Required: False
@@ -88,7 +110,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
+Parameter Sets: ByPath, ByName, ByNumbers
 Aliases:
 
 Required: False
@@ -103,7 +125,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
+Parameter Sets: ByPath, ByName, ByNumbers
 Aliases:
 
 Required: False
@@ -118,7 +140,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
+Parameter Sets: ByPath, ByName, ByNumbers
 Aliases:
 
 Required: False
@@ -148,7 +170,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByPath, ByName, ByValue
 Aliases:
 
 Required: False
@@ -167,6 +189,36 @@ Parameter Sets: ByName
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AutoUpdate
+{{Fill AutoUpdate Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: ByPath, ByName, ByAutoUpdateSemVer
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SourceFolderPath
+{{Fill SourceFolderPath Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

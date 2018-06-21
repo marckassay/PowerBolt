@@ -40,23 +40,10 @@ class TestRunnerSupportModule {
         Set-Location -Path $this.FixtureDirectoryPath
         $this.Setup($MockModuleName, '')
     }
-    <#
-    [void]Setup() {
-        $this.Setup('', '')
-    }
-    
-    [void]Setup([string]$MockModuleName) {
-        $this.Setup($MockModuleName, '')
-    } 
-    #>
+ 
     [void]Setup ([string]$MockModuleName, [string]$FixtureConfigFilePath) {
         # lets hope there is only one psd1 file in this directory
         $this.FixtureManifestPath = Get-Item '*.psd1' | Select-Object -First 1 | Select-Object -ExpandProperty FullName
-
-        # if this is the first test, module may be in "production install" state, if so remove it.
-        Split-Path $this.FixtureDirectoryPath -Leaf | `
-            Get-Module | `
-            Remove-Module -ErrorAction SilentlyContinue
 
         if (-not $FixtureConfigFilePath) {
             # MK.PowerShell module will copy config file to this path:

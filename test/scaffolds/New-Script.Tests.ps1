@@ -5,12 +5,12 @@ Describe "Test New-Script" {
         $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleB')
         $PlasterTemplatePath = Join-Path -Path $TestSupportModule.MockDirectoryPath -ChildPath 'resources\plasterManifest_en-US.xml'
 
+        Push-Location
         Set-Location $TestSupportModule.MockDirectoryPath
     }
     
     AfterAll {
-        # This will throw an exception: 
-        # Remove-Item : Cannot remove the item at 'C:\Users\Marc\AppData\Local\Temp\6f248999-9933-46c8-966a-30c661214cdd' because it is in use.
+        Pop-Location
         $TestSupportModule.Teardown()
     }
     

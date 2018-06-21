@@ -32,9 +32,9 @@ function Invoke-TestSuiteRunner {
         Push-Location -StackName 'PriorTestLocation'
         
         $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath $TestFolderPath -Resolve
+
+        # FYI: https://github.com/PowerShell/Plaster/blob/master/docs/en-US/Invoke-Plaster.md
         $ArgList = @{ Script = $ScriptPath; PassThru = $true }
-        
-        Remove-Module -Name $ModInfo.Name
     }
 
     process {
@@ -44,7 +44,7 @@ function Invoke-TestSuiteRunner {
     }
 
     end {
-        Import-Module -Name ($ModInfo.Path)
+        Import-Module ($ModInfo.Path) -Global -Force
         
         Pop-Location -StackName 'PriorTestLocation'
     }
