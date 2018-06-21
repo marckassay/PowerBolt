@@ -1,4 +1,6 @@
 using module .\..\dynamicparams\GetPlasterTemplateVarSet.ps1
+
+# TODO: add Path and Name parameters so that the scaffold files can be added to rootmodule
 function New-Script {
     [CmdletBinding(PositionalBinding = $True, 
         DefaultParameterSetName = "ByTemplate")]

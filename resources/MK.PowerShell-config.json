@@ -9,6 +9,7 @@
   "LastLocation": "",
   "NuGetApiKey": "",
   "TurnOnAvailableUpdates": "true",
+  "TurnOnAutoUpdateSemVer": "true",
   "TurnOnBackup": "false",
   "TurnOnExtendedFormats": "true",
   "TurnOnExtendedTypes": "true",

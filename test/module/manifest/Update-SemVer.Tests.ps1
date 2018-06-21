@@ -46,4 +46,37 @@ Describe "Test Update-SemVer" {
             $Results | Should -Be '1.0.0'
         }
     }
+
+    Context "Calling Update-SemVer with -AutoUpdate" {
+        Push-Location
+        Set-Location $TestSupportModule.MockDirectoryPath
+            
+        Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -Value '3.0.0'
+
+        It "Should change version to Git branch name - 3.0.1" {
+
+            Invoke-Expression -Command 'git checkout -b 3.0.1'
+            
+            $Results = Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate
+            $Results | Should -Be '3.0.1'
+        }
+
+        It "Should change version to Git branch name - 3.1.1" {
+ 
+            Invoke-Expression -Command 'git checkout -b 3.1.1'
+            
+            $Results = Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate
+            $Results | Should -Be '3.1.1'
+        }
+
+        It "Should change version to Git branch name - 4.0.0" {
+ 
+            Invoke-Expression -Command 'git checkout -b 4.0.0'
+            
+            $Results = Update-SemVer -Path ($TestSupportModule.MockDirectoryPath) -AutoUpdate
+            $Results | Should -Be '4.0.0'
+        }
+
+        Pop-Location
+    }
 }

@@ -1,5 +1,5 @@
-# NoExport: Get-ManifestKey
-function Get-ManifestKey {
+# NoExport: Get-GitBranchName
+function Get-GitBranchName {
     [CmdletBinding(PositionalBinding = $True, 
         DefaultParameterSetName = "ByPath")]
     Param
@@ -8,11 +8,7 @@ function Get-ManifestKey {
             Position = 0,
             ValueFromPipeline = $False, 
             ParameterSetName = "ByPath")]
-        [string]$Path = '.',
-
-        [Parameter(Mandatory = $True)]
-        [ValidateSet("AliasesToExport", "FunctionsToExport", "RootModule", "TypesToProcess", "CmdletsToExport", "PrivateData", "FileList", "Author", "ModuleVersion", "CompanyName", "FormatsToProcess", "GUID", "Copyright")]
-        [String]$Key
+        [string]$Path = '.'
     )
     
     DynamicParam {
@@ -30,14 +26,10 @@ function Get-ManifestKey {
         else {
             $ModInfo = Get-MKModuleInfo -Path $Path
         }
-    
-        try {
-            $Results = (Import-PowerShellDataFile -Path $ModInfo.ManifestFilePath)[$Key]
-        }
-        catch {
-        
-        }
 
-        $Results
+        Join-Path -Path $ModInfo.Path -ChildPath '.git/HEAD' -OutVariable GitHEADPath | Out-Null
+        $GitRaw = Get-Content -Path $GitHEADPath -Raw
+        
+        [regex]::Match($GitRaw, '(?<=[\\|\/])[\w\.]*$').Value
     }
 }
