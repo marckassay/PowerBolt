@@ -1,14 +1,12 @@
 # MK.PowerShell.Flow
 
-Created to streamline coding by primarily completing an objective of, having a [PowerShell](https://github.com/PowerShell/PowerShell) idea that is published to the world in minutes without compromising quality of module.
+Created to streamline coding by primarily completing an objective of: having a [PowerShell](https://github.com/PowerShell/PowerShell) idea that is published to the world in minutes without compromising quality of module.
 
 You may have a PowerShell idea and gone thru the process of preparing this idea into a module so that it's available to be shared. And in doing so you might of created tests, documentation and published it to a repository such as [PowerShell Gallery](https://www.powershellgallery.com/). This can be cumbersome especially when completing other objectives. Flow attempts to remove this hinderance for you. 
 
-Another objective of Flow is to encourage publishing small, monad (how apropos!) scripts instead of a monolithic module in hopes to have it adapted in other modules. Hence the rationale of Flow is to have several script files (.ps1) and one root module (.psm1). Where as individual script files can be published and can be exported when publishing the root module.
+Another objective of Flow is to encourage publishing small, monad (how apropos!) scripts instead of a monolithic module in hopes to have it adapted in other modules. The rationale of Flow is to have several script files (.ps1) and one root module (.psm1). Where as individual script files can be published and can be exported when publishing the root module.
 
-## Flow 101
-
-The development flow:
+## The Development Flow
 
 - Create
 - Develop and Test
@@ -63,23 +61,19 @@ I assume most developers organize their projects or repos in some location on th
 
 To explain further on the reason for this command, by giving an example, I currently have individual PowerShell modules listed in my PowerShell profile. These modules that are listed point to my development directory where they reside on my file system. So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory. A cumbersome process indeed, so this command has been created to speed up that process. In an addition Flow can store your API key on your file system using [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-MKPowerShellSetting.md) which will be retrieved automatically when [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) is called if its `NuGetApiKey` parameter value is not set.
 
-## Flow 102
+## What conformity does Flow expect in your module?
 
-What conformity does Flow expect in your module?
+Although it's still early in development, I can only recall the following conditions that may have issues:
 
-Although it's early in development, I can only recall the following conditions that may have issues:
++ URLs are parsed and validated with the expectation of them structured the way GitHub has them.  
 
-+ GitHub:  I'm obviously using this as SCM and some Regular Expressions validate URLs expecting it to be formatted the way GitHub has them. 
++ Module folder, manifest and root module are expected to be the name of the module.
 
-+ module folder name: Is expected to be the same name as the manifest and root module file.
++ The 'src', 'test' and 'docs' folders inside the module folder are where the source, test and document files respectively are expected to reside.
 
-+ src:  This is where source code is expected to reside inside the module folder
++ Git development branches are expected to be in SemVer format (currently, simple variant only must be used (regex: \d\.\d\.\d)) in order for auto update version to work.
 
-+ test: This is where test code is expected to reside inside the module folder
-
-+ git branch name: Git development branches are expected to be in SemVer format (simple variant only currently). Otherwise it will not update module's version automatically.
-
-## Flow 103
+## Flow Config File
 
 When Flow is installed and ran for the first time, it will place a copy of its config file in the ApplicationData folder. Use [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Get-MKPowerShellSetting.md) and [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-MKPowerShellSetting.md) accordingly.  All values below are default values.
 

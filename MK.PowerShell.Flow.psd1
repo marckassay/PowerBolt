@@ -51,7 +51,20 @@
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    # RequiredModules = @()
+    RequiredModules   = @(
+        @{ModuleName      = 'Plaster';
+            ModuleVersion = '1.1.3';
+            GUID          = 'cfce3c5e-402f-412a-a83a-7b7ee9832ff4'
+        },
+        @{ModuleName      = 'platyPS';
+            ModuleVersion = '0.9.0';
+            GUID          = '0bdcabef-a4b7-4a6d-bf7e-d879817ebbff'
+        },
+        @{ModuleName      = 'Pester';
+            ModuleVersion = '4.1.1';
+            GUID          = 'a699dea5-2c73-4616-a270-1f7abb777e71'
+        }
+    )
 
     # Assemblies that must be loaded prior to importing this module
     # RequiredAssemblies = @()
@@ -128,7 +141,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags       = @('development', 'workflow')
 
             # A URL to the license for this module.
             LicenseUri = 'https://raw.githubusercontent.com/marckassay/MK.PowerShell.Flow/0.0.2/LICENSE'
