@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Publish-ModuleToNuGetGallery.md
 schema: 2.0.0
 ---
 
@@ -14,14 +14,14 @@ Streamlines publishing a module using `Publish-Module`.
 
 ### ByPath (Default)
 ```
-Publish-ModuleToNuGetGallery [[-Path] <String>] [[-NuGetApiKey] <String>] [[-Exclude] <String[]>]
- [-DoNotConfirm] [-WhatIf] [<CommonParameters>]
+Publish-ModuleToNuGetGallery [[-Path] <String>] [-NuGetApiKey <String>] [-Exclude <String[]>] [-DoNotConfirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Publish-ModuleToNuGetGallery [[-NuGetApiKey] <String>] [[-Exclude] <String[]>] [-DoNotConfirm] [-WhatIf]
- -Name <String> [<CommonParameters>]
+Publish-ModuleToNuGetGallery [-NuGetApiKey <String>] [-Exclude <String[]>] [-DoNotConfirm] [-WhatIf]
+ [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,6 +40,21 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -DoNotConfirm
+{{Fill DoNotConfirm Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Exclude
 {{Fill Exclude Description}}
 
@@ -49,7 +64,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByName
+Aliases:
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.Flow, Pester, Plaster, Plaster, platyPS, posh-git, PSReadLine
+
+Required: True
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -64,7 +95,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -101,36 +132,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DoNotConfirm
-{{Fill DoNotConfirm Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Name
-{{Fill Name Description}}
-
-```yaml
-Type: String
-Parameter Sets: ByName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -146,6 +147,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Publish-ModuleToNuGetGallery.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/publish/Publish-ModuleToNuGetGallery.ps1)
+[Publish-ModuleToNuGetGallery.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/publish/Publish-ModuleToNuGetGallery.ps1)
 
-[Publish-ModuleToNuGetGallery.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1)
+[Publish-ModuleToNuGetGallery.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1)

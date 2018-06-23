@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Update-ModuleExports.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ModuleExports.md
 schema: 2.0.0
 ---
 
@@ -14,14 +14,14 @@ Updates root-module and manifest file with commands to be exported.
 
 ### ByPath (Default)
 ```
-Update-ModuleExports [[-Path] <String>] [-SourceFolderPath <String>] [[-Include] <String[]>]
- [[-Exclude] <String[]>] [-PassThru] [<CommonParameters>]
+Update-ModuleExports [[-Path] <String>] [-SourceFolderPath <String>] [-Include <String[]>]
+ [-Exclude <String[]>] [-PassThru] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Update-ModuleExports [-SourceFolderPath <String>] [[-Include] <String[]>] [[-Exclude] <String[]>] [-PassThru]
- -Name <String> [<CommonParameters>]
+Update-ModuleExports [-SourceFolderPath <String>] [-Include <String[]>] [-Exclude <String[]>] [-PassThru]
+ [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -47,7 +47,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,7 +62,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByName
+Aliases:
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.Flow, Pester, Plaster, Plaster, platyPS, posh-git, PSReadLine
+
+Required: True
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -98,21 +114,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Name
-{{Fill Name Description}}
-
-```yaml
-Type: String
-Parameter Sets: ByName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SourceFolderPath
 {{Fill SourceFolderPath Description}}
 
@@ -143,6 +144,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Update-ModuleExports.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/module/Update-ModuleExports.ps1)
+[Update-ModuleExports.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/Update-ModuleExports.ps1)
 
-[Update-ModuleExports.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/module/Update-ModuleExports.Tests.ps1)
+[Update-ModuleExports.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/Update-ModuleExports.Tests.ps1)

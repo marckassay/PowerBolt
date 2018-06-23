@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-LocationAndStore.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Set-LocationAndStore.md
 schema: 2.0.0
 ---
 
@@ -90,6 +90,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Set-LocationAndStore.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/management/Set-LocationAndStore.ps1)
+[Set-LocationAndStore.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/management/Set-LocationAndStore.ps1)
 
-[Set-LocationAndStore.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/management/Set-LocationAndStore.Tests.ps1)
+[Set-LocationAndStore.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/management/Set-LocationAndStore.Tests.ps1)

@@ -161,19 +161,14 @@ $BodyContent
             $FileUrl = $this.OnlineVersionUrl -f $_.BaseName
             $FileContent = [regex]::Replace($FileContent, "(?<=online version:).*", " $FileUrl")
 
-            # update any other exisiting urls that similiarly matches OnlineVersionUrl without
+            # update any other exisiting urls with branchname that similiarly matches OnlineVersionUrl without
             # overwriting filename
             $UrlSegmentPriorToGitBranchName = $FileUrl.Split('blob')[0] + 'blob'
-            $SemVerMatched = [regex]::Match($FileUrl, [MKDocumentationInfo]::SemVerRegExPattern)
-     
-            if ($SemVerMatched.Success) {
-                $MDFolder = $this.MarkdownFolder
-                $FileContent = [regex]::Replace($FileContent, "(?<=$UrlSegmentPriorToGitBranchName[\\|\/]).*?(?=[\\|\/]$MDFolder)", $SemVerMatched.Value)
-            }
+            $GitBranchName = [regex]::Match($FileUrl, "(?<=$UrlSegmentPriorToGitBranchName[\\|\/])[^\/|\\]*")
+            $FileContent = [regex]::Replace($FileContent, "(?<=$UrlSegmentPriorToGitBranchName[\\|\/])[^\/|\\]*", $GitBranchName)
             
             if ($AddSourceAndTestFileLinks -eq $True) {
                 $ModuleName = $this.ModuleName
-                $GitBranchName = [regex]::Match($FileUrl, '(?<=blob[\\|\/])[^\/|\\]*').Value
                 $RelatedLinksContent = [regex]::Match($FileContent, '(?<=## RELATED LINKS)[\w\W]*$').Value
                 $RelatedLinksContent = $RelatedLinksContent.TrimStart()
 

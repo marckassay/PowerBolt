@@ -4,14 +4,19 @@ function Reset-ModuleInProfile {
     (
         [Parameter(Mandatory = $False, Position = 1)]
         [string]
-        $ProfilePath = $(Get-Variable Profile -ValueOnly)
+        $ProfilePath = $(Get-Variable Profile -ValueOnly),
+
+        [switch]$ByPassForDocumentation
     )
 
     DynamicParam {
-        if (-not $ProfilePath) {
-            $ProfilePath = $(Get-Variable Profile -ValueOnly)
+        # if no $ProfilePath then, platyPS likely is calling 
+        if ($ProfilePath) {
+            return GetImportNameParameterSet -LineStatus 'Comment' -ProfilePath $ProfilePath
         }
-        return Get-ImportNameParameterSet -LineStatus 'Comment' -ProfilePath $ProfilePath 
+        else {
+            return GetImportNameParameterSet -LineStatus 'Comment' -ByPassForDocumentation
+        }
     }
 
     begin {

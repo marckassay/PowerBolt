@@ -5,7 +5,7 @@ Describe "Test GetPlasterTemplateVarSet" {
         $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleB')
 
         $AlicesTemplates = New-Item -Path (Join-Path $TestSupportModule.TestDrivePath "AlicesTemplates") -ItemType Directory
-        <#         
+        <#
         Copy-Item -Path (Join-Path -Path $TestSupportModule.FixtureDirectoryPath -ChildPath 'resources\templates\NewModule') -Destination $AlicesTemplates -Recurse
         $MockNewModuleTemplatePath = Join-Path -Path $AlicesTemplates -ChildPath 'NewModule\plasterManifest_en-US.xml' 
         #>

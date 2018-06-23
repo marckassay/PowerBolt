@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Update-SemVer.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-SemVer.md
 schema: 2.0.0
 ---
 
@@ -15,35 +15,35 @@ Updates the module's semantic version value in the manifest file.
 ### ByPath (Default)
 ```
 Update-SemVer [[-Path] <String>] [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>]
- [-SourceFolderPath <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [-AutoUpdate] [<CommonParameters>]
+ [[-SourceFolderPath] <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [-AutoUpdate] [<CommonParameters>]
 ```
 
 ### ByName
 ```
 Update-SemVer [-Value <String>] [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>]
- [-SourceFolderPath <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [-AutoUpdate] -Name <String>
+ [[-SourceFolderPath] <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [-AutoUpdate] [-Name] <String>
  [<CommonParameters>]
 ```
 
 ### ByValue
 ```
-Update-SemVer [-Value <String>] [-SourceFolderPath <String>] [<CommonParameters>]
+Update-SemVer [-Value <String>] [[-SourceFolderPath] <String>] [<CommonParameters>]
 ```
 
 ### ByNumbers
 ```
-Update-SemVer [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>] [-SourceFolderPath <String>]
+Update-SemVer [[-Major] <Int32>] [[-Minor] <Int32>] [[-Patch] <Int32>] [[-SourceFolderPath] <String>]
  [<CommonParameters>]
 ```
 
 ### ByBumping
 ```
-Update-SemVer [-SourceFolderPath <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [<CommonParameters>]
+Update-SemVer [[-SourceFolderPath] <String>] [-BumpMajor] [-BumpMinor] [-BumpPatch] [<CommonParameters>]
 ```
 
 ### ByAutoUpdateSemVer
 ```
-Update-SemVer [-SourceFolderPath <String>] [-AutoUpdate] [<CommonParameters>]
+Update-SemVer [[-SourceFolderPath] <String>] [-AutoUpdate] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,6 +59,21 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -AutoUpdate
+{{Fill AutoUpdate Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: ByPath, ByName, ByAutoUpdateSemVer
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -BumpMajor
 {{Fill BumpMajor Description}}
@@ -135,6 +150,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Name
+{{Fill Name Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByName
+Aliases:
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.Flow, Pester, Plaster, Plaster, platyPS, posh-git, PSReadLine
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Patch
 {{Fill Patch Description}}
 
@@ -165,57 +196,27 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Value
-{{Fill Value Description}}
-
-```yaml
-Type: String
-Parameter Sets: ByPath, ByName, ByValue
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Name
-{{Fill Name Description}}
-
-```yaml
-Type: String
-Parameter Sets: ByName
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AutoUpdate
-{{Fill AutoUpdate Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: ByPath, ByName, ByAutoUpdateSemVer
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SourceFolderPath
 {{Fill SourceFolderPath Description}}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Value
+{{Fill Value Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByPath, ByName, ByValue
 Aliases:
 
 Required: False
@@ -240,6 +241,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Update-SemVer.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/module/manifest/Update-SemVer.ps1)
+[Update-SemVer.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/manifest/Update-SemVer.ps1)
 
-[Update-SemVer.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/module/manifest/Update-SemVer.Tests.ps1)
+[Update-SemVer.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/manifest/Update-SemVer.Tests.ps1)

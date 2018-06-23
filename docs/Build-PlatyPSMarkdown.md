@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Build-PlatyPSMarkdown.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-PlatyPSMarkdown.md
 schema: 2.0.0
 ---
 
@@ -15,21 +15,21 @@ With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, calls [
 ### ByPath (Default)
 ```
 Build-PlatyPSMarkdown [[-Path] <String>] [-MarkdownFolder <String>] [-Locale <String>]
- [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Force]
  [<CommonParameters>]
 ```
 
 ### ByPipe
 ```
-Build-PlatyPSMarkdown -DocInfo <MKDocumentationInfo> [-MarkdownFolder <String>] [-Locale <String>]
- [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
+Build-PlatyPSMarkdown [-DocInfo] <MKDocumentationInfo> [-MarkdownFolder <String>] [-Locale <String>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Force]
  [<CommonParameters>]
 ```
 
 ### ByName
 ```
 Build-PlatyPSMarkdown [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersionUrlTemplate <String>]
- [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] -Name <String> [<CommonParameters>]
+ [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Force] [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +45,21 @@ PS C:\> Build-PlatyPSMarkdown -Path C:\Users\Alice\PowerSploit -NoReImportModule
 With specified `Path` value and `NoReImportModule` switched, this will generate (new or update) files for PowerSploit module. The `NoReImportModule` prevents re-importing PowerSploit so the current state of this imported module is used. In otherwords, if changes to the source code of PowerSploit has been made it will not be available until it is imported again. And because of that `NoReImportModule` is typically not switched.
 
 ## PARAMETERS
+
+### -DocInfo
+{{Fill DocInfo Description}}
+
+```yaml
+Type: MKDocumentationInfo
+Parameter Sets: ByPipe
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
 
 ### -Locale
 The name of the folder where PowerShell XML file will reside.
@@ -83,9 +98,10 @@ If the module is already imported, the value is the name of the module.
 Type: String
 Parameter Sets: ByName
 Aliases:
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.Flow, Pester, Plaster, Plaster, platyPS, posh-git, PSReadLine
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -152,18 +168,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DocInfo
-{{Fill DocInfo Description}}
+### -Force
+{{Fill Force Description}}
 
 ```yaml
-Type: MKDocumentationInfo
-Parameter Sets: ByPipe
+Type: SwitchParameter
+Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -182,12 +198,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Build-PlatyPSMarkdown.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/documentation/Build-PlatyPSMarkdown.ps1)
+[Build-PlatyPSMarkdown.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/documentation/Build-PlatyPSMarkdown.ps1)
 
-[Build-PlatyPSMarkdown.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/documentation/Build-PlatyPSMarkdown.Tests.ps1)
+[Build-PlatyPSMarkdown.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/documentation/Build-PlatyPSMarkdown.Tests.ps1)
 
-[`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Build-Documentation.md)
+[`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-Documentation.md)
 
-[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
+[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 
-[`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Update-ReadmeFromPlatyPSMarkdown.md)
+[`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ReadmeFromPlatyPSMarkdown.md)

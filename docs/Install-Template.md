@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Install-Template.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Install-Template.md
 schema: 2.0.0
 ---
 
@@ -12,9 +12,15 @@ Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Pl
 
 ## SYNTAX
 
+### ByTemplatePath (Default)
 ```
-Install-Template -PlasterTemplatePath <String> -ScriptCongruentPath <String> -ScriptName <String>
+Install-Template [-TemplatePath] <String> [-ScriptCongruentPath] <String> [-ScriptName] <String>
  [<CommonParameters>]
+```
+
+### ByTemplateName
+```
+Install-Template [-TemplateName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,31 +39,16 @@ One can deduce that the variable 'PLASTER_PARAM_AppName' is in the template file
 
 ## PARAMETERS
 
-### -PlasterTemplatePath
-A path value to a Plaster template (manifest) file.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ScriptCongruentPath
 {{Fill ScriptCongruentPath Description}}
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByTemplatePath
 Aliases:
 
 Required: True
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -68,11 +59,42 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: ByTemplatePath
 Aliases:
 
 Required: True
-Position: Named
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TemplateName
+{{Fill TemplateName Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByTemplateName
+Aliases:
+Accepted values: NewScript, NewModule
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TemplatePath
+A path value to a Plaster template (manifest) file.
+
+```yaml
+Type: String
+Parameter Sets: ByTemplatePath
+Aliases:
+
+Required: True
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -93,8 +115,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Install-Template.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/scaffolds/Install-Template.ps1)
+[Install-Template.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/scaffolds/Install-Template.ps1)
 
-[Install-Template.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/scaffolds/Install-Template.Tests.ps1)
+[Install-Template.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/scaffolds/Install-Template.Tests.ps1)
 
 [Plaster - Creating A Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md)

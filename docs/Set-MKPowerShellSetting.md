@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-MKPowerShellSetting.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Set-MKPowerShellSetting.md
 schema: 2.0.0
 ---
 
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: HistoryLocation, TurnOnRememberLastLocation, TurnOnQuickRestart, TurnOnBackup, TurnOnExtendedTypes, Backups, TurnOnExtendedFormats, NuGetApiKey, LastLocation, TurnOnHistoryRecording, BackupPolicy, TurnOnAvailableUpdates
+Accepted values: TurnOnBackup, LastLocation, Backups, TurnOnAutoUpdateSemVer, NuGetApiKey, TurnOnExtendedTypes, HistoryLocation, TurnOnQuickRestart, TurnOnExtendedFormats, TurnOnHistoryRecording, BackupPolicy, TurnOnRememberLastLocation, TurnOnAvailableUpdates
 
 Required: False
 Position: 0
@@ -107,8 +107,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Set-MKPowerShellSetting.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/settings/Set-MKPowerShellSetting.ps1)
+[Set-MKPowerShellSetting.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/settings/Set-MKPowerShellSetting.ps1)
 
-[Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/settings/Set-MKPowerShellSetting.Tests.ps1)
+[Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/settings/Set-MKPowerShellSetting.Tests.ps1)
 
-[`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Get-MKPowerShellSetting.md)
+[`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MKPowerShellSetting.md)

@@ -32,7 +32,10 @@ function Build-PlatyPSMarkdown {
         [string]$OnlineVersionUrlPolicy = 'Auto',
         
         [switch]
-        $NoReImportModule
+        $NoReImportModule,
+        
+        [switch]
+        $Force
     ) 
     
     DynamicParam {
@@ -89,14 +92,14 @@ function Build-PlatyPSMarkdown {
                 Select-Object -ExpandProperty BaseName | `
                 ForEach-Object {
                 if ($ExportedFunctions -notcontains $_) {
-                    Remove-Item -Path ($DocInfo.ModuleMarkdownFolder + "\$_.md") -Confirm
+                    Remove-Item -Path ($DocInfo.ModuleMarkdownFolder + "\$_.md") -Confirm:$($Force.IsPresent -ne $True)
                 }
             }
 
             Update-MarkdownHelpModule -Path $DocInfo.ModuleMarkdownFolder | Out-Null
 
             # TODO: adding a parameter to Build-PlatyPSMarkdown for this line below wouldnt require 
-            # much work. should remove source-and-test links when and if setting to False when they
+            # much work. should remove source-and-test links when and if setting to False if they
             # exist.
             $DocInfo.UpdateOnlineVersionUrl($False)
         }

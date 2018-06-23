@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Get-MergedPath.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MergedPath.md
 schema: 2.0.0
 ---
 
@@ -117,6 +117,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Get-MergedPath.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/utility/Get-MergedPath.ps1)
+[Get-MergedPath.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/utility/Get-MergedPath.ps1)
 
 [https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c](https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c)

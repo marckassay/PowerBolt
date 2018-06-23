@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Build-Documentation.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-Documentation.md
 schema: 2.0.0
 ---
 
@@ -22,7 +22,7 @@ Build-Documentation [[-Path] <String>] [-MarkdownFolder <String>] [-Locale <Stri
 ### ByName
 ```
 Build-Documentation [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersionUrlTemplate <String>]
- [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] -Name <String> [<CommonParameters>]
+ [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -76,9 +76,10 @@ If the module is already imported, the value is the name of the module.
 Type: String
 Parameter Sets: ByName
 Aliases:
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, MK.PowerShell.Flow, Pester, Plaster, Plaster, platyPS, posh-git, PSReadLine
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -160,12 +161,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Build-Documentation.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/documentation/Build-Documentation.ps1)
+[Build-Documentation.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/documentation/Build-Documentation.ps1)
 
-[Build-Documentation.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/documentation/Build-Documentation.Tests.ps1)
+[Build-Documentation.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/documentation/Build-Documentation.Tests.ps1)
 
-[`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Build-PlatyPSMarkdown.md)
+[`Build-PlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-PlatyPSMarkdown.md)
 
-[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
+[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 
-[`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Update-ReadmeFromPlatyPSMarkdown.md)
+[`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ReadmeFromPlatyPSMarkdown.md)

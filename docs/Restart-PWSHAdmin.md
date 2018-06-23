@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Restart-PWSHAdmin.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Restart-PWSHAdmin.md
 schema: 2.0.0
 ---
 
@@ -45,6 +45,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Restart-PWSHAdmin.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/management/Restart-PWSHAdmin.ps1)
+[Restart-PWSHAdmin.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/management/Restart-PWSHAdmin.ps1)
 
-[`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Restart-PWSH.md)
+[`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Restart-PWSH.md)

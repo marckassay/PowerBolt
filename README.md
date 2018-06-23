@@ -154,62 +154,62 @@ Using the alias `pwsh` and `pwsha` will restart PowerShell.  The former restarts
 
 ## Commands
 
-#### [`Add-ModuleToProfile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Add-ModuleToProfile.md)
+#### [`Add-ModuleToProfile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Add-ModuleToProfile.md)
 
 Appends content of the PowerShell session's profile with an `Import-Module` statement. 
 
-#### [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Build-Documentation.md)
+#### [`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-Documentation.md)
 
 Creates or updates help documentation files and module's README file. Also creates a XML based help documentation file for PowerShell. 
 
-#### [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Get-MKPowerShellSetting.md)
+#### [`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MKPowerShellSetting.md)
 
 Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch. 
 
-#### [`Invoke-TestSuiteRunner`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Invoke-TestSuiteRunner.md)
+#### [`Install-Template`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Install-Template.md)
+
+{{Fill in the Synopsis}} 
+
+#### [`Invoke-TestSuiteRunner`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Invoke-TestSuiteRunner.md)
 
 Creates a PowerShell background job that calls [`Invoke-Pester`](https://github.com/pester/Pester/wiki/Invoke-Pester) 
 
-#### [`New-MKPowerShellConfigFile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-MKPowerShellConfigFile.md)
+#### [`New-MKPowerShellConfigFile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-MKPowerShellConfigFile.md)
 
 Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerShell.Flow`. 
 
-#### [`Install-Template`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Install-Template.md)
-
-Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Plaster) template. 
-
-#### [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md)
+#### [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Publish-ModuleToNuGetGallery.md)
 
 Streamlines publishing a module using `Publish-Module`. 
 
-#### [`Reset-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Reset-ModuleInProfile.md)
+#### [`Reset-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Reset-ModuleInProfile.md)
 
-Re-enables an `Import-Module` statement in `$PROFILE` to be executed. 
+Re-enables an `Import-Module` statement in `$PROFILE` to be executed.  
 
-#### [`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Restart-PWSH.md)
+#### [`Restart-PWSH`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Restart-PWSH.md)
 
 Launches a new PowerShell window by immediately terminating that called this function. Default alias is `pwsh`. 
 
-#### [`Restart-PWSHAdmin`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Restart-PWSHAdmin.md)
+#### [`Restart-PWSHAdmin`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Restart-PWSHAdmin.md)
 
 Launches a new PowerShell window with Admin privileges by immediately terminating that called this function. Default alias is `pwsha`. 
 
-#### [`Set-LocationAndStore`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-LocationAndStore.md)
+#### [`Set-LocationAndStore`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Set-LocationAndStore.md)
 
 Records every time `sl` is called so that when new session launches, location will be the one last record. Default alias value for this function is `sl`. 
 
-#### [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-MKPowerShellSetting.md)
+#### [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Set-MKPowerShellSetting.md)
 
 Sets value to JSON data in `MK.PowerShell-config.json`. 
 
-#### [`Skip-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Skip-ModuleInProfile.md)
+#### [`Skip-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Skip-ModuleInProfile.md)
 
 Prevents an `Import-Module` statement in `$PROFILE` from executing. 
 
-#### [`Update-ModuleExports`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Update-ModuleExports.md)
+#### [`Update-ModuleExports`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ModuleExports.md)
 
 Updates root-module and manifest file with commands to be exported. 
 
-#### [`Update-SemVer`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Update-SemVer.md)
+#### [`Update-SemVer`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-SemVer.md)
 
-Updates manifest's `ModuleVersion` key to one that is formatted to SemVer.
+Updates the module's semantic version value in the manifest file.

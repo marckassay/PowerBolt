@@ -10,10 +10,13 @@ function Skip-ModuleInProfile {
     )
 
     DynamicParam {
-        if (-not $ProfilePath) {
-            $ProfilePath = $(Get-Variable Profile -ValueOnly)
+        # if no $ProfilePath then, platyPS likely is calling 
+        if ($ProfilePath) {
+            return GetImportNameParameterSet -LineStatus 'Uncomment' -ProfilePath $ProfilePath 
         }
-        return Get-ImportNameParameterSet -LineStatus 'Uncomment' -ProfilePath $ProfilePath 
+        else {
+            return GetImportNameParameterSet -LineStatus 'Uncomment' -ByPassForDocumentation
+        }
     }
     
     begin {
@@ -31,8 +34,7 @@ function Skip-ModuleInProfile {
     }
 }
 
-# NoExport: Get-ImportNameParameterSet
-function Get-ImportNameParameterSet {
+function GetImportNameParameterSet {
     [CmdletBinding(PositionalBinding = $True)]
     Param(
         [Parameter(Mandatory = $True)]
@@ -40,8 +42,10 @@ function Get-ImportNameParameterSet {
         [String[]]
         $LineStatus,
 
-        [Parameter(Mandatory = $False)]
-        [String]$ProfilePath = $(Get-Variable Profile -ValueOnly)
+        [Parameter(Mandatory = $false)]
+        [String]$ProfilePath,
+
+        [switch]$ByPassForDocumentation
     )
 
     $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
@@ -50,20 +54,21 @@ function Get-ImportNameParameterSet {
     $ParamAttribute.Position = 0
     $AttributeCollection.Add($ParamAttribute)
     
-    if ($ProfilePath) {
+    $ModuleBases = '<ModuleName>'
+
+    if ($ByPassForDocumentation.IsPresent -eq $false) {
         # regex below returns the last directory in Path value for Import-Module
         $ProfileRaw = Get-Content -Path $ProfilePath -Raw
-        if ($LineStatus -eq "Uncomment") {
-            $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
-        }
-        else {
-            $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=\# Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
+        if ($ProfileRaw) {
+            if ($LineStatus -eq "Uncomment") {
+                $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
+            }
+            else {
+                $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=\# Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
+            }
         }
     }
-    else {
-        $ModuleBases = '<ModuleName>'
-    }
-
+    
     $ValidateSet = New-Object ValidateSet(@($ModuleBases))
 
     $AttributeCollection.Add($ValidateSet)
