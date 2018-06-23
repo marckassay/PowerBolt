@@ -1,11 +1,11 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-Script.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Install-Template.md
 schema: 2.0.0
 ---
 
-# New-Script
+# Install-Template
 
 ## SYNOPSIS
 Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Plaster) template.
@@ -13,7 +13,7 @@ Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Pl
 ## SYNTAX
 
 ```
-New-Script -PlasterTemplatePath <String> -ScriptCongruentPath <String> -ScriptName <String>
+Install-Template -PlasterTemplatePath <String> -ScriptCongruentPath <String> -ScriptName <String>
  [<CommonParameters>]
 ```
 
@@ -26,7 +26,7 @@ If calling this method by script and not thru the CLI, positional binding is ena
 
 ### Example 1
 ```powershell
-PS C:\> New-Script -PlasterTemplatePath 'C:\Users\Alice\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'
+PS C:\> Install-Template -PlasterTemplatePath 'C:\Users\Alice\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'
 ```
 
 One can deduce that the variable 'PLASTER_PARAM_AppName' is in the template file, which is used in this example to assign a name value to the app being scaffold.
@@ -93,8 +93,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[New-Script.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/scaffolds/New-Script.ps1)
+[Install-Template.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/src/scaffolds/Install-Template.ps1)
 
-[New-Script.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/scaffolds/New-Script.Tests.ps1)
+[Install-Template.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/test/scaffolds/Install-Template.Tests.ps1)
 
 [Plaster - Creating A Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md)

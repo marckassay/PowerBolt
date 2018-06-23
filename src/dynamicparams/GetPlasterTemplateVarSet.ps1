@@ -16,7 +16,7 @@ function GetPlasterTemplateVarSet {
     
     $Dictionary = [System.Management.Automation.RuntimeDefinedParameterDictionary]::new()
 
-    # start position at 1; since there New-Script has a param already at that index
+    # start position at 1; since there Install-Template has a param already at that index
     $PlasterParams | ForEach-Object -Begin {$Position = 1} -Process {
         # the PLASTER_PARAM_Name variable is required, but not used here. its in place to bypass 
         # being prompt in the CLI

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest schemaVersion="1.1" templateType="Item" 
+    xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+    <metadata>
+        <name>NewModule</name>
+        <id>00146c4d-38c7-4e4d-8910-ef81bb508fdd</id>
+        <version>1.0.0</version>
+        <title>New PowerShell module</title>
+        <description>Creates a manifest, module, README.md, .gitignore, LICENSE files. It will also create a src, test, resources directory</description>
+        <author>Marc Kassay</author>
+        <tags>Script,Test</tags>
+    </metadata>
+    <parameters>
+        <!-- Since this template is designed to be called via Install-Template; the parameters for that command will set value for this variable/directive
+            So the condition expression set to return false to prevent being prompt.
+         -->
+        <parameter prompt="Enter the name of the module" type="text" name="Name" default="${PLASTER_PARAM_Name}" condition="0" />
+        <parameter prompt="" type="text" name="Destination" default="${PLASTER_PARAM_DestinationPath}" condition="0" />
+    </parameters>
+    <content>
+        <message>
+Scaffolding your PowerShell template...
+
+        </message>
+
+        <file source='' destination='${PLASTER_PARAM_ModuleName}\src'/>
+        <file source='' destination='${PLASTER_PARAM_ModuleName}\test'/>
+        <file source='' destination='${PLASTER_PARAM_ModuleName}\resources'/>
+
+        <templateFile source='parts\README.md' destination='${PLASTER_PARAM_ModuleName}/README.md' />
+        <templateFile source='parts\LICENSE' destination='${PLASTER_PARAM_ModuleName}/LICENSE' />
+        <templateFile source='parts\Module.psm1' destination='${PLASTER_PARAM_ModuleName}/${PLASTER_PARAM_ModuleName}.psm1' />
+        <newModuleManifest destination='${PLASTER_PARAM_ModuleName}/${PLASTER_PARAM_ModuleName}.psd1' moduleVersion='0.0.1' rootModule='${PLASTER_PARAM_ModuleName}.psm1' author='${PLASTER_PARAM_Author}' encoding='UTF8-NoBOM' powerShellVersion ='6.0' />
+
+        <message>
+
+Scaffolding is completed.
+        </message>
+    </content>
+</plasterManifest>

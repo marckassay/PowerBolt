@@ -18,7 +18,7 @@ using module .\src\profile\Add-ModuleToProfile.ps1
 using module .\src\profile\Reset-ModuleInProfile.ps1
 using module .\src\profile\Skip-ModuleInProfile.ps1
 using module .\src\publish\Publish-ModuleToNuGetGallery.ps1
-using module .\src\scaffolds\New-Script.ps1
+using module .\src\scaffolds\Install-Template.ps1
 using module .\src\settings\Get-MKPowerShellSetting.ps1
 using module .\src\settings\New-MKPowerShellConfigFile.ps1
 using module .\src\settings\Set-MKPowerShellSetting.ps1

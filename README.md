@@ -15,12 +15,12 @@ Another objective of Flow is to encourage publishing small, monad (how apropos!)
 
 ### Create
 
-First step is to scaffold files from a custom [Plaster](https://github.com/PowerShell/Plaster) template. For information on templates (plaster manifests) [Creating a Plaster Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md). Using Flow, the [`New-Script`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-Script.md) command guides you after choosing a template for its first parameter followed with dynamic constraints for its remaining arity.
+First step is to scaffold files from a custom [Plaster](https://github.com/PowerShell/Plaster) template. For information on templates (plaster manifests) [Creating a Plaster Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md). Using Flow, the [`Install-Template`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Install-Template.md) command guides you after choosing a template for its first parameter followed with dynamic constraints for its remaining arity.
 
 For an example, the following:
 
 ```powershell
-PS C:\Users\Alice\Apps> New-Script -PlasterTemplatePath '..\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'
+PS C:\Users\Alice\Apps> Install-Template -PlasterTemplatePath '..\PlasterTemplates\NewMVC\plasterManifest_en-US.xml' -AppName 'CoffeeApp'
 ```
 
 Although the Plaster manifest file is not shown, you can be assured that a variable of `PLASTER_PARAM_AppName` resides in its contents. And with Plaster you can scaffold files with variables (tokens) inside them that can be replaced with values such as the one given to AppName, for this instance.
@@ -174,7 +174,7 @@ Creates a PowerShell background job that calls [`Invoke-Pester`](https://github.
 
 Creates a new `MK.PowerShell-config.json` to be used for settings for `MK.PowerShell.Flow`. 
 
-#### [`New-Script`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/New-Script.md)
+#### [`Install-Template`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Install-Template.md)
 
 Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Plaster) template. 
 
