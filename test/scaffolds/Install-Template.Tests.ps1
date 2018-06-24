@@ -24,7 +24,16 @@ Describe "Test Install-Template" {
     Context "Call Install-Template with built-in template 'NewModule' and then with 'NewScript'" {
 
         Set-Location $TestSupportModule.TestDrivePath
+
+        Mock Add-ModuleToProfile {} -ModuleName MK.PowerShell.Flow
+
         Install-Template -TemplateName 'NewModule' '.' 'MockModuleC' 'Alice' 
+
+        $MockModuleCPath = (Join-Path -Path '.' -ChildPath 'MockModuleC')
+
+        Assert-MockCalled Add-ModuleToProfile -ModuleName MK.PowerShell.Flow -Times 1 -ParameterFilter {
+            $Path -eq $MockModuleCPath
+        }
 
         $ScaffoldModuleFolder = Join-Path -Path $TestSupportModule.TestDrivePath -ChildPath 'MockModuleC'
         $ScaffoldManifestPath = Join-Path $ScaffoldModuleFolder -ChildPath 'MockModuleC.psd1'
@@ -43,6 +52,7 @@ Describe "Test Install-Template" {
         }
 
         Set-Location $ScaffoldModuleFolder
+
         Install-Template -TemplateName 'NewScript' 'utils/io' 'Get-FileExtension'
 
         $GetFileExtensionSrcPath = Join-Path -Path '.' -ChildPath 'src/utils/io/Get-FileExtension.ps1'

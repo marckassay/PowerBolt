@@ -55,6 +55,14 @@ function Install-Template {
             Invoke-Plaster -TemplatePath $PlasterTemplateFolderPath -DestinationPath $DestinationPath
         }
 
+        # TODO: to have this conditional avail when TemplatePath is used too
+        if ($TemplateName -eq 'NewScript') {
+            Update-ModuleExports 
+        }
+        elseif ($TemplateName -eq 'NewModule') {
+            Add-ModuleToProfile -Path (Join-Path -Path $PSBoundParameters.DestinationPath -ChildPath $PSBoundParameters.ModuleName)
+        }
+
         $TemplateVarDictionary.GetEnumerator() | ForEach-Object {
             $Name = "PLASTER_PARAM_" + ($_.Key)
             Remove-Variable -Name $Name -Scope Global

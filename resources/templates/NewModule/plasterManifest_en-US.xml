@@ -15,6 +15,7 @@
             So the condition expression set to return false to prevent being prompt.
          -->
         <parameter prompt="Enter the name of the module" type="text" name="Name" default="${PLASTER_PARAM_Name}" condition="0" />
+        <!-- 'DestinationPath' isnt used in this file but is here as a dynamic parameter for Install-Template -->
         <parameter prompt="" type="text" name="Destination" default="${PLASTER_PARAM_DestinationPath}" condition="0" />
     </parameters>
     <content>

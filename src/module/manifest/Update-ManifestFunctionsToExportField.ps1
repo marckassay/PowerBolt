@@ -28,8 +28,11 @@ function Update-ManifestFunctionsToExportField {
         # HACK: Perhaps its not possible to have Update-ModuleManifest -FunctionsToExport to be 
         # formatted in an array listed vertically. So here manually edit it to have just that.
         $FunctionNames = $FunctionNames | ForEach-Object -Process {"'$_',`r`n"} | Sort-Object
-        $Tail = $FunctionNames.Count - 1
-        $FunctionNames[$Tail] = $FunctionNames[$Tail].Replace(",`r`n", "")
+        
+        if ($FunctionNames -is [Object[]]) {
+            $Tail = $FunctionNames.Count - 1
+            $FunctionNames[$Tail] = $FunctionNames[$Tail].TrimEnd().TrimEnd(',')
+        }
 
         [regex]$InsertPointRegEx = "(?(?<=(FunctionsToExport))([\w\W]*?)|($))(?(?=\#)(?=\#)|(CmdletsToExport))"
         $ManifestContents = Get-Content -Path $ManifestUpdate.ManifestPath -Raw 
