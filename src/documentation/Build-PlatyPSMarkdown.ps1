@@ -32,6 +32,9 @@ function Build-PlatyPSMarkdown {
         [string]$OnlineVersionUrlPolicy = 'Auto',
         
         [switch]
+        $RemoveSourceAndTestLinks,
+        
+        [switch]
         $NoReImportModule,
         
         [switch]
@@ -63,30 +66,25 @@ function Build-PlatyPSMarkdown {
         AutoUpdateSemVerDelegate($DocInfo.Path)
 
         $DocInfo.ModuleMarkdownFolder = Join-Path -Path $DocInfo.ModuleFolder -ChildPath $DocInfo.MarkdownFolder
+        # create markdown folder if it doesn't exist 
+        New-Item -Path $DocInfo.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
+        $MarkdownFolderItems = Get-ChildItem -Path $DocInfo.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
+
+        if ($DocInfo.NoReImportModule -eq $False) {
+            Remove-Module -Name $DocInfo.ModuleName
+            Import-Module -Name $DocInfo.ManifestPath -Force -Scope Global
+        }
+            
         $MarkdownFolderItems = Get-ChildItem -Path $DocInfo.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
         if ($MarkdownFolderItems.Count -eq 0) {
-            New-Item -Path $DocInfo.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
-
-            if ($DocInfo.NoReImportModule -eq $False) {
-                Remove-Module -Name $DocInfo.ModuleName
-                Import-Module -Name $DocInfo.RootManifest -Force -Scope Global
-            }
-            
             New-MarkdownHelp -Module $DocInfo.ModuleName -OutputFolder $DocInfo.ModuleMarkdownFolder | Out-Null
-
-            $DocInfo.UpdateOnlineVersionUrl($True)
         }
         else {
-            if ($DocInfo.NoReImportModule -eq $False) {
-                Remove-Module -Name $DocInfo.ModuleName
-                Import-Module -Name $DocInfo.RootManifest -Force -Scope Global
-            }
-
             $ExportedFunctions = Get-Module -Name $DocInfo.ModuleName | `
                 Select-Object -ExpandProperty ExportedFunctions | `
                 Select-Object -ExpandProperty Values | `
                 Select-Object -ExpandProperty Name
-
+    
             # remove obsolete .md files
             $MarkdownFolderItems | `
                 Select-Object -ExpandProperty BaseName | `
@@ -95,15 +93,12 @@ function Build-PlatyPSMarkdown {
                     Remove-Item -Path ($DocInfo.ModuleMarkdownFolder + "\$_.md") -Confirm:$($Force.IsPresent -ne $True)
                 }
             }
-
+    
             Update-MarkdownHelpModule -Path $DocInfo.ModuleMarkdownFolder | Out-Null
-
-            # TODO: adding a parameter to Build-PlatyPSMarkdown for this line below wouldnt require 
-            # much work. should remove source-and-test links when and if setting to False if they
-            # exist.
-            $DocInfo.UpdateOnlineVersionUrl($False)
         }
 
+        $DocInfo.UpdateVersionUrls(($RemoveSourceAndTestLinks.IsPresent) -eq $False)
+        
         Write-Output $DocInfo
     }
 }

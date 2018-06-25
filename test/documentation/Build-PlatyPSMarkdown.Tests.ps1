@@ -54,7 +54,7 @@ Describe "Test Build-PlatyPSMarkdown" {
             Param($Index, $Expected)
             $Actual = (Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md")[$Index]
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
-        }
+        } 
 
         It "Should *update* Get-AFunction.md file with new parameter and preserve md modification." {
             $NewSynopsisContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
@@ -116,6 +116,73 @@ function Get-AFunction {
 
         It "Should generate exact filenames." {
             $script:FileNames | Should -BeExactly $script:Files
+        }
+    }
+
+    Context "As a non-piped call, test to ensure RemoveSourceAndTestLinks works as expected" {
+        
+        It "Should not add source and test links." {
+
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -RemoveSourceAndTestLinks -NoReImportModule
+
+            $Actual = Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" -Raw
+            $Actual.Contains('[Get-AFunction.ps1](https:') | Should -Be $false
+        }
+        
+        It "Should add source and test links." {
+
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -NoReImportModule
+
+            $Actual = Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" -Raw
+            $Actual.Contains('[Get-AFunction.ps1](https:') | Should -Be $true
+        }
+        
+        It "Should not add source and test links on first call. And second call, requests them to be added." {
+
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -RemoveSourceAndTestLinks -NoReImportModule
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -NoReImportModule
+
+            $Actual = Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" -Raw
+            $Actual.Contains('[Get-AFunction.ps1](https:') | Should -Be $true
+        }
+        
+        It "Should not add source and test links on first call.  Afterwards modify markdown file with other links and second call, requests them to be added." {
+
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -RemoveSourceAndTestLinks -NoReImportModule
+
+            Add-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" -Value "[Get-BFunction](https://github.com/marckassay/MockModuleB/blob/master/docs/Get-BFunction.md)"
+
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -NoReImportModule
+
+            $Actual = Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" -Raw
+
+            $Actual.Contains('[Get-AFunction.ps1](https:') | Should -Be $true
+            $Actual.Contains('[Get-BFunction](https:') | Should -Be $true
+        }
+        
+        It "Should add source and test links on first call.  Afterwards modify markdown file with other links and second call, requests them to be kept." {
+
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -NoReImportModule
+
+            Add-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" -Value "[Get-CFunction](https://github.com/marckassay/MockModuleB/blob/master/docs/Get-CFunction.md)"
+
+            Build-PlatyPSMarkdown -Name 'MockModuleB' -NoReImportModule
+
+            $FileContent = Get-Content "$($TestSupportModule.MockDirectoryPath)\docs\Get-AFunction.md" -Raw
+            
+            $RelatedLinksContent = [regex]::Match($FileContent, '(?<=## RELATED LINKS)[\w\W]*$').Value
+            $RelatedLinksContent = $RelatedLinksContent.TrimStart()
+            
+            $ExpectedRelatedLinksContent = @"
+[Get-AFunction.ps1](https://github.com/marckassay/MockModuleB/blob/master/src/Get-AFunction.ps1)
+
+[Get-AFunction.Tests.ps1](https://github.com/marckassay/MockModuleB/blob/master/test/Get-AFunction.Tests.ps1)
+
+
+[Get-BFunction](https://github.com/marckassay/MockModuleB/blob/master/docs/Get-BFunction.md)
+[Get-CFunction](https://github.com/marckassay/MockModuleB/blob/master/docs/Get-CFunction.md)
+"@
+            $RelatedLinksContent.Trim() | Should -Be $ExpectedRelatedLinksContent.Trim()
         }
     }
 }

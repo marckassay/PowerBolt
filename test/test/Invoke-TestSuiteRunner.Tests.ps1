@@ -22,7 +22,7 @@ Describe "Test Invoke-TestSuiteRunner" {
             } -ModuleName MK.PowerShell.Flow -Times 1
             
             Assert-MockCalled Start-Job -ParameterFilter {
-                $ArgumentList[0].Script -like '*MockModuleB\test'
+                $ArgumentList[0].Script -like '*MockModuleB*test*'
             } -ModuleName MK.PowerShell.Flow -Times 1
         }
     }

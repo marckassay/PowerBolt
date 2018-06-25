@@ -11,7 +11,7 @@ class MKDocumentationInfo {
     [string]$OnlineVersionUrlPolicy = 'Auto'
     [string]$MarkdownSnippetCollection
     [bool]$NoReImportModule
-    [object]$RootManifest
+    [object]$ManifestPath
     [object]$RootModule
     [string]$ModuleFolder
     [string]$ModuleMarkdownFolder
@@ -91,7 +91,7 @@ class MKDocumentationInfo {
             }
         }
 
-        $this.RootManifest = Get-ChildItem -Path $this.Path -Filter '*.psd1' | `
+        $this.ManifestPath = Get-ChildItem -Path $this.Path -Filter '*.psd1' | `
             Select-Object -ExpandProperty FullName
 
         $this.RootModule = Get-ChildItem -Path $this.Path -Filter '*.psm1' | `
@@ -150,7 +150,7 @@ $BodyContent
         return $SnippetCollectionString
     }
 
-    [void] UpdateOnlineVersionUrl ([bool]$AddSourceAndTestFileLinks) {
+    [void] UpdateVersionUrls ([bool]$AddSourceAndTestFileLinks) {
         # Since New-MarkdownHelp OnlineVersionUrl parameter is only available in a specific parameter
         # set that is not used here; below is to assign 'onlineverion' field.
         Get-ChildItem -Path $this.ModuleMarkdownFolder -Include '*.md' -Recurse | `
@@ -164,38 +164,58 @@ $BodyContent
             # update any other exisiting urls with branchname that similiarly matches OnlineVersionUrl without
             # overwriting filename
             $UrlSegmentPriorToGitBranchName = $FileUrl.Split('blob')[0] + 'blob'
-            $GitBranchName = [regex]::Match($FileUrl, "(?<=$UrlSegmentPriorToGitBranchName[\\|\/])[^\/|\\]*")
+            $script:GitBranchName = [regex]::Match($FileUrl, "(?<=$UrlSegmentPriorToGitBranchName[\\|\/])[^\/|\\]*")
             $FileContent = [regex]::Replace($FileContent, "(?<=$UrlSegmentPriorToGitBranchName[\\|\/])[^\/|\\]*", $GitBranchName)
             
+            $RelatedLinksContent = [regex]::Match($FileContent, '(?<=## RELATED LINKS)[\w\W]*$').Value
+            $RelatedLinksContent = $RelatedLinksContent.TrimStart()
+
+            $FileName = $_.BaseName
+
             if ($AddSourceAndTestFileLinks -eq $True) {
-                $ModuleName = $this.ModuleName
-                $RelatedLinksContent = [regex]::Match($FileContent, '(?<=## RELATED LINKS)[\w\W]*$').Value
-                $RelatedLinksContent = $RelatedLinksContent.TrimStart()
-
-                $FileName = $_.BaseName
-                $SourceFilePath = Get-ChildItem ($this.Path) -Recurse | Where-Object {$_ -like "$FileName.ps1"} | Select-Object -ExpandProperty FullName
-                $SourceFilePath = [regex]::Match($SourceFilePath, "(?<=$ModuleName[\\|\/]).*") | Select-Object -ExpandProperty Value
-                $SourceUrl = $FileUrl.Split($GitBranchName)[0] + ("$GitBranchName/$SourceFilePath").Replace('\', '/')
-                $SourceLink = "[$FileName.ps1](" + $SourceUrl + ")`n`n"
-                $SourceAndTestFileLinks = $SourceLink
-
-                $TestFilePath = Get-ChildItem ($this.Path) -Recurse | Where-Object {$_ -like "$FileName.Tests.ps1"} | Select-Object -ExpandProperty FullName
-                if ($TestFilePath) {
-                    $TestFilePath = [regex]::Match($TestFilePath, "(?<=$ModuleName[\\|\/]).*") | Select-Object -ExpandProperty Value
-                    $TestUrl = $FileUrl.Split($GitBranchName)[0] + ("$GitBranchName/$TestFilePath").Replace('\', '/')
-                    $TestLink = "[$FileName.Tests.ps1](" + $TestUrl + ")`n`n"
-                    $SourceAndTestFileLinks += $TestLink
+                $SourceAndTestFileLinks = GetFileLink -FileName $FileName
+                
+                if ($FileContent.Contains("[$FileName.ps1]")) {
+                    $SourceAndTestFileLinks = ""
                 }
 
-                $NuRelatedLinksContent = @"
+                $SourceAndTestFileLinks += GetFileLink -FileName "$FileName.Tests"
+
+                if ($FileContent.Contains("[$FileName.Tests.ps1]")) {
+                    $SourceAndTestFileLinks = ""
+                }
+
+                if ($SourceAndTestFileLinks -ne "") {
+                    $NuRelatedLinksContent = @"
 `n
 $SourceAndTestFileLinks
 $RelatedLinksContent
 "@
-                $FileContent = [regex]::Replace($FileContent, '(?<=## RELATED LINKS)[\w\W]*$', $NuRelatedLinksContent)
+                    $FileContent = [regex]::Replace($FileContent, '(?<=## RELATED LINKS)[\w\W]*$', $NuRelatedLinksContent)
+                }
+            }
+            else {
+                $SourceAndTestFileLinks = GetFileLink -FileName $FileName
+                $SourceAndTestFileLinks += GetFileLink -FileName "$FileName.Tests"
+
+                $FileContent = $FileContent.Replace($SourceAndTestFileLinks, "")
             }
 
             Set-Content -Path $_.FullName -Value $FileContent -NoNewline
         }
+    }
+}
+
+function GetFileLink ([string]$FileName) {
+    $ModuleName = $this.ModuleName
+    $GitBranchName = $script:GitBranchName
+    $FilePath = Get-ChildItem ($this.Path) -Recurse | Where-Object {$_ -like "$FileName.ps1"} | Select-Object -ExpandProperty FullName
+    if ($FilePath) {
+        $FilePath = [regex]::Match($FilePath, "(?<=$ModuleName[\\|\/]).*") | Select-Object -ExpandProperty Value
+        $Url = $FileUrl.Split($GitBranchName)[0] + ("$GitBranchName/$FilePath").Replace('\', '/')
+        return "[$FileName.ps1](" + $Url + ")`n`n"
+    }
+    else {
+        return ""
     }
 }

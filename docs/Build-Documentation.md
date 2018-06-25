@@ -15,14 +15,14 @@ Creates or updates help documentation files and module's README file. Also creat
 ### ByPath (Default)
 ```
 Build-Documentation [[-Path] <String>] [-MarkdownFolder <String>] [-Locale <String>]
- [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Force]
  [<CommonParameters>]
 ```
 
 ### ByName
 ```
 Build-Documentation [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersionUrlTemplate <String>]
- [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Name] <String> [<CommonParameters>]
+ [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Force] [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -141,6 +141,21 @@ Aliases:
 
 Required: False
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Force
+{{Fill Force Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

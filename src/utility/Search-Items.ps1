@@ -13,10 +13,13 @@ function Search-Items {
         [Parameter(Mandatory = $False)]
         [String[]]$Exclude,
 
+        [Parameter(Mandatory = $False)]
+        [int]$Depth = 15,
+
         [switch]$Recurse
     )
 
-    [hashtable[]]$Results = Get-ChildItem $Path -Include $Include -Exclude $Exclude -Recurse:$Recurse.IsPresent -PipelineVariable Fi -File | `
+    [hashtable[]]$Results = Get-ChildItem $Path -Include $Include -Exclude $Exclude -Depth $Depth -Recurse:$Recurse.IsPresent -PipelineVariable Fi -File | `
         Get-Content | `
         Select-String -Pattern $Pattern -PipelineVariable Ss | `
         ForEach-Object -Process {

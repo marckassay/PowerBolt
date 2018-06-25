@@ -14,7 +14,12 @@ function Invoke-TestSuiteRunner {
         [Parameter(Mandatory = $False,
             Position = 1,
             ValueFromPipeline = $False)]
-        [string]$TestFolderPath = 'test'
+        [string]$TestFolderPath = 'test',
+
+        [Parameter(Mandatory = $False,
+            Position = 2,
+            ValueFromPipeline = $False)]
+        [string[]]$Excludes = 'mocks'
     )
 
     DynamicParam {
@@ -36,9 +41,10 @@ function Invoke-TestSuiteRunner {
         Push-Location -StackName 'PriorTestLocation'
         
         $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath $TestFolderPath -Resolve
-
+        $ScriptPaths += Get-ChildItem $ScriptPath -Exclude $Excludes | `
+            Select-Object -ExpandProperty FullName
         # FYI: https://github.com/PowerShell/Plaster/blob/master/docs/en-US/Invoke-Plaster.md
-        $ArgList = @{ Script = $ScriptPath; PassThru = $true }
+        $ArgList = @{ Script = $ScriptPaths; PassThru = $true }
     }
 
     process {

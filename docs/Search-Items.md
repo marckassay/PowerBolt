@@ -13,8 +13,8 @@ Recurses thru folders to find files that its content matches `Pattern`. Outputs 
 ## SYNTAX
 
 ```
-Search-Items [-Path] <String> [-Pattern] <String[]> [[-Include] <String[]>] [[-Exclude] <String[]>] [-Recurse]
- [<CommonParameters>]
+Search-Items [-Path] <String> [-Pattern] <String[]> [[-Include] <String[]>] [[-Exclude] <String[]>]
+ [-Depth <Int32>] [-Recurse] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -106,6 +106,21 @@ Accept wildcard characters: False
 
 ```yaml
 Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Depth
+{{Fill Depth Description}}
+
+```yaml
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 

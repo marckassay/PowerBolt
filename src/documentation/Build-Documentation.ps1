@@ -25,7 +25,10 @@ function Build-Documentation {
         [string]$OnlineVersionUrlPolicy = 'Auto',
         
         [switch]
-        $NoReImportModule
+        $NoReImportModule,
+
+        [switch]
+        $Force
     )
 
     DynamicParam {
@@ -52,7 +55,7 @@ function Build-Documentation {
 
     end {
         Write-Output $DocInfo | `
-            Build-PlatyPSMarkdown | `
+            Build-PlatyPSMarkdown -Force:$Force.IsPresent | `
             New-ExternalHelpFromPlatyPSMarkdown | `
             Update-ReadmeFromPlatyPSMarkdown
 

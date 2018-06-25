@@ -15,21 +15,22 @@ With required [`PlatyPS`](https://github.com/PowerShell/platyPS) module, calls [
 ### ByPath (Default)
 ```
 Build-PlatyPSMarkdown [[-Path] <String>] [-MarkdownFolder <String>] [-Locale <String>]
- [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Force]
- [<CommonParameters>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-RemoveSourceAndTestLinks]
+ [-NoReImportModule] [-Force] [<CommonParameters>]
 ```
 
 ### ByPipe
 ```
 Build-PlatyPSMarkdown [-DocInfo] <MKDocumentationInfo> [-MarkdownFolder <String>] [-Locale <String>]
- [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Force]
- [<CommonParameters>]
+ [-OnlineVersionUrlTemplate <String>] [-OnlineVersionUrlPolicy <String>] [-RemoveSourceAndTestLinks]
+ [-NoReImportModule] [-Force] [<CommonParameters>]
 ```
 
 ### ByName
 ```
 Build-PlatyPSMarkdown [-MarkdownFolder <String>] [-Locale <String>] [-OnlineVersionUrlTemplate <String>]
- [-OnlineVersionUrlPolicy <String>] [-NoReImportModule] [-Force] [-Name] <String> [<CommonParameters>]
+ [-OnlineVersionUrlPolicy <String>] [-RemoveSourceAndTestLinks] [-NoReImportModule] [-Force] [-Name] <String>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -170,6 +171,21 @@ Accept wildcard characters: False
 
 ### -Force
 {{Fill Force Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RemoveSourceAndTestLinks
+{{Fill RemoveSourceAndTestLinks Description}}
 
 ```yaml
 Type: SwitchParameter

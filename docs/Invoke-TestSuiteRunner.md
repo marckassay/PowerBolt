@@ -14,12 +14,14 @@ Creates a PowerShell background job that calls [`Invoke-Pester`](https://github.
 
 ### ByPath (Default)
 ```
-Invoke-TestSuiteRunner [[-Path] <String>] [[-TestFolderPath] <String>] [<CommonParameters>]
+Invoke-TestSuiteRunner [[-Path] <String>] [[-TestFolderPath] <String>] [-Excludes <String[]>]
+ [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Invoke-TestSuiteRunner [[-TestFolderPath] <String>] [-Name] <String> [<CommonParameters>]
+Invoke-TestSuiteRunner [[-TestFolderPath] <String>] [-Excludes <String[]>] [-Name] <String>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -77,6 +79,21 @@ Aliases:
 
 Required: False
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Excludes
+{{Fill Excludes Description}}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -57,7 +57,7 @@ This file will have an API section added or updated, with each exported command'
 PS C:\Users\Alice\Apps\CoffeeApp> Publish-ModuleToNuGetGallery
 ```
 
-I assume most developers organize their projects or repos in some location on their machine and resist having them elsewhere. If so, [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) may help by deploying your module directory in a "PowerShell" module directory and publish it from there. Afterwards it will remove the directory and keep the original untouched.
+I assume most developers organize their projects or repository in some location on their machine and resist having them elsewhere. If so, [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) may help by deploying your module directory in a "PowerShell" module directory and publish it from there. Afterwards it will remove the directory and keep the original untouched.
 
 To explain further on the reason for this command, by giving an example, I currently have individual PowerShell modules listed in my PowerShell profile. These modules that are listed point to my development directory where they reside on my file system. So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory. A cumbersome process indeed, so this command has been created to speed up that process. In an addition Flow can store your API key on your file system using [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-MKPowerShellSetting.md) which will be retrieved automatically when [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) is called if its `NuGetApiKey` parameter value is not set.
 
@@ -67,7 +67,7 @@ Although it's still early in development, I can only recall the following condit
 
 + URLs are parsed and validated with the expectation of them structured the way GitHub has them.  
 
-+ Module folder, manifest and root module are expected to be the name of the module.
++ Module folder, manifest and root module are expected to all have the same the name.
 
 + The 'src', 'test' and 'docs' folders inside the module folder are where the source, test and document files respectively are expected to reside.
 
@@ -168,7 +168,7 @@ Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAl
 
 #### [`Install-Template`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Install-Template.md)
 
-{{Fill in the Synopsis}} 
+Scaffolds files based on the required [Plaster](https://github.com/PowerShell/Plaster) template. 
 
 #### [`Invoke-TestSuiteRunner`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Invoke-TestSuiteRunner.md)
 
