@@ -7,7 +7,8 @@ function Backup-Sources {
         [String]$ConfigFilePath,
 
         [switch]$Force,
-        [switch]$Initialize
+        [switch]$Initialize,
+        [switch]$Silent
     )
 
     # TODO: need to create a config validator and use it at least here
@@ -188,14 +189,19 @@ function Backup-Sources {
                 $Predicates += [BackupPredicateEnum]::HasUpdatedSuccessfully
             }
 
-            Write-SourceReport $Predicates $_
+            if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+                Write-SourceReport $Predicates $_
+            }
+
             # set $Predicates to value prior to entering into for-loop
             $Predicates = [BackupPredicateEnum]::IsPrecheckValid
         }
     }
     else {
-        # if called manually when 'TurnOnBackup' is false or config is invalid
-        Write-SourceReport $Predicates
+        if ($Silent.IsPresent -eq $False) {
+            # if called manually when 'TurnOnBackup' is false or config is invalid
+            Write-SourceReport $Predicates
+        }
     }
 }
 

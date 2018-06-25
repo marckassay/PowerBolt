@@ -62,7 +62,7 @@ function Build-PlatyPSMarkdown {
         }
     }
 
-    end {
+    process {
         AutoUpdateSemVerDelegate($DocInfo.Path)
 
         $DocInfo.ModuleMarkdownFolder = Join-Path -Path $DocInfo.ModuleFolder -ChildPath $DocInfo.MarkdownFolder

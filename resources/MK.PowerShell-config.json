@@ -15,5 +15,6 @@
   "TurnOnExtendedTypes": "true",
   "TurnOnHistoryRecording": "true",
   "TurnOnQuickRestart": "true",
-  "TurnOnRememberLastLocation": "true"
+  "TurnOnRememberLastLocation": "true",
+  "TurnOnStartupOutput": "true"
 }

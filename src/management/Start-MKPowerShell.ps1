@@ -35,12 +35,14 @@ function Start-MKPowerShell {
             $script:ConfigFileParentPath = (Split-Path $ConfigFilePath -Parent)
         }
 
-        Restore-RememberLastLocation -Initialize
-        Restore-QuickRestartSetting -Initialize
-        Backup-Sources -Initialize
-        Restore-History -Initialize
-        Restore-Formats -Initialize
-        Restore-Types -Initialize
+        $SilentStartupOutput = (Get-MKPowerShellSetting -Name 'TurnOnStartupOutput') -eq $true
+        
+        Restore-RememberLastLocation -Initialize -Silent:$SilentStartupOutput
+        Restore-QuickRestartSetting -Initialize -Silent:$SilentStartupOutput
+        Backup-Sources -Initialize -Silent:$SilentStartupOutput
+        Restore-History -Initialize -Silent:$SilentStartupOutput
+        Restore-Formats -Initialize -Silent:$SilentStartupOutput
+        Restore-Types -Initialize -Silent:$SilentStartupOutput
 
         Register-Shutdown
     }
@@ -50,12 +52,15 @@ function Start-MKPowerShell {
 function Restore-RememberLastLocation {
     [CmdletBinding()]
     Param(
-        [switch]$Initialize
+        [switch]$Initialize,
+        [switch]$Silent
     )
 
     if ((Get-MKPowerShellSetting -Name 'TurnOnRememberLastLocation') -eq $true) {
         Set-Alias sl Set-LocationAndStore -Scope Global -Force
-        Write-Host "'sl' alias is now mapped to 'Set-LocationAndStore'." -ForegroundColor Green
+        if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+            Write-Host "'sl' alias is now mapped to 'Set-LocationAndStore'." -ForegroundColor Green
+        }
 
         if ($Initialize.IsPresent) {
             $LastLocation = Get-MKPowerShellSetting -Name 'LastLocation'
@@ -69,7 +74,9 @@ function Restore-RememberLastLocation {
     }
     else {
         Set-Alias sl Set-Location -Scope Global -Force
-        Write-Host "'sl' alias is now mapped to 'Set-Location'." -ForegroundColor Green
+        if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+            Write-Host "'sl' alias is now mapped to 'Set-Location'." -ForegroundColor Green
+        }
     }
 }
 
@@ -77,23 +84,32 @@ function Restore-RememberLastLocation {
 function Restore-QuickRestartSetting {
     [CmdletBinding()]
     Param(
-        [switch]$Initialize
+        [switch]$Initialize,
+        [switch]$Silent
     )
 
     if ((Get-MKPowerShellSetting -Name 'TurnOnQuickRestart') -eq $true) {
         Set-Alias pwsh Restart-PWSH -Scope Global
-        Write-Host "'pwsh' alias is now mapped to 'Restart-PWSH'." -ForegroundColor Green
+        if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+            Write-Host "'pwsh' alias is now mapped to 'Restart-PWSH'." -ForegroundColor Green
+        }
 
         Set-Alias pwsha Restart-PWSHAdmin -Scope Global
-        Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'." -ForegroundColor Green
+        if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+            Write-Host "'pwsha' alias is now mapped to 'Restart-PWSHAdmin'." -ForegroundColor Green
+        }
     }
     else {
         if (-not $Initialize.IsPresent) { 
             Remove-Alias pwsh -Scope Global
-            Write-Host "'pwsh' alias has been removed." -ForegroundColor Green
+            if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+                Write-Host "'pwsh' alias has been removed." -ForegroundColor Green
+            }
 
             Remove-Alias pwsha -Scope Global
-            Write-Host "'pwsha' alias has been removed." -ForegroundColor Green
+            if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+                Write-Host "'pwsha' alias has been removed." -ForegroundColor Green
+            }
         }
     }
 }
@@ -102,7 +118,8 @@ function Restore-QuickRestartSetting {
 function Restore-History {
     [CmdletBinding()]
     Param(
-        [switch]$Initialize
+        [switch]$Initialize,
+        [switch]$Silent
     )
 
     $IsHistoryRecordingEnabled = (Get-MKPowerShellSetting -Name 'TurnOnHistoryRecording') -eq $true
@@ -114,13 +131,15 @@ function Restore-History {
             $SessionHistoriesPath = New-Item -Path $script:ConfigFileParentPath"\SessionHistories.csv" -ItemType File | Select-Object -ExpandProperty FullName
 
             Set-MKPowerShellSetting -Name 'HistoryLocation' -Value $SessionHistoriesPath
-            
-            Write-Host "History file has been created." -ForegroundColor Green
+            if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+                Write-Host "History file has been created." -ForegroundColor Green
+            }
         }
         else {
             Import-History
-
-            Write-Host "History is restored from previous session(s)." -ForegroundColor Green
+            if (($Initialize.IsPresent) -and -not($Silent.IsPresent)) {
+                Write-Host "History is restored from previous session(s)." -ForegroundColor Green
+            }
         }
     }
 }
@@ -129,7 +148,8 @@ function Restore-History {
 function Restore-Formats {
     [CmdletBinding()]
     Param(
-        [switch]$Initialize
+        [switch]$Initialize,
+        [switch]$Silent
     )
     
     # TODO: can't seem to have manifest's 'FormatsToProcess' key  to load files listed in it. So 
@@ -151,7 +171,8 @@ function Restore-Formats {
 function Restore-Types {
     [CmdletBinding()]
     Param(
-        [switch]$Initialize
+        [switch]$Initialize,
+        [switch]$Silent
     )
     
     if ((Get-MKPowerShellSetting -Name 'TurnOnExtendedTypes') -eq $false) {
