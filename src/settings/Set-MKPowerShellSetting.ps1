@@ -26,6 +26,13 @@ function Set-MKPowerShellSetting {
 
     end {
        
+        # make sure that bools get double-quotes
+        if ($Value -match "^.?true.?`$") {
+            $Value = "true"
+        }
+        elseif (($Value -match "^.?false.?`$")) {
+            $Value = "false"
+        }
         $Script:MKPowerShellConfig = Get-Content -Path $ConfigFilePath | `
             ConvertFrom-Json -AsHashtable
         $Script:MKPowerShellConfig[$Name] = $Value

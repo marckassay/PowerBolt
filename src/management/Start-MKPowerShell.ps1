@@ -35,7 +35,7 @@ function Start-MKPowerShell {
             $script:ConfigFileParentPath = (Split-Path $ConfigFilePath -Parent)
         }
 
-        $SilentStartupOutput = (Get-MKPowerShellSetting -Name 'TurnOnStartupOutput') -eq $true
+        $SilentStartupOutput = (Get-MKPowerShellSetting -Name 'TurnOnStartupOutput') -eq $false
         
         Restore-RememberLastLocation -Initialize -Silent:$SilentStartupOutput
         Restore-QuickRestartSetting -Initialize -Silent:$SilentStartupOutput
@@ -44,7 +44,7 @@ function Start-MKPowerShell {
         Restore-Formats -Initialize -Silent:$SilentStartupOutput
         Restore-Types -Initialize -Silent:$SilentStartupOutput
 
-        Register-Shutdown
+        # Register-Shutdown
     }
 }
 
