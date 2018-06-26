@@ -23,10 +23,6 @@ function Update-ManifestFunctionsToExportField {
         $ManifestFile = Get-Item -Path $ManifestUpdate.ManifestPath
         $FunctionNames = $ManifestUpdate.TargetFunctionsToExport.FunctionName
         
-        Update-ModuleManifest -Path $ManifestFile -FunctionsToExport $FunctionNames
-
-        # HACK: Perhaps its not possible to have Update-ModuleManifest -FunctionsToExport to be 
-        # formatted in an array listed vertically. So here manually edit it to have just that.
         $FunctionNames = $FunctionNames | ForEach-Object -Process {"'$_',`r`n"} | Sort-Object
         
         if ($FunctionNames -is [Object[]]) {
@@ -35,6 +31,9 @@ function Update-ManifestFunctionsToExportField {
         }
 
         [regex]$InsertPointRegEx = "(?(?<=(FunctionsToExport))([\w\W]*?)|($))(?(?=\#)(?=\#)|(CmdletsToExport))"
+        # PowerShellGet's Update-ModuleManifest currently has a bug that is reverting previous 
+        # changed values. Because of that, using Content commands.
+        # https://github.com/PowerShell/PowerShell/issues/7181
         $ManifestContents = Get-Content -Path $ManifestUpdate.ManifestPath -Raw 
         $ManifestContents = $InsertPointRegEx.Replace($ManifestContents, @"
  = @(

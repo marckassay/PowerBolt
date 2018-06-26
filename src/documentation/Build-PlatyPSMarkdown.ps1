@@ -71,7 +71,9 @@ function Build-PlatyPSMarkdown {
         $MarkdownFolderItems = Get-ChildItem -Path $DocInfo.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
 
         if ($DocInfo.NoReImportModule -eq $False) {
-            Remove-Module -Name $DocInfo.ModuleName
+            # SilentlyContinue to prevent CLI telling me that 'PackageManagement' cant be removed 
+            # with Force.
+            Remove-Module -Name $DocInfo.ModuleName -ErrorAction SilentlyContinue
             Import-Module -Name $DocInfo.ManifestPath -Force -Scope Global
         }
             

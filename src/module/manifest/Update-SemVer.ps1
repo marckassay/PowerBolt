@@ -96,15 +96,57 @@ function Update-SemVer {
             $ModInfo = Get-MKModuleInfo -Path $Path
         }
 
+        # PowerShellGet's Update-ModuleManifest currently has a bug that is reverting previous 
+        # changed values. https://github.com/PowerShell/PowerShell/issues/7181
+        $ManifestContentRaw = Get-Content -Path $ModInfo.ManifestFilePath -Raw
+            
         if ($AutoUpdate.IsPresent) {
             $CurrentBranchName = Get-GitBranchName -Path ($ModInfo.Path)
 
             if ($CurrentBranchName -match $script:SemVerRegEx) {
                 $Version = $ModInfo.Version
-                # using '-gt' comparison because developer may have bumped or explictly set semver to something greater than what 
-                # Git branch they are on. although it they explictly set a lower value it will be overwritten.
-                if (($Matches.MAJOR -gt $Version.Major) -or ($Matches.MINOR -gt $Version.Minor) -or ($Matches.PATCH -gt $Version.Build)) {
+                # using '-gt' comparison because developer may have bumped or explictly set semver
+                # to something greater than what Git branch they are on. although if they explictly 
+                # set a lower value it will be overwritten.
+                if (($Matches.MAJOR -gt $Version.Major) -or `
+                    ($Matches.MINOR -gt $Version.Minor) -or `
+                    ($Matches.PATCH -gt $Version.Build)) {
                     $Value = $CurrentBranchName 
+                }
+            }
+            
+            # since $AutoUpdate is present, lets update URIs
+            # Using Import-PowerShellDataFile for convenience to check keys
+            $Manifest = Import-PowerShellDataFile -Path $ModInfo.ManifestFilePath
+            
+            $Name = $ModInfo.Name
+
+            # expecting: ...<ModuleName>/tree/<AnyValue>
+            if ($Manifest.ContainsKey('HelpInfoURI')) {
+                if ($ManifestContentRaw -match "(?<=HelpInfoURI)(?:[\s]*[=][\s]*)(\'.*\')") {
+                    $NuHelpInfoUri = [regex]::Replace($Matches[1].Trim(), "(?<=$Name[\\|\/]tree[\\|\/]).*(?=\')", $CurrentBranchName)
+                    $ManifestContentRaw = [regex]::Replace($ManifestContentRaw, "(?<=HelpInfoURI)(?:[\s]*[=][\s]*)(\'.*\')", " = $NuHelpInfoUri")
+                }
+            }
+    
+            if ($Manifest.ContainsKey('PrivateData')) {
+                $PSData = $Manifest.PrivateData.PSData
+
+                # expecting: .../<AnyValue>/LICENSE
+                if ($PSData.ContainsKey('LicenseUri')) {
+                    if ($ManifestContentRaw -match "(?<=LicenseUri)(?:[\s]*[=][\s]*)(\'.*\')") {
+                        $NuLicenseUri = [regex]::Replace($Matches[1].Trim(), "[^\\|\/]+?(?=[\\|\/]LICENSE)", $CurrentBranchName)
+                        $ManifestContentRaw = [regex]::Replace($ManifestContentRaw, "(?<=LicenseUri)(?:[\s]*[=][\s]*)(\'.*\')", " = $NuLicenseUri")
+
+                    }
+                }
+
+                # expecting: ...<ModuleName>/tree/<AnyValue>
+                if ($PSData.ContainsKey('IconUri')) {
+                    if ($ManifestContentRaw -match "(?<=IconUri)(?:[\s]*[=][\s]*)(\'.*\')") {
+                        $NuIconUri = [regex]::Replace($Matches[1].Trim(), "(?<=$Name[\\|\/]tree[\\|\/]).*(?=\')", $CurrentBranchName)
+                        $ManifestContentRaw = [regex]::Replace($ManifestContentRaw, "(?<=IconUri)(?:[\s]*[=][\s]*)(\'.*\')", " = $NuIconUri")
+                    }
                 }
             }
         }
@@ -139,11 +181,11 @@ function Update-SemVer {
         }
 
         if ($Value) {
-            Update-ModuleManifest -Path ($ModInfo.ManifestFilePath) -ModuleVersion $Value | Out-Null
+            if ($ManifestContentRaw -match "(?<=ModuleVersion).*") {
+                $ManifestContentRaw = [regex]::Replace($ManifestContentRaw, $Matches[0], " = '$Value'")
+            }
 
-            # TODO: this should not be in this file; if its still needed make switch param to enable it
-            Update-RootModuleUsingStatements -Path ($ModInfo.Path) -SourceFolderPath $SourceFolderPath | `
-                Update-ManifestFunctionsToExportField
+            Set-Content -Path $ModInfo.ManifestFilePath -Value $ManifestContentRaw -NoNewline
 
             if ($AutoUpdate.IsPresent) {
                 Write-Host "Module version has been changed to '$Value'" -ForegroundColor Green

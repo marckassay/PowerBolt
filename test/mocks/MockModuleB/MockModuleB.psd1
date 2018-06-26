@@ -100,10 +100,10 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = 'Test'
+            Tags       = 'Test'
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://raw.githubusercontent.com/marckassay/MockModuleB/master/LICENSE'
 
             # A URL to the main website for this project.
             # ProjectUri = ''
@@ -128,7 +128,7 @@
     } # End of PrivateData hashtable
 
     # HelpInfo URI of this module
-    # HelpInfoURI = ''
+    HelpInfoURI       = 'https://github.com/marckassay/MockModuleB/tree/master'
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''

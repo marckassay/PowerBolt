@@ -13,7 +13,7 @@ The `Backups` object defined in `MK.PowerShell-config.json` will copy items to t
 ## SYNTAX
 
 ```
-Backup-Sources [-ConfigFilePath <String>] [-Force] [-Initialize] [<CommonParameters>]
+Backup-Sources [-ConfigFilePath <String>] [-Force] [-Initialize] [-Silent] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,6 +72,21 @@ Accept wildcard characters: False
 
 ### -Initialize
 For internal for `MK.PowerShell.Flow` module.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Silent
+{{Fill Silent Description}}
 
 ```yaml
 Type: SwitchParameter
