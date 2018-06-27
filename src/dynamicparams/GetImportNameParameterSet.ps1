@@ -22,10 +22,12 @@ function GetImportNameParameterSet {
     $ProfileRaw = Get-Content -Path $ProfilePath -Raw
     if ($ProfileRaw) {
         if ($LineStatus -eq "Uncomment") {
-            $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
+            $ModuleBases = [regex]::Matches($ProfileRaw, "^\s*(?<!\#)\s*(?:Import-Module).*[\\|\/](?<ModuleName>\S*)", [System.Text.RegularExpressions.RegexOptions]::Multiline) | `
+                ForEach-Object {$_.Groups['ModuleName'].Value}
         }
         else {
-            $ModuleBases = [regex]::Matches($ProfileRaw, "(?<=\# Import-Module ).*\\(\S*)") | ForEach-Object {$_.Groups[1].Value}
+            $ModuleBases = [regex]::Matches($ProfileRaw, "[\#]+\s*(?:Import-Module).*[\\|\/](?<ModuleName>\S*)") | `
+                ForEach-Object {$_.Groups['ModuleName'].Value}
         }
     }
 

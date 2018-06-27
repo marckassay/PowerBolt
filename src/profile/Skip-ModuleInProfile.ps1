@@ -27,11 +27,19 @@ function Skip-ModuleInProfile {
 
     end {
         $ProfileContent = Get-Content -Path $script:ProfilePath -Raw
-        $ImportStatement = [regex]::Match($ProfileContent, "Import-Module.*[\\|\/]$Name") | `
+        
+        $ImportStatementLine = [regex]::Match($ProfileContent, ".*(?:Import-Module).*(?=$Name).*") | `
             Select-Object -ExpandProperty Value
-    
-        $SkipImportStatement = $ImportStatement.Trim()
-        $ProfileContent.Replace($ImportStatement, "# $SkipImportStatement") | `
-            Set-Content -Path $script:ProfilePath
+        
+        $ImportStatementPath = [regex]::Match($ImportStatementLine, "(?<=Import-Module).*$") | `
+            Select-Object -ExpandProperty Value
+
+        $ImportStatementPath = $ImportStatementPath.Trim()
+
+        $UpdatedProfileContent = [regex]::Replace($ProfileContent, ".*(?:Import-Module).*(?=$Name).*", "# Import-Module $ImportStatementPath")
+
+        $UpdatedProfileContent = $UpdatedProfileContent.Trim()
+
+        Set-Content -Path $script:ProfilePath -Value $UpdatedProfileContent
     }
 }

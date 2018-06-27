@@ -21,9 +21,6 @@ Import-Module C:\Users\Bob\Goo
 Import-Module C:\Users\Bob\Plaster
 "@
             Set-Content -Path $MockProfilePath -Value $MockProfileContent
-
-            Get-Alias -Name Set-Location
-            Get-Alias -Name Set-Location
             
             Skip-ModuleInProfile -Name 'Plaster' -ProfilePath $MockProfilePath
 

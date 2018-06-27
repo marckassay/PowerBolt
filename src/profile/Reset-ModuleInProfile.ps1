@@ -4,9 +4,7 @@ function Reset-ModuleInProfile {
     (
         [Parameter(Mandatory = $False, Position = 1)]
         [string]
-        $ProfilePath,
-
-        [switch]$ByPassForDocumentation
+        $ProfilePath
     )
 
     DynamicParam {
@@ -23,12 +21,20 @@ function Reset-ModuleInProfile {
     }
 
     end {
-        $ProfileContent = Get-Content -Path $ProfilePath -Raw
-        $ImportStatement = [regex]::Match($ProfileContent, "# Import-Module.*[\\|\/]$Name") | `
+        $ProfileContent = Get-Content -Path $script:ProfilePath -Raw
+        
+        $ImportStatementLine = [regex]::Match($ProfileContent, ".*(?:Import-Module).*(?=$Name).*") | `
             Select-Object -ExpandProperty Value
-        $ResetImportStatement = $ImportStatement.TrimStart('#').Trim()
-    
-        $ProfileContent.Replace($ImportStatement, $ResetImportStatement) | `
-            Set-Content -Path $ProfilePath
+        
+        $ImportStatementPath = [regex]::Match($ImportStatementLine, "(?<=Import-Module).*$") | `
+            Select-Object -ExpandProperty Value
+
+        $ImportStatementPath = $ImportStatementPath.Trim()
+        
+        $UpdatedProfileContent = [regex]::Replace($ProfileContent, ".*(?:Import-Module).*(?=$Name).*", "Import-Module $ImportStatementPath")
+        
+        $UpdatedProfileContent = $UpdatedProfileContent.Trim()
+
+        Set-Content -Path $script:ProfilePath -Value $UpdatedProfileContent
     }
 }

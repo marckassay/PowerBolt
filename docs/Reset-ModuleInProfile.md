@@ -13,7 +13,7 @@ Re-enables an `Import-Module` statement in `$PROFILE` to be executed.
 ## SYNTAX
 
 ```
-Reset-ModuleInProfile [[-ProfilePath] <String>] [-ByPassForDocumentation] [-Name] <String> [<CommonParameters>]
+Reset-ModuleInProfile [[-ProfilePath] <String>] [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,21 +29,6 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
-
-### -ByPassForDocumentation
-{{Fill ByPassForDocumentation Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 {{Fill Name Description}}
