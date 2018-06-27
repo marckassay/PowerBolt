@@ -123,10 +123,10 @@
     'resources\templates\NewScript\plasterManifest_en-US.xml', 
     'resources\templates\NewScript\parts\Script.ps1', 
     'resources\templates\NewScript\parts\Script.Tests.ps1', 
-    'resources\templates\NewModule\plasterManifest_en-US.xml', 
-    'resources\templates\NewModule\parts\LICENSE', 
-    'resources\templates\NewModule\parts\Module.psm1', 
-    'resources\templates\NewModule\parts\README.md'
+    'resources\templates\NewModuleProject\plasterManifest_en-US.xml', 
+    'resources\templates\NewModuleProject\parts\LICENSE', 
+    'resources\templates\NewModuleProject\parts\Module.psm1', 
+    'resources\templates\NewModuleProject\parts\README.md'
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
     PrivateData       = @{

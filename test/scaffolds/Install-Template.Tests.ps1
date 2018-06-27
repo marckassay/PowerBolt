@@ -6,8 +6,8 @@ Describe "Test Install-Template" {
 
         $AlicesTemplates = New-Item -Path (Join-Path $TestSupportModule.TestDrivePath "AlicesTemplates") -ItemType Directory
 
-        Copy-Item -Path (Join-Path -Path $TestSupportModule.FixtureDirectoryPath -ChildPath 'resources\templates\NewModule') -Destination $AlicesTemplates -Recurse
-        $MockNewModuleTemplatePath = Join-Path -Path $AlicesTemplates -ChildPath 'NewModule\plasterManifest_en-US.xml'
+        Copy-Item -Path (Join-Path -Path $TestSupportModule.FixtureDirectoryPath -ChildPath 'resources\templates\NewModuleProject') -Destination $AlicesTemplates -Recurse
+        $MockNewModuleProjectPath = Join-Path -Path $AlicesTemplates -ChildPath 'NewModuleProject\plasterManifest_en-US.xml'
    
         Copy-Item -Path (Join-Path -Path $TestSupportModule.FixtureDirectoryPath -ChildPath 'resources\templates\NewScript') -Destination $AlicesTemplates -Recurse
         $MockNewScriptTemplatePath = Join-Path -Path $AlicesTemplates -ChildPath 'NewScript\plasterManifest_en-US.xml'
@@ -21,13 +21,13 @@ Describe "Test Install-Template" {
         $TestSupportModule.Teardown()
     }
     
-    Context "Call Install-Template with built-in template 'NewModule' and then with 'NewScript'" {
+    Context "Call Install-Template with built-in template 'NewModuleProject' and then with 'NewScript'" {
 
         Set-Location $TestSupportModule.TestDrivePath
 
         Mock Add-ModuleToProfile {} -ModuleName MK.PowerShell.Flow
 
-        Install-Template -TemplateName 'NewModule' '.' 'MockModuleC' 'Alice' 
+        Install-Template -TemplateName 'NewModuleProject' '.' 'MockModuleC' 'Alice' 
 
         $MockModuleCPath = (Join-Path -Path '.' -ChildPath 'MockModuleC')
 
@@ -75,7 +75,7 @@ Describe "Test Install-Template" {
     Context "Call Install-Template with explict paths to templates" {
 
         Set-Location $TestSupportModule.TestDrivePath
-        Install-Template -TemplatePath $MockNewModuleTemplatePath  '.' 'MockModuleC' 'Alice' 
+        Install-Template -TemplatePath $MockNewModuleProjectPath  '.' 'MockModuleC' 'Alice' 
 
         $ScaffoldModuleFolder = Join-Path -Path $TestSupportModule.TestDrivePath -ChildPath 'MockModuleC'
         $ScaffoldManifestPath = Join-Path $ScaffoldModuleFolder -ChildPath 'MockModuleC.psd1'

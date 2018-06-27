@@ -5,5 +5,5 @@ Param(
 
 $script:SUT = $SUT
 if ($script:SUT -eq $False) {
-    # Start-Mddule
+    # Start-Module
 }

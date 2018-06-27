@@ -16,7 +16,7 @@ function Install-Template {
             Position = 0,
             ValueFromPipeline = $False, 
             ParameterSetName = "ByTemplateName")]
-        [ValidateSet("NewScript", "NewModule")]
+        [ValidateSet("NewScript", "NewModuleProject")]
         [string]$TemplateName
     )
 
@@ -59,7 +59,7 @@ function Install-Template {
         if ($TemplateName -eq 'NewScript') {
             Update-ModuleExports 
         }
-        elseif ($TemplateName -eq 'NewModule') {
+        elseif ($TemplateName -eq 'NewModuleProject') {
             Add-ModuleToProfile -Path (Join-Path -Path $PSBoundParameters.DestinationPath -ChildPath $PSBoundParameters.ModuleName)
         }
 

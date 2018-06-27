@@ -18,7 +18,7 @@
     </parameters>
     <content>
         <message>
-Scaffolding your PowerShell template...
+Flow is scaffolding your PowerShell template...
 
         </message>
         <templateFile source='parts\Script.ps1' destination='src\${PLASTER_PARAM_ScriptCongruentPath}\${PLASTER_PARAM_ScriptName}.ps1' />

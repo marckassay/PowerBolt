@@ -2,11 +2,11 @@
 <plasterManifest schemaVersion="1.1" templateType="Item" 
     xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
     <metadata>
-        <name>NewModule</name>
+        <name>NewModuleProject</name>
         <id>00146c4d-38c7-4e4d-8910-ef81bb508fdd</id>
         <version>1.0.0</version>
-        <title>New PowerShell module</title>
-        <description>Creates a manifest, module, README.md, .gitignore, LICENSE files. It will also create a src, test, resources directory</description>
+        <title>New PowerShell module project</title>
+        <description>Creates a manifest, module, README.md, .gitignore and (MIT) LICENSE file. It will also create a src, test, resources directory.</description>
         <author>Marc Kassay</author>
         <tags>Script,Test</tags>
     </metadata>
@@ -20,7 +20,7 @@
     </parameters>
     <content>
         <message>
-Scaffolding your PowerShell template...
+Flow is scaffolding your PowerShell template...
 
         </message>
 
