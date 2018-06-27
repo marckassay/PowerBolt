@@ -19,7 +19,14 @@ function Invoke-TestSuiteRunner {
         [Parameter(Mandatory = $False,
             Position = 2,
             ValueFromPipeline = $False)]
-        [string[]]$Excludes = 'mocks'
+        [string[]]$Excludes = 'mocks',
+
+        [Parameter(Mandatory = $False,
+            Position = 3,
+            ValueFromPipeline = $False)]
+        [Pester.OutputTypes[]]$Show = @('Header', 'Fails'),
+
+        [switch]$PassThru
     )
 
     DynamicParam {
@@ -43,18 +50,19 @@ function Invoke-TestSuiteRunner {
         $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath $TestFolderPath -Resolve
         $ScriptPaths += Get-ChildItem $ScriptPath -Exclude $Excludes | `
             Select-Object -ExpandProperty FullName
-        # FYI: https://github.com/PowerShell/Plaster/blob/master/docs/en-US/Invoke-Plaster.md
-        $ArgList = @{ Script = $ScriptPaths; PassThru = $true }
+        # FYI: https://github.com/pester/Pester/wiki/Invoke-Pester
+        $ArgList = @{ Script = $ScriptPaths; Show = $Show; PassThru = $PassThru.IsPresent }
     }
 
     process {
-        Start-Job -Name "JobPester" -ScriptBlock {
-            param($P)  Invoke-Pester @P
-        } -ArgumentList $ArgList | Wait-Job
+        Write-Host "Flow is now testing in: $ScriptPath" -ForegroundColor Green
+        Start-Job -Name "JobPester" -ScriptBlock {param($P) Invoke-Pester @P} -ArgumentList $ArgList | `
+            Wait-Job -Force | `
+            ForEach-Object {Receive-Job -Name JobPester}
     }
 
     end {
-        Import-Module ($ModInfo.Path) -Global -Force
+        Import-Module ($ModInfo.Path)
         
         Pop-Location -StackName 'PriorTestLocation'
     }

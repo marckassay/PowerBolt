@@ -57,6 +57,13 @@ function Publish-ModuleToNuGetGallery {
         $RedactedNuGetApiKey = $NuGetApiKey.Remove(0, 23).Insert(0, 'XXXXXXXX-XXXX-XXXX-XXXX')
         Write-Information "Will be using the following value for NuGet API Key: $RedactedNuGetApiKey" -InformationAction Continue
 
+        if ($Confirm -eq $False) {
+            Write-Host "Flow is will now attempt to publish module in: $DestinationDirectory" -ForegroundColor Green
+        }
+        else {
+            Write-Host "Flow is needs confirmation to publish module in: $DestinationDirectory" -ForegroundColor Red
+        }
+
         Publish-Module -Path $DestinationDirectory -NuGetApiKey $NuGetApiKey -Confirm:$Confirm -WhatIf:$WhatIf.IsPresent -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)
     
         # teardown

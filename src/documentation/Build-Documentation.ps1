@@ -54,6 +54,8 @@ function Build-Documentation {
     }
 
     end {
+        Write-Host ("Flow is now building documentation for " + $DocInfo.ModuleName) -ForegroundColor Green
+
         Write-Output $DocInfo | `
             Build-PlatyPSMarkdown -Force:$Force.IsPresent | `
             New-ExternalHelpFromPlatyPSMarkdown | `
