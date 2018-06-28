@@ -72,5 +72,20 @@ function Get-DFunction {
             'Set-DFunction' | Should -BeIn $FunctionNames
             'Remove-DFunction' | Should -not -BeIn $FunctionNames
         }
+
+        It "Should after file removal insert one function name in FunctionsToExport field" {
+
+            Remove-Item -Path (Join-Path $TestSupportModule.MockDirectoryPath -ChildPath 'src/*.ps1')
+            Remove-Item -Path (Join-Path $TestSupportModule.MockDirectoryPath -ChildPath 'src/D/*.ps1')
+
+            Update-RootModuleUsingStatements -Path $TestSupportModule.MockDirectoryPath | Update-ManifestFunctionsToExportField
+
+            $FunctionNames = Test-ModuleManifest $TestSupportModule.MockManifestPath | `
+                Select-Object -ExpandProperty ExportedCommands | `
+                Select-Object -ExpandProperty Values | `
+                Select-Object -ExpandProperty Name
+
+            'Get-CFunction' | Should -BeIn $FunctionNames
+        }
     }
 }

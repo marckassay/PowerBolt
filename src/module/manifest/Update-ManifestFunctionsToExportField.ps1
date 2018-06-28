@@ -28,6 +28,9 @@ function Update-ManifestFunctionsToExportField {
         if ($FunctionNames -is [Object[]]) {
             $Tail = $FunctionNames.Count - 1
             $FunctionNames[$Tail] = $FunctionNames[$Tail].TrimEnd().TrimEnd(',')
+        } 
+        elseif ($FunctionNames -is [String]) {
+            $FunctionNames = $FunctionNames.Trim().TrimEnd(',')
         }
 
         [regex]$InsertPointRegEx = "(?(?<=(FunctionsToExport))([\w\W]*?)|($))(?(?=\#)(?=\#)|(CmdletsToExport))"

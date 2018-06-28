@@ -6,7 +6,7 @@ class ScriptPath {
 
 class TestRunnerSupportModule {
     # TODO: have these elements pushed into this array instead of hard-coded; make it accessible for when Deploy-TestFakes is created.
-    [string[]]$MODULE_NAMES = @('MK.PowerShell.Flow', 'MKDocumentationInfo', 'MKModuleInfo', 'MockModuleA', 'MockModuleB', 'Deploy-TestFakes', 'TestRunnerSupportModule')
+    [string[]]$MODULE_NAMES = @('MK.PowerShell.Flow', 'MKDocumentationInfo', 'MKModuleInfo', 'MockModuleA', 'MockModuleB', 'MockModuleC', 'Deploy-TestFakes')
     [string]$AutoStart = $true
     [string]$TestDrivePath
     [string]$FixtureDirectoryPath
@@ -42,6 +42,8 @@ class TestRunnerSupportModule {
     }
  
     [void]Setup ([string]$MockModuleName, [string]$FixtureConfigFilePath) {
+        $this.Teardown()
+        
         # lets hope there is only one psd1 file in this directory
         $this.FixtureManifestPath = Get-Item '*.psd1' | Select-Object -First 1 | Select-Object -ExpandProperty FullName
 

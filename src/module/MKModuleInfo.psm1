@@ -5,6 +5,7 @@ class MKModuleInfo {
     [string]$ManifestFilePath
     [string]$RootModuleFilePath
     [object]$Version
+    [bool]$IsValid
         
     MKModuleInfo(
         [string]$Path,
@@ -68,12 +69,16 @@ class MKModuleInfo {
         }
         else {
             if (-not $this.Name) {
-                Write-Host "Unable to acquire information about module with the given Path: "$this.Path
+                # Write-Host "Unable to acquire information about module with the given Path: "$this.Path
+                $this.IsValid = $False
             }
             else {
-                Write-Host "Unable to acquire information about module with the given Name: "$this.Name
+                # Write-Host "Unable to acquire information about module with the given Name: "$this.Name
+                $this.IsValid = $False
             }
         }
+
+        $this.IsValid = $true
     }
 
     [string]PredicatedManifestPath([string]$Path) {

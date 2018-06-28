@@ -2,18 +2,9 @@ using module .\..\dynamicparams\GetSettingsNameSet.ps1
 function Get-MKPowerShellSetting {
     [CmdletBinding(PositionalBinding = $True)]
     Param(
-        <# DynamicParam: 
-        [Parameter(Mandatory = $False,
-            Position = 0)]
-        [string]$Name
-        #>
-
         [Parameter(Mandatory = $False,
             Position = 1)]
-        [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath,
-
-        [switch]
-        $ShowAll
+        [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath
     )
 
     DynamicParam {
@@ -24,13 +15,11 @@ function Get-MKPowerShellSetting {
     }
 
     begin {
-        if (-not $ShowAll.IsPresent) {
-            $Name = $PSBoundParameters['Name']
-        }
+        $Name = $PSBoundParameters['Name']
     }
 
     end {
-        if (-not $ShowAll.IsPresent) {
+        if ($Name) {
             $Value = $Script:MKPowerShellConfig[$Name]
         
             if ($Value -match "((T|t)rue|(F|f)alse)") {

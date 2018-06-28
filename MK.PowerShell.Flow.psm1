@@ -39,6 +39,7 @@ Param(
 
 $script:MKPowerShellConfigFilePath = $script:ConfigFilePath
 $script:MKPowerShellSUT = $script:SUT
+
 if ($script:SUT -eq $False) {
     Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath
 }

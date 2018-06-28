@@ -13,6 +13,9 @@ function Start-MKPowerShell {
     )
 
     begin {
+        # Environment var to reference this module's directory
+        Set-Variable -Name FLOWPATH -Value ($script:PSCommandPath | Split-Path)
+
         # Start-MKPowerShell may be called directly which may have a nothing value other then MKPowerShellConfigFilePath
         if ($ConfigFilePath) {
             $script:MKPowerShellConfigFilePath = $ConfigFilePath
@@ -158,10 +161,9 @@ function Restore-Formats {
         # setting this to -1 to display/view all items for ListItems. For instance, Get-Module's 
         # ExportedFunction
         $global:FormatEnumerationLimit = -1
-        
-        $ModuleHome = $MyInvocation.ScriptName | Split-Path -Parent | Split-Path -Parent | Split-Path -Parent
-        $FormatFilePaths = Get-ManifestKey -Path $ModuleHome -Key 'FormatsToProcess' | `
-            ForEach-Object {Join-Path -Path $ModuleHome -ChildPath $_}
+
+        $FormatFilePaths = Get-ManifestKey -Path $FLOWPATH -Key 'FormatsToProcess' | `
+            ForEach-Object {Join-Path -Path $FLOWPATH -ChildPath $_}
         
         Update-FormatData -PrependPath $FormatFilePaths
     }
