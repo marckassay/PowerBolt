@@ -44,8 +44,8 @@ function Install-Template {
         if ($TemplateName -eq 'NewScript') {
             try {
                 $CanidateModulePath = Resolve-Path . | Select-Object -ExpandProperty Path
-                $Results = Get-MKModuleInfo $CanidateModulePath
-                $IsModulePath = $Results.IsValid
+                $ModInfo = Get-MKModuleInfo $CanidateModulePath
+                $IsModulePath = $ModInfo.IsValid
             }
             catch {
                 $IsModulePath = $false
@@ -62,13 +62,31 @@ function Install-Template {
                 Set-Variable -Name $Name -Value $Value -Scope Global
             }
 
+            if ($TemplateName -eq 'NewScript') {
+
+                $ModuleHomeDeclarationCode = "`$script:PSCommandPath | Split-Path -Parent"
+                $Depth = [regex]::Matches($PLASTER_PARAM_ScriptCongruentPath, "[\w]+").Count
+                
+                for ($i = 0; $i -le $Depth; $i++) {
+                    $ModuleHomeDeclarationCode += " | Split-Path -Parent"
+                }
+
+                $PlasterCustomVar = @{PLASTER_ModuleHomeDeclarationCode = $ModuleHomeDeclarationCode; PLASTER_ModuleName = ($ModInfo.Name)}
+                $PlasterCustomVar.GetEnumerator() | `
+                    ForEach-Object {
+                    $Name = $_.Key
+                    $Value = $_.Value
+                    Set-Variable -Name $Name -Value $Value -Scope Global
+                }
+            }
+
             $PlasterTemplateFolderPath = Split-Path -Path $script:TemplatePath -Parent
 
-            if (-not $DestinationPath) {
+            if (-not $PSBoundParameters.DestinationPath) {
                 Invoke-Plaster -TemplatePath $PlasterTemplateFolderPath -DestinationPath '.'
             }
             else {
-                Invoke-Plaster -TemplatePath $PlasterTemplateFolderPath -DestinationPath $DestinationPath
+                Invoke-Plaster -TemplatePath $PlasterTemplateFolderPath -DestinationPath $PSBoundParameters.DestinationPath
             }
 
             # TODO: to have this conditional avail when TemplatePath is used too
@@ -82,6 +100,14 @@ function Install-Template {
             $TemplateVarDictionary.GetEnumerator() | ForEach-Object {
                 $Name = "PLASTER_PARAM_" + ($_.Key)
                 Remove-Variable -Name $Name -Scope Global
+            }
+
+            if ($PlasterCustomVar) {
+                $PlasterCustomVar.GetEnumerator() | `
+                    ForEach-Object {
+                    $Name = $_.Key
+                    Remove-Variable -Name $Name -Scope Global
+                }
             }
         }
         else {

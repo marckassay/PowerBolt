@@ -14,7 +14,7 @@ function Start-MKPowerShell {
 
     begin {
         # Environment var to reference this module's directory
-        Set-Variable -Name FLOWPATH -Value ($script:PSCommandPath | Split-Path)
+        Set-Variable -Name FLOWPATH -Value ($script:PSCommandPath | Split-Path) -Scope Global
 
         # Start-MKPowerShell may be called directly which may have a nothing value other then MKPowerShellConfigFilePath
         if ($ConfigFilePath) {

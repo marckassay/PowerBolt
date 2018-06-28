@@ -5,12 +5,13 @@ function <%=$PLASTER_PARAM_ScriptName%>
         [Parameter(Mandatory = $true,
             Position = 0,
             ParameterSetName = "ParameterSetName",
-            ValueFromPipeline = $true,
-            ValueFromPipelineByPropertyName = $true,
-            HelpMessage = "Path to one or more locations.")]
+            ValueFromPipeline = $false,
+            ValueFromPipelineByPropertyName = $false)]
         [Alias("PSPath")]
         [ValidateNotNullOrEmpty()]
         [string[]]
-        $ParameterName
+        $Path
     )
+
+    Write-Error "The following file has only been scaffold: '$PSCommandPath'" -Category NotImplemented
 }

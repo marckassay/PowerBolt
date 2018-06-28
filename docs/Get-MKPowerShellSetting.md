@@ -13,7 +13,7 @@ Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAl
 ## SYNTAX
 
 ```
-Get-MKPowerShellSetting [[-ConfigFilePath] <String>] [-ShowAll] [[-Name] <String>] [<CommonParameters>]
+Get-MKPowerShellSetting [[-ConfigFilePath] <String>] [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,21 +56,6 @@ Accepted values: TurnOnBackup, LastLocation, Backups, TurnOnAutoUpdateSemVer, Nu
 
 Required: False
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ShowAll
-{{Fill ShowAll Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -1,18 +1,24 @@
-using module ..\.\TestFunctions.psm1
-
-Describe "Test <%=$PLASTER_PARAM_ScriptName%>" {
+Describe 'Test <%=$PLASTER_PARAM_ScriptName%>' {
     BeforeAll {
-        $TestFunctions = [TestFunctions]::new()
+        $ModuleHome = <%=$PLASTER_ModuleHomeDeclarationCode%>
 
-        $TestFunctions.DescribeSetup()
+        # Reimports '<%=$PLASTER_ModuleName%>'.  If its not currently import just silently continue
+        Remove-Module -Name '<%=$PLASTER_ModuleName%>' -ErrorAction SilentlyContinue
+        Import-Module $ModuleHome
+
+        InModuleScope '<%=$PLASTER_ModuleName%>' {
+            $script:SUT = $true
+        }
     }
     
     AfterAll {
-        $TestFunctions.DescribeTeardown()
+        InModuleScope '<%=$PLASTER_ModuleName%>' {
+            $script:SUT = $false
+        }
     }
 
-    Context "Post executing New-Script" {
-        It "Should have command accessable" {
+    Context 'Post executing New-Script' {
+        It 'Should have command accessible' {
             $Results = Get-Command <%=$PLASTER_PARAM_ScriptName%> | Select-Object -ExpandProperty CommandType
             $Results | Should -Be 'Function'
         }
