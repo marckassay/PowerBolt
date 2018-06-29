@@ -137,7 +137,7 @@
             Tags       = 'development', 'workflow'
 
             # A URL to the license for this module.
-            LicenseUri = 'https://raw.githubusercontent.com/marckassay/MK.PowerShell.Flow/0.0.20.0.2/LICENSE'
+            LicenseUri = 'https://raw.githubusercontent.com/marckassay/MK.PowerShell.Flow/0.0.2/LICENSE'
 
             # A URL to the main website for this project.
             ProjectUri = 'https://github.com/marckassay/MK.PowerShell.Flow'

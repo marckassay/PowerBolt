@@ -12,7 +12,7 @@ function GetPlasterTemplateVarSet {
     )
     
     $PlasterTemplateRaw = Get-Content -Path $Path -Raw
-    Write-Verbose "--> $PlasterTemplateRaw"
+
     $PlasterParams = [regex]::Matches($PlasterTemplateRaw , "(?<={PLASTER_PARAM_).*?(?=})") | Select-Object -ExpandProperty Value -Unique
     
     $Dictionary = [System.Management.Automation.RuntimeDefinedParameterDictionary]::new()

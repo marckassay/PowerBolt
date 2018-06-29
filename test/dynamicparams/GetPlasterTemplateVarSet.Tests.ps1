@@ -7,13 +7,12 @@ Describe "Test GetPlasterTemplateVarSet" {
         $AlicesTemplates = New-Item -Path (Join-Path $TestSupportModule.TestDrivePath "AlicesTemplates") -ItemType Directory
     
         Copy-Item -Path (Join-Path -Path $TestSupportModule.FixtureDirectoryPath -ChildPath 'resources\templates\NewScript') -Destination $AlicesTemplates -Recurse
-        $MockNewScriptTemplatePath = Join-Path -Path $AlicesTemplates -ChildPath 'NewScript\plasterManifest_en-US.xml'
 
-        Set-Variable -Name MockNewScriptTemplatePath -Value $MockNewScriptTemplatePath -Scope Global
+        Set-Variable -Name MockNewScriptTemplatePath -Value $(Join-Path -Path $AlicesTemplates -ChildPath 'NewScript\plasterManifest_en-US.xml') -Scope Global
     }
     
     AfterAll {
-        Remove-Variable -Name MockNewScriptTemplatePath 
+        Remove-Variable -Name MockNewScriptTemplatePath -Scope Global
         $TestSupportModule.Teardown()
     }
     

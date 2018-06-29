@@ -107,7 +107,7 @@ class MKDocumentationInfo {
             
             $BranchName = Get-GitBranchName -Path ($this.ModuleFolder)
             
-            if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])[\w\W]*[url\s\=\s](http.*)[\n][\w\W]*(?=\[)") {
+            if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])(?:\s*)(?:url\s\=\s)(http.*\n)") {
                 # TODO: this most likely will only work with Github file structure
                 # TODO: docs folders needs to be a variable
                 $this.OnlineVersionUrl = $Matches[1].Split('.git')[0] + "/blob/$BranchName/docs/{0}.md"

@@ -6,7 +6,7 @@ class ScriptPath {
 
 class TestRunnerSupportModule {
     # TODO: have these elements pushed into this array instead of hard-coded; make it accessible for when Deploy-TestFakes is created.
-    [string[]]$MODULE_NAMES = @('MK.PowerShell.Flow', 'MKDocumentationInfo', 'MKModuleInfo', 'MockModuleA', 'MockModuleB', 'MockModuleC', 'Deploy-TestFakes')
+    [string[]]$MODULE_NAMES = @('MK.PowerShell.Flow', 'MKDocumentationInfo', 'MKModuleInfo', 'MockModuleA', 'MockModuleB', 'MockModuleC', 'Deploy-TestFakes', 'TestRunnerSupportModule')
     [string]$AutoStart = $true
     [string]$TestDrivePath
     [string]$FixtureDirectoryPath
@@ -17,6 +17,8 @@ class TestRunnerSupportModule {
     [string]$MockRootModulePath
 
     TestRunnerSupportModule () {
+        $this.Teardown()
+
         $this.TestDrivePath = Get-Item -Path 'TestDrive:\' | Select-Object -ExpandProperty FullName
 
         $this.FixtureDirectoryPath = [ScriptPath]::new().GetPath()
@@ -25,6 +27,8 @@ class TestRunnerSupportModule {
     }
 
     TestRunnerSupportModule ([bool]$AutoStart, [string]$MockModuleName) {
+        $this.Teardown()
+
         $this.AutoStart = $AutoStart
         $this.TestDrivePath = Get-Item -Path 'TestDrive:\' | Select-Object -ExpandProperty FullName
 
@@ -34,6 +38,8 @@ class TestRunnerSupportModule {
     }
 
     TestRunnerSupportModule ([string]$MockModuleName) {
+        $this.Teardown()
+
         $this.TestDrivePath = Get-Item -Path 'TestDrive:\' | Select-Object -ExpandProperty FullName
 
         $this.FixtureDirectoryPath = [ScriptPath]::new().GetPath()
@@ -42,7 +48,6 @@ class TestRunnerSupportModule {
     }
  
     [void]Setup ([string]$MockModuleName, [string]$FixtureConfigFilePath) {
-        $this.Teardown()
         
         # lets hope there is only one psd1 file in this directory
         $this.FixtureManifestPath = Get-Item '*.psd1' | Select-Object -First 1 | Select-Object -ExpandProperty FullName
@@ -59,14 +64,20 @@ class TestRunnerSupportModule {
         Import-Module $this.FixtureManifestPath -ArgumentList @($this.FixtureConfigFilePath, $true) -Global -Force
 
         if ($MockModuleName -ne '') {
-
             Copy-Item -Path ".\test\mocks\$MockModuleName" -Destination $this.TestDrivePath -Container -Recurse -Force
             $this.MockDirectoryPath = Join-Path -Path ($this.TestDrivePath) -ChildPath ($MockModuleName)
 
-            $this.MockManifestPath = Get-Item (Join-Path -Path ($this.MockDirectoryPath) -ChildPath ($MockModuleName + ".psd1")) | Select-Object -ExpandProperty FullName
-            Import-Module $this.MockManifestPath -Global -Force
+            # if this mockmodule directory has a 'git' folder, change it to '.git'
+            $OriginalGit = $(Join-Path -Path ($this.MockDirectoryPath) -ChildPath "git")
+            if (Test-Path -Path $OriginalGit) {
+                Rename-Item -Path $OriginalGit -NewName ".git"
+            }
 
+            $this.MockManifestPath = Get-Item (Join-Path -Path ($this.MockDirectoryPath) -ChildPath ($MockModuleName + ".psd1")) | Select-Object -ExpandProperty FullName
+            
             $this.MockRootModulePath = (Join-Path -Path ($this.MockDirectoryPath) -ChildPath ($MockModuleName + ".psm1"))
+
+            Import-Module $this.MockManifestPath -Global -Force
         }
 
         if ($this.AutoStart -eq $true) {

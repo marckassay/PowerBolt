@@ -30,7 +30,15 @@ function Get-GitBranchName {
         Join-Path -Path $ModInfo.Path -ChildPath '.git/HEAD' -OutVariable GitHEADPath | Out-Null
         if (Test-Path $GitHEADPath) {
             $GitRaw = Get-Content -Path $GitHEADPath -Raw
-            [regex]::Match($GitRaw, '(?<=[\\|\/])[\w\.]*$').Value
+            try {
+                $BranchName = [regex]::Match($GitRaw, "(?<=[\\|\/])[\w\.]*", [System.Text.RegularExpressions.RegexOptions]::RightToLeft).Value
+            }
+            catch {
+                $BranchName = $null
+            }
+            finally {
+                $BranchName
+            }
         }
     }
 }

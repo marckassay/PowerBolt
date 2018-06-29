@@ -13,7 +13,7 @@ Describe "Test Invoke-TestSuiteRunner" {
 
         It "Should of called Start-Job which in-turn calls Invoke-Pester" {
 
-            Mock Start-Job -ModuleName MK.PowerShell.Flow
+            Mock Start-Job {} -ModuleName MK.PowerShell.Flow
 
             Invoke-TestSuiteRunner -Path ($TestSupportModule.MockDirectoryPath)
             
@@ -22,7 +22,7 @@ Describe "Test Invoke-TestSuiteRunner" {
             } -ModuleName MK.PowerShell.Flow -Times 1
             
             Assert-MockCalled Start-Job -ParameterFilter {
-                $ArgumentList[0].Script -like '*MockModuleB*test*'
+                $ArgumentList[0].Script -like '*io*'
             } -ModuleName MK.PowerShell.Flow -Times 1
         }
     }

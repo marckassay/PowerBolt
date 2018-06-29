@@ -68,7 +68,7 @@ Describe "Test Install-Template" {
         }
 
         It "Should modify the scaffold test file as expected" {
-            $GetFileExtensionTestPath | Should -FileContentMatch ([regex]::Escape('Describe "Test Get-FileExtension"'))
+            $GetFileExtensionTestPath | Should -FileContentMatch ([regex]::Escape("Describe 'Test Get-FileExtension'"))
         }
     }
     
@@ -109,7 +109,7 @@ Describe "Test Install-Template" {
         }
 
         It "Should modify the scaffold test file as expected" {
-            $GetFileExtensionTestPath | Should -FileContentMatch ([regex]::Escape('Describe "Test Get-FileExtension"'))
+            $GetFileExtensionTestPath | Should -FileContentMatch ([regex]::Escape("Describe 'Test Get-FileExtension'"))
         }
     }
 }

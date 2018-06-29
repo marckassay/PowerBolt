@@ -19,7 +19,7 @@ function Invoke-TestSuiteRunner {
         [Parameter(Mandatory = $False,
             Position = 2,
             ValueFromPipeline = $False)]
-        [string[]]$Excludes = 'mocks',
+        [string[]]$Exclude = 'mocks',
 
         [Parameter(Mandatory = $False,
             Position = 3,
@@ -46,19 +46,22 @@ function Invoke-TestSuiteRunner {
         AutoUpdateSemVerDelegate($ModInfo.Path)
 
         Push-Location -StackName 'PriorTestLocation'
+        Set-Location $ModInfo.Path
         
-        $ScriptPath = Join-Path -Path $ModInfo.Path -ChildPath $TestFolderPath -Resolve
-        $ScriptPaths += Get-ChildItem $ScriptPath -Exclude $Excludes | `
-            Select-Object -ExpandProperty FullName
+        $TestPath = Join-Path -Path $ModInfo.Path -ChildPath $TestFolderPath -Resolve
+        $ChildTestPaths = Get-ChildItem $TestPath -Exclude $Exclude -Directory | `
+            Select-Object -ExpandProperty Name | `
+            ForEach-Object {Join-Path -Path $TestPath -ChildPath $_}
+            
         # FYI: https://github.com/pester/Pester/wiki/Invoke-Pester
-        $ArgList = @{ Script = $ScriptPaths; Show = $Show; PassThru = $PassThru.IsPresent }
+        $ArgList = @{ Script = $ChildTestPaths; Show = $Show; PassThru = $PassThru.IsPresent }
     }
 
     process {
-        Write-Host "Flow is now testing in: $ScriptPath" -ForegroundColor Green
-        Start-Job -Name "JobPester" -ScriptBlock {param($P) Invoke-Pester @P} -ArgumentList $ArgList | `
-            Wait-Job -Force | `
-            ForEach-Object {Receive-Job -Name JobPester}
+        Write-Host "Flow is now testing in: $TestPath" -ForegroundColor Green
+        Start-Job -Name "JobPester" -ScriptBlock {
+            param($AL) Invoke-Pester @AL
+        } -ArgumentList $ArgList | Wait-Job -Force | ForEach-Object {Receive-Job -Name JobPester}
     }
 
     end {

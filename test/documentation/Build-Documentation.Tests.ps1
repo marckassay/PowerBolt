@@ -3,9 +3,10 @@ using module ..\.\TestRunnerSupportModule.psm1
 Describe "Test Build-Documentation" {
     BeforeAll {
         $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleB')
+        $MockDocDirectoryPath = Join-Path -Path $TestSupportModule.MockDirectoryPath -ChildPath 'docs' -Resolve
 
         # this test file needs the .git repo but not the docs folder
-        Remove-Item -Path "$TestDrive\MockModuleB\docs" -Recurse
+        Remove-Item -Path $MockDocDirectoryPath -Recurse
     }
     
     AfterAll {
@@ -19,9 +20,9 @@ Describe "Test Build-Documentation" {
         
         # NOTE: if this functions re-imports, it will import into a different scope or session. 
         # Although it will still pass, it will write warnings and errors
-        Build-Documentation -Path "$TestDrive\MockModuleB" -NoReImportModule
+        Build-Documentation -Path $TestSupportModule.MockDirectoryPath -NoReImportModule
 
-        $FileNames = Get-ChildItem "$TestDrive\MockModuleB\docs" -Recurse | `
+        $FileNames = Get-ChildItem $MockDocDirectoryPath -Recurse | `
             ForEach-Object {$_.Name} | `
             Sort-Object
 
@@ -34,7 +35,7 @@ Describe "Test Build-Documentation" {
         }
 
         It "Should have modified the new ReadMe file." {
-            (Get-Content "$TestDrive\MockModuleB\README.md" -Raw) -like "*API*" | Should -Be $true
+            (Get-Content "$($TestSupportModule.MockDirectoryPath)\README.md" -Raw) -like "*API*" | Should -Be $true
         }
 
         It "Should modify Get-AFunction.md file at line number <Index> with: {<Expected>} " -TestCases @(
@@ -51,7 +52,7 @@ Describe "Test Build-Documentation" {
             @{ Index = 10; Expected = "{{Fill in the Synopsis}}" }
         ) {
             Param($Index, $Expected)
-            $Actual = (Get-Content "$TestDrive\MockModuleB\docs\Get-AFunction.md")[$Index]
+            $Actual = (Get-Content "$MockDocDirectoryPath\Get-AFunction.md")[$Index]
             $Actual.Replace('```', '`') | Should -BeExactly $Expected
         }
 
