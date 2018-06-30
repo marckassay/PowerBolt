@@ -19,6 +19,14 @@ function Add-ModuleToProfile {
     $ModuleDirectory = Get-MKModuleInfo -Path $Path | Select-Object -ExpandProperty Path
 
     if (Test-Path $ModuleDirectory) {
-        Add-Content -Path $ProfilePath -Value "Import-Module $ModuleDirectory`n"
+        $ProfileContent = Get-Content -Path $ProfilePath -Raw
+
+        $UpdatedProfileContent = $ProfileContent.Trim()
+
+        $UpdatedProfileContent = @"
+$UpdatedProfileContent
+Import-Module $ModuleDirectory
+"@
+        Set-Content -Path $ProfilePath -Value $UpdatedProfileContent
     }
 }

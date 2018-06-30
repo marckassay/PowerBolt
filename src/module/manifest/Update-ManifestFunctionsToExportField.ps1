@@ -39,8 +39,8 @@ function Update-ManifestFunctionsToExportField {
         # https://github.com/PowerShell/PowerShell/issues/7181
         $ManifestContents = Get-Content -Path $ManifestUpdate.ManifestPath -Raw 
         $ManifestContents = $InsertPointRegEx.Replace($ManifestContents, @"
- = @(
-            $FunctionNames
+    = @(
+        $FunctionNames
     )
 `r`n
 "@, 1)
