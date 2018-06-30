@@ -1,5 +1,5 @@
 using module ..\..\.\TestRunnerSupportModule.psm1
-using module .\Deploy-TestFakes.psm1
+using module .\Deploy-TestFakes.ps1
 
 $script:PreTicks
 $script:ConfigFileJson

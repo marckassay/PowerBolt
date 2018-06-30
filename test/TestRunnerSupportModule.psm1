@@ -48,7 +48,8 @@ class TestRunnerSupportModule {
     }
  
     [void]Setup ([string]$MockModuleName, [string]$FixtureConfigFilePath) {
-        
+        Write-Information -MessageData ($this.TestDrivePath)
+
         # lets hope there is only one psd1 file in this directory
         $this.FixtureManifestPath = Get-Item '*.psd1' | Select-Object -First 1 | Select-Object -ExpandProperty FullName
 
