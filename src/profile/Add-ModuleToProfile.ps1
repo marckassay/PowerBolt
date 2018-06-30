@@ -21,7 +21,9 @@ function Add-ModuleToProfile {
     if (Test-Path $ModuleDirectory) {
         $ProfileContent = Get-Content -Path $ProfilePath -Raw
 
-        $UpdatedProfileContent = $ProfileContent.Trim()
+        if ($ProfileContent) {
+            $UpdatedProfileContent = $ProfileContent.Trim()
+        }
 
         $UpdatedProfileContent = @"
 $UpdatedProfileContent
