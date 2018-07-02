@@ -40,8 +40,8 @@ function Update-ManifestFunctionsToExportField {
         $ManifestContents = Get-Content -Path $ManifestUpdate.ManifestPath -Raw 
         $ManifestContents = $InsertPointRegEx.Replace($ManifestContents, @"
     = @(
-        $FunctionNames
-    )
+`t`t$FunctionNames
+`t)
 `r`n
 "@, 1)
 

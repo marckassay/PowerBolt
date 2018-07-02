@@ -129,6 +129,7 @@ param (
 "@ 
             Update-RootModuleUsingStatements -Path 'TestDrive:\MockModuleA'
             'TestDrive:\MockModuleA\MockModuleA.psm1' | Should -not -FileContentMatch ([regex]::Escape('Remove-DFunction')) 
+
             $Results = Get-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1'
             $Results.Count | Should -Be 13
 
@@ -149,6 +150,34 @@ param (
             
             $Assert = $Results[5] 
             $Assert | Should -Be ''
+        }
+
+        It "Should not 'touch' (change modification date) root module when nothing has been modified." {
+            $MockModuleAContent = @"
+using module .\src\C\Get-CFunction.ps1
+using module .\src\C\Set-CFunction.ps1
+using module .\src\D\Set-DFunction.ps1
+using module .\src\Get-AFunction.ps1
+using module .\src\Get-BFunction.ps1
+
+function Remove-CFunction {
+[CmdletBinding()]
+param (
+
+)
+
+}
+"@
+            $MockModuleAContentArray = $($MockModuleAContent -split "`n").TrimEnd("`r")
+
+            Set-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1' -Value $MockModuleAContent -NoNewline
+
+            Update-RootModuleUsingStatements -Path 'TestDrive:\MockModuleA'
+
+            $Results = (Get-Content -Path 'TestDrive:\MockModuleA\MockModuleA.psm1')
+
+            $Differences = Compare-Object -ReferenceObject $MockModuleAContentArray -DifferenceObject $Results -PassThru
+            $Differences | Should -Be $null
         }
     }
 }

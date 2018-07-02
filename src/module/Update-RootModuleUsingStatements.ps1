@@ -59,7 +59,8 @@ function Update-RootModuleUsingStatements {
         # $StopMatchingImportStatements: stop matching when there is a break of consecutive 
         # 'using module' statements. a break with additional statements means that developer 
         # manually added that line; so keep it.
-        [string[]]$ModuleContentsCleaned = Get-Content $ModInfo.RootModuleFilePath | `
+        $RootModuleContent = Get-Content $ModInfo.RootModuleFilePath
+        [string[]]$ModuleContentsCleaned = $RootModuleContent | `
             ForEach-Object -Begin {$StopMatchingImportStatements = $false} -Process {
             if ($StopMatchingImportStatements) {
                 $($_ + "`n")
@@ -89,23 +90,23 @@ function Update-RootModuleUsingStatements {
             }
         }
 
-        $UniqueSourceFiles = $TargetFunctionsToExport.FilePath.FullName | `
+        [string[]]$UniqueSourceFiles = $TargetFunctionsToExport.FilePath.FullName | `
             Sort-Object -Unique | `
             Group-Object -Property {$_.Split("$SourceFolderPath\")[1]} | `
             Select-Object -ExpandProperty Group | `
             ForEach-Object {
             if ($_ -ne $ModInfo.RootModuleFilePath) {
-                Write-Output "using module .$($_.Split($ModInfo.Path)[1])`n"
+                $("using module .$($_.Split($ModInfo.Path)[1])".Trim() + "`n")
             }
         }
     
         if ($ModuleContentsCleaned -eq $null) {
-            $UpdatedModuleContent = @"
+            $UpdatedModuleContentRaw = @"
 $UniqueSourceFiles
 "@
         }
         elseif ($ModuleContentsCleaned -ne $null) {
-            $UpdatedModuleContent = @"
+            $UpdatedModuleContentRaw = @"
 $UniqueSourceFiles
 $ModuleContentsCleaned
 "@
@@ -116,7 +117,23 @@ $ModuleContentsCleaned
             TargetFunctionsToExport = $TargetFunctionsToExport
         }
 
-        Set-Content -Path $ModInfo.RootModuleFilePath -Value $UpdatedModuleContent -PassThru:$PassThru.IsPresent -Encoding UTF8 -NoNewline
+        if ($UpdatedModuleContentRaw) {
+            $UpdatedModuleContent = $($UpdatedModuleContentRaw -split "`n").TrimEnd("`r")
+        }
+        else {
+            $UpdatedModuleContent = @()
+        }
+
+        if (-not $RootModuleContent) {
+            $RootModuleContent = @()
+        }
+
+        $Differences = Compare-Object -ReferenceObject $UpdatedModuleContent -DifferenceObject $RootModuleContent -PassThru
+        
+        # touch the file only when there is a difference
+        if ($Differences) {
+            Set-Content -Path $ModInfo.RootModuleFilePath -Value $UpdatedModuleContentRaw -PassThru:$PassThru.IsPresent -Encoding UTF8 -NoNewline
+        }
 
         $OFS = ' '
     }

@@ -12,7 +12,7 @@
     RootModule        = 'MK.PowerShell.Flow.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.2'
+    ModuleVersion     = '0.0.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -137,7 +137,7 @@
             Tags       = 'development', 'workflow'
 
             # A URL to the license for this module.
-            LicenseUri = 'https://raw.githubusercontent.com/marckassay/MK.PowerShell.Flow/0.0.2/LICENSE'
+            LicenseUri = 'https://raw.githubusercontent.com/marckassay/MK.PowerShell.Flow/0.0.3/LICENSE'
 
             # A URL to the main website for this project.
             ProjectUri = 'https://github.com/marckassay/MK.PowerShell.Flow'
@@ -162,7 +162,7 @@
     } # End of PrivateData hashtable
 
     # HelpInfo URI of this module
-    HelpInfoURI       = 'https://github.com/marckassay/MK.PowerShell.Flow/tree/0.0.2'
+    HelpInfoURI       = 'https://github.com/marckassay/MK.PowerShell.Flow/tree/0.0.3'
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''
