@@ -23,14 +23,15 @@ function Update-ManifestFunctionsToExportField {
         $ManifestFile = Get-Item -Path $ManifestUpdate.ManifestPath
         $FunctionNames = $ManifestUpdate.TargetFunctionsToExport.FunctionName
         
-        $FunctionNames = $FunctionNames | ForEach-Object -Process {"'$_',`r`n"} | Sort-Object
+        # keep the 8 spaces for default VSCode PowerShell preference
+        $FunctionNames = $FunctionNames | ForEach-Object -Process {"        '$_',`r`n"} | Sort-Object
         
         if ($FunctionNames -is [Object[]]) {
             $Tail = $FunctionNames.Count - 1
             $FunctionNames[$Tail] = $FunctionNames[$Tail].TrimEnd().TrimEnd(',')
         } 
         elseif ($FunctionNames -is [String]) {
-            $FunctionNames = $FunctionNames.Trim().TrimEnd(',')
+            $FunctionNames = $FunctionNames.TrimEnd().TrimEnd(',')
         }
 
         [regex]$InsertPointRegEx = "(?(?<=(FunctionsToExport))([\w\W]*?)|($))(?(?=\#)(?=\#)|(CmdletsToExport))"
@@ -38,11 +39,14 @@ function Update-ManifestFunctionsToExportField {
         # changed values. Because of that, using Content commands.
         # https://github.com/PowerShell/PowerShell/issues/7181
         $ManifestContents = Get-Content -Path $ManifestUpdate.ManifestPath -Raw 
+
+        # becareful with whitespace in this here-string below.  as it works perfectly as of now.
         $ManifestContents = $InsertPointRegEx.Replace($ManifestContents, @"
-    = @(
-`t`t$FunctionNames
-`t)
-`r`n
+ = @(
+$FunctionNames
+    )
+
+    
 "@, 1)
 
         Set-Content -Path $ManifestUpdate.ManifestPath -Value $ManifestContents -NoNewline
