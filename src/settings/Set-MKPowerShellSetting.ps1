@@ -41,13 +41,13 @@ function Set-MKPowerShellSetting {
             ConvertTo-Json | `
             Set-Content -Path $ConfigFilePath -PassThru:$PassThru.IsPresent
 
-        switch ($Name) {
-            TurnOnRememberLastLocation { Restore-RememberLastLocation }
-            TurnOnQuickRestart { Restore-QuickRestartSetting }
-            # TODO: not sure if these are intended to be commented out
-            #TurnOnHistoryRecording { Restore-TurnOnHistoryRecording }
-            #TurnOnBackup
-            Default {}
-        }
+        # TODO: not sure if these are intended to be commented out
+        #switch ($Name) {
+        #TurnOnRememberLastLocation { Restore-RememberLastLocation }
+        #TurnOnQuickRestart { Restore-QuickRestartSetting }
+        #TurnOnHistoryRecording { Restore-TurnOnHistoryRecording }
+        #TurnOnBackup
+        #   Default {}
+        #}
     }
 }
