@@ -5,13 +5,13 @@ using module .\Get-GitBranchName.ps1
 $script:SemVerRegEx = "^(?'MAJOR'0|(?:[1-9]\d*))\.(?'MINOR'0|(?:[1-9]\d*))\.(?'PATCH'0|(?:[1-9]\d*))(?:-(?'prerelease'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?(?:\+(?'build'(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*))(?:\.(?:0|(?:[1-9A-Za-z-][0-9A-Za-z-]*)))*))?$"
 
 function Update-SemVer {
-    [CmdletBinding(PositionalBinding = $True, 
+    [CmdletBinding(PositionalBinding = $true, 
         DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 0,
-            ValueFromPipeline = $False, 
+            ValueFromPipeline = $false, 
             ParameterSetName = "ByPath")]
         [string]$Path = '.',
         
@@ -55,7 +55,7 @@ function Update-SemVer {
             ParameterSetName = "ByName")]
         [int]$Patch = -1,
 
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 4)]
         [string]$SourceFolderPath = 'src',
 

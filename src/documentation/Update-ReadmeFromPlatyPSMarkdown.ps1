@@ -1,26 +1,26 @@
 using module .\.\MKDocumentationInfo.psm1
 
 function Update-ReadmeFromPlatyPSMarkdown {
-    [CmdletBinding(PositionalBinding = $True, 
+    [CmdletBinding(PositionalBinding = $true, 
         DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 0,
-            ValueFromPipeline = $False, 
+            ValueFromPipeline = $false, 
             ParameterSetName = "ByPath")]
         [string]$Path = '.',
 
-        [Parameter(Mandatory = $True,
+        [Parameter(Mandatory = $true,
             Position = 1,
-            ValueFromPipeline = $True, 
+            ValueFromPipeline = $true, 
             ParameterSetName = "ByPipe")]
         [MKDocumentationInfo]$DocInfo,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$MarkdownFolder = 'docs',
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$FileName = 'README.md'
     )
     

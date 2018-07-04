@@ -2,12 +2,12 @@
 using module .\New-DynamicParam.ps1
 
 function GetSettingsNameSet {
-    [CmdletBinding(PositionalBinding = $False)]
+    [CmdletBinding(PositionalBinding = $false)]
     Param(
         [Parameter(Mandatory = $true)]
         [String]$ConfigFilePath,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [int]$Position = 0,
 
         [switch]$Mandatory

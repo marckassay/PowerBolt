@@ -3,8 +3,8 @@ function Update-ManifestFunctionsToExportField {
     [OutputType([PSModuleInfo])]
     Param
     (
-        [Parameter(Mandatory = $True,
-            ValueFromPipeline = $True)]
+        [Parameter(Mandatory = $true,
+            ValueFromPipeline = $true)]
         [PSObject]
         $ManifestUpdate,
 

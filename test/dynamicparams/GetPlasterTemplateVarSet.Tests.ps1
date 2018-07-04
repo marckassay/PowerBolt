@@ -20,8 +20,8 @@ Describe "Test GetPlasterTemplateVarSet" {
         It "`$Result should have entries matching variable names" {
             InModuleScope MK.PowerShell.Flow {
                 $Results = GetPlasterTemplateVarSet -Path $MockNewScriptTemplatePath
-                $Results.Keys -Contains "ScriptCongruentPath" | Should -Be $True
-                $Results.Keys -Contains "ScriptName" | Should -Be $True
+                $Results.Keys -Contains "ScriptCongruentPath" | Should -Be $true
+                $Results.Keys -Contains "ScriptName" | Should -Be $true
             }
         }
     }

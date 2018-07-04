@@ -1,17 +1,17 @@
 using module .\New-DynamicParam.ps1
 
 function GetImportNameParameterSet {
-    [CmdletBinding(PositionalBinding = $False)]
+    [CmdletBinding(PositionalBinding = $false)]
     Param(
         [Parameter(Mandatory = $true)]
         [String]$ProfilePath,
 
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $true)]
         [ValidateSet("Uncomment", "Comment")]
         [String]
         $LineStatus,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [int]$Position = 0,
         
         [switch]$ByPassForDocumentation,

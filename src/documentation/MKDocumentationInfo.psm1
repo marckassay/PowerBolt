@@ -81,7 +81,7 @@ class MKDocumentationInfo {
             $this.Path = Resolve-Path $this.Path.TrimEnd('\', '/') | Select-Object -ExpandProperty Path
 
             # if Path was provided (hopefully .ps1, .psm1 or .psd1) ...
-            if ((Test-Path -Path $this.Path -PathType Leaf) -eq $True) {
+            if ((Test-Path -Path $this.Path -PathType Leaf) -eq $true) {
                 $this.ModuleFolder = Split-Path -Path $this.Path -Parent 
                 $this.ModuleName = Split-Path -Path $this.Path -LeafBase 
             }
@@ -172,7 +172,7 @@ $BodyContent
 
             $FileName = $_.BaseName
 
-            if ($AddSourceAndTestFileLinks -eq $True) {
+            if ($AddSourceAndTestFileLinks -eq $true) {
                 $SourceAndTestFileLinks = GetFileLink -FileName $FileName
                 
                 if ($FileContent.Contains("[$FileName.ps1]")) {

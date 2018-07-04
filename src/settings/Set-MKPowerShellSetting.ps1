@@ -1,12 +1,12 @@
 using module .\..\dynamicparams\GetSettingsNameSet.ps1
 
 function Set-MKPowerShellSetting {
-    [CmdletBinding(PositionalBinding = $True)]
+    [CmdletBinding(PositionalBinding = $true)]
     Param(
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $true)]
         [object]$Value,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [String]$ConfigFilePath = $script:MKPowerShellConfigFilePath,
 
         [switch]

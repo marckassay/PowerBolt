@@ -36,11 +36,11 @@ function GetModuleNameSet {
     }
         
     if ($PSBoundParameters.ContainsKey('Mandatory') -eq $false) {
-        $PSBoundParameters.Add('Mandatory', $False)
+        $PSBoundParameters.Add('Mandatory', $false)
     }
         
     if ($PSBoundParameters.ContainsKey('ValueFromPipeline') -eq $false) {
-        $PSBoundParameters.Add('ValueFromPipeline', $False)
+        $PSBoundParameters.Add('ValueFromPipeline', $false)
     }
 
     $DynamicParam = New-DynamicParam @PSBoundParameters

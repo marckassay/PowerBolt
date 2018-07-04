@@ -2,32 +2,32 @@ using module .\.\MKDocumentationInfo.psm1
 using module .\..\module\manifest\AutoUpdateSemVerDelegate.ps1
 
 function Build-PlatyPSMarkdown {
-    [CmdletBinding(PositionalBinding = $True, 
+    [CmdletBinding(PositionalBinding = $true, 
         DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 0,
-            ValueFromPipeline = $False, 
+            ValueFromPipeline = $false, 
             ParameterSetName = "ByPath")]
         [string]$Path = '.',
 
-        [Parameter(Mandatory = $True,
+        [Parameter(Mandatory = $true,
             Position = 1,
-            ValueFromPipeline = $True, 
+            ValueFromPipeline = $true, 
             ParameterSetName = "ByPipe")]
         [MKDocumentationInfo]$DocInfo,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$MarkdownFolder = 'docs',
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$Locale = 'en-US',
         
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$OnlineVersionUrlTemplate,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [ValidateSet("Auto", "Omit")]
         [string]$OnlineVersionUrlPolicy = 'Auto',
         
@@ -70,7 +70,7 @@ function Build-PlatyPSMarkdown {
         New-Item -Path $DocInfo.ModuleMarkdownFolder -ItemType Container -Force | Out-Null
         $MarkdownFolderItems = Get-ChildItem -Path $DocInfo.ModuleMarkdownFolder -Include '*.md' -Recurse -ErrorAction SilentlyContinue
 
-        if ($DocInfo.NoReImportModule -eq $False) {
+        if ($DocInfo.NoReImportModule -eq $false) {
             # SilentlyContinue to prevent CLI telling me that 'PackageManagement' cant be removed 
             # with Force.
             Remove-Module -Name $DocInfo.ModuleName -ErrorAction SilentlyContinue
@@ -92,14 +92,14 @@ function Build-PlatyPSMarkdown {
                 Select-Object -ExpandProperty BaseName | `
                 ForEach-Object {
                 if ($ExportedFunctions -notcontains $_) {
-                    Remove-Item -Path ($DocInfo.ModuleMarkdownFolder + "\$_.md") -Confirm:$($Force.IsPresent -ne $True)
+                    Remove-Item -Path ($DocInfo.ModuleMarkdownFolder + "\$_.md") -Confirm:$($Force.IsPresent -ne $true)
                 }
             }
     
             Update-MarkdownHelpModule -Path $DocInfo.ModuleMarkdownFolder | Out-Null
         }
 
-        $DocInfo.UpdateVersionUrls(($RemoveSourceAndTestLinks.IsPresent) -eq $False)
+        $DocInfo.UpdateVersionUrls(($RemoveSourceAndTestLinks.IsPresent) -eq $false)
         
         Write-Output $DocInfo
     }

@@ -1,26 +1,26 @@
 using module .\.\MKDocumentationInfo.psm1
 
 function Build-Documentation {
-    [CmdletBinding(PositionalBinding = $True, 
+    [CmdletBinding(PositionalBinding = $true, 
         DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 0,
-            ValueFromPipeline = $False, 
+            ValueFromPipeline = $false, 
             ParameterSetName = "ByPath")]
         [string]$Path = '.',
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$MarkdownFolder = 'docs',
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$Locale = 'en-US',
         
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$OnlineVersionUrlTemplate = '',
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [ValidateSet("Auto", "Omit")]
         [string]$OnlineVersionUrlPolicy = 'Auto',
         

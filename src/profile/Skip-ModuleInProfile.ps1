@@ -4,10 +4,10 @@ using module .\..\module\Get-MKModuleInfo.ps1
 $script:ProfilePath
 
 function Skip-ModuleInProfile {
-    [CmdletBinding(PositionalBinding = $True)]
+    [CmdletBinding(PositionalBinding = $true)]
     Param
     (
-        [Parameter(Mandatory = $False, Position = 1)]
+        [Parameter(Mandatory = $false, Position = 1)]
         [string]
         $ProfilePath
     )

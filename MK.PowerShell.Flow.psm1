@@ -23,16 +23,16 @@ using module .\src\utility\Search-Items.ps1
 using module .\src\management\Start-MKPowerShell.ps1
 
 Param(
-    [Parameter(Mandatory = $False)]
+    [Parameter(Mandatory = $false)]
     [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json"),
 
-    [Parameter(Mandatory = $False)]
-    [bool]$SUT = $False
+    [Parameter(Mandatory = $false)]
+    [bool]$SUT = $false
 )
 
 $script:MKPowerShellConfigFilePath = $script:ConfigFilePath
 $script:MKPowerShellSUT = $script:SUT
 
-if ($script:SUT -eq $False) {
+if ($script:SUT -eq $false) {
     Start-MKPowerShell -ConfigFilePath $script:MKPowerShellConfigFilePath
 }

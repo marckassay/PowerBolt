@@ -1,19 +1,19 @@
 function Search-Items {
     [CmdletBinding(PositionalBinding = $true)]
     Param(
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $true)]
         [String]$Path,
 
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $true)]
         [String[]]$Pattern,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [String[]]$Include,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [String[]]$Exclude,
 
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [int]$Depth = 15,
 
         [switch]$Recurse

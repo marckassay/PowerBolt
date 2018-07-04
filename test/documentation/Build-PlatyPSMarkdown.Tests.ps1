@@ -73,12 +73,12 @@ Describe "Test Build-PlatyPSMarkdown" {
 
             $NewGetAFunctionPS1Content = @"
 function Get-AFunction {
-    [CmdletBinding(PositionalBinding = `$False)]
+    [CmdletBinding(PositionalBinding = `$false)]
     Param(
-        [Parameter(Mandatory = `$False)]
+        [Parameter(Mandatory = `$false)]
         [String]`$Path,
 
-        [Parameter(Mandatory = `$False)]
+        [Parameter(Mandatory = `$false)]
         [String]`$Key
     )
     

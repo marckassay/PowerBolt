@@ -1,6 +1,6 @@
 # NoExport: Register-Shutdown
 function Register-Shutdown {
-    [CmdletBinding(PositionalBinding = $False)]
+    [CmdletBinding(PositionalBinding = $false)]
     Param()
 
     # callback when Remove-Module is called on this module

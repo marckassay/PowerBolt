@@ -6,9 +6,9 @@ $script:ImportedSessionHistories
 
 # NoExport: Start-MKPowerShell
 function Start-MKPowerShell {
-    [CmdletBinding(PositionalBinding = $False)]
+    [CmdletBinding(PositionalBinding = $false)]
     Param(
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [String]$ConfigFilePath
     )
 

@@ -194,7 +194,7 @@ Function New-DynamicParam {
                 if (-not ( $_ -is [System.Management.Automation.RuntimeDefinedParameterDictionary] -or -not $_) ) {
                     Throw "DPDictionary must be a System.Management.Automation.RuntimeDefinedParameterDictionary object, or not exist"
                 }
-                $True
+                $true
             })]
         $DPDictionary = $false
  
@@ -203,16 +203,16 @@ Function New-DynamicParam {
     $ParamAttr = New-Object System.Management.Automation.ParameterAttribute
     $ParamAttr.ParameterSetName = $ParameterSetName
     if ($mandatory.IsPresent) {
-        $ParamAttr.Mandatory = $True
+        $ParamAttr.Mandatory = $true
     }
     if ($Position -ne $null) {
         $ParamAttr.Position = $Position
     }
     if ($ValueFromPipeline.IsPresent) {
-        $ParamAttr.ValueFromPipelineByPropertyName = $True
+        $ParamAttr.ValueFromPipelineByPropertyName = $true
     }
     elseif ($ValueFromPipelineByPropertyName.IsPresent) {
-        $ParamAttr.ValueFromPipelineByPropertyName = $True
+        $ParamAttr.ValueFromPipelineByPropertyName = $true
     }
     if ($HelpMessage) {
         $ParamAttr.HelpMessage = $HelpMessage

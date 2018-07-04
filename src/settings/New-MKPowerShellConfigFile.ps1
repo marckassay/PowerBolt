@@ -11,7 +11,7 @@ function New-MKPowerShellConfigFile {
     [CmdletBinding()]
     Param
     (
-        [Parameter(Mandatory = $False)]
+        [Parameter(Mandatory = $false)]
         [string]$Path = [Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData),
 
         [switch]
@@ -26,7 +26,7 @@ function New-MKPowerShellConfigFile {
 
     $FullName = Join-Path -Path $Path -ChildPath '\MK.PowerShell\MK.PowerShell-config.json'
     
-    if (((Test-Path -Path $FullName) -eq $false) -or ($Force.IsPresent -eq $True)) {
+    if (((Test-Path -Path $FullName) -eq $false) -or ($Force.IsPresent -eq $true)) {
         $LeafBase = Join-Path -Path $Path -ChildPath '\MK.PowerShell\'
         if ((Test-Path -Path $LeafBase) -eq $false) {
             New-Item -Path $LeafBase -ItemType Directory -OutVariable ModuleConfigFolder

@@ -1,29 +1,29 @@
 using module .\..\module\manifest\AutoUpdateSemVerDelegate.ps1
 
 function Invoke-TestSuiteRunner {
-    [CmdletBinding(PositionalBinding = $True, 
+    [CmdletBinding(PositionalBinding = $true, 
         DefaultParameterSetName = "ByPath")]
     Param
     (
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 0,
-            ValueFromPipeline = $False, 
+            ValueFromPipeline = $false, 
             ParameterSetName = "ByPath")]
         [string]$Path = '.',
 
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 1,
-            ValueFromPipeline = $False)]
+            ValueFromPipeline = $false)]
         [string]$TestFolderPath = 'test',
 
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 2,
-            ValueFromPipeline = $False)]
+            ValueFromPipeline = $false)]
         [string[]]$Exclude = 'mocks',
 
-        [Parameter(Mandatory = $False,
+        [Parameter(Mandatory = $false,
             Position = 3,
-            ValueFromPipeline = $False)]
+            ValueFromPipeline = $false)]
         [Pester.OutputTypes[]]$Show = @('Header', 'Fails'),
 
         [switch]$PassThru

@@ -3,19 +3,19 @@ using module .\..\module\Get-MKModuleInfo.ps1
 
 # TODO: add Path and Name parameters so that the scaffold files can be added to rootmodule
 function Install-Template {
-    [CmdletBinding(PositionalBinding = $True, 
+    [CmdletBinding(PositionalBinding = $true, 
         DefaultParameterSetName = "ByTemplatePath")]
     Param
     (
-        [Parameter(Mandatory = $True,
+        [Parameter(Mandatory = $true,
             Position = 0,
-            ValueFromPipeline = $False, 
+            ValueFromPipeline = $false, 
             ParameterSetName = "ByTemplatePath")]
         [string]$TemplatePath,
 
-        [Parameter(Mandatory = $True,
+        [Parameter(Mandatory = $true,
             Position = 0,
-            ValueFromPipeline = $False, 
+            ValueFromPipeline = $false, 
             ParameterSetName = "ByTemplateName")]
         [ValidateSet("NewScript", "NewModuleProject")]
         [string]$TemplateName

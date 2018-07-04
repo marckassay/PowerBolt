@@ -70,11 +70,11 @@ class MKModuleInfo {
         else {
             if (-not $this.Name) {
                 # Write-Host "Unable to acquire information about module with the given Path: "$this.Path
-                $this.IsValid = $False
+                $this.IsValid = $false
             }
             else {
                 # Write-Host "Unable to acquire information about module with the given Name: "$this.Name
-                $this.IsValid = $False
+                $this.IsValid = $false
             }
         }
 
