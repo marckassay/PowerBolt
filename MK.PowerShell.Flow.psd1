@@ -12,7 +12,7 @@
     RootModule        = 'MK.PowerShell.Flow.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.3'
+    ModuleVersion     = '0.0.4'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -62,11 +62,10 @@
     # ScriptsToProcess = @()
 
     # Type files (.ps1xml) to be loaded when importing this module
-    TypesToProcess    = 'resources\types\Misc.type.ps1xml'
+    # TypesToProcess    = @()
 
     # Format files (.ps1xml) to be loaded when importing this module
-    FormatsToProcess  = 'resources\formats\HistoryInfo.format.ps1xml', 
-    'resources\formats\PSModuleInfo.format.ps1xml'
+    # FormatsToProcess  = @()
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()
@@ -74,26 +73,19 @@
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     FunctionsToExport = @(
         'Add-ModuleToProfile',
-        'Backup-Sources',
         'Build-Documentation',
         'Build-PlatyPSMarkdown',
         'ConvertTo-EnumFlag',
-        'Export-History',
-        'Get-LatestError',
         'Get-MergedPath',
         'Get-MKModuleInfo',
         'Get-MKPowerShellSetting',
-        'Import-History',
         'Install-Template',
         'Invoke-TestSuiteRunner',
         'New-ExternalHelpFromPlatyPSMarkdown',
         'New-MKPowerShellConfigFile',
         'Publish-ModuleToNuGetGallery',
         'Reset-ModuleInProfile',
-        'Restart-PWSH',
-        'Restart-PWSHAdmin',
         'Search-Items',
-        'Set-LocationAndStore',
         'Set-MKPowerShellSetting',
         'Skip-ModuleInProfile',
         'Update-ManifestFunctionsToExportField',
@@ -137,7 +129,7 @@
             Tags       = 'development', 'workflow'
 
             # A URL to the license for this module.
-            LicenseUri = 'https://raw.githubusercontent.com/marckassay/MK.PowerShell.Flow/0.0.3/LICENSE'
+            LicenseUri = 'https://raw.githubusercontent.com/marckassay/MK.PowerShell.Flow/0.0.4/LICENSE'
 
             # A URL to the main website for this project.
             ProjectUri = 'https://github.com/marckassay/MK.PowerShell.Flow'
@@ -162,7 +154,7 @@
     } # End of PrivateData hashtable
 
     # HelpInfo URI of this module
-    HelpInfoURI       = 'https://github.com/marckassay/MK.PowerShell.Flow/tree/0.0.3'
+    HelpInfoURI       = 'https://github.com/marckassay/MK.PowerShell.Flow/tree/0.0.4'
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''

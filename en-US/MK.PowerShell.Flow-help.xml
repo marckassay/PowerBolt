@@ -112,205 +112,23 @@ PS C:\&gt;</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Add-ModuleToProfile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/profile/Add-ModuleToProfile.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/profile/Add-ModuleToProfile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Add-ModuleToProfile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/profile/Add-ModuleToProfile.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/profile/Add-ModuleToProfile.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Skip-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Reset-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Reset-ModuleInProfile.md</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Backup-Sources</command:name>
-      <command:verb>Backup</command:verb>
-      <command:noun>Sources</command:noun>
-      <maml:description>
-        <maml:para>The `Backups` object defined in `MK.PowerShell-config.json` will copy items to their destination location.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>When called with the `Force` switch param, it will disregard `TurnOnBackup` and `BackupPolicy` object in `MK.PowerShell-config.json` and continue to attempt to backup sources that are define in `Backups` object.</maml:para>
-      <maml:para> `BackupPolicy` key is set to 'auto' by default and `TurnOnBackup` is set false. Ideally, when `TurnOnBackup` key is set to true prior to importing `MK.PowerShell.Flow`, this will be called and attempt to backup sources.</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Backup-Sources</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ConfigFilePath</maml:name>
-          <maml:Description>
-            <maml:para>The config file for `MK.PowerShell.Flow`.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>$([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:Description>
-            <maml:para>Will disregard values for `TurnOnBackup` and `BackupPolicy`.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Initialize</maml:name>
-          <maml:Description>
-            <maml:para>For internal for `MK.PowerShell.Flow` module.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Silent</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Silent Description}}</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ConfigFilePath</maml:name>
-        <maml:Description>
-          <maml:para>The config file for `MK.PowerShell.Flow`.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>$([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json")</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Force</maml:name>
-        <maml:Description>
-          <maml:para>Will disregard values for `TurnOnBackup` and `BackupPolicy`.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Initialize</maml:name>
-        <maml:Description>
-          <maml:para>For internal for `MK.PowerShell.Flow` module.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Silent</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Silent Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Set-MKPowerShellSetting -Name TurnOnBackup -Value $true
-PS C:\&gt; $BackupObject = @(
-     @{
-      UpdatePolicy = "Overwrite",
-      Path = "C:\\Users\\Marc\\AppData\\Roaming\\Code\\User\\keybindings.json",
-      Destination = "D:\\Google Drive\\Documents\\PowerShell\\"
-    }
-PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
-)</dev:code>
-        <dev:remarks>
-          <maml:para>This example enables `TurnOnBackup` and assigns one backup object to `Backups`. When `MK.PowerShell.Flow` imported next, it will attempt to overwrite the keybindings.json file if its in the `$Destination` folder. If there is no file in that folder it will simpily move it there. If `UpdatePolicy` had a value of `New`, it will move the file and to add an intger to its basename. For instance, for this example keybindings.json file will be keybindings(1).json.</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Backup-Sources.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Backup-Sources.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/management/backupsources/Backup-Sources.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Backup-Sources.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/management/backupsources/Backup-Sources.Tests.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MKPowerShellSetting.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Set-MKPowerShellSetting.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>`New-MKPowerShellConfigFile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-MKPowerShellConfigFile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -653,27 +471,27 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Build-Documentation.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/documentation/Build-Documentation.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/documentation/Build-Documentation.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Build-Documentation.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/documentation/Build-Documentation.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/documentation/Build-Documentation.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1162,27 +980,27 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Build-PlatyPSMarkdown.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/documentation/Build-PlatyPSMarkdown.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/documentation/Build-PlatyPSMarkdown.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Build-PlatyPSMarkdown.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/documentation/Build-PlatyPSMarkdown.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/documentation/Build-PlatyPSMarkdown.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1290,170 +1108,11 @@ PS C:\&gt; Set-MKPowerShellSetting -Name Backups -Value $BackupObject
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/ConvertTo-EnumFlag.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/ConvertTo-EnumFlag.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>ConvertTo-EnumFlag.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/utility/ConvertTo-EnumFlag.ps1</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Export-History</command:name>
-      <command:verb>Export</command:verb>
-      <command:noun>History</command:noun>
-      <maml:description>
-        <maml:para>Exports HistoryInfo entries from `Get-History` to a CSV file which is intended to be imported so that a continuous history can be output to CLI.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Export-History</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Path</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Path Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Path</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Path Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Export-History.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Export-History.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/history/Export-History.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Export-History.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/history/Export-History.Tests.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>`Import-History`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Import-History.md</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-LatestError</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>LatestError</command:noun>
-      <maml:description>
-        <maml:para>Throwaway function that may be reincarnated in a from of Format.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-LatestError</maml:name>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-LatestError.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Get-LatestError.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/error/Get-LatestError.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/utility/ConvertTo-EnumFlag.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1598,11 +1257,11 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MergedPath.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Get-MergedPath.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MergedPath.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/utility/Get-MergedPath.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/utility/Get-MergedPath.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c</maml:linkText>
@@ -1736,15 +1395,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MKModuleInfo.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Get-MKModuleInfo.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MKModuleInfo.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/Get-MKModuleInfo.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/module/Get-MKModuleInfo.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MKModuleInfo.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/Get-MKModuleInfo.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/module/Get-MKModuleInfo.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1867,115 +1526,19 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Get-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MKPowerShellSetting.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/settings/Get-MKPowerShellSetting.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/settings/Get-MKPowerShellSetting.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MKPowerShellSetting.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/settings/Get-MKPowerShellSetting.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/settings/Get-MKPowerShellSetting.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Set-MKPowerShellSetting.md</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Import-History</command:name>
-      <command:verb>Import</command:verb>
-      <command:noun>History</command:noun>
-      <maml:description>
-        <maml:para>Imports HistoryInfo entries from `Export-History` so that a continuous history can be output to CLI.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Import-History</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Path</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Path Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Path</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Path Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Import-History.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Import-History.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/history/Import-History.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Import-History.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/history/Import-History.Tests.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>`Export-History`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Export-History.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Set-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2139,15 +1702,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Install-Template.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Install-Template.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Install-Template.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/scaffolds/Install-Template.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/scaffolds/Install-Template.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Install-Template.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/scaffolds/Install-Template.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/scaffolds/Install-Template.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Plaster - Creating A Manifest</maml:linkText>
@@ -2207,18 +1770,6 @@ Version            : 1.1.4</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Excludes</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Excludes Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PassThru</maml:name>
           <maml:Description>
             <maml:para>{{Fill PassThru Description}}</maml:para>
@@ -2237,6 +1788,18 @@ Version            : 1.1.4</dev:code>
           <command:parameterValue required="true" variableLength="false">OutputTypes[]</command:parameterValue>
           <dev:type>
             <maml:name>OutputTypes[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Exclude</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Exclude Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -2269,18 +1832,6 @@ Version            : 1.1.4</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Excludes</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Excludes Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PassThru</maml:name>
           <maml:Description>
             <maml:para>{{Fill PassThru Description}}</maml:para>
@@ -2299,6 +1850,18 @@ Version            : 1.1.4</dev:code>
           <command:parameterValue required="true" variableLength="false">OutputTypes[]</command:parameterValue>
           <dev:type>
             <maml:name>OutputTypes[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Exclude</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Exclude Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -2343,18 +1906,6 @@ Version            : 1.1.4</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Excludes</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Excludes Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-        <dev:type>
-          <maml:name>String[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PassThru</maml:name>
         <maml:Description>
           <maml:para>{{Fill PassThru Description}}</maml:para>
@@ -2374,6 +1925,18 @@ Version            : 1.1.4</dev:code>
         <command:parameterValue required="true" variableLength="false">OutputTypes[]</command:parameterValue>
         <dev:type>
           <maml:name>OutputTypes[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Exclude</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Exclude Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -2416,15 +1979,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Invoke-TestSuiteRunner.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Invoke-TestSuiteRunner.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Invoke-TestSuiteRunner.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/test/Invoke-TestSuiteRunner.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/test/Invoke-TestSuiteRunner.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Invoke-TestSuiteRunner.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/test/Invoke-TestSuiteRunner.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/test/Invoke-TestSuiteRunner.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2670,27 +2233,27 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-ExternalHelpFromPlatyPSMarkdown.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/documentation/New-ExternalHelpFromPlatyPSMarkdown.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/documentation/New-ExternalHelpFromPlatyPSMarkdown.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-ExternalHelpFromPlatyPSMarkdown.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/documentation/New-ExternalHelpFromPlatyPSMarkdown.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/documentation/New-ExternalHelpFromPlatyPSMarkdown.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2843,15 +2406,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-MKPowerShellConfigFile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/New-MKPowerShellConfigFile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-MKPowerShellConfigFile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/settings/New-MKPowerShellConfigFile.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/settings/New-MKPowerShellConfigFile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-MKPowerShellConfigFile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/settings/New-MKPowerShellConfigFile.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/settings/New-MKPowerShellConfigFile.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3114,15 +2677,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Publish-ModuleToNuGetGallery.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Publish-ModuleToNuGetGallery.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Publish-ModuleToNuGetGallery.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/publish/Publish-ModuleToNuGetGallery.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/publish/Publish-ModuleToNuGetGallery.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Publish-ModuleToNuGetGallery.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3233,161 +2796,23 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Reset-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Reset-ModuleInProfile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/profile/Reset-ModuleInProfile.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/profile/Reset-ModuleInProfile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Reset-ModuleInProfile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/profile/Reset-ModuleInProfile.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/profile/Reset-ModuleInProfile.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Skip-ModuleInProfile.md</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Restart-PWSH</command:name>
-      <command:verb>Restart</command:verb>
-      <command:noun>PWSH</command:noun>
-      <maml:description>
-        <maml:para>Launches a new PowerShell window by immediately terminating that called this function. Default alias is `pwsh`.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Restart-PWSH</maml:name>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Restart-PWSH.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Restart-PWSH.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/management/Restart-PWSH.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Restart-PWSH.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/management/Restart-PWSH.Tests.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>`Restart-PWSHAdmin`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Restart-PWSHAdmin.md</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Restart-PWSHAdmin</command:name>
-      <command:verb>Restart</command:verb>
-      <command:noun>PWSHAdmin</command:noun>
-      <maml:description>
-        <maml:para>Launches a new PowerShell window with Admin privileges by immediately terminating that called this function. Default alias is `pwsha`.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Restart-PWSHAdmin</maml:name>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Restart-PWSHAdmin.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Restart-PWSHAdmin.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/management/Restart-PWSHAdmin.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>`Restart-PWSH`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Restart-PWSH.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3600,154 +3025,15 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Search-Items.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Search-Items.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Search-Items.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/utility/Search-Items.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/utility/Search-Items.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Search-Items.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/utility/Search-Items.Tests.ps1</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Set-LocationAndStore</command:name>
-      <command:verb>Set</command:verb>
-      <command:noun>LocationAndStore</command:noun>
-      <maml:description>
-        <maml:para>Records every time `sl` is called so that when new session launches, location will be the one last record. Default alias value for this function is `sl`.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Set-LocationAndStore</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Path</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Path Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>LiteralPath</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill LiteralPath Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>PassThru</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill PassThru Description}}</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>LiteralPath</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill LiteralPath Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>PassThru</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill PassThru Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Path</maml:name>
-        <maml:Description>
-          <maml:para>{{Fill Path Description}}</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Set-LocationAndStore.md</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Set-LocationAndStore.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/management/Set-LocationAndStore.ps1</maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Set-LocationAndStore.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/management/Set-LocationAndStore.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/utility/Search-Items.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3917,19 +3203,19 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Set-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Set-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Set-MKPowerShellSetting.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/settings/Set-MKPowerShellSetting.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Set-MKPowerShellSetting.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/settings/Set-MKPowerShellSetting.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Get-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4040,23 +3326,23 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Skip-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Skip-ModuleInProfile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/profile/Skip-ModuleInProfile.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/profile/Skip-ModuleInProfile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Skip-ModuleInProfile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/profile/Skip-ModuleInProfile.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/profile/Skip-ModuleInProfile.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Reset-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Reset-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4163,19 +3449,19 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ManifestFunctionsToExportField.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/manifest/Update-ManifestFunctionsToExportField.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/module/manifest/Update-ManifestFunctionsToExportField.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ManifestFunctionsToExportField.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/manifest/Update-ManifestFunctionsToExportField.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/module/manifest/Update-ManifestFunctionsToExportField.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-RootModuleUsingStatements`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-RootModuleUsingStatements.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-RootModuleUsingStatements.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4440,15 +3726,15 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ModuleExports.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ModuleExports.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ModuleExports.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/Update-ModuleExports.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/module/Update-ModuleExports.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ModuleExports.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/Update-ModuleExports.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/module/Update-ModuleExports.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4694,27 +3980,27 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ReadmeFromPlatyPSMarkdown.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/documentation/Update-ReadmeFromPlatyPSMarkdown.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/documentation/Update-ReadmeFromPlatyPSMarkdown.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ReadmeFromPlatyPSMarkdown.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/documentation/Update-ReadmeFromPlatyPSMarkdown.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/documentation/Update-ReadmeFromPlatyPSMarkdown.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5053,19 +4339,19 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-RootModuleUsingStatements.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-RootModuleUsingStatements.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-RootModuleUsingStatements.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/Update-RootModuleUsingStatements.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/module/Update-RootModuleUsingStatements.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-RootModuleUsingStatements.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/Update-RootModuleUsingStatements.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/module/Update-RootModuleUsingStatements.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ManifestFunctionsToExportField`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5656,15 +4942,15 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-SemVer.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-SemVer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-SemVer.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/manifest/Update-SemVer.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/module/manifest/Update-SemVer.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-SemVer.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/manifest/Update-SemVer.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/module/manifest/Update-SemVer.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

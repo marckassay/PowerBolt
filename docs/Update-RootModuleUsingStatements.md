@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-RootModuleUsingStatements.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-RootModuleUsingStatements.md
 schema: 2.0.0
 ---
 
@@ -165,8 +165,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Update-RootModuleUsingStatements.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/Update-RootModuleUsingStatements.ps1)
+[Update-RootModuleUsingStatements.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/module/Update-RootModuleUsingStatements.ps1)
 
-[Update-RootModuleUsingStatements.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/Update-RootModuleUsingStatements.Tests.ps1)
+[Update-RootModuleUsingStatements.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/module/Update-RootModuleUsingStatements.Tests.ps1)
 
-[`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ManifestFunctionsToExportField.md)
+[`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md)

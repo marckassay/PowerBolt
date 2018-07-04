@@ -1,20 +1,4 @@
 {
-  "BackupPolicy": "auto",
-  "Backups": [{
-    "Destination": "",
-    "Path": "",
-    "UpdatePolicy": ""
-  }],
-  "HistoryLocation": "",
-  "LastLocation": "",
   "NuGetApiKey": "",
-  "TurnOnAvailableUpdates": "true",
-  "TurnOnAutoUpdateSemVer": "true",
-  "TurnOnBackup": "false",
-  "TurnOnExtendedFormats": "true",
-  "TurnOnExtendedTypes": "true",
-  "TurnOnHistoryRecording": "true",
-  "TurnOnQuickRestart": "true",
-  "TurnOnRememberLastLocation": "true",
-  "TurnOnStartupOutput": "true"
+  "TurnOnAutoUpdateSemVer": "true"
 }

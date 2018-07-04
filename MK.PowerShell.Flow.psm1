@@ -2,13 +2,6 @@ using module .\src\documentation\Build-Documentation.ps1
 using module .\src\documentation\Build-PlatyPSMarkdown.ps1
 using module .\src\documentation\New-ExternalHelpFromPlatyPSMarkdown.ps1
 using module .\src\documentation\Update-ReadmeFromPlatyPSMarkdown.ps1
-using module .\src\error\Get-LatestError.ps1
-using module .\src\history\Export-History.ps1
-using module .\src\history\Import-History.ps1
-using module .\src\management\backupsources\Backup-Sources.ps1
-using module .\src\management\Restart-PWSH.ps1
-using module .\src\management\Restart-PWSHAdmin.ps1
-using module .\src\management\Set-LocationAndStore.ps1
 using module .\src\module\Get-MKModuleInfo.ps1
 using module .\src\module\manifest\Update-ManifestFunctionsToExportField.ps1
 using module .\src\module\manifest\Update-SemVer.ps1

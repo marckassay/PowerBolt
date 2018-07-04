@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Search-Items.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Search-Items.md
 schema: 2.0.0
 ---
 
@@ -146,6 +146,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Search-Items.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/utility/Search-Items.ps1)
+[Search-Items.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/utility/Search-Items.ps1)
 
-[Search-Items.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/utility/Search-Items.Tests.ps1)
+[Search-Items.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/utility/Search-Items.Tests.ps1)

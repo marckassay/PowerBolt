@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-PlatyPSMarkdown.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-PlatyPSMarkdown.md
 schema: 2.0.0
 ---
 
@@ -214,12 +214,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Build-PlatyPSMarkdown.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/documentation/Build-PlatyPSMarkdown.ps1)
+[Build-PlatyPSMarkdown.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/documentation/Build-PlatyPSMarkdown.ps1)
 
-[Build-PlatyPSMarkdown.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/documentation/Build-PlatyPSMarkdown.Tests.ps1)
+[Build-PlatyPSMarkdown.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/documentation/Build-PlatyPSMarkdown.Tests.ps1)
 
-[`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Build-Documentation.md)
+[`Build-Documentation`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Build-Documentation.md)
 
-[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
+[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 
-[`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-ReadmeFromPlatyPSMarkdown.md)
+[`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md)

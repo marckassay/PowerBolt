@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Invoke-TestSuiteRunner.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Invoke-TestSuiteRunner.md
 schema: 2.0.0
 ---
 
@@ -14,13 +14,13 @@ Creates a PowerShell background job that calls [`Invoke-Pester`](https://github.
 
 ### ByPath (Default)
 ```
-Invoke-TestSuiteRunner [[-Path] <String>] [[-TestFolderPath] <String>] [-Excludes <String[]>]
+Invoke-TestSuiteRunner [[-Path] <String>] [[-TestFolderPath] <String>] [-Exclude <String[]>]
  [-Show <OutputTypes[]>] [-PassThru] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Invoke-TestSuiteRunner [[-TestFolderPath] <String>] [-Excludes <String[]>] [-Show <OutputTypes[]>] [-PassThru]
+Invoke-TestSuiteRunner [[-TestFolderPath] <String>] [-Exclude <String[]>] [-Show <OutputTypes[]>] [-PassThru]
  [-Name] <String> [<CommonParameters>]
 ```
 
@@ -84,21 +84,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Excludes
-{{Fill Excludes Description}}
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -PassThru
 {{Fill PassThru Description}}
 
@@ -129,6 +114,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Exclude
+{{Fill Exclude Description}}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -144,6 +144,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Invoke-TestSuiteRunner.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/test/Invoke-TestSuiteRunner.ps1)
+[Invoke-TestSuiteRunner.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/test/Invoke-TestSuiteRunner.ps1)
 
-[Invoke-TestSuiteRunner.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/test/Invoke-TestSuiteRunner.Tests.ps1)
+[Invoke-TestSuiteRunner.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/test/Invoke-TestSuiteRunner.Tests.ps1)

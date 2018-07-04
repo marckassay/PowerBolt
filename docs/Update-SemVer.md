@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Update-SemVer.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Update-SemVer.md
 schema: 2.0.0
 ---
 
@@ -241,6 +241,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Update-SemVer.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/manifest/Update-SemVer.ps1)
+[Update-SemVer.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/module/manifest/Update-SemVer.ps1)
 
-[Update-SemVer.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/manifest/Update-SemVer.Tests.ps1)
+[Update-SemVer.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/module/manifest/Update-SemVer.Tests.ps1)

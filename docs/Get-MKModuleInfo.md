@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Get-MKModuleInfo.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Get-MKModuleInfo.md
 schema: 2.0.0
 ---
 
@@ -89,6 +89,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Get-MKModuleInfo.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/module/Get-MKModuleInfo.ps1)
+[Get-MKModuleInfo.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/module/Get-MKModuleInfo.ps1)
 
-[Get-MKModuleInfo.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/module/Get-MKModuleInfo.Tests.ps1)
+[Get-MKModuleInfo.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/module/Get-MKModuleInfo.Tests.ps1)

@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/Publish-ModuleToNuGetGallery.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Publish-ModuleToNuGetGallery.md
 schema: 2.0.0
 ---
 
@@ -147,6 +147,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Publish-ModuleToNuGetGallery.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/publish/Publish-ModuleToNuGetGallery.ps1)
+[Publish-ModuleToNuGetGallery.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/publish/Publish-ModuleToNuGetGallery.ps1)
 
-[Publish-ModuleToNuGetGallery.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1)
+[Publish-ModuleToNuGetGallery.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1)

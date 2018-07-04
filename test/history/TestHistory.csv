@@ -1,6 +1,0 @@
-"Id","CommandLine","ExecutionStatus","StartExecutionTime","EndExecutionTime"
-"1","sl c:","Completed","5/10/2018 4:36:34 PM","5/10/2018 4:36:34 PM"
-"2","Get-ChildItem .","Completed","5/10/2018 4:36:50 PM","5/10/2018 4:36:50 PM"
-"3","sl .\Temp","Completed","5/10/2018 4:36:56 PM","5/10/2018 4:36:56 PM"
-"4","ls","Completed","5/10/2018 4:36:58 PM","5/10/2018 4:36:58 PM"
-"5","sl ..","Completed","5/10/2018 4:37:04 PM","5/10/2018 4:37:04 PM"

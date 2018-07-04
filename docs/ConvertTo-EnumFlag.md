@@ -1,7 +1,7 @@
 ---
 external help file: MK.PowerShell.Flow-help.xml
 Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/docs/ConvertTo-EnumFlag.md
+online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/ConvertTo-EnumFlag.md
 schema: 2.0.0
 ---
 
@@ -77,4 +77,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[ConvertTo-EnumFlag.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.2/src/utility/ConvertTo-EnumFlag.ps1)
+[ConvertTo-EnumFlag.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/utility/ConvertTo-EnumFlag.ps1)
