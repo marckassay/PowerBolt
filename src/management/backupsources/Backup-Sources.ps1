@@ -1,4 +1,4 @@
-using module .\BackupPredicateEnum.ps1
+using module .\BackupPredicateEnum.psm1
 
 function Backup-Sources {
     [CmdletBinding(PositionalBinding = $False)]
