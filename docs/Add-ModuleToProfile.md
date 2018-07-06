@@ -1,7 +1,7 @@
 ---
-external help file: MK.PowerShell.Flow-help.xml
-Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Add-ModuleToProfile.md
+external help file: PowerEquip-help.xml
+Module Name: PowerEquip
+online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Add-ModuleToProfile.md
 schema: 2.0.0
 ---
 
@@ -83,10 +83,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Add-ModuleToProfile.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/profile/Add-ModuleToProfile.ps1)
+[Add-ModuleToProfile.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/profile/Add-ModuleToProfile.ps1)
 
-[Add-ModuleToProfile.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/profile/Add-ModuleToProfile.Tests.ps1)
+[Add-ModuleToProfile.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/profile/Add-ModuleToProfile.Tests.ps1)
 
-[`Skip-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Skip-ModuleInProfile.md)
+[`Skip-ModuleInProfile`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Skip-ModuleInProfile.md)
 
-[`Reset-ModuleInProfile`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Reset-ModuleInProfile.md)
+[`Reset-ModuleInProfile`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Reset-ModuleInProfile.md)

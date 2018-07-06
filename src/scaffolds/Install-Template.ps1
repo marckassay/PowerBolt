@@ -29,7 +29,7 @@ function Install-Template {
             $script:TemplatePath = 'resources\templates\NewScript\plasterManifest_en-US.xml'
         }
         elseif ($PSCmdlet.ParameterSetName -eq "ByTemplateName") {
-            $script:TemplatePath = Join-Path -Path $FLOWPATH -ChildPath "resources\templates\$TemplateName\plasterManifest_en-US.xml"
+            $script:TemplatePath = Join-Path -Path $POWEREQUIPPATH -ChildPath "resources\templates\$TemplateName\plasterManifest_en-US.xml"
         }
         elseif ($PSCmdlet.ParameterSetName -eq "ByTemplatePath") {
             $script:TemplatePath = $TemplatePath

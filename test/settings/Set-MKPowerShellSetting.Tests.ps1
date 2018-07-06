@@ -11,7 +11,7 @@ Describe "Test Set-MKPowerShellSetting" {
     
     Context "Setting TurnOnAutoUpdateSemVer" {
 
-        # Mock Restore-RememberLastLocation {} -ModuleName MK.PowerShell.Flow
+        # Mock Restore-RememberLastLocation {} -ModuleName PowerEquip
 
         It "Should set TurnOnAutoUpdateSemVer to '<Value>' in config file" -TestCases @(
             @{ Value = $false}
@@ -24,7 +24,7 @@ Describe "Test Set-MKPowerShellSetting" {
             $MKPowerShellConfig = Get-Content -Path $TestSupportModule.FixtureConfigFilePath | ConvertFrom-Json -AsHashtable
             $MKPowerShellConfig["TurnOnAutoUpdateSemVer"] -eq $true | Should -Be $Value
 
-            # Assert-MockCalled Restore-RememberLastLocation -ModuleName MK.PowerShell.Flow -Times 1
+            # Assert-MockCalled Restore-RememberLastLocation -ModuleName PowerEquip -Times 1
         }
     } 
     

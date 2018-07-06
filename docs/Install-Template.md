@@ -1,7 +1,7 @@
 ---
-external help file: MK.PowerShell.Flow-help.xml
-Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Install-Template.md
+external help file: PowerEquip-help.xml
+Module Name: PowerEquip
+online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Install-Template.md
 schema: 2.0.0
 ---
 
@@ -115,8 +115,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Install-Template.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/scaffolds/Install-Template.ps1)
+[Install-Template.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/scaffolds/Install-Template.ps1)
 
-[Install-Template.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/scaffolds/Install-Template.Tests.ps1)
+[Install-Template.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/scaffolds/Install-Template.Tests.ps1)
 
 [Plaster - Creating A Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md)

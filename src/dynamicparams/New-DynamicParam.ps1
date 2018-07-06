@@ -1,4 +1,4 @@
-# TODO: Publish this as a 'Script' so that MK.PowerShell.Flow can 
+# TODO: Publish this as a 'Script' so that PowerEquip can 
 Function New-DynamicParam {
     <#
     .SYNOPSIS

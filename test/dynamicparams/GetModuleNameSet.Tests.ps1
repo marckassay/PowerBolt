@@ -11,7 +11,7 @@ Describe "Test GetModuleNameSet" {
     
     Context "Call with Position, ParameterSetName and Mandatory attributes" {
         It "Lame test here, can't seem to access `$Results fully to retrieve expected module names" {
-            InModuleScope MK.PowerShell.Flow {
+            InModuleScope PowerEquip {
                 $Results = GetModuleNameSet -Position 0 -ParameterSetName 'ByName' -Mandatory
                 $Results.Keys | Should -Be 'Name'
                 $Results | Should -BeOfType [System.Management.Automation.RuntimeDefinedParameterDictionary]

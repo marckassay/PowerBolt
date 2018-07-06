@@ -18,7 +18,7 @@ Describe "Test GetPlasterTemplateVarSet" {
     
     Context "Call with path to a plaster template file" {
         It "`$Result should have entries matching variable names" {
-            InModuleScope MK.PowerShell.Flow {
+            InModuleScope PowerEquip {
                 $Results = GetPlasterTemplateVarSet -Path $MockNewScriptTemplatePath
                 $Results.Keys -Contains "ScriptCongruentPath" | Should -Be $true
                 $Results.Keys -Contains "ScriptName" | Should -Be $true

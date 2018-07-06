@@ -1,7 +1,7 @@
 ---
-external help file: MK.PowerShell.Flow-help.xml
-Module Name: MK.PowerShell.Flow
-online version: https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Set-MKPowerShellSetting.md
+external help file: PowerEquip-help.xml
+Module Name: PowerEquip
+online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Set-MKPowerShellSetting.md
 schema: 2.0.0
 ---
 
@@ -107,8 +107,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Set-MKPowerShellSetting.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1)
+[Set-MKPowerShellSetting.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1)
 
-[Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1)
+[Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1)
 
-[`Get-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.4/docs/Get-MKPowerShellSetting.md)
+[`Get-MKPowerShellSetting`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Get-MKPowerShellSetting.md)
