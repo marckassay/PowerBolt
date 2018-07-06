@@ -15,7 +15,7 @@ Inspired by [Convention over configuration](https://en.wikipedia.org/wiki/Conven
 
 ### Create
 
-First step is to scaffold files from a [Plaster](https://github.com/PowerShell/Plaster) template. Flow currently has 2 templates available when installed; 'NewModuleProject' and 'NewScript' (for information on templates, visit: [Creating a Plaster Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md)). Flow's [`Install-Template`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Install-Template.md) command is to be used to install Plaster templates. The 'NewModuleProject' template creates a new PowerShell module that includes the *convention* that Flow expects in a module.  The 'DestinationPath' parameter for this template, doesn't have to be in a PowerShell module path (`$Env:PSModulePath`) for it to be imported. Flow will append the PowerShell profile with an `Import-Module` statement.
+First step is to scaffold files from a [Plaster](https://github.com/PowerShell/Plaster) template. Flow currently has 2 templates available when installed; 'NewModuleProject' and 'NewScript' (for information on templates, visit: [Creating a Plaster Manifest](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/about_Plaster_CreatingAManifest.help.md)). Flow's [`Install-Template`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Install-Template.md) command is to be used to install Plaster templates. The 'NewModuleProject' template creates a new PowerShell module that includes the *convention* that Flow expects in a module.  The 'DestinationPath' parameter for this template, doesn't have to be in a PowerShell module path (`$Env:PSModulePath`) for it to be imported. Flow will append the PowerShell profile with an `Import-Module` statement. You can verify this by executing the alias for `Get-Content` by passing in the automatic PowerShell variable `$PROFILE`; `gc $PROFILE`. 
 
 After that template is installed (scaffold), you probably want to add your first command to the module. The 'NewScript' template does this.
 
@@ -51,7 +51,7 @@ Flow is scaffolding your PowerShell template...
 Scaffolding is completed.
 ```
 
-Above the first command is scaffold, 'Compress-Data'. You may have made the conclusion already that the value of 'ScriptCongruentPath' is the sub-path to the new command file in 'src' and 'test' folder. In an addition to what you may have already determined that has been done by executing these two commands, the root module (AcmeTasks.psm1) has been prefixed with the following:
+Above the first command is scaffold, 'Compress-Data'. You may have made the conclusion already that 'ScriptCongruentPath' parameter value is the sub-path to the new command file in 'src' and 'test' folder. In an addition to what you may have already determined that has been done by executing these two commands, the root module (AcmeTasks.psm1) has been prefixed with the following:
 
 ```powershell
 using module .\src\io\file\Compress-Data.ps1
@@ -77,7 +77,7 @@ PS C:\Users\Alice\projects\AcmeTasks> Invoke-TestSuiteRunner
 
 Since `Invoke-TestSuiteRunner` has been executed without an argument, the location of PowerShell must be in the 'AcmeTasks' folder. Alternatively Invoke-TestSuiteRunner can be called with a path value to a module via `Path` parameter, or name value to a module via `Name`. The `Name` parameter has a "validate set" constraint which the elements of that set are retrieved from a `Get-Module` call.
 
-When using Git with GitHub, if your Git branch is named with a valid Semantic Version value, this value will be transposed to the `ModuleVersion` key in the manifest file automatically.  Only simple variants (regex: \d.\d.\d) of Semantic Version will work otherwise PowerShell will not be able to import the module. At this step or the next ('Document') you may manually change the module version using [`Update-SemVer`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Update-SemVer.md).
+When using Git with GitHub, if your Git branch is named with a valid Semantic Version value, this value will be transposed to the `ModuleVersion` key in the manifest file automatically.  Only simple variants (regex: `\d.\d.\d`) of Semantic Version will work otherwise PowerShell will not be able to import the module. At this step or the next ('Document') you may manually change the module version using [`Update-SemVer`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Update-SemVer.md).
 
 ### Document
 
@@ -93,13 +93,13 @@ This file will have an API section added or updated, with each exported command'
 
 ### Publish
 
-As mentioned above in the Create section, your module doesn't have to reside in a `$Env:PSModulePath`.  And if it doesn't you can publish your module without moving it into one of the path(s) of `$Env:PSModulePath` (which is required by the internal publish command [`Publish-Module`]()).  Flow will copy your module into one of these paths and will delete it after publishing.
+As mentioned above in the Create section, your module doesn't have to reside in a `$Env:PSModulePath`.  And if it doesn't, you can publish your module without moving it into one of the paths of `$Env:PSModulePath` (which is required by the internal publish command [`Publish-Module`](https://docs.microsoft.com/en-us/powershell/module/powershellget/publish-module)).  Flow will copy your module into one of these paths and will delete it after publishing.
 
 ```powershell
 PS C:\Users\Alice\projects\AcmeTasks> Publish-ModuleToNuGetGallery
 ```
 
-To explain further on the reason for this command, by giving an example, I currently have individual PowerShell modules listed in my PowerShell profile. These modules that are listed point to my development directory where they reside on my file system. So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory. A cumbersome process indeed, so this command has been created to speed up that process. In an addition Flow can store your API key on your file system using [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-MKPowerShellSetting.md) which will be retrieved automatically when [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) is called if its `NuGetApiKey` parameter value is not set. Also remember when Flow creates a module manifest file, it will set the Prerelease key to '-alpha' so that when published, it is still accessble to anyone searching for modules with or without prerelease status.
+To explain further on the reason for this command, by giving an example, I currently have individual PowerShell modules imported (via `Import-Module`) in my PowerShell profile. These modules that are imported to my development directory where they reside on my file system. So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory. A cumbersome process indeed, so this command has been created to speed up that process. In an addition, Flow can store your API key on your file system using [`Set-MKPowerShellSetting`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Set-MKPowerShellSetting.md) which will be retrieved automatically when [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/MK.PowerShell.Flow/blob/0.0.1/docs/Publish-ModuleToNuGetGallery.md) is called if its `NuGetApiKey` parameter value is not set. Also remember when Flow creates a module manifest file, it will set the Prerelease key to 'alpha' so that when published it's still accessible to anyone searching for modules with or without prerelease status but not polluting the repository/gallery with newly created modules. Obviously you can simply remove this value when you feel so, so that the module will not be published in that software stage.
 
 ## Flow Config File
 
@@ -170,26 +170,34 @@ Updates the module's semantic version value in the manifest file.
 
 ### What conformity does Flow expect in your module?
 
-Although it's still early in development, I can only recall the following conditions that may have issues:
+To see an example of an ideal module, execute the same as what is mentioned in the 'Create' section of this file. Although it's still early in development, I can only recall the following conditions that may have issues:
 
-+ URLs are parsed and validated with the expectation of them structured the way GitHub has them.
++ Git repository and file URLs are parsed with the expectation of them structured the way GitHub currently does so.
 
-+ Module folder, manifest and root module are expected to all have the same the name.
++ Module folder, manifest (.psd1) and root module (.psm1) are expected to all have the same name.
 
 + The 'src', 'test' and 'docs' folders inside the module folder are where the source, test and document files respectively are expected to reside.
 
-+ Git development branches are expected to be in SemVer format (currently, simple variant only must be used (regex: \d\.\d\.\d)) in order for auto update version to work.
++ Git development branches are expected to be in SemVer format (currently, simple variant only must be used (regex: `\d.\d.\d`)) in order for auto update version to work.
 
-### What other advantages does Flow give me?
+### What advantages does Flow give me?
 
-+ Updates URLs in documentation files to prevent users loading a webpage that is not the version of module they have.
++ By automation, streamlines PowerShell development from creation to publication. This also applys when new commands are added.
 
-+ Automatically change ModuleVersion number to Git branch name only if its a simplied (regex: \d.\d.\d) SemVer.
++ Updates URLs in documentation files (by changing the Git branch name segment for GitHub URLs) to prevent users loading a webpage that is not the version of module they currently have installed.
 
-+ Automatically imports script files (.ps1) into the root module and exports the function(s) of those files in the module's manifest.
++ Option to add source and test file links to the command's help doc.
+
++ Updates README file with title and synopsis for all exported commands.
+
++ Automatically change ModuleVersion number to Git branch name only if its a simplied (regex: `\d.\d.\d`) SemVer.
+
++ Automatically imports script files (.ps1) into the root module (.psm1) and exports the function(s) of those files in the module's manifest file (.psd1).
+
++ You can add, skip (disable) and reset (enable) Import-Module statements listed in your PowerShell profile page.
 
 ### What other features are planned to be in Flow?
 
-+ GitHub repository creation at the same time when `Install-Template` is called to scaffold a new module.
++ To have GitHub repository creation at the same time when `Install-Template` is called to scaffold a new module. So in an addition to what `Install-Template` does currently, and if you have a GitHub account with a [personal access token](https://github.com/settings/tokens), the name of the module will be used to create a new respoitory in your GitHub account.
 
 + More preferences in config file such as, license type, expected module sub folders ('src', 'test', 'docs'), editor to launch.

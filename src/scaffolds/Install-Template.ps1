@@ -94,7 +94,10 @@ function Install-Template {
                 Update-ModuleExports 
             }
             elseif ($TemplateName -eq 'NewModuleProject') {
-                Add-ModuleToProfile -Path (Join-Path -Path $PSBoundParameters.DestinationPath -ChildPath $PSBoundParameters.ModuleName)
+                $ModInfo = Get-MKModuleInfo -Path (Join-Path -Path $PSBoundParameters.DestinationPath -ChildPath $PSBoundParameters.ModuleName)
+                
+                Update-ModuleManifest -Path $ModInfo.ManifestFilePath -Prerelease 'alpha'
+                Add-ModuleToProfile $ModInfo.Path
             }
 
             $TemplateVarDictionary.GetEnumerator() | ForEach-Object {

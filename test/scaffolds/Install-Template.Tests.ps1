@@ -29,7 +29,7 @@ Describe "Test Install-Template" {
 
         Install-Template -TemplateName 'NewModuleProject' '.' 'MockModuleC' 'Alice' 
 
-        $MockModuleCPath = (Join-Path -Path '.' -ChildPath 'MockModuleC')
+        $MockModuleCPath = (Join-Path -Path '.' -ChildPath 'MockModuleC' -Resolve)
 
         Assert-MockCalled Add-ModuleToProfile -ModuleName MK.PowerShell.Flow -Times 1 -ParameterFilter {
             $Path -eq $MockModuleCPath
