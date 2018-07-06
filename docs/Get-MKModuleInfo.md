@@ -50,7 +50,7 @@ A dynamic parameter with its valid set being confined to locally installed modul
 Type: String
 Parameter Sets: ByName
 Aliases:
-Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, PowerEquip, Pester, Plaster, Plaster, platyPS, posh-git, PSReadLine
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerEquip, PSReadLine
 
 Required: True
 Position: 0

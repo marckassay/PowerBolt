@@ -14,7 +14,7 @@ Recurses thru folders to find files that its content matches `Pattern`. Outputs 
 
 ```
 Search-Items [-Path] <String> [-Pattern] <String[]> [[-Include] <String[]>] [[-Exclude] <String[]>]
- [-Depth <Int32>] [-Recurse] [<CommonParameters>]
+ [[-Depth] <Int32>] [-Recurse] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,6 +40,21 @@ MatchedLine                        # TODO: need to have this functions arity bet
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -Depth
+{{Fill Depth Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Exclude
 {{Fill Exclude Description}}
@@ -106,21 +121,6 @@ Accept wildcard characters: False
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Depth
-{{Fill Depth Description}}
-
-```yaml
-Type: Int32
 Parameter Sets: (All)
 Aliases:
 

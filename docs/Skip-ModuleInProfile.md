@@ -37,7 +37,7 @@ PS C:\> {{ Add example code here }}
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: <ModuleName>
+Accepted values: posh-git.psd1, PowerEquip
 
 Required: True
 Position: 0

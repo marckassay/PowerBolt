@@ -14,14 +14,14 @@ Creates a PowerShell background job that calls [`Invoke-Pester`](https://github.
 
 ### ByPath (Default)
 ```
-Invoke-TestSuiteRunner [[-Path] <String>] [[-TestFolderPath] <String>] [-Exclude <String[]>]
- [-Show <OutputTypes[]>] [-PassThru] [<CommonParameters>]
+Invoke-TestSuiteRunner [[-Path] <String>] [[-TestFolderPath] <String>] [[-Exclude] <String[]>]
+ [[-Show] <OutputTypes[]>] [-PassThru] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Invoke-TestSuiteRunner [[-TestFolderPath] <String>] [-Exclude <String[]>] [-Show <OutputTypes[]>] [-PassThru]
- [-Name] <String> [<CommonParameters>]
+Invoke-TestSuiteRunner [[-TestFolderPath] <String>] [[-Exclude] <String[]>] [[-Show] <OutputTypes[]>]
+ [-PassThru] [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,6 +38,21 @@ Using the `ByName` validation parameter set and since no `TestFolderPath` value 
 
 ## PARAMETERS
 
+### -Exclude
+{{Fill Exclude Description}}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Name
 {{Fill Name Description}}
 
@@ -45,40 +60,10 @@ Using the `ByName` validation parameter set and since no `TestFolderPath` value 
 Type: String
 Parameter Sets: ByName
 Aliases:
-Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, PowerEquip, Pester, Plaster, Plaster, platyPS, posh-git, PSReadLine
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerEquip, PSReadLine
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-{{Fill Path Description}}
-
-```yaml
-Type: String
-Parameter Sets: ByPath
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TestFolderPath
-{{Fill TestFolderPath Description}}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -99,6 +84,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Path
+{{Fill Path Description}}
+
+```yaml
+Type: String
+Parameter Sets: ByPath
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Show
 {{Fill Show Description}}
 
@@ -106,24 +106,25 @@ Accept wildcard characters: False
 Type: OutputTypes[]
 Parameter Sets: (All)
 Aliases:
+Accepted values: None, Default, Passed, Failed, Pending, Skipped, Inconclusive, Describe, Context, Summary, Header, Fails, All
 
 Required: False
-Position: Named
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Exclude
-{{Fill Exclude Description}}
+### -TestFolderPath
+{{Fill TestFolderPath Description}}
 
 ```yaml
-Type: String[]
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

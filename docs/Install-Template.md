@@ -76,7 +76,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: ByTemplateName
 Aliases:
-Accepted values: NewScript, NewModule
+Accepted values: NewScript, NewModuleProject
 
 Required: True
 Position: 0

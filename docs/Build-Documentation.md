@@ -39,6 +39,21 @@ Builds documentation for the PowerSploit module with default parameters.
 
 ## PARAMETERS
 
+### -Force
+{{Fill Force Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Locale
 The name of the folder where PowerShell XML file will reside.
 
@@ -76,7 +91,7 @@ If the module is already imported, the value is the name of the module.
 Type: String
 Parameter Sets: ByName
 Aliases:
-Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, PowerEquip, Pester, Plaster, Plaster, platyPS, posh-git, PSReadLine
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerEquip, PSReadLine
 
 Required: True
 Position: 0
@@ -141,21 +156,6 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-{{Fill Force Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

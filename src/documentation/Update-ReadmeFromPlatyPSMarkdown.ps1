@@ -50,7 +50,7 @@ function Update-ReadmeFromPlatyPSMarkdown {
             }
 
             $ReadMeContent = Get-Content -Path $ReadMePath -Raw
-            $ExistingSnippetPattern = "^(#### \[.*\w+-\w+.*\]\(http.*\))(\s*)(?<body>[\w\W]+?)(?(?=####)(?=####)|(\z))"
+            $ExistingSnippetPattern = "(?<link>#### \[.*\w+-\w+.*\]\(http.*\))(?:\s*)(?<body>[\w\W]+?)(?(?=####)(?=####)|(?=(?:##|\z)))"
 
             if ($ReadMeContent) {
                 $FirstIndex = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -First 1 -ExpandProperty Index
@@ -70,12 +70,16 @@ function Update-ReadmeFromPlatyPSMarkdown {
 ## API
 "@
                 # TODO: may want to use StringBuilder here
-                $MarkdownSnippetCollection = $MarkdownSnippetCollection.Insert(0, $SubSectionTitle)
-                $FirstIndex = $ReadMeContent.Length
+                $FirstIndex = 0
+                $MarkdownSnippetCollection = $MarkdownSnippetCollection.Insert($FirstIndex, $SubSectionTitle)
+                $MarkdownSnippetCollection += [Environment]::NewLine
             }
             
-            # if the file isn't new..., else just assign $MarkdownSnippetCollection
+            # if: the file isn't new $FirstIndex will not be 0... else: $FirstIndex will be 0, just assign $MarkdownSnippetCollection
             if ($FirstIndex) {
+                # TODO: yeah StringBuilder can be used here for sure or fix regex
+                $ReadMeContent = $ReadMeContent.Insert($FirstIndex, [Environment]::NewLine)
+                $ReadMeContent = $ReadMeContent.Insert($FirstIndex, [Environment]::NewLine)
                 $ReadMeContent.Insert($FirstIndex, $MarkdownSnippetCollection) | Set-Content -Path $ReadMePath | Out-Null
             }
             else {
