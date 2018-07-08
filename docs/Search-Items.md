@@ -1,7 +1,7 @@
 ---
-external help file: PowerEquip-help.xml
-Module Name: PowerEquip
-online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Search-Items.md
+external help file: PowerBolt-help.xml
+Module Name: PowerBolt
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Search-Items.md
 schema: 2.0.0
 ---
 
@@ -24,7 +24,7 @@ Search-Items [-Path] <String> [-Pattern] <String[]> [[-Include] <String[]>] [[-E
 
 ### Example 1
 ```powershell
-PS C:\> Search-Items -Path C:\Users\Alice\PowerEquip -Pattern '.*TODO.*' -Recurse
+PS C:\> Search-Items -Path C:\Users\Alice\PowerBolt -Pattern '.*TODO.*' -Recurse
 
 Name                           Value
 ----                           -----
@@ -146,6 +146,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Search-Items.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/utility/Search-Items.ps1)
+[Search-Items.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/utility/Search-Items.ps1)
 
-[Search-Items.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/utility/Search-Items.Tests.ps1)
+[Search-Items.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/utility/Search-Items.Tests.ps1)

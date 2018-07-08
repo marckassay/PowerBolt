@@ -1,4 +1,4 @@
-# TODO: Publish this as a 'Script' so that PowerEquip can 
+# TODO: Publish this as a 'Script' so that PowerBolt can 
 Function New-DynamicParam {
     <#
     .SYNOPSIS

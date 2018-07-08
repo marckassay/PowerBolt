@@ -14,7 +14,7 @@ function Start-MKPowerShell {
 
     begin {
         # Environment var to reference this module's directory
-        Set-Variable -Name POWEREQUIPPATH -Value ($script:PSScriptRoot) -Scope Global
+        Set-Variable -Name PowerBoltPATH -Value ($script:PSScriptRoot) -Scope Global
 
         # Start-MKPowerShell may be called directly which may have a nothing value other then MKPowerShellConfigFilePath
         if ($ConfigFilePath) {
@@ -32,7 +32,7 @@ function Start-MKPowerShell {
                 New-Item -Path $script:ConfigFileParentPath -ItemType Directory -Verbose
             }
             
-            Copy-Item -Path "$PSScriptRoot\..\..\resources\MK.PowerShell-config.json" -Destination $script:ConfigFileParentPath -Verbose -PassThru
+            Copy-Item -Path "$PSScriptRoot\..\..\resources\PowerBolt-config.json" -Destination $script:ConfigFileParentPath -Verbose -PassThru
         }
         else {
             $script:ConfigFileParentPath = (Split-Path $ConfigFilePath -Parent)

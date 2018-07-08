@@ -11,7 +11,7 @@ Describe "Test New-MKPowerShellConfigFile" {
     
     Context "Call New-MKPowerShellConfigFile when no file exists" {
         BeforeEach {
-            $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'MK.PowerShell-config.json'
+            $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'PowerBolt-config.json'
         }
         AfterEach {
 
@@ -26,14 +26,14 @@ Describe "Test New-MKPowerShellConfigFile" {
 
     Context "Call New-MKPowerShellConfigFile when file exists" {
         It "Should prompt user about exisiting file" {
-            InModuleScope PowerEquip {
+            InModuleScope PowerBolt {
                 ### HACK: Before and After block is inside here since Pester seems to not like 
                 # nested Before and After
                 ### Before
-                $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'MK.PowerShell-config.json'
-                Get-Module PowerEquip | `
+                $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'PowerBolt-config.json'
+                Get-Module PowerBolt | `
                     Select-Object -ExpandProperty FileList | `
-                    ForEach-Object {if ($_ -like '*MK.PowerShell-config.json') {$_}} -OutVariable ModuleConfigFile
+                    ForEach-Object {if ($_ -like '*PowerBolt-config.json') {$_}} -OutVariable ModuleConfigFile
                 New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
                 Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName 
 
@@ -54,15 +54,15 @@ Describe "Test New-MKPowerShellConfigFile" {
         }
 
         It "Should not prompt user about exisiting file" {
-            InModuleScope PowerEquip {
+            InModuleScope PowerBolt {
                 ### HACK: Before and After block is inside here since Pester seems to not like 
                 # nested Before and After
 
                 ### Before
-                $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'MK.PowerShell-config.json'
-                Get-Module PowerEquip | `
+                $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'PowerBolt-config.json'
+                Get-Module PowerBolt | `
                     Select-Object -ExpandProperty FileList | `
-                    ForEach-Object {if ($_ -like '*MK.PowerShell-config.json') {$_}} -OutVariable ModuleConfigFile
+                    ForEach-Object {if ($_ -like '*PowerBolt-config.json') {$_}} -OutVariable ModuleConfigFile
                 New-Item -Path "$TestDrive\MK.PowerShell" -ItemType Directory -OutVariable ModuleConfigFolder
                 Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName 
 

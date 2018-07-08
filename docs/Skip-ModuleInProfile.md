@@ -1,7 +1,7 @@
 ---
-external help file: PowerEquip-help.xml
-Module Name: PowerEquip
-online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Skip-ModuleInProfile.md
+external help file: PowerBolt-help.xml
+Module Name: PowerBolt
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Skip-ModuleInProfile.md
 schema: 2.0.0
 ---
 
@@ -37,7 +37,7 @@ PS C:\> {{ Add example code here }}
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: posh-git.psd1, PowerEquip
+Accepted values: posh-git.psd1, PowerBolt
 
 Required: True
 Position: 0
@@ -76,10 +76,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Skip-ModuleInProfile.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/profile/Skip-ModuleInProfile.ps1)
+[Skip-ModuleInProfile.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/profile/Skip-ModuleInProfile.ps1)
 
-[Skip-ModuleInProfile.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/profile/Skip-ModuleInProfile.Tests.ps1)
+[Skip-ModuleInProfile.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/profile/Skip-ModuleInProfile.Tests.ps1)
 
-[`Add-ModuleToProfile`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Add-ModuleToProfile.md)
+[`Add-ModuleToProfile`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Add-ModuleToProfile.md)
 
-[`Reset-ModuleInProfile`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Reset-ModuleInProfile.md)
+[`Reset-ModuleInProfile`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Reset-ModuleInProfile.md)

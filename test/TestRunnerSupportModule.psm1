@@ -6,7 +6,7 @@ class ScriptPath {
 
 class TestRunnerSupportModule {
     # TODO: have these elements pushed into this array instead of hard-coded; make it accessible for when Deploy-TestFakes is created.
-    [string[]]$MODULE_NAMES = @('PowerEquip', 'MKDocumentationInfo', 'MKModuleInfo', 'MockModuleA', 'MockModuleB', 'MockModuleC', 'TestRunnerSupportModule')
+    [string[]]$MODULE_NAMES = @('PowerBolt', 'MKDocumentationInfo', 'MKModuleInfo', 'MockModuleA', 'MockModuleB', 'MockModuleC', 'TestRunnerSupportModule')
     [string]$AutoStart = $true
     [string]$TestDrivePath
     [string]$FixtureDirectoryPath
@@ -53,7 +53,7 @@ class TestRunnerSupportModule {
 
         if (-not $FixtureConfigFilePath) {
             # MK.PowerShell module will copy config file to this path:
-            $this.FixtureConfigFilePath = Join-Path -Path $this.TestDrivePath -ChildPath "\User\Bob\AppData\Roaming\MK.PowerShell\MK.PowerShell-config.json"
+            $this.FixtureConfigFilePath = Join-Path -Path $this.TestDrivePath -ChildPath "\User\Bob\AppData\Roaming\MK.PowerShell\PowerBolt-config.json"
         }
         else {
             $this.FixtureConfigFilePath = $FixtureConfigFilePath
@@ -80,7 +80,7 @@ class TestRunnerSupportModule {
         }
 
         if ($this.AutoStart -eq $true) {
-            InModuleScope PowerEquip {
+            InModuleScope PowerBolt {
                 Start-MKPowerShell -ConfigFilePath $this.FixtureConfigFilePath
             }
         }

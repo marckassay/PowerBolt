@@ -1,7 +1,7 @@
 ---
-external help file: PowerEquip-help.xml
-Module Name: PowerEquip
-online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-RootModuleUsingStatements.md
+external help file: PowerBolt-help.xml
+Module Name: PowerBolt
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-RootModuleUsingStatements.md
 schema: 2.0.0
 ---
 
@@ -96,7 +96,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: ByName
 Aliases:
-Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerEquip, PSReadLine
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerBolt, PSReadLine
 
 Required: True
 Position: 0
@@ -165,8 +165,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Update-RootModuleUsingStatements.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/module/Update-RootModuleUsingStatements.ps1)
+[Update-RootModuleUsingStatements.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/module/Update-RootModuleUsingStatements.ps1)
 
-[Update-RootModuleUsingStatements.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/module/Update-RootModuleUsingStatements.Tests.ps1)
+[Update-RootModuleUsingStatements.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/module/Update-RootModuleUsingStatements.Tests.ps1)
 
-[`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md)
+[`Update-ManifestFunctionsToExportField`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md)

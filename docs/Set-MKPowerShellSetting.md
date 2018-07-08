@@ -1,14 +1,14 @@
 ---
-external help file: PowerEquip-help.xml
-Module Name: PowerEquip
-online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Set-MKPowerShellSetting.md
+external help file: PowerBolt-help.xml
+Module Name: PowerBolt
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md
 schema: 2.0.0
 ---
 
 # Set-MKPowerShellSetting
 
 ## SYNOPSIS
-Sets value to JSON data in `MK.PowerShell-config.json`.
+Sets value to JSON data in `PowerBolt-config.json`.
 
 ## SYNTAX
 
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: TurnOnBackup, TurnOnRememberLastLocation, Backups, BackupPolicy, TurnOnAutoUpdateSemVer, NuGetApiKey, TurnOnQuickRestart, TurnOnStartupOutput, TurnOnHistoryRecording, LastLocation, TurnOnExtendedFormats, TurnOnExtendedTypes, HistoryLocation, TurnOnAvailableUpdates
+Accepted values: TurnOnAutoUpdateSemVer, NuGetApiKey
 
 Required: False
 Position: 0
@@ -107,8 +107,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Set-MKPowerShellSetting.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1)
+[Set-MKPowerShellSetting.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1)
 
-[Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1)
+[Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1)
 
-[`Get-MKPowerShellSetting`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Get-MKPowerShellSetting.md)
+[`Get-MKPowerShellSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKPowerShellSetting.md)

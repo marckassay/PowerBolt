@@ -24,7 +24,7 @@ using module .\src\management\Start-MKPowerShell.ps1
 
 Param(
     [Parameter(Mandatory = $false)]
-    [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\MK.PowerShell-config.json"),
+    [String]$ConfigFilePath = $([Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\MK.PowerShell\PowerBolt-config.json"),
 
     [Parameter(Mandatory = $false)]
     [bool]$SUT = $false

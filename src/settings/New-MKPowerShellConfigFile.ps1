@@ -3,7 +3,7 @@ function WriteWarningWrapper($FullName) {
 The following file already exists:`r`n
 $FullName`r`n
 
-If you wish to overwrite this file with the default 'MK.PowerShell-config.json' file, call this function with the -Force switch. 
+If you wish to overwrite this file with the default 'PowerBolt-config.json' file, call this function with the -Force switch. 
 "@
 }
 
@@ -24,7 +24,7 @@ function New-MKPowerShellConfigFile {
         $Confirm
     )
 
-    $FullName = Join-Path -Path $Path -ChildPath '\MK.PowerShell\MK.PowerShell-config.json'
+    $FullName = Join-Path -Path $Path -ChildPath '\MK.PowerShell\PowerBolt-config.json'
     
     if (((Test-Path -Path $FullName) -eq $false) -or ($Force.IsPresent -eq $true)) {
         $LeafBase = Join-Path -Path $Path -ChildPath '\MK.PowerShell\'
@@ -32,9 +32,9 @@ function New-MKPowerShellConfigFile {
             New-Item -Path $LeafBase -ItemType Directory -OutVariable ModuleConfigFolder
         }
 
-        Get-Module PowerEquip | `
+        Get-Module PowerBolt | `
             Select-Object -ExpandProperty FileList | `
-            ForEach-Object {if ($_ -like '*MK.PowerShell-config.json') {$_}} -OutVariable ModuleConfigFile
+            ForEach-Object {if ($_ -like '*PowerBolt-config.json') {$_}} -OutVariable ModuleConfigFile
 
         Copy-Item -Path $ModuleConfigFile -Destination $ModuleConfigFolder.FullName -PassThru:$PassThru.IsPresent -Force:$Force.IsPresent  -Confirm:$Confirm.IsPresent
     }

@@ -1,7 +1,7 @@
 ---
-external help file: PowerEquip-help.xml
-Module Name: PowerEquip
-online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Reset-ModuleInProfile.md
+external help file: PowerBolt-help.xml
+Module Name: PowerBolt
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Reset-ModuleInProfile.md
 schema: 2.0.0
 ---
 
@@ -76,10 +76,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Reset-ModuleInProfile.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/profile/Reset-ModuleInProfile.ps1)
+[Reset-ModuleInProfile.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/profile/Reset-ModuleInProfile.ps1)
 
-[Reset-ModuleInProfile.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/profile/Reset-ModuleInProfile.Tests.ps1)
+[Reset-ModuleInProfile.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/profile/Reset-ModuleInProfile.Tests.ps1)
 
-[`Add-ModuleToProfile`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Add-ModuleToProfile.md)
+[`Add-ModuleToProfile`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Add-ModuleToProfile.md)
 
-[`Skip-ModuleInProfile`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Skip-ModuleInProfile.md)
+[`Skip-ModuleInProfile`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Skip-ModuleInProfile.md)

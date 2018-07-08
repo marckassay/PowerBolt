@@ -13,7 +13,7 @@ Describe "Test Get-GitBranchName" {
 
     Context "Calling on MockModuleB" {
         It "Should return current branch name of master" {
-            InModuleScope PowerEquip {
+            InModuleScope PowerBolt {
                 $SemVer = Get-GitBranchName -Path $MockDirectoryPath
                 $SemVer | Should -Be 'master'
             }
@@ -25,7 +25,7 @@ Describe "Test Get-GitBranchName" {
             Set-Location $MockDirectoryPath
             Invoke-Expression -Command 'git checkout -b 0.0.1'
 
-            InModuleScope PowerEquip {
+            InModuleScope PowerBolt {
                 $SemVer = Get-GitBranchName -Path $MockDirectoryPath
                 $SemVer | Should -Be '0.0.1'
             }

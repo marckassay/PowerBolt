@@ -58,10 +58,10 @@ function Publish-ModuleToNuGetGallery {
         Write-Information "Will be using the following value for NuGet API Key: $RedactedNuGetApiKey" -InformationAction Continue
 
         if ($Confirm -eq $false) {
-            Write-Host "PowerEquip is will now attempt to publish module in: $DestinationDirectory" -ForegroundColor Green
+            Write-Host "PowerBolt is will now attempt to publish module in: $DestinationDirectory" -ForegroundColor Green
         }
         else {
-            Write-Host "PowerEquip is needs confirmation to publish module in: $DestinationDirectory" -ForegroundColor Red
+            Write-Host "PowerBolt is needs confirmation to publish module in: $DestinationDirectory" -ForegroundColor Red
         }
 
         Publish-Module -Path $DestinationDirectory -NuGetApiKey $NuGetApiKey -Confirm:$Confirm -WhatIf:$WhatIf.IsPresent -Verbose:$($Verbose.IsPresent -or $WhatIf.IsPresent)

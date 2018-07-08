@@ -1,7 +1,7 @@
 ---
-external help file: PowerEquip-help.xml
-Module Name: PowerEquip
-online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-PlatyPSMarkdown.md
+external help file: PowerBolt-help.xml
+Module Name: PowerBolt
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-PlatyPSMarkdown.md
 schema: 2.0.0
 ---
 
@@ -114,7 +114,7 @@ If the module is already imported, the value is the name of the module.
 Type: String
 Parameter Sets: ByName
 Aliases:
-Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerEquip, PSReadLine
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerBolt, PSReadLine
 
 Required: True
 Position: 0
@@ -214,12 +214,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Build-PlatyPSMarkdown.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/documentation/Build-PlatyPSMarkdown.ps1)
+[Build-PlatyPSMarkdown.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/documentation/Build-PlatyPSMarkdown.ps1)
 
-[Build-PlatyPSMarkdown.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/documentation/Build-PlatyPSMarkdown.Tests.ps1)
+[Build-PlatyPSMarkdown.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/documentation/Build-PlatyPSMarkdown.Tests.ps1)
 
-[`Build-Documentation`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-Documentation.md)
+[`Build-Documentation`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-Documentation.md)
 
-[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
+[`New-ExternalHelpFromPlatyPSMarkdown`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md)
 
-[`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md)
+[`Update-ReadmeFromPlatyPSMarkdown`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md)

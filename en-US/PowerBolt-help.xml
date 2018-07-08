@@ -1425,20 +1425,8 @@ Version            : 1.1.4</dev:code>
             <maml:para>{{Fill Name Description}}</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnBackup</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnRememberLastLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Backups</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">BackupPolicy</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">TurnOnAutoUpdateSemVer</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">NuGetApiKey</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnQuickRestart</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnStartupOutput</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnHistoryRecording</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">LastLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnExtendedFormats</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnExtendedTypes</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HistoryLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnAvailableUpdates</command:parameterValue>
           </command:parameterValueGroup>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3084,20 +3072,8 @@ MatchedLine                        # TODO: need to have this functions arity bet
             <maml:para>{{Fill Name Description}}</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnBackup</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnRememberLastLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Backups</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">BackupPolicy</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">TurnOnAutoUpdateSemVer</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">NuGetApiKey</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnQuickRestart</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnStartupOutput</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnHistoryRecording</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">LastLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnExtendedFormats</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnExtendedTypes</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HistoryLocation</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnAvailableUpdates</command:parameterValue>
           </command:parameterValueGroup>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>

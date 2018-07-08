@@ -112,23 +112,23 @@ PS C:\&gt;</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Add-ModuleToProfile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/profile/Add-ModuleToProfile.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/profile/Add-ModuleToProfile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Add-ModuleToProfile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/profile/Add-ModuleToProfile.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/profile/Add-ModuleToProfile.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Reset-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -156,7 +156,7 @@ PS C:\&gt;</dev:code>
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -471,27 +471,27 @@ PS C:\&gt;</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Build-Documentation.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/documentation/Build-Documentation.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/documentation/Build-Documentation.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Build-Documentation.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/documentation/Build-Documentation.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/documentation/Build-Documentation.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -619,7 +619,7 @@ PS C:\&gt;</dev:code>
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -980,27 +980,27 @@ PS C:\&gt;</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Build-PlatyPSMarkdown.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/documentation/Build-PlatyPSMarkdown.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/documentation/Build-PlatyPSMarkdown.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Build-PlatyPSMarkdown.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/documentation/Build-PlatyPSMarkdown.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/documentation/Build-PlatyPSMarkdown.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1108,11 +1108,11 @@ PS C:\&gt;</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/ConvertTo-EnumFlag.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/ConvertTo-EnumFlag.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>ConvertTo-EnumFlag.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/utility/ConvertTo-EnumFlag.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/utility/ConvertTo-EnumFlag.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1257,11 +1257,11 @@ False</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Get-MergedPath.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MergedPath.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MergedPath.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/utility/Get-MergedPath.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/utility/Get-MergedPath.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://gist.github.com/marckassay/2f54ae68779c9f27fd130b193374335c</maml:linkText>
@@ -1293,7 +1293,7 @@ False</dev:code>
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -1395,15 +1395,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Get-MKModuleInfo.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKModuleInfo.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MKModuleInfo.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/module/Get-MKModuleInfo.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/module/Get-MKModuleInfo.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MKModuleInfo.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/module/Get-MKModuleInfo.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/module/Get-MKModuleInfo.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1413,7 +1413,7 @@ Version            : 1.1.4</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>MKPowerShellSetting</command:noun>
       <maml:description>
-        <maml:para>Retrieves JSON data from `MK.PowerShell-config.json` or outputs file via `ShowAll` switch.</maml:para>
+        <maml:para>Retrieves JSON data from `PowerBolt-config.json` or outputs file via `ShowAll` switch.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1526,19 +1526,19 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MKPowerShellSetting.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/settings/Get-MKPowerShellSetting.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Get-MKPowerShellSetting.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-MKPowerShellSetting.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/settings/Get-MKPowerShellSetting.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Get-MKPowerShellSetting.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Set-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1702,15 +1702,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Install-Template.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Install-Template.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Install-Template.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/scaffolds/Install-Template.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/scaffolds/Install-Template.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Install-Template.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/scaffolds/Install-Template.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/scaffolds/Install-Template.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Plaster - Creating A Manifest</maml:linkText>
@@ -1742,7 +1742,7 @@ Version            : 1.1.4</dev:code>
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -1979,15 +1979,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Invoke-TestSuiteRunner.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Invoke-TestSuiteRunner.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Invoke-TestSuiteRunner.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/test/Invoke-TestSuiteRunner.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/test/Invoke-TestSuiteRunner.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Invoke-TestSuiteRunner.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/test/Invoke-TestSuiteRunner.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/test/Invoke-TestSuiteRunner.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2054,7 +2054,7 @@ Version            : 1.1.4</dev:code>
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -2233,27 +2233,27 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-ExternalHelpFromPlatyPSMarkdown.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/documentation/New-ExternalHelpFromPlatyPSMarkdown.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/documentation/New-ExternalHelpFromPlatyPSMarkdown.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-ExternalHelpFromPlatyPSMarkdown.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/documentation/New-ExternalHelpFromPlatyPSMarkdown.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/documentation/New-ExternalHelpFromPlatyPSMarkdown.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ReadmeFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2263,7 +2263,7 @@ Version            : 1.1.4</dev:code>
       <command:verb>New</command:verb>
       <command:noun>MKPowerShellConfigFile</command:noun>
       <maml:description>
-        <maml:para>Creates a new `MK.PowerShell-config.json` to be used for settings for `PowerEquip`.</maml:para>
+        <maml:para>Creates a new `PowerBolt-config.json` to be used for settings for `PowerBolt`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2406,15 +2406,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/New-MKPowerShellConfigFile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-MKPowerShellConfigFile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-MKPowerShellConfigFile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/settings/New-MKPowerShellConfigFile.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/New-MKPowerShellConfigFile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-MKPowerShellConfigFile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/settings/New-MKPowerShellConfigFile.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/New-MKPowerShellConfigFile.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2428,7 +2428,7 @@ Version            : 1.1.4</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>When `MK.PowerShell-config.json` has valid `NuGetApiKey`, it will deploy locally module to a  temp folder, removing specified items via `Exclude`, prompt user to confirm publishing and will  "teardown" setup items after confirming.</maml:para>
+      <maml:para>When `PowerBolt-config.json` has valid `NuGetApiKey`, it will deploy locally module to a  temp folder, removing specified items via `Exclude`, prompt user to confirm publishing and will  "teardown" setup items after confirming.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2442,7 +2442,7 @@ Version            : 1.1.4</dev:code>
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -2677,15 +2677,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Publish-ModuleToNuGetGallery.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Publish-ModuleToNuGetGallery.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Publish-ModuleToNuGetGallery.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/publish/Publish-ModuleToNuGetGallery.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/publish/Publish-ModuleToNuGetGallery.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Publish-ModuleToNuGetGallery.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2796,23 +2796,23 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Reset-ModuleInProfile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/profile/Reset-ModuleInProfile.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/profile/Reset-ModuleInProfile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Reset-ModuleInProfile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/profile/Reset-ModuleInProfile.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/profile/Reset-ModuleInProfile.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Skip-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3006,7 +3006,7 @@ Version            : 1.1.4</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Search-Items -Path C:\Users\Alice\PowerEquip -Pattern '.*TODO.*' -Recurse
+        <dev:code>PS C:\&gt; Search-Items -Path C:\Users\Alice\PowerBolt -Pattern '.*TODO.*' -Recurse
 
 Name                           Value
 ----                           -----
@@ -3025,15 +3025,15 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Search-Items.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Search-Items.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Search-Items.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/utility/Search-Items.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/utility/Search-Items.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Search-Items.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/utility/Search-Items.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/utility/Search-Items.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3043,7 +3043,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
       <command:verb>Set</command:verb>
       <command:noun>MKPowerShellSetting</command:noun>
       <maml:description>
-        <maml:para>Sets value to JSON data in `MK.PowerShell-config.json`.</maml:para>
+        <maml:para>Sets value to JSON data in `PowerBolt-config.json`.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -3203,19 +3203,19 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Set-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Set-MKPowerShellSetting.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Set-MKPowerShellSetting.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKPowerShellSetting.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3326,23 +3326,23 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Skip-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Skip-ModuleInProfile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/profile/Skip-ModuleInProfile.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/profile/Skip-ModuleInProfile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Skip-ModuleInProfile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/profile/Skip-ModuleInProfile.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/profile/Skip-ModuleInProfile.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Add-ModuleToProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Add-ModuleToProfile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Reset-ModuleInProfile`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Reset-ModuleInProfile.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3449,19 +3449,19 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ManifestFunctionsToExportField.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/module/manifest/Update-ManifestFunctionsToExportField.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/module/manifest/Update-ManifestFunctionsToExportField.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ManifestFunctionsToExportField.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/module/manifest/Update-ManifestFunctionsToExportField.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/module/manifest/Update-ManifestFunctionsToExportField.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-RootModuleUsingStatements`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-RootModuleUsingStatements.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-RootModuleUsingStatements.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3489,7 +3489,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -3726,15 +3726,15 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ModuleExports.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ModuleExports.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ModuleExports.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/module/Update-ModuleExports.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/module/Update-ModuleExports.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ModuleExports.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/module/Update-ModuleExports.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/module/Update-ModuleExports.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3801,7 +3801,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -3980,27 +3980,27 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ReadmeFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ReadmeFromPlatyPSMarkdown.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/documentation/Update-ReadmeFromPlatyPSMarkdown.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/documentation/Update-ReadmeFromPlatyPSMarkdown.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-ReadmeFromPlatyPSMarkdown.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/documentation/Update-ReadmeFromPlatyPSMarkdown.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/documentation/Update-ReadmeFromPlatyPSMarkdown.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-Documentation`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-Documentation.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Build-PlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Build-PlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`New-ExternalHelpFromPlatyPSMarkdown`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-ExternalHelpFromPlatyPSMarkdown.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4090,7 +4090,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -4339,19 +4339,19 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-RootModuleUsingStatements.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-RootModuleUsingStatements.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-RootModuleUsingStatements.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/module/Update-RootModuleUsingStatements.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/module/Update-RootModuleUsingStatements.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-RootModuleUsingStatements.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/module/Update-RootModuleUsingStatements.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/module/Update-RootModuleUsingStatements.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>`Update-ManifestFunctionsToExportField`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-ManifestFunctionsToExportField.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4498,7 +4498,7 @@ MatchedLine                        # TODO: need to have this functions arity bet
             <command:parameterValue required="false" command:variableLength="false">CimCmdlets</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Management</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Microsoft.PowerShell.Utility</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">PowerEquip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">PowerBolt</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Pester</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Plaster</command:parameterValue>
@@ -4942,15 +4942,15 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Update-SemVer.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Update-SemVer.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-SemVer.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/src/module/manifest/Update-SemVer.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/module/manifest/Update-SemVer.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-SemVer.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerEquip/blob/0.0.4/test/module/manifest/Update-SemVer.Tests.ps1</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/module/manifest/Update-SemVer.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

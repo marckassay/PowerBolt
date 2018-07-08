@@ -1,7 +1,7 @@
 ---
-external help file: PowerEquip-help.xml
-Module Name: PowerEquip
-online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/Publish-ModuleToNuGetGallery.md
+external help file: PowerBolt-help.xml
+Module Name: PowerBolt
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Publish-ModuleToNuGetGallery.md
 schema: 2.0.0
 ---
 
@@ -25,7 +25,7 @@ Publish-ModuleToNuGetGallery [-NuGetApiKey <String>] [-Exclude <String[]>] [-DoN
 ```
 
 ## DESCRIPTION
-When `MK.PowerShell-config.json` has valid `NuGetApiKey`, it will deploy locally module to a 
+When `PowerBolt-config.json` has valid `NuGetApiKey`, it will deploy locally module to a 
 temp folder, removing specified items via `Exclude`, prompt user to confirm publishing and will 
 "teardown" setup items after confirming.
 
@@ -77,7 +77,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: ByName
 Aliases:
-Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerEquip, PSReadLine
+Accepted values: CimCmdlets, Microsoft.PowerShell.Management, Microsoft.PowerShell.Utility, Pester, Plaster, platyPS, posh-git, PowerBolt, PSReadLine
 
 Required: True
 Position: 0
@@ -147,6 +147,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Publish-ModuleToNuGetGallery.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/publish/Publish-ModuleToNuGetGallery.ps1)
+[Publish-ModuleToNuGetGallery.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/publish/Publish-ModuleToNuGetGallery.ps1)
 
-[Publish-ModuleToNuGetGallery.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1)
+[Publish-ModuleToNuGetGallery.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/publish/Publish-ModuleToNuGetGallery.Tests.ps1)

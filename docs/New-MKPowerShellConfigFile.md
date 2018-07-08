@@ -1,14 +1,14 @@
 ---
-external help file: PowerEquip-help.xml
-Module Name: PowerEquip
-online version: https://github.com/marckassay/PowerEquip/blob/0.0.4/docs/New-MKPowerShellConfigFile.md
+external help file: PowerBolt-help.xml
+Module Name: PowerBolt
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-MKPowerShellConfigFile.md
 schema: 2.0.0
 ---
 
 # New-MKPowerShellConfigFile
 
 ## SYNOPSIS
-Creates a new `MK.PowerShell-config.json` to be used for settings for `PowerEquip`.
+Creates a new `PowerBolt-config.json` to be used for settings for `PowerBolt`.
 
 ## SYNTAX
 
@@ -105,6 +105,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[New-MKPowerShellConfigFile.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/src/settings/New-MKPowerShellConfigFile.ps1)
+[New-MKPowerShellConfigFile.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/New-MKPowerShellConfigFile.ps1)
 
-[New-MKPowerShellConfigFile.Tests.ps1](https://github.com/marckassay/PowerEquip/blob/0.0.4/test/settings/New-MKPowerShellConfigFile.Tests.ps1)
+[New-MKPowerShellConfigFile.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/New-MKPowerShellConfigFile.Tests.ps1)

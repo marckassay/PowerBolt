@@ -25,13 +25,13 @@ Describe "Test Install-Template" {
 
         Set-Location $TestSupportModule.TestDrivePath
 
-        Mock Add-ModuleToProfile {} -ModuleName PowerEquip
+        Mock Add-ModuleToProfile {} -ModuleName PowerBolt
 
         Install-Template -TemplateName 'NewModuleProject' '.' 'MockModuleC' 'Alice' 
 
         $MockModuleCPath = (Join-Path -Path '.' -ChildPath 'MockModuleC' -Resolve)
 
-        Assert-MockCalled Add-ModuleToProfile -ModuleName PowerEquip -Times 1 -ParameterFilter {
+        Assert-MockCalled Add-ModuleToProfile -ModuleName PowerBolt -Times 1 -ParameterFilter {
             $Path -eq $MockModuleCPath
         }
 

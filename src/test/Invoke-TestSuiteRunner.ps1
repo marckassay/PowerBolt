@@ -58,7 +58,7 @@ function Invoke-TestSuiteRunner {
     }
 
     process {
-        Write-Host "PowerEquip is now testing in: $TestPath" -ForegroundColor Green
+        Write-Host "PowerBolt is now testing in: $TestPath" -ForegroundColor Green
         Start-Job -Name "JobPester" -ScriptBlock {
             param($AL) Invoke-Pester @AL
         } -ArgumentList $ArgList | Wait-Job -Force | ForEach-Object {Receive-Job -Name JobPester}
