@@ -116,7 +116,7 @@ Store your API key that was issued from [PowerShell Gallery](https://www.powersh
 "TurnOnAutoUpdateSemVer": "true",
 ```
 
-Updates manifest's `ModuleVersion` key when using some of PowerBolt commands. So if you GitHub branch name has simple Semantic Version value, it will be transposed to this manifest key.
+Updates manifest's `ModuleVersion` key when using some of PowerBolt commands. So if your GitHub branch name has simple Semantic Version value, it will be transposed to this manifest key.
 
 ## Commands
 
@@ -196,8 +196,12 @@ To see an example of an ideal module, execute the same as what is mentioned in t
 
 - You can add, skip (disable) and reset (enable) Import-Module statements listed in your PowerShell profile page.
 
+- Just one command to build your module's documentation.  And just one command to test your module.  And just one command to publish your module.  
+
 ### What other features are planned to be in PowerBolt?
 
 - To have GitHub repository creation at the same time when `Install-Template` is called to scaffold a new module. So in an addition to what `Install-Template` does currently, and if you have a GitHub account with a [personal access token](https://github.com/settings/tokens), the name of the module will be used to create a new repository in your GitHub account.
 
 - More preferences in config file such as, license type, expected module sub folders ('src', 'test', 'docs'), editor to launch.
+
+- To have module work with other SCM and SCM hosting sites.
