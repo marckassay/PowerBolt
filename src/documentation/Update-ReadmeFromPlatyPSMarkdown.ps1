@@ -50,9 +50,25 @@ function Update-ReadmeFromPlatyPSMarkdown {
             }
 
             $ReadMeContent = Get-Content -Path $ReadMePath -Raw
-            $ExistingSnippetPattern = "(?<link>#### \[.*\w+-\w+.*\]\(http.*\))(?:\s*)(?<body>[\w\W]+?)(?(?=####)(?=####)|(?=(?:##|\z)))"
 
             if ($ReadMeContent) {
+                $ModuleName = $DocInfo.ModuleName
+                
+                $MatchEvaluator = {
+                    param($match)
+                    $NewGitBranchName = $DocInfo.GitBranchName
+                    # this $match.Value is a single link, $ModuleLinkMatches is regex with 2 groups, one being 'GitBranchName' which is the exisitng branchname
+                    $ModuleLinkMatches = [regex]::Matches($match.Value, "(?<UrlSegmentPriorToGitBranchName>^.*blob)(?:\/|\\)(?<GitBranchName>.+?(?=\/|\\))")
+                    $GitBranchName = $ModuleLinkMatches.Groups | Where-Object -Property Name -EQ 'GitBranchName' | Select-Object -ExpandProperty value
+                    return $match.Value.Replace($GitBranchName, $NewGitBranchName)
+                }
+    
+                [regex]$ExisitngRepositoryLinkPattern = "(?<=\()[^\)]+(?:$ModuleName)[^\(]+(?=\))"
+                $ReadMeContent = $ExisitngRepositoryLinkPattern.Replace($ReadMeContent, $MatchEvaluator)
+
+                # TODO: need to make this expression more specific so that it doesnt match a file from 
+                # another repository.  Having the '####' prefix makes the possibility low.
+                $ExistingSnippetPattern = "(?<link>#### \[.*\w+-\w+.*\]\(http.*\))(?:\s*)(?<body>[\w\W]+?)(?(?=####)(?=####)|(?=(?:##|\z)))"
                 $FirstIndex = [regex]::Matches($ReadMeContent, $ExistingSnippetPattern, 'm') | Select-Object -First 1 -ExpandProperty Index
             }
 
@@ -80,7 +96,7 @@ function Update-ReadmeFromPlatyPSMarkdown {
                 # TODO: yeah StringBuilder can be used here for sure or fix regex
                 $ReadMeContent = $ReadMeContent.Insert($FirstIndex, [Environment]::NewLine)
                 $ReadMeContent = $ReadMeContent.Insert($FirstIndex, [Environment]::NewLine)
-                $ReadMeContent.Insert($FirstIndex, $MarkdownSnippetCollection) | Set-Content -Path $ReadMePath | Out-Null
+                $ReadMeContent.Insert($FirstIndex, $MarkdownSnippetCollection) | Set-Content -Path $ReadMePath -NoNewline | Out-Null
             }
             else {
                 Set-Content -Path $ReadMePath -Value $MarkdownSnippetCollection | Out-Null

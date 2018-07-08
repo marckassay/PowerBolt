@@ -9,6 +9,7 @@ class MKDocumentationInfo {
     [string]$OnlineVersionUrl
     [string]$OnlineVersionUrlTemplate
     [string]$OnlineVersionUrlPolicy = 'Auto'
+    [string]$GitBranchName
     [string]$MarkdownSnippetCollection
     [bool]$NoReImportModule
     [object]$ManifestPath
@@ -104,10 +105,11 @@ class MKDocumentationInfo {
         $this.ModuleMarkdownFolder = Join-Path -Path ($this.ModuleFolder) -ChildPath ($this.MarkdownFolder)
 
         if ($this.OnlineVersionUrlPolicy -eq 'Auto') {
-            
-            $BranchName = Get-GitBranchName -Path ($this.ModuleFolder)
-            
+                        
             if ((Get-Content ($this.ModuleFolder + "\.git\config") -Raw) -match "(?<=\[remote\s.origin.\])(?:\s*)(?:url\s\=\s)(?'url'http.*)") {
+                $this.GitBranchName = Get-GitBranchName -Path ($this.ModuleFolder)
+                $BranchName = $this.GitBranchName
+
                 # TODO: this most likely will only work with Github file structure
                 # TODO: docs folders needs to be a variable
                 $this.OnlineVersionUrl = $Matches.url.Split('.git')[0] + "/blob/$BranchName/docs/{0}.md"
