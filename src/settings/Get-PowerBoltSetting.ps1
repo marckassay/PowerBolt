@@ -1,5 +1,5 @@
 using module .\..\dynamicparams\GetSettingsNameSet.ps1
-function Get-MKPowerShellSetting {
+function Get-PowerBoltSetting {
     [CmdletBinding(PositionalBinding = $true)]
     Param(
         [Parameter(Mandatory = $false,

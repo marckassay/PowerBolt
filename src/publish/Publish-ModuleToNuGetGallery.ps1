@@ -10,7 +10,7 @@ function Publish-ModuleToNuGetGallery {
         [string]$Path = '.',
 
         [Parameter(Mandatory = $false)]
-        [string]$NuGetApiKey = (Get-MKPowerShellSetting -Name 'NuGetApiKey'),
+        [string]$NuGetApiKey = (Get-PowerBoltSetting -Name 'NuGetApiKey'),
         
         [Parameter(Mandatory = $false)]
         [string[]]$Exclude = ('.git', '.vscode', '.gitignore'),

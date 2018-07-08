@@ -12,9 +12,9 @@ using module .\src\profile\Reset-ModuleInProfile.ps1
 using module .\src\profile\Skip-ModuleInProfile.ps1
 using module .\src\publish\Publish-ModuleToNuGetGallery.ps1
 using module .\src\scaffolds\Install-Template.ps1
-using module .\src\settings\Get-MKPowerShellSetting.ps1
-using module .\src\settings\New-MKPowerShellConfigFile.ps1
-using module .\src\settings\Set-MKPowerShellSetting.ps1
+using module .\src\settings\Get-PowerBoltSetting.ps1
+using module .\src\settings\New-PowerBoltConfigFile.ps1
+using module .\src\settings\Set-PowerBoltSetting.ps1
 using module .\src\test\Invoke-TestSuiteRunner.ps1
 using module .\src\utility\ConvertTo-EnumFlag.ps1
 using module .\src\utility\Get-MergedPath.ps1

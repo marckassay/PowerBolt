@@ -1,20 +1,19 @@
 ---
 external help file: PowerBolt-help.xml
 Module Name: PowerBolt
-online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md
+online version: https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-PowerBoltSetting.md
 schema: 2.0.0
 ---
 
-# Set-MKPowerShellSetting
+# Get-PowerBoltSetting
 
 ## SYNOPSIS
-Sets value to JSON data in `PowerBolt-config.json`.
+Retrieves JSON data from `PowerBolt-config.json` or outputs file via `ShowAll` switch.
 
 ## SYNTAX
 
 ```
-Set-MKPowerShellSetting [-Value] <Object> [[-ConfigFilePath] <String>] [-PassThru] [[-Name] <String>]
- [<CommonParameters>]
+Get-PowerBoltSetting [[-ConfigFilePath] <String>] [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,36 +61,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-{{Fill PassThru Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Value
-{{Fill Value Description}}
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -107,8 +76,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Set-MKPowerShellSetting.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1)
+[Get-PowerBoltSetting.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Get-PowerBoltSetting.ps1)
 
-[Set-MKPowerShellSetting.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1)
+[Get-PowerBoltSetting.Tests.ps1](https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Get-PowerBoltSetting.Tests.ps1)
 
-[`Get-MKPowerShellSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKPowerShellSetting.md)
+[`Set-PowerBoltSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-PowerBoltSetting.md)

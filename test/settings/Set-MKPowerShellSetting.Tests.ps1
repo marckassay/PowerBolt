@@ -1,6 +1,6 @@
 using module ..\.\TestRunnerSupportModule.psm1
 
-Describe "Test Set-MKPowerShellSetting" {
+Describe "Test Set-PowerBoltSetting" {
     BeforeAll {
         $TestSupportModule = [TestRunnerSupportModule]::new()
     }
@@ -19,7 +19,7 @@ Describe "Test Set-MKPowerShellSetting" {
         ) {
             Param($Value)
 
-            Set-MKPowerShellSetting -Name 'TurnOnAutoUpdateSemVer' -Value $Value
+            Set-PowerBoltSetting -Name 'TurnOnAutoUpdateSemVer' -Value $Value
             
             $MKPowerShellConfig = Get-Content -Path $TestSupportModule.FixtureConfigFilePath | ConvertFrom-Json -AsHashtable
             $MKPowerShellConfig["TurnOnAutoUpdateSemVer"] -eq $true | Should -Be $Value
@@ -36,7 +36,7 @@ Describe "Test Set-MKPowerShellSetting" {
         ) {
             Param($Value)
 
-            Set-MKPowerShellSetting -Name 'TurnOnQuickRestart' -Value $Value
+            Set-PowerBoltSetting -Name 'TurnOnQuickRestart' -Value $Value
 
             $MKPowerShellConfig = Get-Content -Path $TestSupportModule.FixtureConfigFilePath | ConvertFrom-Json -AsHashtable
             $MKPowerShellConfig["TurnOnQuickRestart"] -eq $true | Should -Be $Value
@@ -67,7 +67,7 @@ Describe "Test Set-MKPowerShellSetting" {
         ) {
             Param($Value)
 
-            Set-MKPowerShellSetting -Name 'Backups' -Value $Value
+            Set-PowerBoltSetting -Name 'Backups' -Value $Value
 
             $MKPowerShellConfig = Get-Content -Path $TestSupportModule.FixtureConfigFilePath | ConvertFrom-Json -AsHashtable
             $MKPowerShellConfig.Backups.Path | Should -BeLike "'$PROFILE'"

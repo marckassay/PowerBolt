@@ -1,6 +1,6 @@
 using module ..\.\TestRunnerSupportModule.psm1
 
-Describe "Test New-MKPowerShellConfigFile" {
+Describe "Test New-PowerBoltConfigFile" {
     BeforeAll {
         $TestSupportModule = [TestRunnerSupportModule]::new('MockModuleA')
     }
@@ -9,7 +9,7 @@ Describe "Test New-MKPowerShellConfigFile" {
         $TestSupportModule.Teardown()
     }
     
-    Context "Call New-MKPowerShellConfigFile when no file exists" {
+    Context "Call New-PowerBoltConfigFile when no file exists" {
         BeforeEach {
             $FullName = Join-Path -Path $TestDrive -ChildPath '\MK.PowerShell\' -AdditionalChildPath 'PowerBolt-config.json'
         }
@@ -18,13 +18,13 @@ Describe "Test New-MKPowerShellConfigFile" {
         }
 
         It "Should copy a new file to the destination folder ('MK.PowerShell')" {
-            New-MKPowerShellConfigFile -Path $TestDrive
+            New-PowerBoltConfigFile -Path $TestDrive
 
             Get-Item $FullName | Should -Exist 
         }
     }
 
-    Context "Call New-MKPowerShellConfigFile when file exists" {
+    Context "Call New-PowerBoltConfigFile when file exists" {
         It "Should prompt user about exisiting file" {
             InModuleScope PowerBolt {
                 ### HACK: Before and After block is inside here since Pester seems to not like 
@@ -42,7 +42,7 @@ Describe "Test New-MKPowerShellConfigFile" {
                 
                 Get-Item $FullName | Should -Exist
                 
-                New-MKPowerShellConfigFile -Path $TestDrive
+                New-PowerBoltConfigFile -Path $TestDrive
                 
                 Assert-MockCalled WriteWarningWrapper 1
                 
@@ -71,7 +71,7 @@ Describe "Test New-MKPowerShellConfigFile" {
 
                 Get-Item $FullName | Should -Exist 
 
-                New-MKPowerShellConfigFile -Path $TestDrive -Force
+                New-PowerBoltConfigFile -Path $TestDrive -Force
                 # NOTE: although this mock wasnt called '1' time in this 'It', this is from the 
                 # previous 'It' block
                 Assert-MockCalled WriteWarningWrapper 1

@@ -99,11 +99,11 @@ As mentioned above in the Create section, your module doesn't have to reside in 
 PS C:\Users\Alice\projects\AcmeTasks> Publish-ModuleToNuGetGallery
 ```
 
-To explain further on the reason for this command, by giving an example, I currently have individual PowerShell modules imported (via `Import-Module`) in my PowerShell profile. These modules that are imported to my development directory where they reside on my file system. So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory. A cumbersome process indeed, so this command has been created to speed up that process. In an addition, PowerBolt can store your API key on your file system using [`Set-MKPowerShellSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md) which will be retrieved automatically when [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Publish-ModuleToNuGetGallery.md) is called if its `NuGetApiKey` parameter value is not set. Also remember when PowerBolt creates a module manifest file, it will set the 'Prerelease' key to 'alpha' so that when published it's still accessible to anyone searching for modules with or without being in prerelease stage.  This is to not pollute the repository/gallery with newly created modules that are in its early stages of development. Obviously you can simply remove this value when you feel so, so that the module will not be published in that software stage.
+To explain further on the reason for this command, by giving an example, I currently have individual PowerShell modules imported (via `Import-Module`) in my PowerShell profile. These modules that are imported to my development directory where they reside on my file system. So when I had to publish a module prior to this command, I would have to copy the folder to a PowerShell module directory. A cumbersome process indeed, so this command has been created to speed up that process. In an addition, PowerBolt can store your API key on your file system using [`Set-PowerBoltSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-PowerBoltSetting.md) which will be retrieved automatically when [`Publish-ModuleToNuGetGallery`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Publish-ModuleToNuGetGallery.md) is called if its `NuGetApiKey` parameter value is not set. Also remember when PowerBolt creates a module manifest file, it will set the 'Prerelease' key to 'alpha' so that when published it's still accessible to anyone searching for modules with or without being in prerelease stage.  This is to not pollute the repository/gallery with newly created modules that are in its early stages of development. Obviously you can simply remove this value when you feel so, so that the module will not be published in that software stage.
 
 ## PowerBolt Config File
 
-When PowerBolt is installed and ran for the first time, it will place a copy of its config file in the ApplicationData (`[Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData)`) folder. Use [`Get-MKPowerShellSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKPowerShellSetting.md) and [`Set-MKPowerShellSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md) accordingly.  All values below are default values.
+When PowerBolt is installed and ran for the first time, it will place a copy of its config file in the ApplicationData (`[Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData)`) folder. Use [`Get-PowerBoltSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-PowerBoltSetting.md) and [`Set-PowerBoltSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-PowerBoltSetting.md) accordingly.  All values below are default values.
 
 ```json
 "NuGetApiKey": "",
@@ -130,7 +130,7 @@ Appends content of the PowerShell session's profile with an `Import-Module` stat
 
 Creates or updates help documentation files and module's README file. Also creates a XML based help documentation file for PowerShell. 
 
-#### [`Get-MKPowerShellSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKPowerShellSetting.md)
+#### [`Get-PowerBoltSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-PowerBoltSetting.md)
 
 Retrieves JSON data from `PowerBolt-config.json` or outputs file via `ShowAll` switch. 
 
@@ -150,7 +150,7 @@ Streamlines publishing a module using `Publish-Module`.
 
 Re-enables an `Import-Module` statement in `$PROFILE` to be executed.  
 
-#### [`Set-MKPowerShellSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md)
+#### [`Set-PowerBoltSetting`](https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-PowerBoltSetting.md)
 
 Sets value to JSON data in `PowerBolt-config.json`. 
 

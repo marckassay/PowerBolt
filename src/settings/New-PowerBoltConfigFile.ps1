@@ -7,7 +7,7 @@ If you wish to overwrite this file with the default 'PowerBolt-config.json' file
 "@
 }
 
-function New-MKPowerShellConfigFile {
+function New-PowerBoltConfigFile {
     [CmdletBinding()]
     Param
     (

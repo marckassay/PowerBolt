@@ -1406,9 +1406,9 @@ Version            : 1.1.4</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-MKPowerShellSetting</command:name>
+      <command:name>Get-PowerBoltSetting</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>MKPowerShellSetting</command:noun>
+      <command:noun>PowerBoltSetting</command:noun>
       <maml:description>
         <maml:para>Retrieves JSON data from `PowerBolt-config.json` or outputs file via `ShowAll` switch.</maml:para>
       </maml:description>
@@ -1418,15 +1418,15 @@ Version            : 1.1.4</dev:code>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-MKPowerShellSetting</maml:name>
+        <maml:name>Get-PowerBoltSetting</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>{{Fill Name Description}}</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnAutoUpdateSemVer</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">NuGetApiKey</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnAutoUpdateSemVer</command:parameterValue>
           </command:parameterValueGroup>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1512,19 +1512,19 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-PowerBoltSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Get-MKPowerShellSetting.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Get-MKPowerShellSetting.ps1</maml:uri>
+        <maml:linkText>Get-PowerBoltSetting.ps1</maml:linkText>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Get-PowerBoltSetting.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Get-MKPowerShellSetting.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Get-MKPowerShellSetting.Tests.ps1</maml:uri>
+        <maml:linkText>Get-PowerBoltSetting.Tests.ps1</maml:linkText>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Get-PowerBoltSetting.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>`Set-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md</maml:uri>
+        <maml:linkText>`Set-PowerBoltSetting`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-PowerBoltSetting.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -2273,9 +2273,9 @@ Version            : 1.1.4</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>New-MKPowerShellConfigFile</command:name>
+      <command:name>New-PowerBoltConfigFile</command:name>
       <command:verb>New</command:verb>
-      <command:noun>MKPowerShellConfigFile</command:noun>
+      <command:noun>PowerBoltConfigFile</command:noun>
       <maml:description>
         <maml:para>Creates a new `PowerBolt-config.json` to be used for settings for `PowerBolt`.</maml:para>
       </maml:description>
@@ -2285,7 +2285,7 @@ Version            : 1.1.4</dev:code>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>New-MKPowerShellConfigFile</maml:name>
+        <maml:name>New-PowerBoltConfigFile</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Path</maml:name>
           <maml:Description>
@@ -2420,15 +2420,15 @@ Version            : 1.1.4</dev:code>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-MKPowerShellConfigFile.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/New-PowerBoltConfigFile.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>New-MKPowerShellConfigFile.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/New-MKPowerShellConfigFile.ps1</maml:uri>
+        <maml:linkText>New-PowerBoltConfigFile.ps1</maml:linkText>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/New-PowerBoltConfigFile.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>New-MKPowerShellConfigFile.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/New-MKPowerShellConfigFile.Tests.ps1</maml:uri>
+        <maml:linkText>New-PowerBoltConfigFile.Tests.ps1</maml:linkText>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/New-PowerBoltConfigFile.Tests.ps1</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3053,9 +3053,9 @@ MatchedLine                        # TODO: need to have this functions arity bet
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Set-MKPowerShellSetting</command:name>
+      <command:name>Set-PowerBoltSetting</command:name>
       <command:verb>Set</command:verb>
-      <command:noun>MKPowerShellSetting</command:noun>
+      <command:noun>PowerBoltSetting</command:noun>
       <maml:description>
         <maml:para>Sets value to JSON data in `PowerBolt-config.json`.</maml:para>
       </maml:description>
@@ -3065,15 +3065,15 @@ MatchedLine                        # TODO: need to have this functions arity bet
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Set-MKPowerShellSetting</maml:name>
+        <maml:name>Set-PowerBoltSetting</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>{{Fill Name Description}}</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">TurnOnAutoUpdateSemVer</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">NuGetApiKey</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">TurnOnAutoUpdateSemVer</command:parameterValue>
           </command:parameterValueGroup>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3206,19 +3206,19 @@ MatchedLine                        # TODO: need to have this functions arity bet
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-MKPowerShellSetting.md</maml:uri>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Set-PowerBoltSetting.md</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-MKPowerShellSetting.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Set-MKPowerShellSetting.ps1</maml:uri>
+        <maml:linkText>Set-PowerBoltSetting.ps1</maml:linkText>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/src/settings/Set-PowerBoltSetting.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-MKPowerShellSetting.Tests.ps1</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Set-MKPowerShellSetting.Tests.ps1</maml:uri>
+        <maml:linkText>Set-PowerBoltSetting.Tests.ps1</maml:linkText>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/test/settings/Set-PowerBoltSetting.Tests.ps1</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>`Get-MKPowerShellSetting`</maml:linkText>
-        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-MKPowerShellSetting.md</maml:uri>
+        <maml:linkText>`Get-PowerBoltSetting`</maml:linkText>
+        <maml:uri>https://github.com/marckassay/PowerBolt/blob/0.0.4/docs/Get-PowerBoltSetting.md</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
