@@ -33,7 +33,7 @@
     Description       = 'PowerBolt is to quickly create, develop, test, document and publish modules'
 
     # Minimum version of the PowerShell engine required by this module
-    # PowerShellVersion = ''
+    PowerShellVersion = '6.0'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''
@@ -141,7 +141,7 @@
             # ReleaseNotes = ''
 
             # Prerelease string of this module
-            Prerelease = '-alpha'
+            Prerelease = 'alpha'
 
             # Flag to indicate whether the module requires explicit user acceptance for install/update
             # RequireLicenseAcceptance = $false

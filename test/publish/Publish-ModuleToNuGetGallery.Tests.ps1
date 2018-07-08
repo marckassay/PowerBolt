@@ -17,17 +17,23 @@ Describe "Test Publish-ModuleToNuGetGallery" {
     
     Context "Call Publish-ModuleToNuGetGallery with NuGetApiKey value from config file." {
 
-        Mock Publish-Module -ModuleName PowerBolt
+        Mock Start-Job {} -ModuleName PowerBolt
         
         Publish-ModuleToNuGetGallery -Path ($TestSupportModule.MockManifestPath) -NuGetApiKey 'd2a2cea9-624f-451d-acd2-cdcd2110ab5e' -DoNotConfirm
 
         It "Should of called PowerShellGet's Publish-Module with expected params" {
             
-            # TODO: test against $Path using regex so that this can be ran on someone elses computer
-            Assert-MockCalled Publish-Module -ParameterFilter {
-                $NuGetApiKey -eq 'd2a2cea9-624f-451d-acd2-cdcd2110ab5e' -and `
-                    $Path -like '*TestModules*'
-            } -ModuleName PowerBolt
+            Assert-MockCalled Start-Job -ParameterFilter {
+                $Name -eq "JobPowerShellGet"
+            } -ModuleName PowerBolt -Times 1
+            
+            Assert-MockCalled Start-Job -ParameterFilter {
+                $ArgumentList[0].DestinationDirectory -like '*MockModuleB*'
+            } -ModuleName PowerBolt -Times 1
+            
+            Assert-MockCalled Start-Job -ParameterFilter {
+                $ArgumentList[0].NuGetApiKey -like 'd2a2cea9-624f-451d-acd2-cdcd2110ab5e'
+            } -ModuleName PowerBolt -Times 1
         }
     }
 }
